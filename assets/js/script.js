@@ -1,16 +1,68 @@
-// Menu Mobile Toggle
+// Menu Mobile Toggle com overlay
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.querySelector('.nav-menu');
+const menuOverlay = document.createElement('div');
+menuOverlay.className = 'menu-overlay';
+document.body.appendChild(menuOverlay);
+
+// Dropdown toggles
+const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
 
 if (hamburger && navMenu) {
+    // Abrir/fechar menu
     hamburger.addEventListener('click', () => {
         navMenu.classList.toggle('active');
+        hamburger.classList.toggle('active');
+        menuOverlay.classList.toggle('active');
+        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
     });
 
-    // Fecha menu ao clicar em um link
+    // Fechar menu ao clicar no overlay
+    menuOverlay.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+        menuOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+        
+        // Fechar todos os dropdowns
+        dropdownToggles.forEach(toggle => {
+            toggle.parentElement.classList.remove('open');
+        });
+    });
+
+    // Dropdown para mobile
+    dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                e.stopPropagation();
+                const dropdown = toggle.parentElement;
+                dropdown.classList.toggle('open');
+            }
+        });
+    });
+
+    // Fechar dropdowns ao clicar fora (apenas desktop)
+    document.addEventListener('click', (e) => {
+        if (window.innerWidth > 768) {
+            dropdownToggles.forEach(toggle => {
+                const dropdown = toggle.parentElement;
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove('open');
+                }
+            });
+        }
+    });
+
+    // Fechar menu ao clicar em um link
     document.querySelectorAll('.nav-menu a').forEach(link => {
         link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
+            if (window.innerWidth <= 768 && !link.classList.contains('dropdown-toggle')) {
+                navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+                menuOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
         });
     });
 }
@@ -24,12 +76,16 @@ document.querySelectorAll('.nav-menu a').forEach(link => {
         link.classList.remove('active');
     }
 });
+
 /* =============================
    OPÇÃO PRIMEIRO SLIDE
  ============================= */
 document.addEventListener('DOMContentLoaded', async () => {
     const slider = document.getElementById("eventosSlider");
     const indicators = document.getElementById("sliderIndicators");
+
+    // Verifica se os elementos existem
+    if (!slider || !indicators) return;
 
     let slideIndex = 0;
     let slides = [];
@@ -109,17 +165,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     resetTimer();
 });
 
-
 /* =============================
    OPÇÃO SEGUNDO SLIDE
- ============================= */
-/* =============================
-   CARROSSEL DE EVENTOS MODERNO
  ============================= */
 document.addEventListener("DOMContentLoaded", async () => {
     const wrapper = document.getElementById("bannerWrapper");
     const indicators = document.getElementById("bannerIndicators");
-    
+
+    // 🔴 SE NÃO EXISTIR, PARA AQUI
+    if (!wrapper || !indicators) return;
+
     // Mostrar loading
     wrapper.innerHTML = `
         <div class="carousel-loading">
@@ -259,8 +314,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     
     // Event listeners
-    document.getElementById("bannerNext").onclick = proximoSlide;
-    document.getElementById("bannerPrev").onclick = slideAnterior;
+    const bannerNext = document.getElementById("bannerNext");
+    const bannerPrev = document.getElementById("bannerPrev");
+    
+    if (bannerNext) bannerNext.onclick = proximoSlide;
+    if (bannerPrev) bannerPrev.onclick = slideAnterior;
     
     // Pausar no hover
     wrapper.addEventListener("mouseenter", pararAutoPlay);
@@ -278,8 +336,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     console.log(`Carrossel iniciado com ${eventos.length} slides`);
 });
-    
-    // Função placeholder para abrir modal
+
 // Função para abrir modal com detalhes do evento
 window.abrirModalEvento = async function(eventId) {
     console.log("Abrindo modal para evento ID:", eventId);
@@ -287,6 +344,12 @@ window.abrirModalEvento = async function(eventId) {
     // Abrir o modal imediatamente
     const modal = document.getElementById('eventModal');
     const modalContent = document.getElementById('modalContent');
+    
+    // Verificar se o modal existe
+    if (!modal || !modalContent) {
+        console.error("Modal não encontrado no DOM");
+        return;
+    }
     
     // Mostrar loading
     modalContent.innerHTML = `
@@ -297,6 +360,7 @@ window.abrirModalEvento = async function(eventId) {
     `;
     
     modal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevenir scroll
     
     // Buscar dados do evento
     try {
@@ -451,11 +515,29 @@ window.trocarImagemPrincipal = function(src, index) {
 };
 
 // Função para fechar modal
-function fecharModal() {
+window.fecharModal = function() {
     const modal = document.getElementById('eventModal');
-    modal.classList.remove('active');
-}
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = ''; // Restaurar scroll
+    }
+};
 
+// Fechar modal ao pressionar ESC
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        fecharModal();
+    }
+});
 
-
-
+// Fechar modal ao clicar fora do conteúdo
+document.addEventListener('click', function(e) {
+    const modal = document.getElementById('eventModal');
+    const modalContent = document.getElementById('modalContent');
+    
+    if (modal && modalContent && modal.classList.contains('active')) {
+        if (!modalContent.contains(e.target) && e.target !== modal) {
+            fecharModal();
+        }
+    }
+});

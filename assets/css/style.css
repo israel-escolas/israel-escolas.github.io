@@ -35,6 +35,41 @@ header {
     justify-content: space-between;
     align-items: center;
 }
+/*UL*/
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background: #222;
+    padding: 10px 0;
+    border-radius: 6px;
+}
+.dropdown.open .dropdown-menu {
+    display: block;
+}
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown a {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+}
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
 
 /*LOGO*/
 .logo {
