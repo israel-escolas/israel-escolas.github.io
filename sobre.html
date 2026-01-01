@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escola Mariana Cavalcanti - Sobre</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/sobre.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="assets/img/LOGO.png">
+            </a>
+            <nav class="navbar">
+                <ul class="nav-menu">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="horarios.html"><i class="fas fa-clock"></i> Horários</a></li>
+                    <li><a href="calendario.html"><i class="fas fa-calendar-alt"></i> Calendário</a></li>
+                    <li><a href="eventos.html"><i class="fas fa-images"></i> Eventos</a></li>
+                    <li><a href="comunicados.html"><i class="fas fa-bullhorn"></i> Comunicados</a></li>
+                    <li><a href="jogos.html"><i class="fas fa-gamepad"></i> Jogos</a></li>
+                    <li><a href="sobre.html" class="active"><i class="fas fa-school"></i> Sobre</a></li>
+                </ul>
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1><img src="assets/img/LOGO.png" width="5%"></i> Escola Estadual Mariana Cavalcanti</h1>
+            <p class="page-description">Conheça a história, equipe e valores da Escola Estadual Mariana Cavalcanti.</p>
+            
+            <!-- Seção: História -->
+            <section class="sobre-section">
+                <h2><i class="fas fa-history"></i> Nossa História</h2>
+                <p class="sobre-intro">Há mais de 30 anos formando cidadãos conscientes para um futuro melhor.</p>
+                
+                <div class="timeline">
+                    <div id="timelineContainer" class="timeline-container">
+                        <div class="loading">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Carregando história...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Seção: Estatísticas -->
+            <section class="sobre-section">
+                <h2><i class="fas fa-chart-bar"></i> Nossos Números</h2>
+                <div class="estatisticas-grid">
+                    <div class="estatistica-card">
+                        <div class="estatistica-numero" id="numAlunos">...</div>
+                        <div class="estatistica-label">Alunos</div>
+                    </div>
+                    <div class="estatistica-card">
+                        <div class="estatistica-numero" id="numProfessores">12</div>
+                        <div class="estatistica-label">Professores</div>
+                    </div>
+                    <div class="estatistica-card">
+                        <div class="estatistica-numero" id="numSalas">5</div>
+                        <div class="estatistica-label">Salas de Aula</div>
+                    </div>
+                    <div class="estatistica-card">
+                        <div class="estatistica-numero" id="numAnos">...</div>
+                        <div class="estatistica-label">Anos de História</div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Seção: Professores -->
+            <section class="sobre-section">
+                <h2><i class="fas fa-chalkboard-teacher"></i> Nossos Professores</h2>
+                <p class="section-subtitle">Profissionais qualificados e dedicados ao ensino.</p>
+                
+                <!-- Filtro por disciplina -->
+                <div class="filtro-professores">
+                    <label for="filtroDisciplina">Filtrar por disciplina:</label>
+                    <select id="filtroDisciplina">
+                        <option value="all">Todas as disciplinas</option>
+                        <!-- Opções serão preenchidas por JavaScript -->
+                    </select>
+                </div>
+                
+                <!-- Grid de professores -->
+                <div id="professoresContainer" class="professores-grid">
+                    <div class="loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Carregando professores...</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Seção: Diretoria -->
+            <section class="sobre-section">
+                <h2><i class="fas fa-users"></i> Diretoria e Coordenação</h2>
+                <div class="diretoria-grid">
+                    <div class="diretoria-card">
+                        <div class="diretoria-avatar">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3>Prof. Carlos Mendonça</h3>
+                        <p class="diretoria-cargo">Diretor Geral</p>
+                        <p class="diretoria-formacao">Mestre em Educação</p>
+                        <p class="diretoria-experiencia">25 anos de experiência</p>
+                    </div>
+                    
+                    <div class="diretoria-card">
+                        <div class="diretoria-avatar">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h3>Profa. Ana Lúcia Silva</h3>
+                        <p class="diretoria-cargo">Coordenadora Pedagógica</p>
+                        <p class="diretoria-formacao">Especialista em Gestão Escolar</p>
+                        <p class="diretoria-experiencia">12 anos na instituição</p>
+                    </div>
+                    
+                    <div class="diretoria-card">
+                        <div class="diretoria-avatar">
+                            <i class="fas fa-user-cog"></i>
+                        </div>
+                        <h3>Prof. Roberto Almeida</h3>
+                        <p class="diretoria-cargo">Coordenador Administrativo</p>
+                        <p class="diretoria-formacao">Graduado em Administração</p>
+                        <p class="diretoria-experiencia">13 anos de experiência</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Seção: Missão, Visão, Valores -->
+            <section class="sobre-section valores-section">
+                <h2><i class="fas fa-star"></i> Missão, Visão e Valores</h2>
+                <div class="valores-grid">
+                    <div class="valor-card">
+                        <div class="valor-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3>Missão</h3>
+                        <p>Oferecer educação de qualidade, formando cidadãos críticos, éticos e preparados para os desafios da sociedade contemporânea.</p>
+                    </div>
+                    
+                    <div class="valor-card">
+                        <div class="valor-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3>Visão</h3>
+                        <p>Ser referência nacional em educação básica, reconhecida pela qualidade do ensino e pela formação de profissionais do futuro.</p>
+                    </div>
+                    
+                    <div class="valor-card">
+                        <div class="valor-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Valores</h3>
+                        <ul class="valores-lista">
+                            <li>Ética</li>
+                            <li>Respeito</li>
+                            <li>Inovação</li>
+                            <li>Comprometimento</li>
+                            <li>Responsabilidade Social</li>
+                            <li>Excelência Acadêmica</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="logo-footer">
+            <img src="assets/img/LOGO.png" alt="">
+        
+        <div class="container">
+            <p>Escola Estadual Mariana Cavalcanti</p>
+            <p>Endereço: AV. SENHORA SANTANA, 09 PREDIO. CENTRO - CEP: 59940-000</p>
+            <p>Telefone: (84) 3382-2270 | Email: eemarianacavalcanti@hotmail.com</p>
+            <p>&copy; 2025 - EEMC.</p>
+        </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/sobre.js"></script>
+</body>
+</html>

@@ -1,0 +1,607 @@
+/* Estilos para página Sobre */
+.page-description {
+    margin-bottom: 3rem;
+    color: #666;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.sobre-section {
+    margin-bottom: 4rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.sobre-section:last-child {
+    border-bottom: none;
+    margin-bottom: 2rem;
+}
+
+.sobre-section h2 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.8rem;
+}
+
+.sobre-section h2 i {
+    color: #3498db;
+}
+
+.sobre-intro {
+    font-size: 1.2rem;
+    color: #34495e;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-style: italic;
+    line-height: 1.6;
+}
+
+.section-subtitle {
+    color: #666;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+/* LINHA DO TEMPO */
+.timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #3498db;
+    transform: translateX(-50%);
+}
+
+.timeline-container {
+    position: relative;
+    padding: 2rem 0;
+}
+
+.timeline-item {
+    display: flex;
+    margin-bottom: 3rem;
+    position: relative;
+    width: 100%;
+}
+
+.timeline-item:nth-child(odd) {
+    justify-content: flex-end;
+    padding-right: calc(50% + 2rem);
+    padding-left: 0;
+}
+
+.timeline-item:nth-child(even) {
+    justify-content: flex-start;
+    padding-left: calc(50% + 2rem);
+    padding-right: 0;
+}
+
+.timeline-content {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    border-left: 4px solid #3498db;
+    position: relative;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+    border-left: none;
+    border-right: 4px solid #2ecc71;
+}
+
+.timeline-year {
+    position: absolute;
+    top: -15px;
+    background: #3498db;
+    color: white;
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.timeline-item:nth-child(odd) .timeline-year {
+    left: -80px;
+}
+
+.timeline-item:nth-child(even) .timeline-year {
+    right: -80px;
+    background: #2ecc71;
+}
+
+.timeline-title {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.timeline-description {
+    color: #555;
+    line-height: 1.5;
+}
+
+/* ESTATÍSTICAS */
+.estatisticas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.estatistica-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.estatistica-card:hover {
+    transform: translateY(-5px);
+}
+
+.estatistica-numero {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #3498db;
+    margin-bottom: 0.5rem;
+    line-height: 1;
+}
+
+.estatistica-label {
+    font-size: 1.1rem;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+/* FILTRO PROFESSORES */
+.filtro-professores {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.filtro-professores label {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.filtro-professores select {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    min-width: 200px;
+    background: #f8f9fa;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.filtro-professores select:hover {
+    border-color: #3498db;
+}
+
+.filtro-professores select:focus {
+    outline: none;
+    border-color: #2980b9;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* PROFESSORES */
+.professores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.professor-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #e9ecef;
+}
+
+.professor-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.professor-header {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    color: white;
+    padding: 1.8rem 1.5rem;
+    text-align: center;
+    position: relative;
+}
+
+.professor-avatar {
+    width: 90px;
+    height: 90px;
+    background: #3498db;
+    border-radius: 50%;
+    margin: 0 auto 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    color: white;
+    font-weight: 700;
+    border: 4px solid rgba(255,255,255,0.3);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Estilos para foto do professor */
+.professor-avatar.has-foto {
+    background: transparent;
+    padding: 0;
+}
+
+.professor-foto-real {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid rgba(255,255,255,0.3);
+    display: block;
+}
+
+.professor-avatar.no-foto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.professor-nome {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.professor-area {
+    font-size: 1rem;
+    opacity: 0.9;
+    font-weight: 500;
+    color: #ecf0f1;
+    margin-bottom: 0;
+}
+
+.professor-info {
+    padding: 1.8rem;
+}
+
+.professor-formacao, 
+.professor-experiencia {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.professor-formacao i, 
+.professor-experiencia i {
+    color: #3498db;
+    font-size: 1.1rem;
+    min-width: 20px;
+}
+
+.professor-formacao span, 
+.professor-experiencia span {
+    color: #2c3e50;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.professor-disciplinas h4 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.professor-disciplinas h4 i {
+    color: #2ecc71;
+}
+
+.disciplinas-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.disciplina-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed #eee;
+}
+
+.disciplina-item:last-child {
+    border-bottom: none;
+}
+
+.disciplina-item i {
+    color: #27ae60;
+    font-size: 0.9rem;
+}
+
+.disciplina-item span {
+    color: #34495e;
+    font-size: 0.95rem;
+}
+
+.sem-disciplinas {
+    color: #95a5a6;
+    font-style: italic;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+/* DIRETORIA */
+.diretoria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.diretoria-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.diretoria-card:hover {
+    transform: translateY(-5px);
+}
+
+.diretoria-avatar {
+    width: 80px;
+    height: 80px;
+    background: #3498db;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+}
+
+.diretoria-card h3 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.diretoria-cargo {
+    color: #3498db;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.diretoria-formacao {
+    color: #666;
+    font-style: italic;
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.diretoria-experiencia {
+    color: #95a5a6;
+    font-size: 0.9rem;
+}
+
+/* VALORES */
+.valores-section {
+    background: #f8f9fa;
+    padding: 3rem;
+    border-radius: 15px;
+    margin-top: 3rem;
+}
+
+.valores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.valor-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.valor-icon {
+    width: 70px;
+    height: 70px;
+    background: #3498db;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: white;
+}
+
+.valor-card h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+.valor-card p {
+    color: #555;
+    line-height: 1.6;
+}
+
+.valores-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.valores-lista li {
+    padding: 0.5rem 0;
+    color: #555;
+    border-bottom: 1px solid #eee;
+}
+
+.valores-lista li:last-child {
+    border-bottom: none;
+}
+
+.valores-lista li::before {
+    content: "✓";
+    color: #2ecc71;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* LOADING & ERROS */
+.loading, .error, .sem-dados {
+    text-align: center;
+    padding: 3rem;
+    color: #7f8c8d;
+    grid-column: 1 / -1;
+}
+
+.loading i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #3498db;
+}
+
+.error i, .sem-dados i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.error i {
+    color: #e74c3c;
+}
+
+.sem-dados i {
+    color: #95a5a6;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+    .timeline::before {
+        left: 30px;
+    }
+    
+    .timeline-item {
+        justify-content: flex-start !important;
+        padding-left: 80px !important;
+        padding-right: 0 !important;
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-year,
+    .timeline-item:nth-child(even) .timeline-year {
+        left: 0 !important;
+        right: auto !important;
+    }
+    
+    .estatisticas-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .valores-section {
+        padding: 1.5rem;
+    }
+    
+    .valores-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .professores-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .estatisticas-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .diretoria-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .professores-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .filtro-professores {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filtro-professores select {
+        min-width: auto;
+        width: 100%;
+    }
+}
+
+/* CORES POR ÁREA DO PROFESSOR */
+.professor-linguas .professor-header { 
+    background: linear-gradient(135deg, #2c3e50, #3498db) !important; 
+}
+.professor-exatas .professor-header { 
+    background: linear-gradient(135deg, #2c3e50, #e74c3c) !important; 
+}
+.professor-humanas .professor-header { 
+    background: linear-gradient(135deg, #2c3e50, #2ecc71) !important; 
+}
+.professor-ciencias .professor-header { 
+    background: linear-gradient(135deg, #2c3e50, #f39c12) !important; 
+}
+
+.professor-linguas .professor-avatar:not(.has-foto) { background: #2980b9 !important; }
+.professor-exatas .professor-avatar:not(.has-foto) { background: #c0392b !important; }
+.professor-humanas .professor-avatar:not(.has-foto) { background: #27ae60 !important; }
+.professor-ciencias .professor-avatar:not(.has-foto) { background: #d35400 !important; }
+
+.professor-linguas .professor-area { color: #3498db !important; font-weight: bold; }
+.professor-exatas .professor-area { color: #e74c3c !important; font-weight: bold; }
+.professor-humanas .professor-area { color: #2ecc71 !important; font-weight: bold; }
+.professor-ciencias .professor-area { color: #f39c12 !important; font-weight: bold; }

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HORÁRIOS</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/horarios.css">
+</head>
+<body>
+    <!-- Cabeçalho e Menu -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="assets/img/LOGO.png">
+            </a>
+            <nav class="navbar">
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="horarios.html"><i class="fas fa-clock"></i> Horários</a></li>
+                    <li><a href="calendario.html"><i class="fas fa-calendar-alt"></i> Calendário</a></li>
+                    <li><a href="eventos.html"><i class="fas fa-images"></i> Eventos</a></li>
+                    <li><a href="comunicados.html"><i class="fas fa-bullhorn"></i> Comunicados</a></li>
+                    <li><a href="jogos.html"><i class="fas fa-gamepad"></i> Jogos</a></li>
+                    <li><a href="sobre.html"><i class="fas fa-school"></i> Sobre</a></li>
+                </ul>
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1><i class="fas fa-clock"></i> Horários de Aula</h1>
+            <p class="page-description">Selecione uma turma para visualizar a grade horária.</p>
+            
+            <!-- Seletor de turma -->
+            <div class="turma-selector">
+                <label for="selectTurma">Selecionar Turma:</label>
+                <select id="selectTurma">
+                    <option value="">-- Escolha uma turma --</option>
+                    <option value="1º MATUTINO A">1º Ano A - Matutino</option>
+                    <option value="2º MATUTINO A">2º Ano A - Matutino</option>
+                    <option value="2º MATUTINO B">2º Ano B - Matutino</option>
+                    <option value="3º MATUTINO A">3º Ano A - Matutino</option>
+                    <option value="1º VESPERTINO A">1º Ano A - Vespertino</option>
+                    <option value="2º VESPERTINO A">2º Ano A - Vespertino</option>
+                    <option value="3º VESPERTINO A">3º Ano A - Vespertino</option>
+                </select>
+                <button id="btnDownload" class="btn-download">
+                    <i class="fas fa-download"></i> Baixar PDF
+                </button>
+            </div>
+            
+            <!-- Tabela de horários -->
+            <div id="horariosContainer">
+                <div class="no-turma-selected">
+                    <i class="far fa-calendar-alt fa-3x"></i>
+                    <p>Selecione uma turma para visualizar os horários</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="logo-footer">
+            <img src="assets/img/LOGO.png" alt="">
+        
+        <div class="container">
+            <p>Escola Estadual Mariana Cavalcanti</p>
+            <p>Endereço: AV. SENHORA SANTANA, 09 PREDIO. CENTRO - CEP: 59940-000</p>
+            <p>Telefone: (84) 3382-2270 | Email: eemarianacavalcanti@hotmail.com</p>
+            <p>&copy; 2025 - EEMC.</p>
+        </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/horarios.js"></script>
+</body>
+</html>
