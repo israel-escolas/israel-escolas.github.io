@@ -12,15 +12,24 @@ document.addEventListener('DOMContentLoaded', async function() {
         container.innerHTML = '<p class="loading">Carregando eventos...</p>';
         
         const eventos = await fetchData('EVENTOS', 'EVENTOS');
-        todosEventos = eventos;
         
-        if (eventos.length === 0) {
+        // *** ORDENA OS EVENTOS: MAIS RECENTES PRIMEIRO ***
+        todosEventos = eventos.sort((a, b) => {
+            // Converte as datas para objetos Date
+            const dataA = a.INICIO ? new Date(a.INICIO) : new Date(0);
+            const dataB = b.INICIO ? new Date(b.INICIO) : new Date(0);
+            
+            // Ordena do MAIS RECENTE para o MAIS ANTIGO
+            return dataB - dataA;
+        });
+        
+        if (todosEventos.length === 0) {
             container.innerHTML = '<p class="no-events">Nenhum evento cadastrado.</p>';
             return;
         }
         
         // Coleta tipos únicos
-        eventos.forEach(evento => {
+        todosEventos.forEach(evento => {
             if (evento.TIPO) tiposUnicos.add(evento.TIPO);
         });
         
@@ -30,8 +39,8 @@ document.addEventListener('DOMContentLoaded', async function() {
             filterType.innerHTML += `<option value="${tipo}">${tipo}</option>`;
         });
         
-        // Exibe eventos
-        exibirEventos(eventos);
+        // Exibe eventos (já ordenados)
+        exibirEventos(todosEventos);
     }
     
     // Exibe eventos na tela
@@ -94,6 +103,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             });
         }
         
+        // *** MANTÉM A ORDEM (mais recentes primeiro) mesmo após filtrar ***
         exibirEventos(filtrados);
     }
     
@@ -107,66 +117,64 @@ document.addEventListener('DOMContentLoaded', async function() {
     });
     
     // Modal simples (para teste)
-// ======== MODAL MELHORADO ======== //
-let fotosModal = [];
-let indexFoto = 0;
+    // ======== MODAL MELHORADO ======== //
+    let fotosModal = [];
+    let indexFoto = 0;
 
-window.abrirModalEvento = function(id) {
-    const evento = todosEventos.find(e => e.ID == id);
-    if (!evento) return;
+    window.abrirModalEvento = function(id) {
+        const evento = todosEventos.find(e => e.ID == id);
+        if (!evento) return;
 
-    // Dados
-    document.getElementById("modalTitulo").textContent = evento.EVENTO;
-    document.getElementById("modalDescricao").textContent = evento.DESCRICAO || "Sem descrição";
-    document.getElementById("modalData").textContent =
-        formatarData(evento.INICIO) +
-        (evento.FIM ? " até " + formatarData(evento.FIM) : "");
+        // Dados
+        document.getElementById("modalTitulo").textContent = evento.EVENTO;
+        document.getElementById("modalDescricao").textContent = evento.DESCRICAO || "Sem descrição";
+        document.getElementById("modalData").textContent =
+            formatarData(evento.INICIO) +
+            (evento.FIM ? " até " + formatarData(evento.FIM) : "");
 
-    // Fotos
-    fotosModal = converterLinksDrive(evento.FOTOS || '');
-    indexFoto = 0;
+        // Fotos
+        fotosModal = converterLinksDrive(evento.FOTOS || '');
+        indexFoto = 0;
 
-    const img = document.getElementById("galeriaImagem");
-    img.src = fotosModal[0] || "https://via.placeholder.com/800x500?text=Sem+Imagem";
+        const img = document.getElementById("galeriaImagem");
+        img.src = fotosModal[0] || "https://via.placeholder.com/800x500?text=Sem+Imagem";
 
-    // Mostrar modal
-    document.getElementById("modalEvento").classList.add("active");
-};
+        // Mostrar modal
+        document.getElementById("modalEvento").classList.add("active");
+    };
 
-// Botões da galeria
-document.getElementById("galeriaNext").onclick = function() {
-    if (fotosModal.length === 0) return;
-    indexFoto = (indexFoto + 1) % fotosModal.length;
-    document.getElementById("galeriaImagem").src = fotosModal[indexFoto];
-};
+    // Botões da galeria
+    document.getElementById("galeriaNext").onclick = function() {
+        if (fotosModal.length === 0) return;
+        indexFoto = (indexFoto + 1) % fotosModal.length;
+        document.getElementById("galeriaImagem").src = fotosModal[indexFoto];
+    };
 
-document.getElementById("galeriaPrev").onclick = function() {
-    if (fotosModal.length === 0) return;
-    indexFoto = (indexFoto - 1 + fotosModal.length) % fotosModal.length;
-    document.getElementById("galeriaImagem").src = fotosModal[indexFoto];
-};
+    document.getElementById("galeriaPrev").onclick = function() {
+        if (fotosModal.length === 0) return;
+        indexFoto = (indexFoto - 1 + fotosModal.length) % fotosModal.length;
+        document.getElementById("galeriaImagem").src = fotosModal[indexFoto];
+    };
 
-// Fechar modal
-document.getElementById("modalClose").onclick = function() {
-    document.getElementById("modalEvento").classList.remove("active");
-};
-
-// Fechar clicando fora
-document.getElementById("modalEvento").onclick = function(e) {
-    if (e.target.id === "modalEvento") {
+    // Fechar modal
+    document.getElementById("modalClose").onclick = function() {
         document.getElementById("modalEvento").classList.remove("active");
-    }
-};
+    };
 
-// Fechar com ESC
-document.addEventListener("keydown", function(e) {
-    if (e.key === "Escape") {
-        document.getElementById("modalEvento").classList.remove("active");
-    }
-});
+    // Fechar clicando fora
+    document.getElementById("modalEvento").onclick = function(e) {
+        if (e.target.id === "modalEvento") {
+            document.getElementById("modalEvento").classList.remove("active");
+        }
+    };
 
+    // Fechar com ESC
+    document.addEventListener("keydown", function(e) {
+        if (e.key === "Escape") {
+            document.getElementById("modalEvento").classList.remove("active");
+        }
+    });
 
-    
     // Inicializa
     carregarEventos();
 });

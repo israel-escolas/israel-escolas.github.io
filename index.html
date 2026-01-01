@@ -69,10 +69,8 @@
             </div>
                 <div class="img-content" ><img src="assets/img/Escola_Entrada.jpg" alt="Entrada da Escola Estadual Mariana Cavalcanti"></div>
         </section>
-        <section>
-            <div class="noticias-home">
-                <h2><i class="fas fa-news"></i> Últimas Notícias</h2>
-                <div class="noticias-list" id="noticiasList">
+        <section class="news">
+            <a class="btn-news" style=" text-decoration: none;">Noticias </a>
         </section>
     </main>
     <!-- Rodapé -->
@@ -109,7 +107,50 @@
         Desenvolvido com <i class="fa-solid fa-heart"></i> para a nossa escola
     </div>
 </footer>    
+<!-- ============================
+     CHATBOT DA ESCOLA
+=============================== -->
+<div id="chatbotContainer" class="chatbot-hidden">
+    <!-- Cabeçalho do Chat -->
+    <div class="chatbot-header">
+        <div class="chatbot-title">
+            <i class="fas fa-robot"></i>
+            <h3>Assistente Virtual</h3>
+        </div>
+        <button class="chatbot-close" id="chatbotClose">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- Mensagens -->
+    <div class="chatbot-messages" id="chatbotMessages">
+        <!-- Mensagens serão adicionadas aqui dinamicamente -->
+        <div class="message bot">
+            <div class="message-content">
+                Olá! Sou o assistente virtual da Escola Mariana Cavalcanti. 
+                Como posso ajudar você hoje?
+            </div>
+            <div class="message-time">Agora</div>
+        </div>
+    </div>
+
+    <!-- Input do usuário -->
+    <div class="chatbot-input">
+        <input type="text" id="chatbotInput" placeholder="Digite sua mensagem..." 
+               autocomplete="off">
+        <button id="chatbotSend">
+            <i class="fas fa-paper-plane"></i>
+        </button>
+    </div>
+</div>
+
+<!-- Botão flutuante para abrir o chat -->
+<button id="chatbotToggle" class="chatbot-toggle">
+    <i class="fas fa-comment-dots"></i>
+    <span class="chatbot-notification" id="chatbotNotification">1</span>
+</button>
     <script src="assets/js/script.js"></script>
     <script src="assets/js/api.js"></script>
+    <script src="assets/js/chatbot.js"></script>
 </body>
 </html>

@@ -119,8 +119,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 document.addEventListener("DOMContentLoaded", async () => {
     const wrapper = document.getElementById("bannerWrapper");
     const indicators = document.getElementById("bannerIndicators");
-    const currentSlideSpan = document.getElementById("currentSlide");
-    const totalSlidesSpan = document.getElementById("totalSlides");
     
     // Mostrar loading
     wrapper.innerHTML = `
@@ -142,17 +140,38 @@ document.addEventListener("DOMContentLoaded", async () => {
         return d.getMonth() + 1 === mesAtual && d.getFullYear() === anoAtual;
     });
     
+    // *** ALTERAÇÃO: Se não tiver eventos, buscar fotos ***
     if (eventos.length === 0) {
-        wrapper.innerHTML = `
-            <div class="carousel-loading">
-                <i class="far fa-calendar-times"></i>
-                <span>Nenhum evento programado para este mês</span>
-            </div>
-        `;
-        return;
+        console.log("Nenhum evento encontrado, buscando fotos da escola...");
+        
+        // Busca fotos da escola
+        const fotosEscola = await buscarFotosEscola();
+        
+        if (fotosEscola.length > 0) {
+            console.log(`✅ Encontradas ${fotosEscola.length} fotos da escola`);
+            
+            // Usar as fotos no lugar dos eventos
+            eventos = fotosEscola.map(foto => ({
+                EVENTO: "Nossa Escola",
+                INICIO: foto.DATA || new Date().toISOString(),
+                FOTOS: foto.LINK,
+                DESCRICAO: "Conheça as instalações da Escola Mariana Cavalcanti",
+                LOCAL: "Luís Gomes - RN"
+            }));
+            
+        } else {
+            // Se não tiver nem eventos nem fotos
+            wrapper.innerHTML = `
+                <div class="carousel-loading">
+                    <i class="far fa-calendar-times"></i>
+                    <span>Nenhum evento este mês</span>
+                </div>
+            `;
+            return;
+        }
     }
     
-    // Limitar a 5 eventos para não sobrecarregar
+    // Limitar a 5 eventos/fotos para não sobrecarregar
     eventos = eventos.slice(0, 5);
     
     let current = 0;
@@ -207,10 +226,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             indicator.onclick = () => mudarSlide(i);
             indicators.appendChild(indicator);
         });
-        
-        // Atualizar contador
-        totalSlidesSpan.textContent = eventos.length;
-        atualizarContador();
     }
     
     function mudarSlide(novoIndex) {
@@ -224,8 +239,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         
         slides[current].classList.add("active");
         dots[current].classList.add("active");
-        
-        atualizarContador();
     }
     
     function proximoSlide() {
@@ -236,13 +249,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         mudarSlide((current - 1 + eventos.length) % eventos.length);
     }
     
-    function atualizarContador() {
-        currentSlideSpan.textContent = current + 1;
-    }
-    
     // Auto-play
     function iniciarAutoPlay() {
-        timer = setInterval(proximoSlide, 6000); // 6 segundos
+        timer = setInterval(proximoSlide, 6000);
     }
     
     function pararAutoPlay() {
@@ -266,6 +275,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Inicializar
     criarSlides();
     iniciarAutoPlay();
+    
+    console.log(`Carrossel iniciado com ${eventos.length} slides`);
+});
     
     // Função placeholder para abrir modal
 // Função para abrir modal com detalhes do evento
@@ -444,81 +456,6 @@ function fecharModal() {
     modal.classList.remove('active');
 }
 
-// Adicione este código para configurar os eventos de fechar o modal
-document.addEventListener('DOMContentLoaded', function() {
-    // Criar modal dinamicamente se não existir
-    if (!document.getElementById('eventModal')) {
-        const modalHTML = `
-            <div class="modal-overlay" id="eventModal">
-                <div class="modal-container">
-                    <div class="modal-header">
-                        <h2><i class="fas fa-calendar-alt"></i> Detalhes do Evento</h2>
-                        <button class="modal-close" id="modalClose">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    <div class="modal-content" id="modalContent"></div>
-                    <div class="modal-footer">
-                        <button class="modal-btn secondary" id="modalCloseBtn">
-                            <i class="fas fa-times"></i> Fechar
-                        </button>
-                        <button class="modal-btn primary" id="modalShareBtn">
-                            <i class="fas fa-share-alt"></i> Compartilhar
-                        </button>
-                    </div>
-                </div>
-            </div>
-        `;
-        document.body.insertAdjacentHTML('beforeend', modalHTML);
-    }
-    
-    // Event listeners para fechar modal
-    document.getElementById('modalClose')?.addEventListener('click', fecharModal);
-    document.getElementById('modalCloseBtn')?.addEventListener('click', fecharModal);
-    document.getElementById('modalShareBtn')?.addEventListener('click', function() {
-        alert('Compartilhando evento...');
-        // Aqui você pode adicionar funcionalidade de compartilhamento
-    });
-    
-    // Fechar modal ao clicar fora
-    document.getElementById('eventModal')?.addEventListener('click', function(e) {
-        if (e.target === this) {
-            fecharModal();
-        }
-    });
-    
-    // Fechar com ESC
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            fecharModal();
-        }
-    });
-    
-    // Adicionar estilos para status
-    const style = document.createElement('style');
-    style.textContent = `
-        .event-status {
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-        .event-status.confirmado,
-        .event-status.realizado {
-            background: #d4edda;
-            color: #155724;
-        }
-        .event-status.pendente,
-        .event-status.agendado {
-            background: #fff3cd;
-            color: #856404;
-        }
-        .event-status.cancelado {
-            background: #f8d7da;
-            color: #721c24;
-        }
-    `;
-    document.head.appendChild(style);
-});
-});
+
+
 
