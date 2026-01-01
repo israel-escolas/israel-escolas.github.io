@@ -1,0 +1,244 @@
+/* Estilos para página de Horários */
+.turma-selector {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.turma-selector label {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.turma-selector select {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    min-width: 250px;
+    background: #f8f9fa;
+    transition: border 0.3s;
+}
+
+.turma-selector select:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.btn-download {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-download:hover {
+    background-color: #219653;
+}
+
+.no-turma-selected,
+.loading,
+.no-data,
+.error {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #7f8c8d;
+    font-size: 1.2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.no-turma-selected i,
+.error i {
+    margin-bottom: 1rem;
+    color: #3498db;
+}
+
+.error i {
+    color: #e74c3c;
+}
+
+/* CONTAINER DA TABELA */
+.table-container {
+    overflow-x: auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+    padding: 0;
+    border: 1px solid #e9ecef;
+}
+
+/* TABELA PRINCIPAL */
+.tabela-horarios {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    min-width: 700px;
+}
+
+/* CABEÇALHOS DOS DIAS */
+.tabela-horarios th {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    color: white;
+    padding: 1.2rem 0.8rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1rem;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+}
+
+.tabela-horarios th:first-child {
+    border-radius: 12px 0 0 0;
+}
+
+.tabela-horarios th:last-child {
+    border-right: none;
+    border-radius: 0 12px 0 0;
+}
+
+/* LINHA DE HORÁRIOS (COLUNA DA ESQUERDA) */
+.tabela-horarios .horario-cell {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 1.2rem 0.8rem;
+    text-align: center;
+    width: 110px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+/* CÉLULAS DOS DIAS */
+.tabela-horarios td:not(.horario-cell) {
+    padding: 12px 8px;
+    text-align: center;
+    border: 1px solid #e9ecef;
+    border-top: none;
+    border-left: none;
+    vertical-align: middle;
+    min-height: 70px;
+    background-color: #fff;
+    transition: background-color 0.2s;
+}
+
+/* DIVISÃO ENTRE COLUNAS (LINHAS VERTICAIS) */
+.tabela-horarios td:not(.horario-cell) {
+    border-right: 2px solid #f8f9fa;
+}
+
+.tabela-horarios td:last-child:not(.horario-cell) {
+    border-right: 1px solid #e9ecef;
+}
+
+/* LINHAS HORIZONTAIS SUAVES */
+.tabela-horarios tr:not(.separator):not(.contraturno-row) {
+    border-bottom: 1px solid #f1f3f4;
+}
+
+/* HOVER NAS LINHAS */
+.tabela-horarios tr:hover td:not(.horario-cell) {
+    background-color: #f8fafc;
+}
+
+/* ESTILO PARA DISCIPLINAS */
+.tabela-horarios .disciplina {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #2c3e50;
+    display: block;
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+
+/* ESTILO PARA PROFESSORES */
+.tabela-horarios .professor {
+    color: #6c757d;
+    font-size: 0.85rem;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.2;
+    display: block;
+}
+
+/* CONTRATURNO - DESTAQUE */
+.contraturno-row td:not(.horario-cell) {
+    background-color: #f0f7ff !important;
+    border-bottom: 2px solid #d0e3ff;
+}
+
+.contraturno-row td.horario-cell {
+    background: linear-gradient(135deg, #1abc9c, #16a085) !important;
+    font-weight: 800;
+    font-size: 1rem;
+}
+
+/* SEPARADOR ANTES DO CONTRATURNO */
+.tabela-horarios .separator td {
+    background: linear-gradient(to right, transparent, #e3f2fd, transparent);
+    height: 4px;
+    border: none;
+}
+
+.tabela-horarios .separator td:first-child {
+    border-radius: 0 0 0 12px;
+}
+
+/* LINHAS VAZIAS */
+.tabela-horarios td:empty:not(.horario-cell)::after {
+    content: "—";
+    color: #adb5bd;
+    font-style: italic;
+}
+
+/* ZEBRADO SUAVE */
+.tabela-horarios tr:nth-child(even):not(.contraturno-row):not(.separator) td:not(.horario-cell) {
+    background-color: #fafbfc;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+    .turma-selector {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .turma-selector select {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .btn-download {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .tabela-horarios th,
+    .tabela-horarios td {
+        padding: 0.6rem 0.4rem;
+        font-size: 0.9rem;
+    }
+    
+    .tabela-horarios .horario-cell {
+        width: 80px;
+        font-size: 0.9rem;
+    }
+    
+    .tabela-horarios .professor {
+        font-size: 0.75rem;
+    }
+}
