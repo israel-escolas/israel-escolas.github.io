@@ -1,0 +1,796 @@
+/* ============================================
+   APP-LAYOUT.CSS
+   Estilo de aplicativo nativo para mobile
+   ============================================ */
+
+/* ============================================
+   CONFIGURAÇÕES GERAIS APP
+   ============================================ */
+.app-mode {
+    -webkit-overflow-scrolling: touch;
+    height: 100vh;
+    max-height: -webkit-fill-available;
+    background: #f5f7fa;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+.app-mode * {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ============================================
+   APP HEADER (Status Bar + Navigation Bar)
+   ============================================ */
+.app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: #2c3e50;
+    color: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Status Bar (Barra de status do sistema) */
+.app-status-bar {
+    height: env(safe-area-inset-top, 0);
+    background: #2c3e50;
+}
+
+/* Navigation Bar */
+.app-nav-bar {
+    height: 56px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+}
+
+/* Logo App */
+.app-logo {
+    height: 32px;
+    width: auto;
+    filter: brightness(0) invert(1);
+}
+
+/* Botão Menu App */
+.app-menu-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: white;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: auto;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.app-menu-btn:active {
+    background: rgba(255,255,255,0.2);
+    transform: scale(0.92);
+}
+
+/* ============================================
+   APP DRAWER (Menu lateral)
+   ============================================ */
+.app-drawer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(3px);
+    z-index: 1999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+.app-drawer-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.app-drawer {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 85%;
+    max-width: 280px;
+    height: 100%;
+    background: #2c3e50;
+    z-index: 2000;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 20px rgba(0,0,0,0.3);
+}
+
+.app-drawer.active {
+    left: 0;
+}
+
+/* Header do Drawer */
+.app-drawer-header {
+    padding: 70px 20px 20px;
+    background: rgba(0,0,0,0.2);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.app-drawer-school-logo {
+    height: 40px;
+    width: auto;
+    margin-bottom: 10px;
+}
+
+.app-drawer-school-name {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+/* Menu do Drawer */
+.app-drawer-menu {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 0;
+}
+
+.app-drawer-item {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    color: rgba(255,255,255,0.9);
+    text-decoration: none;
+    border-left: 4px solid transparent;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.app-drawer-item:active {
+    background: rgba(255,255,255,0.1);
+}
+
+.app-drawer-item.active {
+    background: rgba(52, 152, 219, 0.15);
+    border-left-color: #3498db;
+    color: white;
+}
+
+.app-drawer-icon {
+    width: 24px;
+    font-size: 1.2rem;
+    margin-right: 16px;
+    text-align: center;
+}
+
+.app-drawer-label {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.app-drawer-badge {
+    position: absolute;
+    right: 20px;
+    background: #e74c3c;
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 10px;
+    min-width: 18px;
+    text-align: center;
+}
+
+/* Divisor no menu */
+.app-drawer-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin: 10px 20px;
+}
+
+/* Footer do Drawer */
+.app-drawer-footer {
+    padding: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.app-drawer-footer-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.app-drawer-footer-item:active {
+    color: white;
+}
+
+/* ============================================
+   APP CONTENT (Conteúdo principal)
+   ============================================ */
+.app-content {
+    position: fixed;
+    top: calc(56px + env(safe-area-inset-top, 0));
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    background: #f5f7fa;
+    padding: 16px;
+    padding-bottom: 76px; /* Espaço para bottom navigation */
+}
+
+/* ============================================
+   APP BOTTOM NAVIGATION
+   ============================================ */
+.app-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    z-index: 999;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.app-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    height: 100%;
+    text-decoration: none;
+    color: #95a5a6;
+    transition: all 0.2s ease;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.app-nav-item:active {
+    background: rgba(52, 152, 219, 0.05);
+}
+
+.app-nav-item.active {
+    color: #3498db;
+}
+
+.app-nav-item.active .app-nav-icon {
+    transform: translateY(-2px);
+}
+
+.app-nav-icon {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+    transition: transform 0.2s ease;
+}
+
+.app-nav-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+}
+
+.app-nav-indicator {
+    position: absolute;
+    top: 6px;
+    right: calc(50% - 15px);
+    width: 6px;
+    height: 6px;
+    background: #e74c3c;
+    border-radius: 50%;
+    animation: pulseIndicator 2s infinite;
+}
+
+@keyframes pulseIndicator {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 0.3; }
+}
+
+/* ============================================
+   APP CARDS (Cards estilo app)
+   ============================================ */
+.app-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border: none;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.app-card:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.app-card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.app-card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #3498db, #2c3e50);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.4rem;
+    margin-right: 16px;
+}
+
+.app-card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+}
+
+.app-card-subtitle {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    margin-top: 4px;
+}
+
+/* ============================================
+   APP LISTS (Listas estilo app)
+   ============================================ */
+.app-list {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.app-list-item {
+    display: flex;
+    align-items: center;
+    padding: 18px 16px;
+    text-decoration: none;
+    color: #2c3e50;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.2s ease;
+}
+
+.app-list-item:active {
+    background: #f8f9fa;
+}
+
+.app-list-item:last-child {
+    border-bottom: none;
+}
+
+.app-list-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #3498db;
+    font-size: 1.3rem;
+    margin-right: 16px;
+    font-weight: 600;
+}
+
+.app-list-content {
+    flex: 1;
+}
+
+.app-list-title {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+
+.app-list-subtitle {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+}
+
+.app-list-arrow {
+    color: #bdc3c7;
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   APP BUTTONS (Botões estilo app)
+   ============================================ */
+.app-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 18px 24px;
+    border: none;
+    border-radius: 14px;
+    font-size: 1rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.app-btn:active {
+    transform: scale(0.97);
+}
+
+.app-btn:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.app-btn:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(40, 40);
+        opacity: 0;
+    }
+}
+
+.app-btn-secondary {
+    background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+}
+
+.app-btn-outline {
+    background: transparent;
+    border: 2px solid #3498db;
+    color: #3498db;
+}
+
+.app-btn-outline:active {
+    background: rgba(52, 152, 219, 0.1);
+}
+
+/* ============================================
+   APP FORMS (Formulários estilo app)
+   ============================================ */
+.app-form-group {
+    margin-bottom: 20px;
+}
+
+.app-input {
+    width: 100%;
+    padding: 18px;
+    border: 2px solid #e0e6ed;
+    border-radius: 14px;
+    font-size: 1rem;
+    background: white;
+    transition: all 0.2s ease;
+}
+
+.app-input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.app-textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* ============================================
+   APP MODAL (Modal estilo app)
+   ============================================ */
+.app-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    padding: 16px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.app-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.app-modal {
+    background: white;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 400px;
+    max-height: 85vh;
+    overflow: hidden;
+    animation: modalAppear 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes modalAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.app-modal-header {
+    padding: 24px 24px 16px;
+    text-align: center;
+    position: relative;
+}
+
+.app-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: #f8f9fa;
+    color: #7f8c8d;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.app-modal-close:active {
+    background: #e9ecef;
+}
+
+.app-modal-body {
+    padding: 0 24px 24px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+/* ============================================
+   APP LOADING (Loading estilo app)
+   ============================================ */
+.app-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+}
+
+.app-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(52, 152, 219, 0.1);
+    border-radius: 50%;
+    border-top-color: #3498db;
+    animation: spinApp 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spinApp {
+    to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   APP TABS (Abas estilo app)
+   ============================================ */
+.app-tabs {
+    display: flex;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.app-tab {
+    flex: 1;
+    padding: 18px;
+    text-align: center;
+    text-decoration: none;
+    color: #7f8c8d;
+    font-weight: 500;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.app-tab:active {
+    background: rgba(52, 152, 219, 0.05);
+}
+
+.app-tab.active {
+    color: #3498db;
+    font-weight: 600;
+}
+
+.app-tab.active:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 20%;
+    right: 20%;
+    height: 3px;
+    background: #3498db;
+    border-radius: 2px;
+}
+
+/* ============================================
+   APP SWITCH (Toggle estilo app)
+   ============================================ */
+.app-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.app-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.app-switch-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.app-switch-slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .app-switch-slider {
+    background-color: #3498db;
+}
+
+input:checked + .app-switch-slider:before {
+    transform: translateX(26px);
+}
+
+/* ============================================
+   UTILITÁRIOS APP
+   ============================================ */
+.app-separator {
+    height: 1px;
+    background: #e0e6ed;
+    margin: 20px 0;
+}
+
+.app-section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 24px 0 16px;
+    padding-left: 16px;
+    position: relative;
+}
+
+.app-section-title:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 16px;
+    background: #3498db;
+    border-radius: 2px;
+}
+
+/* ============================================
+   DARK MODE APP (Opcional)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    .app-mode {
+        background: #1a1a1a;
+    }
+    
+    .app-content {
+        background: #1a1a1a;
+    }
+    
+    .app-card,
+    .app-list,
+    .app-tabs {
+        background: #2d2d2d;
+        color: #ffffff;
+    }
+    
+    .app-card-title,
+    .app-list-title {
+        color: #ffffff;
+    }
+    
+    .app-card-subtitle,
+    .app-list-subtitle {
+        color: #b0b0b0;
+    }
+    
+    .app-input {
+        background: #2d2d2d;
+        border-color: #404040;
+        color: #ffffff;
+    }
+    
+    .app-bottom-nav {
+        background: #2d2d2d;
+    }
+    
+    .app-nav-item {
+        color: #b0b0b0;
+    }
+    
+    .app-nav-item.active {
+        color: #3498db;
+    }
+}

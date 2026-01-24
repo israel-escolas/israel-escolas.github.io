@@ -1,0 +1,393 @@
+/* ============================================
+   MOBILE.CSS
+   Responsividade e estilos para dispositivos móveis
+   ============================================ */
+
+@media (max-width: 768px) {
+    /* ============================================
+       LAYOUT GERAL MOBILE
+       ============================================ */
+    body {
+        font-size: 15px;
+        line-height: 1.5;
+        overflow-x: hidden;
+    }
+    
+    .container {
+        padding: 0 15px;
+        max-width: 100%;
+    }
+    
+    /* ============================================
+       HEADER MOBILE
+       ============================================ */
+    .main-header {
+        height: 60px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+    }
+    
+    .header-container {
+        padding: 0 15px;
+    }
+    
+    .logo img {
+        height: 35px;
+    }
+    
+    /* ============================================
+       MENU HAMBURGER MOBILE
+       ============================================ */
+    .menu-toggle {
+        display: block;
+        position: relative;
+        z-index: 1002;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: #2c3e50;
+        flex-direction: column;
+        padding: 20px;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 1001;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        max-height: calc(100vh - 60px);
+        overflow-y: auto;
+    }
+    
+    .nav-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .nav-menu li {
+        margin: 0;
+        width: 100%;
+    }
+    
+    .nav-link {
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 8px;
+        width: 100%;
+        justify-content: flex-start;
+    }
+    
+    /* Dropdown mobile */
+    .dropdown-menu {
+        position: static;
+        width: 100%;
+        background: rgba(0,0,0,0.2);
+        box-shadow: none;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        margin: 10px 0 10px 15px;
+        padding: 10px 0;
+    }
+    
+    /* ============================================
+       CONTEÚDO PRINCIPAL
+       ============================================ */
+    main {
+        padding-top: 60px;
+        padding-bottom: 20px;
+    }
+    
+    .hero {
+        padding: 40px 20px;
+        margin: 15px;
+        border-radius: 12px;
+    }
+    
+    .hero h2 {
+        font-size: 1.8rem;
+    }
+    
+    /* ============================================
+       GRIDS E LAYOUTS
+       ============================================ */
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .flex-row {
+        flex-direction: column;
+    }
+    
+    /* ============================================
+       COMPONENTES MOBILE
+       ============================================ */
+    .btn {
+        padding: 14px 20px;
+        font-size: 16px;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .btn-sm {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+    
+    .btn-lg {
+        padding: 18px 24px;
+        font-size: 16px;
+    }
+    
+    /* Cards */
+    .card {
+        margin-bottom: 15px;
+        border-radius: 12px;
+    }
+    
+    .card-header,
+    .card-body,
+    .card-footer {
+        padding: 15px;
+    }
+    
+    /* Formulários */
+    .form-input,
+    .form-select,
+    .form-textarea {
+        padding: 14px;
+        font-size: 16px; /* Evita zoom no iOS */
+    }
+    
+    /* ============================================
+       SEÇÕES ESPECÍFICAS
+       ============================================ */
+    .eventos-banner {
+        height: 300px;
+        margin: 20px 0;
+        border-radius: 12px;
+    }
+    
+    .propPedag {
+        flex-direction: column;
+        padding: 20px;
+        margin: 20px 15px;
+        border-radius: 12px;
+    }
+    
+    .text-content h1 {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+    
+    .news-container {
+        padding: 20px;
+        margin: 0 15px;
+    }
+    
+    /* ============================================
+       RODAPÉ MOBILE
+       ============================================ */
+    .main-footer {
+        padding: 30px 0 20px;
+        margin-top: 40px;
+    }
+    
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .footer-col {
+        text-align: center;
+    }
+    
+    .footer-col p {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    /* ============================================
+       CHATBOT MOBILE
+       ============================================ */
+    #chatbotContainer {
+        width: 100%;
+        height: 70vh;
+        bottom: 0;
+        right: 0;
+        border-radius: 20px 20px 0 0;
+    }
+    
+    .chatbot-toggle {
+        bottom: 20px;
+        right: 20px;
+        width: 55px;
+        height: 55px;
+    }
+    
+    /* ============================================
+       TABELAS RESPONSIVAS
+       ============================================ */
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    table {
+        min-width: 600px;
+    }
+    
+    /* ============================================
+       UTILITÁRIOS MOBILE
+       ============================================ */
+    .hide-mobile {
+        display: none !important;
+    }
+    
+    .show-mobile {
+        display: block !important;
+    }
+    
+    .text-center-mobile {
+        text-align: center;
+    }
+    
+    /* ============================================
+       TOUCH FRIENDLY
+       ============================================ */
+    .touch-target {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Remove hover effects em mobile */
+    .btn:hover,
+    .card:hover,
+    .nav-link:hover {
+        transform: none !important;
+    }
+    
+    /* ============================================
+       IOS SAFE AREAS
+       ============================================ */
+    @supports (-webkit-touch-callout: none) {
+        .main-header {
+            padding-top: env(safe-area-inset-top);
+            height: calc(60px + env(safe-area-inset-top));
+        }
+        
+        main {
+            padding-top: calc(60px + env(safe-area-inset-top));
+        }
+        
+        .nav-menu {
+            top: calc(60px + env(safe-area-inset-top));
+            max-height: calc(100vh - 60px - env(safe-area-inset-top));
+        }
+        
+        .main-footer {
+            padding-bottom: calc(20px + env(safe-area-inset-bottom));
+        }
+    }
+    
+    /* ============================================
+       ANIMAÇÕES MOBILE
+       ============================================ */
+    .fade-in-mobile {
+        animation: fadeIn 0.3s ease;
+    }
+    
+    .slide-up-mobile {
+        animation: slideInUp 0.3s ease;
+    }
+    
+    .slide-down-mobile {
+        animation: slideInDown 0.3s ease;
+    }
+}
+
+/* ============================================
+   MOBILE PEQUENO (até 480px)
+   ============================================ */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 12px;
+    }
+    
+    .hero {
+        padding: 30px 15px;
+        margin: 10px;
+    }
+    
+    .hero h2 {
+        font-size: 1.5rem;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+    }
+    
+    .btn {
+        padding: 16px 20px;
+    }
+    
+    .card-header,
+    .card-body,
+    .card-footer {
+        padding: 12px;
+    }
+    
+    h1 { font-size: 1.75rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.25rem; }
+    h4 { font-size: 1.125rem; }
+    
+    .eventos-banner {
+        height: 250px;
+    }
+}
+
+/* ============================================
+   TABLET (769px - 1024px)
+   ============================================ */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        max-width: 95%;
+    }
+    
+    .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .grid-4 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .propPedag {
+        padding: 30px;
+        margin: 30px 20px;
+    }
+    
+    .eventos-banner {
+        height: 350px;
+    }
+    
+    .nav-menu {
+        gap: 10px;
+    }
+    
+    .nav-link {
+        padding: 10px 12px;
+        font-size: 0.95rem;
+    }
+}
