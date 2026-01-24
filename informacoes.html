@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informações - Escola Mariana Cavalcanti</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+       <link rel="stylesheet" href="assets/css/informacoes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Cabeçalho e Menu -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="assets/img/LOGO.png">
+            </a>
+            <nav class="navbar">
+                <ul class="nav-menu">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="horarios.html"><i class="fas fa-clock"></i> Horários</a></li>
+                    <li><a href="calendario.html"><i class="fas fa-calendar-alt"></i> Calendário</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="fa-solid fa-panorama"></i> Eventos <i class="fas fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="eventos.html"><i class="fas fa-images"></i> Eventos</a></li>
+                            <li><a href="comunicados.html"><i class="fas fa-bullhorn"></i> Comunicados</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="fa-solid fa-book"></i> Estudo <i class="fas fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="jogos.html"><i class="fas fa-gamepad"></i> Jogos</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle active">
+                            <i class="fas fa-school"></i> Escola <i class="fas fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sobre.html"><i class="fa-solid fa-school-flag"></i> Sobre</a></li>
+                            <li><a href="informacoes.html" class="active"><i class="fas fa-info-circle"></i> Informações</a></li>
+                            <li><a href="contato.html"><i class="fas fa-envelope"></i> Contato</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="page-hero">
+            <div class="container">
+                <h1><i class="fas fa-info-circle"></i> Informações da Escola</h1>
+                <p>Tudo o que você precisa saber sobre matrículas, uniformes, regras e mais</p>
+            </div>
+        </section>
+
+        <!-- Menu de Navegação Interna -->
+        <section class="info-nav">
+            <div class="container">
+                <div class="info-nav-grid">
+                    <a href="#matriculas" class="info-nav-item">
+                        <i class="fas fa-file-signature"></i>
+                        <span>Matrículas</span>
+                    </a>
+                    <a href="#fardamento" class="info-nav-item">
+                        <i class="fas fa-tshirt"></i>
+                        <span>Fardamento</span>
+                    </a>
+                    <a href="#regras" class="info-nav-item">
+                        <i class="fas fa-clipboard-list"></i>
+                        <span>Regras</span>
+                    </a>
+                    <a href="#documentos" class="info-nav-item">
+                        <i class="fas fa-folder-open"></i>
+                        <span>Documentos</span>
+                    </a>
+                    <a href="#calendario-letivo" class="info-nav-item">
+                        <i class="fas fa-calendar-days"></i>
+                        <span>Calendário</span>
+                    </a>
+                    <a href="#duvidas" class="info-nav-item">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Dúvidas</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Matrículas -->
+        <section id="matriculas" class="info-section">
+            <div class="container">
+                <div class="info-header">
+                    <i class="fas fa-file-signature"></i>
+                    <h2>Processo de Matrícula</h2>
+                    <p>Como se matricular na nossa escola</p>
+                </div>
+                
+                <div class="info-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">Janeiro</div>
+                        <div class="timeline-content">
+                            <h3>Matrícula Inicial</h3>
+                            <p>Período para alunos novos e rematrícula dos alunos antigos.</p>
+                            <ul class="info-list">
+                                <li><i class="fas fa-check-circle"></i> Período: 15 a 30 de Janeiro</li>
+                                <li><i class="fas fa-check-circle"></i> Local: Secretaria da escola</li>
+                                <li><i class="fas fa-check-circle"></i> Horário: 7h às 17h</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">Fevereiro</div>
+                        <div class="timeline-content">
+                            <h3>Matrícula Tardia</h3>
+                            <p>Para vagas remanescentes. Sujeito à disponibilidade.</p>
+                            <ul class="info-list">
+                                <li><i class="fas fa-check-circle"></i> Período: 1º a 15 de Fevereiro</li>
+                                <li><i class="fas fa-check-circle"></i> Taxa administrativa: R$ 50,00</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card highlight">
+                    <div class="info-card-header">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Documentos Necessários</h3>
+                    </div>
+                    <div class="info-card-content">
+                        <div class="doc-grid">
+                            <div class="doc-item">
+                                <i class="fas fa-id-card"></i>
+                                <div>
+                                    <h4>Documentos do Aluno</h4>
+                                    <p>Certidão de Nascimento ou RG (original e cópia)</p>
+                                </div>
+                            </div>
+                            <div class="doc-item">
+                                <i class="fas fa-user-tie"></i>
+                                <div>
+                                    <h4>Documentos do Responsável</h4>
+                                    <p>RG, CPF e comprovante de residência</p>
+                                </div>
+                            </div>
+                            <div class="doc-item">
+                                <i class="fas fa-graduation-cap"></i>
+                                <div>
+                                    <h4>Documentos Escolares</h4>
+                                    <p>Histórico escolar ou declaração de transferência</p>
+                                </div>
+                            </div>
+                            <div class="doc-item">
+                                <i class="fas fa-camera"></i>
+                                <div>
+                                    <h4>Fotos</h4>
+                                    <p>2 fotos 3x4 recentes</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Fardamento -->
+        <section id="fardamento" class="info-section alt">
+            <div class="container">
+                <div class="info-header">
+                    <i class="fas fa-tshirt"></i>
+                    <h2>Uniforme Escolar</h2>
+                    <p>Padrão de vestimenta obrigatório</p>
+                </div>
+
+                <div class="uniform-grid">
+                    <div class="uniform-card">
+                        <div class="uniform-image">
+                            <i class="fas fa-tshirt"></i>
+                        </div>
+                        <div class="uniform-info">
+                            <h3>Camiseta Branca</h3>
+                            <p>Com logo da escola na frente. Tecido 100% algodão.</p>
+                            <div class="uniform-price">
+                                <span class="price">R$ 35,00</span>
+                                <span class="size">Tamanhos: P ao GG</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uniform-card">
+                        <div class="uniform-image">
+                            <i class="fas fa-vest"></i>
+                        </div>
+                        <div class="uniform-info">
+                            <h3>Calça/Bermuda Jeans</h3>
+                            <p>Cor azul ou preta. Sem rasgos ou adornos.</p>
+                            <div class="uniform-price">
+                                <span class="price">A cargo do aluno</span>
+                                <span class="size">Modelo tradicional</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uniform-card">
+                        <div class="uniform-image">
+                            <i class="fas fa-shoe-prints"></i>
+                        </div>
+                        <div class="uniform-info">
+                            <h3>Tênis</h3>
+                            <p>Qualquer cor. Fechado e apropriado para educação física.</p>
+                            <div class="uniform-price">
+                                <span class="price">A cargo do aluno</span>
+                                <span class="size">Preferência por cores sóbrias</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card warning">
+                    <div class="info-card-header">
+                        <i class="fas fa-clock"></i>
+                        <h3>Horário de Venda</h3>
+                    </div>
+                    <div class="info-card-content">
+                        <div class="schedule-grid">
+                            <div class="schedule-item">
+                                <i class="fas fa-store"></i>
+                                <div>
+                                    <h4>Onde Comprar</h4>
+                                    <p>Secretaria da escola</p>
+                                </div>
+                            </div>
+                            <div class="schedule-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <div>
+                                    <h4>Quando Comprar</h4>
+                                    <p>Durante o período de matrícula</p>
+                                </div>
+                            </div>
+                            <div class="schedule-item">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <div>
+                                    <h4>Formas de Pagamento</h4>
+                                    <p>Dinheiro, PIX ou cartão (até 3x)</p>
+                                </div>
+                            </div>
+                            <div class="schedule-item">
+                                <i class="fas fa-exchange-alt"></i>
+                                <div>
+                                    <h4>Trocas</h4>
+                                    <p>Até 7 dias após a compra, com nota fiscal</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Regras -->
+        <section id="regras" class="info-section">
+            <div class="container">
+                <div class="info-header">
+                    <i class="fas fa-clipboard-list"></i>
+                    <h2>Regras e Normas</h2>
+                    <p>Conduta esperada dos alunos</p>
+                </div>
+
+                <div class="rules-grid">
+                    <div class="rule-card">
+                        <div class="rule-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Pontualidade</h3>
+                        <p>Os alunos devem chegar até às 7h (manhã) ou 13h (tarde).</p>
+                        <span class="rule-tag">Obrigatório</span>
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-icon">
+                            <i class="fas fa-tshirt"></i>
+                        </div>
+                        <h3>Uniforme</h3>
+                        <p>Uso obrigatório do uniforme completo em todos os dias.</p>
+                        <span class="rule-tag">Obrigatório</span>
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Celulares</h3>
+                        <p>Uso permitido apenas no intervalo, fora da sala de aula.</p>
+                        <span class="rule-tag">Restrito</span>
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3>Material</h3>
+                        <p>Trazer material completo conforme exigência dos professores.</p>
+                        <span class="rule-tag">Obrigatório</span>
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Respeito</h3>
+                        <p>Tratar todos com educação e respeito, sem discriminação.</p>
+                        <span class="rule-tag">Obrigatório</span>
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-icon">
+                            <i class="fas fa-ban"></i>
+                        </div>
+                        <h3>Proibições</h3>
+                        <p>Não é permitido fumar, beber ou usar drogas no ambiente escolar.</p>
+                        <span class="rule-tag">Proibido</span>
+                    </div>
+                </div>
+
+                <div class="info-card important">
+                    <div class="info-card-header">
+                        <i class="fas fa-balance-scale"></i>
+                        <h3>Sanções Disciplinares</h3>
+                    </div>
+                    <div class="info-card-content">
+                        <div class="sanctions-grid">
+                            <div class="sanction-item">
+                                <div class="sanction-level level-1">
+                                    <i class="fas fa-exclamation"></i>
+                                </div>
+                                <div>
+                                    <h4>Advertência Verbal</h4>
+                                    <p>Para infrações leves. Conversa com a coordenação.</p>
+                                </div>
+                            </div>
+                            <div class="sanction-item">
+                                <div class="sanction-level level-2">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div>
+                                    <h4>Advertência Escrita</h4>
+                                    <p>Infrações médias. Comunicação aos pais.</p>
+                                </div>
+                            </div>
+                            <div class="sanction-item">
+                                <div class="sanction-level level-3">
+                                    <i class="fas fa-user-times"></i>
+                                </div>
+                                <div>
+                                    <h4>Suspensão</h4>
+                                    <p>Infrações graves. Afastamento por 1-3 dias.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Calendário Letivo -->
+        <section id="calendario-letivo" class="info-section alt">
+            <div class="container">
+                <div class="info-header">
+                    <i class="fas fa-calendar-days"></i>
+                    <h2>Calendário Escolar 2024</h2>
+                    <p>Datas importantes do ano letivo</p>
+                </div>
+
+                <div class="calendar-grid">
+                    <div class="calendar-item">
+                        <div class="calendar-date">Fevereiro</div>
+                        <div class="calendar-content">
+                            <h3>Início das Aulas</h3>
+                            <p>5 de Fevereiro</p>
+                            <span class="calendar-tag">Início</span>
+                        </div>
+                    </div>
+
+                    <div class="calendar-item">
+                        <div class="calendar-date">Abril</div>
+                        <div class="calendar-content">
+                            <h3>Recesso Escolar</h3>
+                            <p>1 a 7 de Abril</p>
+                            <span class="calendar-tag holiday">Feriado</span>
+                        </div>
+                    </div>
+
+                    <div class="calendar-item">
+                        <div class="calendar-date">Julho</div>
+                        <div class="calendar-content">
+                            <h3>Férias de Inverno</h3>
+                            <p>15 a 31 de Julho</p>
+                            <span class="calendar-tag holiday">Férias</span>
+                        </div>
+                    </div>
+
+                    <div class="calendar-item">
+                        <div class="calendar-date">Outubro</div>
+                        <div class="calendar-content">
+                            <h3>Conselho de Classe</h3>
+                            <p>21 a 25 de Outubro</p>
+                            <span class="calendar-tag">Avaliação</span>
+                        </div>
+                    </div>
+
+                    <div class="calendar-item">
+                        <div class="calendar-date">Dezembro</div>
+                        <div class="calendar-content">
+                            <h3>Término do Ano Letivo</h3>
+                            <p>15 de Dezembro</p>
+                            <span class="calendar-tag">Término</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <a href="calendario.html" class="view-all-btn">
+                        <i class="fas fa-calendar-alt"></i> Ver Calendário Completo
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Dúvidas Frequentes -->
+        <section id="duvidas" class="info-section">
+            <div class="container">
+                <div class="info-header">
+                    <i class="fas fa-question-circle"></i>
+                    <h2>Dúvidas Frequentes</h2>
+                    <p>Tire suas principais dúvidas aqui</p>
+                </div>
+
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Posso fazer matrícula fora do período estabelecido?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Sim, porém somente para vagas remanescentes e com taxa administrativa adicional.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>E se meu filho perder o período de matrícula?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Deve aguardar o próximo período de matrícula ou verificar disponibilidade de vagas na secretaria.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>O uniforme é obrigatório todos os dias?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Sim, o uso do uniforme completo é obrigatório em todos os dias letivos.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Como funciona a merenda escolar?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>A merenda é fornecida gratuitamente para todos os alunos nos horários estabelecidos.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Há transporte escolar fornecido pela escola?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Não, a escola não fornece transporte. Os alunos devem se organizar com transporte particular ou público.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-box">
+                    <div class="contact-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <div class="contact-info">
+                        <h3>Ainda tem dúvidas?</h3>
+                        <p>Entre em contato com nossa secretaria</p>
+                        <a href="contato.html" class="contact-btn">
+                            <i class="fas fa-phone-alt"></i> Fale Conosco
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="footer-content">
+            <div class="logo-footer">
+                <img src="assets/img/LOGO.png" alt="">
+            </div>
+            <div class="footer-col">
+                <h3>Escola Estadual Mariana Cavalcanti</h3>
+                <p><i class="fa-solid fa-location-dot"></i> AV. SENHORA SANTANA, 09 PREDIO. CENTRO</p>
+                <p><i class="fa-solid fa-city"></i> Luís Gomes - RN, CEP: 59940-000</p>
+                <p><i class="fa-solid fa-phone"></i> Telefone: (84) 3382-2270</p>
+            </div>
+            <div class="footer-col">
+                <h3>Contato</h3>
+                <p><i class="fa-solid fa-envelope"></i> eemarianacavalcanti@hotmail.com</p>
+                <p><i class="fa-solid fa-clock"></i> Horário de Atendimento:</p>
+                <p>Segunda a Sexta: 7h às 17h</p>
+                <button class="footer-btn">
+                    <a href="contato.html" style="color: rgb(15, 15, 15); text-decoration: none;">
+                        <i class="fas fa-envelope"></i> Fale Conosco
+                    </a>
+                </button>
+            </div>
+        </div>
+        <div class="footer-divider"></div>
+        <div class="footer-bottom">
+            © 2024 Escola Estadual Mariana Cavalcanti.<br>
+            Desenvolvido com <i class="fa-solid fa-heart"></i> para a nossa escola
+        </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <div id="chatbotContainer" class="chatbot-hidden">
+        <!-- Cabeçalho do Chat -->
+        <div class="chatbot-header">
+            <div class="chatbot-title">
+                <i class="fas fa-robot"></i>
+                <h3>Assistente Virtual</h3>
+            </div>
+            <button class="chatbot-close" id="chatbotClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Mensagens -->
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="message bot">
+                <div class="message-content">
+                    Olá! Sou o assistente virtual da Escola Mariana Cavalcanti. 
+                    Como posso ajudar você hoje?
+                </div>
+                <div class="message-time">Agora</div>
+            </div>
+        </div>
+
+        <!-- Input do usuário -->
+        <div class="chatbot-input">
+            <input type="text" id="chatbotInput" placeholder="Digite sua mensagem..." 
+                   autocomplete="off">
+            <button id="chatbotSend">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Botão flutuante para abrir o chat -->
+    <button id="chatbotToggle" class="chatbot-toggle">
+        <i class="fas fa-comment-dots"></i>
+        <span class="chatbot-notification" id="chatbotNotification">1</span>
+    </button>
+
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/chatbot.js"></script>
+    <script src="assets/js/informacoes.js"></script>
+</body>
+</html>
