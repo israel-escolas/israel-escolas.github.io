@@ -91,7 +91,11 @@ document.addEventListener('DOMContentLoaded', async function() {
                     prof['DISCIPLINA 01'],
                     prof['DISCIPLINA 02'],
                     prof['DISCIPLINA 03'],
-                    prof['DISCIPLINA 04']
+                    prof['DISCIPLINA 04'],
+                    prof['DISCIPLINA 05'],
+                    prof['DISCIPLINA 06'],
+                    prof['DISCIPLINA 07'],
+                    prof['DISCIPLINA 08']
                 ];
                 
                 // Adiciona ao set depois de corrigir
@@ -139,6 +143,10 @@ document.addEventListener('DOMContentLoaded', async function() {
             professorProcessado['DISCIPLINA 02'] = corrigirDisciplina(prof['DISCIPLINA 02']);
             professorProcessado['DISCIPLINA 03'] = corrigirDisciplina(prof['DISCIPLINA 03']);
             professorProcessado['DISCIPLINA 04'] = corrigirDisciplina(prof['DISCIPLINA 04']);
+            professorProcessado['DISCIPLINA 05'] = corrigirDisciplina(prof['DISCIPLINA 05']);
+            professorProcessado['DISCIPLINA 06'] = corrigirDisciplina(prof['DISCIPLINA 06']);
+            professorProcessado['DISCIPLINA 07'] = corrigirDisciplina(prof['DISCIPLINA 07']);
+            professorProcessado['DISCIPLINA 08'] = corrigirDisciplina(prof['DISCIPLINA 08']);
             
             // Processa a foto usando a função converterLinksDrive do api.js
             if (prof.FOTO && prof.FOTO.trim() !== '') {
@@ -202,7 +210,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         const match = experiencia.toString().match(/\d+/);
         if (match) {
             const anos = match[0];
-            return `${anos} anos de experiência`;
+            return `${anos} anos de experiência na instituição.`;
         }
         
         return experiencia.toString();
@@ -241,7 +249,11 @@ document.addEventListener('DOMContentLoaded', async function() {
             professor['DISCIPLINA 01'],
             professor['DISCIPLINA 02'], 
             professor['DISCIPLINA 03'],
-            professor['DISCIPLINA 04']
+            professor['DISCIPLINA 04'],
+            professor['DISCIPLINA 05'],
+            professor['DISCIPLINA 06'],
+            professor['DISCIPLINA 07'],
+            professor['DISCIPLINA 08']
         ].filter(d => d && d.trim() !== '');
         
         // Usa o nome completo da coluna PROFESSORES
@@ -370,7 +382,11 @@ document.addEventListener('DOMContentLoaded', async function() {
                         prof['DISCIPLINA 01'],
                         prof['DISCIPLINA 02'],
                         prof['DISCIPLINA 03'],
-                        prof['DISCIPLINA 04']
+                        prof['DISCIPLINA 04'],
+                        prof['DISCIPLINA 05'],
+                        prof['DISCIPLINA 06'],
+                        prof['DISCIPLINA 07'],
+                        prof['DISCIPLINA 08']
                     ];
                     return disciplinas.some(d => d && d.trim() === this.value);
                 });

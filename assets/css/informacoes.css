@@ -10,7 +10,16 @@
     padding: 60px 20px;
     margin-bottom: 40px;
 }
-
+.farda img {
+    padding: 10%;
+    width: 80%;
+    margin-bottom: -10px;
+}
+.calca i {
+    font-size: 4rem;
+    color: white;
+    opacity: 0.8;
+}
 .page-hero h1 {
     font-size: 2.8rem;
     margin-bottom: 15px;
@@ -275,11 +284,7 @@
     justify-content: center;
 }
 
-.uniform-image i {
-    font-size: 4rem;
-    color: white;
-    opacity: 0.8;
-}
+
 
 .uniform-info {
     padding: 25px;
@@ -341,6 +346,7 @@
 }
 
 .rule-icon i {
+    
     font-size: 2rem;
     color: #3498db;
 }
@@ -698,5 +704,343 @@
     
     .contact-box {
         padding: 30px 20px;
+    }
+}
+
+/* Modal/Lightbox */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    animation: zoomIn 0.4s ease;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    z-index: 10000;
+}
+
+.modal-close:hover {
+    color: #ccc;
+}
+
+#modalCaption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #fff;
+    padding: 10px 0;
+    font-size: 1.1rem;
+}
+
+/* Para a imagem clicável */
+.uniform-image img {
+    cursor: zoom-in;
+    transition: transform 0.3s ease;
+}
+
+.uniform-image img:hover {
+    transform: scale(1.03);
+}
+
+/* ============================
+   CARROSSEL DA ESTRUTURA
+=============================== */
+.estrutura-carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 2rem auto;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    background: #f5f5f5;
+}
+
+.estrutura-carousel {
+    width: 100%;
+    height: 500px;
+    position: relative;
+    overflow: hidden;
+}
+
+.estrutura-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.estrutura-slide.active {
+    opacity: 1;
+}
+
+.estrutura-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* ou 'cover' dependendo do efeito desejado */
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    pointer-events: none; /* opcional: previne seleção de texto na imagem */
+}
+.estrutura-slide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.03);
+    z-index: -1;
+}
+.estrutura-slide:hover img {
+    transform: scale(1.05);
+}
+.estrutura-slide img.cover {
+    object-fit: cover;
+}
+.slide-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    color: white;
+    padding: 20px;
+    text-align: center;
+    z-index: 2;
+}
+.estrutura-slide img.contain {
+    object-fit: contain;
+    background-color: #f5f5f5; /* fundo para áreas vazias */
+}
+.slide-caption h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.3rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.slide-caption p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Indicadores */
+.estrutura-indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.estrutura-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.estrutura-indicator.active {
+    background: white;
+    transform: scale(1.2);
+}
+
+.estrutura-indicator:hover {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+/* Setas de navegação */
+.estrutura-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #333;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.estrutura-arrow:hover {
+    background: white;
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.estrutura-arrow.left {
+    left: 20px;
+}
+
+.estrutura-arrow.right {
+    right: 20px;
+}
+
+/* Contador */
+.estrutura-counter {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    z-index: 10;
+}
+
+/* Loading */
+.carousel-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #666;
+    gap: 15px;
+}
+
+.carousel-loading .fa-spinner {
+    font-size: 2.5rem;
+    color: #3498db;
+}
+
+/* Informações da estrutura */
+.estrutura-info {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 15px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+}
+
+.info-item {
+    text-align: center;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.info-item:hover {
+    transform: translateY(-5px);
+}
+
+.info-item i {
+    font-size: 2.5rem;
+    color: #3498db;
+    margin-bottom: 15px;
+}
+
+.info-item h4 {
+    margin: 10px 0 5px;
+    color: #2c3e50;
+}
+
+.info-item p {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .estrutura-carousel {
+        height: 400px;
+    }
+    
+    .estrutura-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .estrutura-arrow.left {
+        left: 10px;
+    }
+    
+    .estrutura-arrow.right {
+        right: 10px;
+    }
+    
+    .info-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .estrutura-carousel {
+        height: 300px;
+    }
+    
+    .slide-caption {
+        padding: 15px;
+    }
+    
+    .slide-caption h3 {
+        font-size: 1.1rem;
     }
 }

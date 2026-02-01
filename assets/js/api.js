@@ -3,7 +3,7 @@
 // ============================================
 
 // NOVA URL DO GOOGLE APPS SCRIPT (com FOTOS ESCOLA)
-const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbxkVVZEb4m8NDmPbUzoQzHjZ_lHinOriYvcMDIgKjuidEfiB0npf_kyl2js17-IfxmzMg/exec';
+const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwn9fKWJZyH3LaDiZqk-XkSbUdVgICnUNig4kuTGpbDFtU5WV0e2qLx6kOwgg5uBTf5yg/exec';
 
 // ============================================
 // FUNÇÕES PRINCIPAIS
@@ -191,7 +191,13 @@ if (window.location.hostname === 'localhost' ||
         setTimeout(testarConexoesAPI, 1000);
     });
 }
+async function buscarFotosEstrutura() {
+    console.log('🏫 Buscando fotos da estrutura...');
+    const fotos = await fetchData("FOTOS ESCOLA", "FOTOS ESCOLA ESTRUTURA");
+    return fotos.filter(foto => foto.LINK && foto.LINK.trim() !== '');
+}
 
+window.buscarFotosEstrutura = buscarFotosEstrutura;
 // ============================================
 // EXPORTAÇÕES (se necessário para módulos)
 // ============================================

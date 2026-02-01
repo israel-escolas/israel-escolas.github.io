@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vídeos Educativos - Escola Mariana Cavalcanti</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/videos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Cabeçalho e Menu -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="assets/img/LOGO.png" alt="Logo da Escola" loading="lazy">
+            </a>
+            <nav class="navbar">
+                <ul class="nav-menu">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="horarios.html"><i class="fas fa-clock"></i> Horários</a></li>
+                    <li><a href="calendario.html"><i class="fas fa-calendar-alt"></i> Calendário</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="fa-solid fa-panorama"></i> Eventos  <i class="fas fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="eventos.html"><i class="fas fa-images"></i> Eventos</a></li>
+                            <li><a href="comunicados.html"><i class="fas fa-bullhorn"></i> Comunicados</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle active">
+                            <i class="fa-solid fa-book"></i> Estudo  <i class="fas fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="jogos.html"><i class="fas fa-gamepad"></i> Jogos</a></li>
+                            <li><a href="videos.html" class="active"><i class="fas fa-video"></i> Vídeos</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="fas fa-school"></i> Escola <i class="fas fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sobre.html"><i class="fa-solid fa-school-flag"></i> Sobre</a></li>
+                            <li><a href="informacoes.html"><i class="fas fa-info-circle"></i> Informações</a></li>
+                            <li><a href="contato.html"><i class="fas fa-envelope"></i> Contato</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <button class="hamburger" id="hamburger" aria-label="Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Seção Hero com título -->
+        <section class="hero">
+            <div class="container">
+                <h1><i class="fas fa-video"></i> Vídeos Educativos</h1>
+                <p>Conteúdos audiovisuais para complementar seu aprendizado</p>
+                <p class="hero-subtitle">Clique em "Mostrar informações" para detalhes sobre cada vídeo</p>
+            </div>
+        </section>
+
+        <!-- Seção de Vídeos -->
+        <section class="video-section">
+            <div class="container">
+                
+                <!-- Vídeo 1: Vida Maria -->
+                <div class="video-card">
+                    <div class="video-header">
+                        <h2><i class="fas fa-film"></i> Vida Maria</h2>
+                        <span class="video-badge">Animação Brasileira</span>
+                    </div>
+                    
+                    <p class="video-description">
+                        Um emocionante curta-metragem de animação brasileiro que retrata a importância da educação 
+                        e das oportunidades na vida das pessoas, especialmente das mulheres.
+                    </p>
+                    
+                    <!-- Vídeo incorporado -->
+                    <div class="video-container">
+                        <div class="youtube-player" data-id="yFpoG_htum4">
+                            <!-- O iframe será inserido pelo JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <!-- Botão para expandir/recolher informações -->
+                    <div class="info-toggle">
+                        <button class="toggle-btn" data-target="vidaMariaInfo">
+                            <span class="toggle-text">Mostrar informações do vídeo</span>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Informações adicionais (inicialmente escondidas) -->
+                    <div class="video-info" id="vidaMariaInfo">
+                        <div class="info-content">
+                            <div class="info-grid">
+                                <div class="info-column">
+                                    <h3><i class="fas fa-info-circle"></i> Detalhes técnicos</h3>
+                                    <ul class="info-list">
+                                        <li>
+                                            <i class="fas fa-user"></i>
+                                            <div>
+                                                <strong>Diretor:</strong>
+                                                <span>Márcio Ramos</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-calendar"></i>
+                                            <div>
+                                                <strong>Ano de produção:</strong>
+                                                <span>2006</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-clock"></i>
+                                            <div>
+                                                <strong>Duração:</strong>
+                                                <span>9 minutos</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-flag"></i>
+                                            <div>
+                                                <strong>País:</strong>
+                                                <span>Brasil</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-film"></i>
+                                            <div>
+                                                <strong>Formato:</strong>
+                                                <span>Animação 2D</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="info-column">
+                                    <h3><i class="fas fa-tags"></i> Temas abordados</h3>
+                                    <div class="tags">
+                                        <span class="tag">Educação</span>
+                                        <span class="tag">Gênero</span>
+                                        <span class="tag">Transformação Social</span>
+                                        <span class="tag">Família</span>
+                                        <span class="tag">Oportunidades</span>
+                                    </div>
+                                    
+                                    <h3><i class="fas fa-lightbulb"></i> Reflexão principal</h3>
+                                    <p class="reflection-quote">
+                                        "Como a educação pode quebrar ciclos e transformar destinos?"
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Vídeo 2: Ilha das Flores -->
+                <div class="video-card">
+                    <div class="video-header">
+                        <h2><i class="fas fa-film"></i> Ilha das Flores</h2>
+                        <span class="video-badge">Documentário/Sátira</span>
+                    </div>
+                    
+                    <p class="video-description">
+                        Uma sátira premiada e provocante que compara tomates, porcos e seres humanos,
+                        discutindo desigualdade social, consumismo e direitos humanos.
+                    </p>
+                    
+                    <!-- Vídeo incorporado -->
+                    <div class="video-container">
+                        <div class="youtube-player" data-id="h30BO_6kFNM">
+                            <!-- O iframe será inserido pelo JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <!-- Botão para expandir/recolher informações -->
+                    <div class="info-toggle">
+                        <button class="toggle-btn" data-target="ilhaFloresInfo">
+                            <span class="toggle-text">Mostrar informações do vídeo</span>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Informações adicionais (inicialmente escondidas) -->
+                    <div class="video-info" id="ilhaFloresInfo">
+                        <div class="info-content">
+                            <div class="info-grid">
+                                <div class="info-column">
+                                    <h3><i class="fas fa-info-circle"></i> Detalhes técnicos</h3>
+                                    <ul class="info-list">
+                                        <li>
+                                            <i class="fas fa-user"></i>
+                                            <div>
+                                                <strong>Diretor:</strong>
+                                                <span>Jorge Furtado</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-calendar"></i>
+                                            <div>
+                                                <strong>Ano de produção:</strong>
+                                                <span>1989</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-clock"></i>
+                                            <div>
+                                                <strong>Duração:</strong>
+                                                <span>13 minutos</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-flag"></i>
+                                            <div>
+                                                <strong>País:</strong>
+                                                <span>Brasil</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-film"></i>
+                                            <div>
+                                                <strong>Gênero:</strong>
+                                                <span>Documentário/Sátira</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="info-column">
+                                    <h3><i class="fas fa-tags"></i> Temas abordados</h3>
+                                    <div class="tags">
+                                        <span class="tag">Desigualdade Social</span>
+                                        <span class="tag">Consumismo</span>
+                                        <span class="tag">Direitos Humanos</span>
+                                        <span class="tag">Capitalismo</span>
+                                        <span class="tag">Crítica Social</span>
+                                    </div>
+                                    
+                                    <h3><i class="fas fa-lightbulb"></i> Reflexão principal</h3>
+                                    <p class="reflection-quote">
+                                        "O que realmente diferencia seres humanos de outros animais na sociedade capitalista?"
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="logo-footer">
+            <img src="assets/img/LOGO.png" alt="Logo da Escola Mariana Cavalcanti" loading="lazy">
+            <div class="container">
+                <p>Escola Estadual Mariana Cavalcanti</p>
+                <p>Endereço: AV. SENHORA SANTANA, 09 PREDIO. CENTRO - CEP: 59940-000</p>
+                <p>Telefone: (84) 3382-2270 | Email: eemarianacavalcanti@educar.rn.gov.br</p>
+                <p>&copy; 2025 - EEMC. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/videos.js"></script>
+</body>
+</html>

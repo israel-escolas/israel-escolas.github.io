@@ -30,14 +30,25 @@ if (hamburger && navMenu) {
         });
     });
 
-    // Dropdown para mobile
+    // Dropdown para mobile - COM FECHAR OUTROS DROPDOWNS
     dropdownToggles.forEach(toggle => {
         toggle.addEventListener('click', (e) => {
             if (window.innerWidth <= 768) {
                 e.preventDefault();
                 e.stopPropagation();
+                
                 const dropdown = toggle.parentElement;
-                dropdown.classList.toggle('open');
+                const estavaAberto = dropdown.classList.contains('open');
+                
+                // Fecha TODOS os dropdowns primeiro
+                dropdownToggles.forEach(otherToggle => {
+                    otherToggle.parentElement.classList.remove('open');
+                });
+                
+                // Se não estava aberto, abre apenas este
+                if (!estavaAberto) {
+                    dropdown.classList.add('open');
+                }
             }
         });
     });

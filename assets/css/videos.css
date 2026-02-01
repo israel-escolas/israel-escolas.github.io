@@ -1,0 +1,341 @@
+/* ===== ESTILOS PARA A PÁGINA DE VÍDEOS ===== */
+
+/* Seção Hero */
+.hero {
+    background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+    color: white;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    opacity: 0.9;
+}
+
+.hero-subtitle {
+    font-size: 1em;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+/* Seção principal de vídeos */
+.video-section {
+    padding: 40px 0;
+    background: #f9f9f9;
+    min-height: 70vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Card de vídeo */
+.video-card {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 40px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border: 1px solid #eaeaea;
+}
+
+.video-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.video-header h2 {
+    color: #2c3e50;
+    margin: 0;
+    font-size: 1.8em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.video-header h2 i {
+    color: #3498db;
+}
+
+.video-badge {
+    background: #3498db;
+    color: white;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
+.video-description {
+    color: #555;
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    padding-left: 10px;
+    border-left: 3px solid #3498db;
+}
+
+/* Container do vídeo responsivo */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* Proporção 16:9 */
+    height: 0;
+    overflow: hidden;
+    margin: 25px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    background: #000;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 8px;
+}
+
+/* Botão toggle */
+.info-toggle {
+    margin: 30px 0 20px;
+    text-align: center;
+}
+
+.toggle-btn {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-size: 1em;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.toggle-btn:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+}
+
+.toggle-icon {
+    transition: transform 0.3s ease;
+}
+
+/* Informações do vídeo */
+.video-info {
+    background: #f8f9fa;
+    border-radius: 8px;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+.video-info.active {
+    max-height: 2000px;
+    opacity: 1;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.info-content {
+    padding: 20px;
+}
+
+/* Grid de informações */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.info-column h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-column h3 i {
+    color: #3498db;
+}
+
+.info-list {
+    list-style: none;
+    padding: 0;
+}
+
+.info-list li {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.info-list li:last-child {
+    border-bottom: none;
+}
+
+.info-list li i {
+    color: #3498db;
+    font-size: 1.2em;
+    width: 24px;
+}
+
+.info-list li strong {
+    color: #2c3e50;
+    display: block;
+    font-size: 0.9em;
+}
+
+.info-list li span {
+    color: #555;
+    font-size: 1.1em;
+}
+
+/* Tags */
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tag {
+    background: #e3f2fd;
+    color: #1976d2;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.reflection-quote {
+    background: #fff8e1;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #ffb300;
+    font-style: italic;
+    color: #5d4037;
+    margin: 15px 0;
+}
+
+/* Atividades sugeridas */
+.activity-suggestions {
+    background: #e8f5e9;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #4caf50;
+}
+
+.activity-suggestions h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.activity-suggestions h3 i {
+    color: #4caf50;
+}
+
+.activities {
+    list-style: none;
+    padding: 0;
+}
+
+.activities li {
+    padding: 8px 0;
+    padding-left: 25px;
+    position: relative;
+    color: #555;
+}
+
+.activities li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #4caf50;
+    font-weight: bold;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .hero {
+        padding: 40px 0;
+    }
+    
+    .hero h1 {
+        font-size: 2em;
+    }
+    
+    .video-card {
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .video-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .video-header h2 {
+        font-size: 1.5em;
+    }
+    
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .toggle-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .video-description {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.7em;
+    }
+    
+    .video-header h2 {
+        font-size: 1.3em;
+    }
+    
+    .video-badge {
+        font-size: 0.8em;
+    }
+    
+    .tag {
+        font-size: 0.8em;
+    }
+}

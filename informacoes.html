@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informações - Escola Mariana Cavalcanti</title>
     <link rel="stylesheet" href="assets/css/style.css">
-       <link rel="stylesheet" href="assets/css/informacoes.css">
+    <link rel="stylesheet" href="assets/css/informacoes.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -72,6 +72,10 @@
                         <i class="fas fa-file-signature"></i>
                         <span>Matrículas</span>
                     </a>
+                    <a href="#estrutura" class="info-nav-item">
+                        <i class="fas fa-university"></i>
+                        <span>Estrutura</span>
+                    </a>
                     <a href="#fardamento" class="info-nav-item">
                         <i class="fas fa-tshirt"></i>
                         <span>Fardamento</span>
@@ -104,15 +108,16 @@
                     <h2>Processo de Matrícula</h2>
                     <p>Como se matricular na nossa escola</p>
                 </div>
-                
+                <h1 style="text-align: center; margin-top: 1rem; font-size: 4rem; color: rebeccapurple;">2026</h1>
                 <div class="info-timeline">
                     <div class="timeline-item">
+                        
                         <div class="timeline-date">Janeiro</div>
                         <div class="timeline-content">
-                            <h3>Matrícula Inicial</h3>
+                            <h3>Reserva de vaga e Renovação de Matrícula</h3>
                             <p>Período para alunos novos e rematrícula dos alunos antigos.</p>
                             <ul class="info-list">
-                                <li><i class="fas fa-check-circle"></i> Período: 15 a 30 de Janeiro</li>
+                                <li><i class="fas fa-check-circle"></i> Período: 22 de Dezembro de 2025 a 19 de Janeiro de 2026</li>
                                 <li><i class="fas fa-check-circle"></i> Local: Secretaria da escola</li>
                                 <li><i class="fas fa-check-circle"></i> Horário: 7h às 17h</li>
                             </ul>
@@ -122,11 +127,12 @@
                     <div class="timeline-item">
                         <div class="timeline-date">Fevereiro</div>
                         <div class="timeline-content">
-                            <h3>Matrícula Tardia</h3>
+                            <h3>Matrícula de Novos Estudantes</h3>
                             <p>Para vagas remanescentes. Sujeito à disponibilidade.</p>
                             <ul class="info-list">
-                                <li><i class="fas fa-check-circle"></i> Período: 1º a 15 de Fevereiro</li>
-                                <li><i class="fas fa-check-circle"></i> Taxa administrativa: R$ 50,00</li>
+                                <li><i class="fas fa-check-circle"></i> Período: 9 a 18 de Fevereiro de 2026</li>
+                                <li><i class="fas fa-check-circle"></i> Local: Secretaria da escola</li>
+                                <li><i class="fas fa-check-circle"></i> Horário: 7h às 17h</li>
                             </ul>
                         </div>
                     </div>
@@ -143,14 +149,19 @@
                                 <i class="fas fa-id-card"></i>
                                 <div>
                                     <h4>Documentos do Aluno</h4>
-                                    <p>Certidão de Nascimento ou RG (original e cópia)</p>
+                                    <p>Certidão de Nascimento ou RG</p>
+                                    <p>CPF</p>
+                                    <p>Cartão do SUS</p>
                                 </div>
                             </div>
                             <div class="doc-item">
                                 <i class="fas fa-user-tie"></i>
                                 <div>
                                     <h4>Documentos do Responsável</h4>
-                                    <p>RG, CPF e comprovante de residência</p>
+                                    <p>RG, CPF</p>
+                                    <p> Comprovante de Residência</p>
+                                    <p>NIS (caso tenha)</p>                                   
+
                                 </div>
                             </div>
                             <div class="doc-item">
@@ -172,7 +183,79 @@
                 </div>
             </div>
         </section>
+        <!-- Seção de Estrutura -->
+        <section id="estrutura" class="info-section alt">
+            <div class="container">
+                <div class="info-header">
+                    <i class="fas fa-university"></i>
+                    <h2>Nossa Estrutura</h2>
+                    <p>Conheça as instalações da nossa escola</p>
+                </div>
 
+                <!-- Carrossel de Imagens da Estrutura -->
+                <div class="estrutura-carousel-container">
+                    <!-- Carregamento -->
+                    <div id="estruturaCarousel" class="estrutura-carousel">
+                        <div class="carousel-loading">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <span>Carregando imagens da estrutura...</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Indicadores -->
+                    <div class="estrutura-indicators" id="estruturaIndicators"></div>
+                    
+                    <!-- Controles -->
+                    <button class="estrutura-arrow left" id="estruturaPrev">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="estrutura-arrow right" id="estruturaNext">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    
+                    <!-- Contador -->
+                    <div class="estrutura-counter" id="estruturaCounter">
+                        <span id="currentSlide">1</span> / <span id="totalSlides">0</span>
+                    </div>
+                </div>
+
+                <!-- Descrição das instalações -->
+                <div class="estrutura-info">
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <i class="fas fa-snowflake"></i>
+                            <h4>Climatizada</h4>
+                            <p>Todas as salas com ar condicionado</p>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-wifi"></i>
+                            <h4>Internet Wi-Fi</h4>
+                            <p>Conexão em toda a escola</p>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-book"></i>
+                            <h4>Biblioteca</h4>
+                            <p>Acervo amplo e ambiente climatizado</p>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-flask"></i>
+                            <h4>Sala Multidisciplinar</h4>
+                            <p>Equipamentos de informática e jogos para o desenvolvimento de aulas práticas</p>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-utensils"></i>
+                            <h4>Refeitório</h4>
+                            <p>Amplo e arejado para merenda escolar</p>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-basketball-ball"></i>
+                            <h4>Quadra Poliesportiva de areia</h4>
+                            <p>Para atividades físicas e eventos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <!-- Seção de Fardamento -->
         <section id="fardamento" class="info-section alt">
             <div class="container">
@@ -185,51 +268,41 @@
                 <div class="uniform-grid">
                     <div class="uniform-card">
                         <div class="uniform-image">
-                            <i class="fas fa-tshirt"></i>
+                            <i class="farda"><img src="assets/img/FARDA_2026.png" alt=""></i>
                         </div>
                         <div class="uniform-info">
-                            <h3>Camiseta Branca</h3>
-                            <p>Com logo da escola na frente. Tecido 100% algodão.</p>
+                            <h3>Fardamento Escolar</h3>
+                            <p>Com logo da escola na frente</p>
                             <div class="uniform-price">
-                                <span class="price">R$ 35,00</span>
+                                <span class="price">Obrigatório</span>                                
                                 <span class="size">Tamanhos: P ao GG</span>
                             </div>
+                            <p style="font-size: large; color: rebeccapurple; font: bolder;">São válidos os fardamentos para jogos e eventos da escola.</p>
                         </div>
                     </div>
 
                     <div class="uniform-card">
-                        <div class="uniform-image">
-                            <i class="fas fa-vest"></i>
+                        <div class="uniform-image calca">
+                            <i class="fas fa-user-graduate"></i>
                         </div>
                         <div class="uniform-info">
-                            <h3>Calça/Bermuda Jeans</h3>
-                            <p>Cor azul ou preta. Sem rasgos ou adornos.</p>
+                            <h3>Calça Comprida</h3>
+                
                             <div class="uniform-price">
                                 <span class="price">A cargo do aluno</span>
                                 <span class="size">Modelo tradicional</span>
                             </div>
+                            <p style="font-size: large; color: rebeccapurple; font: bolder;">Em caso de impossibilidade de uso da calça, avisar préviamente a escola.</p>
                         </div>
                     </div>
 
-                    <div class="uniform-card">
-                        <div class="uniform-image">
-                            <i class="fas fa-shoe-prints"></i>
-                        </div>
-                        <div class="uniform-info">
-                            <h3>Tênis</h3>
-                            <p>Qualquer cor. Fechado e apropriado para educação física.</p>
-                            <div class="uniform-price">
-                                <span class="price">A cargo do aluno</span>
-                                <span class="size">Preferência por cores sóbrias</span>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
 
                 <div class="info-card warning">
                     <div class="info-card-header">
                         <i class="fas fa-clock"></i>
-                        <h3>Horário de Venda</h3>
+                        <h3>FARDAMENTO ESCOLAR</h3>
                     </div>
                     <div class="info-card-content">
                         <div class="schedule-grid">
@@ -237,28 +310,29 @@
                                 <i class="fas fa-store"></i>
                                 <div>
                                     <h4>Onde Comprar</h4>
-                                    <p>Secretaria da escola</p>
+                                    <p>Nome da Loja</p>
                                 </div>
                             </div>
                             <div class="schedule-item">
                                 <i class="fas fa-calendar-alt"></i>
                                 <div>
-                                    <h4>Quando Comprar</h4>
-                                    <p>Durante o período de matrícula</p>
+                                    <h4>Uso Obrigatório</h4>
+                                    <p>De segunda a sexta-feira, durante o horário escolar.</p>
+                                    
                                 </div>
                             </div>
                             <div class="schedule-item">
                                 <i class="fas fa-money-bill-wave"></i>
                                 <div>
                                     <h4>Formas de Pagamento</h4>
-                                    <p>Dinheiro, PIX ou cartão (até 3x)</p>
+                                    <p>Dinheiro, PIX ou Trata com a vendedora</p>
                                 </div>
                             </div>
                             <div class="schedule-item">
                                 <i class="fas fa-exchange-alt"></i>
                                 <div>
-                                    <h4>Trocas</h4>
-                                    <p>Até 7 dias após a compra, com nota fiscal</p>
+                                    <h4>Período de Transição</h4>
+                                    <p>De 23 de Fevereiro a 06 de Março de 2026</p>
                                 </div>
                             </div>
                         </div>
@@ -377,7 +451,7 @@
             <div class="container">
                 <div class="info-header">
                     <i class="fas fa-calendar-days"></i>
-                    <h2>Calendário Escolar 2024</h2>
+                    <h2>Calendário Escolar 2026</h2>
                     <p>Datas importantes do ano letivo</p>
                 </div>
 
@@ -386,43 +460,43 @@
                         <div class="calendar-date">Fevereiro</div>
                         <div class="calendar-content">
                             <h3>Início das Aulas</h3>
-                            <p>5 de Fevereiro</p>
+                            <p>23 de Fevereiro</p>
                             <span class="calendar-tag">Início</span>
                         </div>
                     </div>
 
-                    <div class="calendar-item">
+                   <!--   <div class="calendar-item">
                         <div class="calendar-date">Abril</div>
                         <div class="calendar-content">
                             <h3>Recesso Escolar</h3>
                             <p>1 a 7 de Abril</p>
                             <span class="calendar-tag holiday">Feriado</span>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="calendar-item">
                         <div class="calendar-date">Julho</div>
                         <div class="calendar-content">
-                            <h3>Férias de Inverno</h3>
+                            <h3>Recesso Escolar</h3>
                             <p>15 a 31 de Julho</p>
                             <span class="calendar-tag holiday">Férias</span>
                         </div>
                     </div>
 
-                    <div class="calendar-item">
+                     <!-- <div class="calendar-item">
                         <div class="calendar-date">Outubro</div>
                         <div class="calendar-content">
                             <h3>Conselho de Classe</h3>
                             <p>21 a 25 de Outubro</p>
                             <span class="calendar-tag">Avaliação</span>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="calendar-item">
                         <div class="calendar-date">Dezembro</div>
                         <div class="calendar-content">
                             <h3>Término do Ano Letivo</h3>
-                            <p>15 de Dezembro</p>
+                            <p>20 de Dezembro</p>
                             <span class="calendar-tag">Término</span>
                         </div>
                     </div>
@@ -438,64 +512,200 @@
 
         <!-- Seção de Dúvidas Frequentes -->
         <section id="duvidas" class="info-section">
-            <div class="container">
-                <div class="info-header">
-                    <i class="fas fa-question-circle"></i>
-                    <h2>Dúvidas Frequentes</h2>
-                    <p>Tire suas principais dúvidas aqui</p>
-                </div>
+<div class="faq-container">
+    <!-- FAQ 1 - Matrícula -->
+    <div class="faq-item">
+        <button class="faq-question">
+            <span><i class="fas fa-user-plus" style="margin-right: 10px;"></i> Posso fazer matrícula fora do período estabelecido?</span>
+            <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+            <p><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 8px;"></i> 
+            <strong>Sim, é possível</strong>, porém com as seguintes condições:</p>
+            <ul>
+                <li><i class="fas fa-clipboard-check" style="color: #3498db;"></i> <strong>Vagas remanescentes:</strong> Apenas para vagas não preenchidas</li>
+                <li><i class="fas fa-user-tie" style="color: #3498db;"></i> <strong>Autorização necessária:</strong> Aprovação da Direção Regional de Ensino</li>
+                <li><i class="fas fa-calendar-alt" style="color: #3498db;"></i> <strong>Prazo estendido:</strong> Conforme disponibilidade no sistema</li>
+            </ul>
+            <p style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-top: 10px;">
+                <i class="fas fa-phone-alt" style="color: #e74c3c;"></i> 
+                <strong>Entre em contato:</strong> Secretaria escolar para verificar disponibilidade.
+            </p>
+        </div>
+    </div>
 
-                <div class="faq-container">
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            <span>Posso fazer matrícula fora do período estabelecido?</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Sim, porém somente para vagas remanescentes e com taxa administrativa adicional.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            <span>E se meu filho perder o período de matrícula?</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Deve aguardar o próximo período de matrícula ou verificar disponibilidade de vagas na secretaria.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            <span>O uniforme é obrigatório todos os dias?</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Sim, o uso do uniforme completo é obrigatório em todos os dias letivos.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            <span>Como funciona a merenda escolar?</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>A merenda é fornecida gratuitamente para todos os alunos nos horários estabelecidos.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            <span>Há transporte escolar fornecido pela escola?</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Não, a escola não fornece transporte. Os alunos devem se organizar com transporte particular ou público.</p>
-                        </div>
+    <!-- FAQ 2 - Perda de período -->
+    <div class="faq-item">
+        <button class="faq-question">
+            <span><i class="fas fa-calendar-times" style="margin-right: 10px;"></i> E se meu filho perder o período de matrícula?</span>
+            <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+            <p><i class="fas fa-exclamation-triangle" style="color: #f39c12; margin-right: 8px;"></i> 
+            <strong>Não se preocupe!</strong> Siga estes passos:</p>
+            
+            <div style="display: flex; flex-direction: column; gap: 10px; margin: 15px 0;">
+                <div style="display: flex; align-items: flex-start; gap: 10px;">
+                    <span style="background: #3498db; color: white; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">1</span>
+                    <div>
+                        <strong>Contate a secretaria</strong> imediatamente
+                        <p style="margin: 5px 0 0; font-size: 0.9em; color: #666;">Telefone: (84) 99999-9999</p>
                     </div>
                 </div>
+                
+                <div style="display: flex; align-items: flex-start; gap: 10px;">
+                    <span style="background: #3498db; color: white; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">2</span>
+                    <div>
+                        <strong>Verifique disponibilidade</strong> de vagas
+                        <p style="margin: 5px 0 0; font-size: 0.9em; color: #666;">Lista de espera e vagas remanescentes</p>
+                    </div>
+                </div>
+                
+                <div style="display: flex; align-items: flex-start; gap: 10px;">
+                    <span style="background: #3498db; color: white; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">3</span>
+                    <div>
+                        <strong>Agende uma visita</strong> à escola
+                        <p style="margin: 5px 0 0; font-size: 0.9em; color: #666;">Horário comercial: 7h às 17h</p>
+                    </div>
+                </div>
+            </div>
+            
+            <p style="color: #7f8c8d; font-size: 0.9em; font-style: italic;">
+                <i class="fas fa-lightbulb" style="color: #f1c40f;"></i> 
+                <strong>Dica:</strong> Recomendamos atenção aos prazos oficiais divulgados no site da escola.
+            </p>
+        </div>
+    </div>
+
+    <!-- FAQ 3 - Uniforme -->
+    <div class="faq-item">
+        <button class="faq-question">
+            <span><i class="fas fa-tshirt" style="margin-right: 10px;"></i> O uniforme é obrigatório todos os dias?</span>
+            <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+            <p><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 8px;"></i> 
+            <strong>Sim, o uso do uniforme é obrigatório.</strong></p>
+            
+            <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                <h4 style="margin-top: 0; color: #2c3e50;">📋 Regras do Uniforme:</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;">
+                    <div style="text-align: center;">
+                        <i class="fas fa-calendar-day" style="color: #3498db; font-size: 1.5em;"></i>
+                        <p style="margin: 5px 0;"><strong>Todos os dias</strong></p>
+                        <small>Letivos e eventos</small>
+                    </div>
+                    <div style="text-align: center;">
+                        <i class="fas fa-user-check" style="color: #3498db; font-size: 1.5em;"></i>
+                        <p style="margin: 5px 0;"><strong>Completo</strong></p>
+                        <small>Camiseta + calça</small>
+                    </div>
+                </div>
+            </div>
+            
+            <p><strong>Exceções:</strong> Dias de educação física (uniforme esportivo) e eventos especiais comunicados previamente.</p>
+        </div>
+    </div>
+
+    <!-- FAQ 4 - Merenda -->
+    <div class="faq-item">
+        <button class="faq-question">
+            <span><i class="fas fa-utensils" style="margin-right: 10px;"></i> Como funciona a merenda escolar?</span>
+            <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+            <p><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 8px;"></i> 
+            <strong>Merenda escolar gratuita para todos os alunos!</strong></p>
+            
+            <div style="display: flex; flex-wrap: wrap; gap: 15px; margin: 15px 0;">
+                <div style="flex: 1; min-width: 200px;">
+                    <h4 style="color: #27ae60; margin-bottom: 8px;"><i class="fas fa-clock"></i> Horários</h4>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li><i class="far fa-clock"></i> <strong>Manhã:</strong> 9h30 - Intervalo</li>
+                        <li><i class="far fa-clock"></i> <strong>Tarde:</strong> 15h30 - Intervalo</li>
+                        <li><i class="far fa-clock"></i> <strong>Integral:</strong> 12h - Almoço</li>
+                    </ul>
+                </div>
+                
+                <div style="flex: 1; min-width: 200px;">
+                    <h4 style="color: #e74c3c; margin-bottom: 8px;"><i class="fas fa-apple-alt"></i> Características</h4>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li><i class="fas fa-leaf"></i> <strong>Balanceada:</strong> Seguindo o cardápio da Nutricionista da SEEC/RN</li>
+                        <li><i class="fas fa-seedling"></i> <strong>Refeitório:</strong> Amplo e arejado</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; border-radius: 6px;">
+                <i class="fas fa-exclamation-circle" style="color: #856404;"></i>
+                <strong> Importante:</strong> A merenda é preparada na cozinha da escola seguindo normas de higiene e segurança alimentar.
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ 5 - Internet (JÁ ESTAVA BOM) -->
+    <div class="faq-item">
+        <button class="faq-question">
+            <span><i class="fas fa-wifi" style="margin-right: 10px;"></i> A escola possui acesso à internet para os alunos?</span>
+            <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+            <p><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 8px;"></i> 
+            <strong><strong>Sim!</strong> A Escola Mariana Cavalcanti oferece <strong>conectividade Wi-Fi em toda sua estrutura</strong>:</p>
+            <ul>
+                <li><i class="fas fa-wifi"></i> <strong>Wi-Fi</strong> em todas as salas de aula</li>
+                <li><i class="fas fa-laptop"></i> <strong>Computadores</strong> com internet dedicada</li>
+                <li><i class="fas fa-book"></i> <strong>Biblioteca conectada</strong> para pesquisas online</li>
+                <li><i class="fas fa-chalkboard"></i> <strong>Salas multidisciplinar</strong> com acesso à internet para atividades pedagógicas</li>
+                <li><i class="fas fa-user-shield"></i> <strong>Internet segura e monitorada</strong> com filtros de conteúdo educacional</li>
+            </ul>
+            <p>Os alunos podem utilizar a rede para pesquisas acadêmicas e atividades escolares supervisionadas.</p>
+        </div>
+    </div>
+
+    <!-- FAQ 6 - Climatização (JÁ ESTAVA BOM) -->
+    <div class="faq-item">
+        <button class="faq-question">
+            <span><i class="fas fa-snowflake" style="margin-right: 10px;"></i> A escola é climatizada? Há ar condicionado?</span>
+            <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+            <p><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 8px;"></i> 
+            <strong><strong>Sim!</strong> Todas as dependências da escola são climatizadas.</strong>:</p>
+
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 15px 0;">
+                <div class="climate-item">
+                    <i class="fas fa-snowflake"></i>
+                    <h4>Salas de Aula</h4>
+                    <p>Sistema de ar condicionado com 02 equipamentos split em todas as salas</p>
+                </div>
+                
+                <div class="climate-item">
+                    <i class="fas fa-book"></i>
+                    <h4>Biblioteca</h4>
+                    <p>Climatizada 02 equipamentos split para melhor concentração nos estudos</p>
+                </div>
+                
+                <div class="climate-item">
+                    <i class="fas fa-users"></i>
+                    <h4>Sala Multiuso</h4>
+                    <p>Sistema de ar condicionado com 02 equipamentos split</p>
+                </div>
+                <div class="climate-item">
+                    <i class="fas fa-school"></i>
+                    <h4>Coordenação</h4>
+                    <p>Ar condicionado para melhor desenvolvimento e  qualidade de trabalho</p>
+                </div>
+            </div>
+            
+            <p style="background: #f0f9ff; padding: 15px; border-radius: 8px; border-left: 4px solid #3498db;">
+                <i class="fas fa-info-circle" style="color: #3498db;"></i>
+                <strong>Conforto térmico garantido:</strong> Mantemos temperatura agradável em todos os ambientes para proporcionar melhores condições de aprendizagem durante todo o ano.
+            </p>
+        </div>
+    </div>
+</div>
 
                 <div class="contact-box">
                     <div class="contact-icon">
@@ -527,7 +737,7 @@
             </div>
             <div class="footer-col">
                 <h3>Contato</h3>
-                <p><i class="fa-solid fa-envelope"></i> eemarianacavalcanti@hotmail.com</p>
+                <p><i class="fa-solid fa-envelope"></i> eemarianacavalcanti@educar.rn.gov.br</p>
                 <p><i class="fa-solid fa-clock"></i> Horário de Atendimento:</p>
                 <p>Segunda a Sexta: 7h às 17h</p>
                 <button class="footer-btn">
@@ -583,7 +793,12 @@
         <i class="fas fa-comment-dots"></i>
         <span class="chatbot-notification" id="chatbotNotification">1</span>
     </button>
-
+    <!-- Modal para imagem expandida -->
+    <div id="imageModal" class="modal">
+        <span class="modal-close">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div id="modalCaption"></div>
+    </div>
     <script src="assets/js/script.js"></script>
     <script src="assets/js/api.js"></script>
     <script src="assets/js/chatbot.js"></script>

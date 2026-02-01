@@ -52,7 +52,7 @@ header {
 }
 
 .logo img {
-    width: 40%;
+    width:30%;
     height: auto;
     max-width: 100%;
     filter: brightness(0) invert(0.96) saturate(0.05) contrast(1.02);
