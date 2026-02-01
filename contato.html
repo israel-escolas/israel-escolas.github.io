@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contato - Escola Mariana Cavalcanti</title>
+
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/contato.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 </head>
 <body>
-    <!-- Cabeçalho e Menu -->
-<header>
+
+    <header>
         <div class="container header-container">
             <a href="index.html" class="logo">
                 <img src="assets/img/LOGO.png">
@@ -36,6 +37,8 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="jogos.html"><i class="fas fa-gamepad"></i> Jogos</a></li>
+                            <li><a href="videos.html"><i class="fas fa-video"></i></i> Vídeos</a></li>
+                            <li><a href="focoEnem.html"><i class="fas fa-clipboard-check"></i></i></i> ENEM</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -44,8 +47,8 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="sobre.html"><i class="fa-solid fa-school-flag"></i> Sobre</a></li>
-                            <li><a href="informacoes.html" class="active"><i class="fas fa-info-circle"></i> Informações</a></li>
-                            <li><a href="contato.html"><i class="fas fa-envelope"></i> Contato</a></li>
+                            <li><a href="informacoes.html" class="active"><i class="fa-solid fa-circle-info"></i> Informações</a></li>
+                            <li><a href="contato.html" class="active"><i class="fas fa-envelope"></i> Contato</a></li>
                         </ul>
                     </li> 
                 </ul>
@@ -56,21 +59,20 @@
         </div>
     </header>
 
-    <main class="contato-page">
-        <!-- Hero Section -->
-        <section class="hero-contato">
-            <div class="container">
-                <h1><i class="fas fa-headset"></i> Fale Conosco</h1>
-                <p>Estamos aqui para ajudar. Entre em contato através dos nossos canais de comunicação.</p>
-            </div>
-        </section>
+<main class="contato-page">
 
-        <!-- Seção de Contato -->
-        <section class="contato-section">
-            <div class="container">
-                <div class="contato-grid">
-                    <!-- Informações de Contato -->
-                    <div class="contato-info">
+    <section class="hero-contato">
+        <div class="container">
+            <h1><i class="fas fa-headset"></i> Fale Conosco</h1>
+            <p>Estamos aqui para ajudar. Entre em contato através dos nossos canais de comunicação.</p>
+        </div>
+    </section>
+
+    <section class="contato-section">
+        <div class="container">
+            <div class="contato-grid">
+
+                <div class="contato-info">
                         <h2><i class="fas fa-map-marker-alt"></i> Nossa Localização</h2>
                         
                         <div class="info-card">
@@ -131,10 +133,10 @@
                                 <a href="https://www.youtube.com/@E.E.MarianaCavalcanti/shorts" class="rede-social" title="YouTube" target="_blank" rel="noopener noreferrer">
                                     <i class="fab fa-youtube"></i>
                                 </a>
-                                <a href="#" class="rede-social" title="WhatsApp">
+                                <a href="https://wa.me/5584999746224" class="rede-social" title="WhatsApp" target="_blank" rel="noopener noreferrer">
                                     <i class="fab fa-whatsapp"></i>
                                 </a>
-                                <a href="mailto:eemarianacavalcanti@educar.rn.gov.br" class="rede-social" title="E-mail">
+                                <a href="mailto:eemarianacavalcanti@educar.rn.gov.br" class="rede-social" title="E-mail" target="_blank" rel="noopener noreferrer">
                                     <i class="fas fa-envelope"></i>
                                 </a>
                             </div>
@@ -154,7 +156,8 @@
 
                             <div class="form-group">
                                 <label for="email"><i class="fas fa-envelope"></i> E-mail</label>
-                                <input type="email" id="email" name="email" splaceholder="seu@email.com">
+                                <input type="email" id="email" name="email" placeholder="seu@email.com">
+
                             </div>
 
                             <div class="form-group">

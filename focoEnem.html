@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENEM</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/focoEnem.css">
+</head>
+<body>
+    <!-- Cabeçalho e Menu -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="assets/img/LOGO.png">
+            </a>
+            <nav class="navbar">
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="horarios.html"><i class="fas fa-clock"></i> Horários</a></li>
+                    <li><a href="calendario.html"><i class="fas fa-calendar-alt"></i> Calendário</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" >
+                            <i class="fa-solid fa-panorama"></i> Eventos  <i class="fas fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="eventos.html"><i class="fas fa-images"></i> Eventos</a></li>
+                            <li><a href="comunicados.html"><i class="fas fa-bullhorn"></i> Comunicados</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" >
+                            <i class="fa-solid fa-book"></i></i> Estudo  <i class="fas fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="jogos.html"><i class="fas fa-gamepad"></i> Jogos</a></li>
+                            <li><a href="videos.html"><i class="fas fa-video"></i></i> Vídeos</a></li>
+                            <li><a href="focoEnem.html"><i class="fas fa-clipboard-check"></i></i></i> ENEM</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" >
+                            <i class="fas fa-school"></i></i> Escola <i class="fas fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sobre.html"><i class="fa-solid fa-school-flag"></i> Sobre</a></li>
+                            <li><a href="informacoes.html" class="active"><i class="fa-solid fa-circle-info"></i> Informações</a></li>
+                            <li><a href="contato.html" class="active"><i class="fas fa-envelope"></i> Contato</a></li>
+                        </ul>
+                    </li> 
+                </ul>
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+<main class="enem-page">
+        <!-- Hero Section -->
+        <section class="hero-enem">
+            <div class="container">
+                <h1><i class="fas fa-graduation-cap"></i> ENEM 2026</h1>
+                <p>Tudo o que você precisa saber para se preparar para o Exame Nacional do Ensino Médio</p>
+                <div class="hero-info">
+                    <div class="info-item">
+                        <i class="far fa-calendar"></i>
+                        <span>Datas Prováveis: 01 e 08 ou 08 e 15 de Novembro</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="far fa-clock"></i>
+                        <span>Abertura portões: 12h</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-pen"></i>
+                        <span>Início prova: 13h</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cronograma ENEM -->
+        <section class="cronograma-section">
+            <div class="container">
+                <h2><i class="fas fa-calendar-check"></i> Cronograma ENEM 2026</h2>
+                <div class="cronograma-grid">
+                    <div class="cronograma-card">
+                        <div class="cronograma-data">Provisão 01 ou 08/11</div>
+                        <h3>1º Dia</h3>
+                        <ul>
+                            <li><i class="fas fa-book"></i> Linguagens</li>
+                            <li><i class="fas fa-globe-americas"></i> Ciências Humanas</li>
+                            <li><i class="fas fa-file-alt"></i> Redação</li>
+                        </ul>
+                        <div class="cronograma-tempo">5h30 de prova</div>
+                    </div>
+                    <div class="cronograma-card">
+                        <div class="cronograma-data">Provisão 08 ou 15/11</div>
+                        <h3>2º Dia</h3>
+                        <ul>
+                            <li><i class="fas fa-calculator"></i> Matemática</li>
+                            <li><i class="fas fa-flask"></i> Ciências da Natureza</li>
+                        </ul>
+                        <div class="cronograma-tempo">5h de prova</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Materiais de Estudo -->
+        <section class="materiais-section">
+            <div class="container">
+                <h2><i class="fas fa-book-open"></i> Materiais de Estudo</h2>
+                <div class="materiais-grid">
+                    <div class="material-card">
+                        <div class="material-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <h3>Provas Anteriores</h3>
+                        <p>Provas dos anos anteriores com gabaritos</p>
+                        <a href="https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gabaritos" target="_blank" class="material-btn">
+                            <i class="fas fa-download"></i> Acessar
+                        </a>
+                    </div>
+
+                    <div class="material-card">
+                        <div class="material-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3>Aulas Online</h3>
+                        <p>Videoaulas gratuitas de todas as matérias</p>
+                        <a href="https://www.youtube.com/@CursoEnemGratuito" target="_blank" class="material-btn">
+                            <i class="fas fa-play-circle"></i> Assistir
+                        </a>
+                    </div>
+
+                    <div class="material-card">
+                        <div class="material-icon">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <h3>Simulados</h3>
+                        <p>Teste seus conhecimentos com simulados</p>
+                        <a href="https://www.gov.br/mec/pt-br/mec-enem" target="_blank" class="material-btn">
+                            <i class="fas fa-pen"></i> Fazer Simulado
+                        </a>
+                    </div>
+
+                    <div class="material-card">
+                        <div class="material-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Redação Nota 1000</h3>
+                        <p>Modelos e dicas para uma redação perfeita</p>
+                        <a href="https://redacaoenem.inep.gov.br/" target="_blank" class="material-btn">
+                            <i class="fas fa-pen-fancy"></i> Ver Dicas
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conteúdos por Matéria -->
+        <section class="conteudos-section">
+            <div class="container">
+                <h2><i class="fas fa-graduation-cap"></i> Conteúdos por Área</h2>
+                <div class="conteudos-accordion">
+                    <!-- Linguagens -->
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <i class="fas fa-book"></i> Linguagens, Códigos e suas Tecnologias
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <h4>Conteúdos principais:</h4>
+                            <ul>
+                                <li>Língua Portuguesa</li>
+                                <li>Literatura</li>
+                                <li>Língua Estrangeira (Inglês/Espanhol)</li>
+                                <li>Artes</li>
+                                <li>Educação Física</li>
+                                <li>Tecnologias da Informação</li>
+                            </ul>
+                            <div class="accordion-links">
+                                <a href="https://www.youtube.com/playlist?list=PLSY5IgQYI2GtQQcZW08M6QZ3cnTV3lMi2" target="_blank">
+                                    <i class="fab fa-youtube"></i> Videoaulas
+                                </a>
+                                <a href="https://exercicios.brasilescola.uol.com.br/exercicios-linguagens-codigos-suas-tecnologias.htm" target="_blank">
+                                    <i class="fas fa-list-check"></i> Exercícios
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Humanas -->
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <i class="fas fa-globe-americas"></i> Ciências Humanas e suas Tecnologias
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <h4>Conteúdos principais:</h4>
+                            <ul>
+                                <li>História</li>
+                                <li>Geografia</li>
+                                <li>Filosofia</li>
+                                <li>Sociologia</li>
+                            </ul>
+                            <div class="accordion-links">
+                                <a href="https://www.youtube.com/playlist?list=PLSY5IgQYI2GtBwle_9Yj3--VrQidhYQpG" target="_blank">
+                                    <i class="fab fa-youtube"></i> Videoaulas
+                                </a>
+                                <a href="https://exercicios.brasilescola.uol.com.br/exercicios-ciencias-humanas-suas-tecnologias.htm" target="_blank">
+                                    <i class="fas fa-list-check"></i> Exercícios
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Natureza -->
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <i class="fas fa-flask"></i> Ciências da Natureza e suas Tecnologias
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <h4>Conteúdos principais:</h4>
+                            <ul>
+                                <li>Química</li>
+                                <li>Física</li>
+                                <li>Biologia</li>
+                            </ul>
+                            <div class="accordion-links">
+                                <a href="https://www.youtube.com/playlist?list=PLSY5IgQYI2GvRF3KkU9UJIXN81Gf7Q9_Q" target="_blank">
+                                    <i class="fab fa-youtube"></i> Videoaulas
+                                </a>
+                                <a href="https://exercicios.brasilescola.uol.com.br/exercicios-ciencias-natureza-suas-tecnologias.htm" target="_blank">
+                                    <i class="fas fa-list-check"></i> Exercícios
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Matemática -->
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <i class="fas fa-calculator"></i> Matemática e suas Tecnologias
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <h4>Conteúdos principais:</h4>
+                            <ul>
+                                <li>Álgebra</li>
+                                <li>Geometria</li>
+                                <li>Estatística</li>
+                                <li>Trigonometria</li>
+                                <li>Matemática Financeira</li>
+                            </ul>
+                            <div class="accordion-links">
+                                <a href="https://www.youtube.com/playlist?list=PLSY5IgQYI2GuFKhW7wDAPXGpNZQsROw5g" target="_blank">
+                                    <i class="fab fa-youtube"></i> Videoaulas
+                                </a>
+                                <a href="https://exercicios.brasilescola.uol.com.br/exercicios-matematica-suas-tecnologias.htm" target="_blank">
+                                    <i class="fas fa-list-check"></i> Exercícios
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Redação -->
+        <section class="redacao-section">
+            <div class="container">
+                <h2><i class="fas fa-pen-fancy"></i> Redação ENEM</h2>
+                <div class="redacao-grid">
+                    <div class="redacao-info">
+                        <h3>Competências Avaliadas</h3>
+                        <ul class="competencia-list">
+                            <li>
+                                <strong>1. Domínio da norma padrão</strong>
+                                <p>Uso correto da língua portuguesa</p>
+                            </li>
+                            <li>
+                                <strong>2. Compreensão da proposta</strong>
+                                <p>Desenvolvimento do tema solicitado</p>
+                            </li>
+                            <li>
+                                <strong>3. Seleção e organização</strong>
+                                <p>Argumentação coerente e organizada</p>
+                            </li>
+                            <li>
+                                <strong>4. Conhecimento linguístico</strong>
+                                <p>Uso adequado dos mecanismos linguísticos</p>
+                            </li>
+                            <li>
+                                <strong>5. Proposta de intervenção</strong>
+                                <p>Solução respeitando os direitos humanos</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="redacao-dicas">
+                        <h3>Dicas Essenciais</h3>
+                        <div class="dica-card">
+                            <div class="dica-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div class="dica-content">
+                                <h4>Estrutura Ideal</h4>
+                                <p>Introdução (1 parágrafo) + Desenvolvimento (2-3 parágrafos) + Conclusão (1 parágrafo)</p>
+                            </div>
+                        </div>
+                        <div class="dica-card">
+                            <div class="dica-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="dica-content">
+                                <h4>Gerenciamento de Tempo</h4>
+                                <p>Separe pelo menos 1 hora para planejar e escrever a redação</p>
+                            </div>
+                        </div>
+                        <div class="dica-card">
+                            <div class="dica-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="dica-content">
+                                <h4>Repertório Sociocultural</h4>
+                                <p>Use citações, filmes, livros e dados para enriquecer seu texto</p>
+                            </div>
+                        </div>
+                        <a href="https://download.inep.gov.br/publicacoes/institucionais/avaliacoes_e_exames_da_educacao_basica/a_redacao_no_enem_2025_cartilha_do_participante.pdf" target="_blank" class="redacao-btn">
+                            <i class="fas fa-external-link-alt"></i> Acessar Guia Oficial de Redação
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Links Úteis -->
+        <section class="links-section">
+            <div class="container">
+                <h2><i class="fas fa-link"></i> Links Úteis</h2>
+                <div class="links-grid">
+                    <a href="https://enem.inep.gov.br/" target="_blank" class="link-card oficial">
+                        <i class="fas fa-university"></i>
+                        <h3>Site Oficial do ENEM</h3>
+                        <p>Informações oficiais e inscrições</p>
+                    </a>
+                    <a href="https://sisu.mec.gov.br/" target="_blank" class="link-card sisu">
+                        <i class="fas fa-university"></i>
+                        <h3>SISU</h3>
+                        <p>Sistema de Seleção Unificada</p>
+                    </a>
+                    <a href="https://sisu.mec.gov.br/" target="_blank" class="link-card prouni">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>ProUni</h3>
+                        <p>Programa Universidade para Todos</p>
+                    </a>
+                    <a href="https://sisu.mec.gov.br/" target="_blank" class="link-card fies">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <h3>FIES</h3>
+                        <p>Financiamento Estudantil</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dicas Finais -->
+        <section class="dicas-section">
+            <div class="container">
+                <h2><i class="fas fa-star"></i> Dicas Finais</h2>
+                <div class="dicas-grid">
+                    <div class="dica-final">
+                        <div class="dica-numero">01</div>
+                        <h3>Controle o Tempo</h3>
+                        <p>Reserve tempo para cada questão e não fique muito tempo em uma só</p>
+                    </div>
+                    <div class="dica-final">
+                        <div class="dica-numero">02</div>
+                        <h3>Leia com Atenção</h3>
+                        <p>Entenda o que a questão está pedindo antes de responder</p>
+                    </div>
+                    <div class="dica-final">
+                        <div class="dica-numero">03</div>
+                        <h3>Alimentação</h3>
+                        <p>Leve água e alimentos leves para a prova</p>
+                    </div>
+                    <div class="dica-final">
+                        <div class="dica-numero">04</div>
+                        <h3>Documentos</h3>
+                        <p>Documento oficial com foto e caneta preta transparente</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Rodapé -->
+<footer>
+    <div class="footer-content">
+        <div class="logo-footer">
+            <img src="assets/img/LOGO.png" alt="">
+        </div>
+        <div class="footer-col">
+            <h3>Escola Estadual Mariana Cavalcanti</h3>
+
+            <p><i class="fa-solid fa-location-dot"></i> AV. SENHORA SANTANA, 09 PREDIO. CENTRO</p>
+            <p><i class="fa-solid fa-city"></i> Luís Gomes - RN, CEP: 59940-000</p>
+            <p><i class="fa-solid fa-phone"></i> Telefone: (84) 3382-2270</p>
+        </div>
+        <div class="footer-col">
+            <h3>Contato</h3>
+            <p><i class="fa-solid fa-envelope"></i> eemarianacavalcanti@educar.rn.gov.br</p>
+            <p><i class="fa-solid fa-clock"></i> Horário de Atendimento:</p>
+            <p>Segunda a Sexta: 7h às 17h</p>
+            <button class="footer-btn"><a href="contato.html" class="active" style="color: rgb(15, 15, 15); text-decoration: none;"><i class="fas fa-envelope"></i> Fale Conosco</a></button>           
+        </div>
+    </div>
+    <div class="footer-divider"></div>
+
+    <div class="footer-bottom">
+        © 2024 Escola Estadual Mariana Cavalcanti.<br>
+        Desenvolvido com <i class="fa-solid fa-heart"></i> para a nossa escola
+    </div>
+</footer>  
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/focoEnem.js"></script>
+    <script src="assets/js/chatbot.js"></script>
+</body>
+</html>

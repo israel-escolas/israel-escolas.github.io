@@ -5,26 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Escola Mariana Cavalcanti</title>
-    
-    <!-- CSS BASE E COMPONENTES -->
-    <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/components.css">
-    
-    <!-- CSS PARA MOBILE (sempre carrega) -->
-    <link rel="stylesheet" href="assets/css/mobile.css" media="screen and (max-width: 768px)">
-    
-    <!-- CSS DE LAYOUT APP (opcional, ativado via JS/classe no body) -->
-    <link rel="stylesheet" href="assets/css/app-layout.css" id="app-layout-css" disabled>
-    
-    <!-- CSS DA PÁGINA ESPECÍFICA -->
-    <link rel="stylesheet" href="assets/css/pagina-especifica.css">
-    
-    <!-- CSS GERAL (antigo style.css - será refatorado) -->
+    <title>ESCOLA MARIANA CAVALCANTI</title>
     <link rel="stylesheet" href="assets/css/style.css">
-    
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/index.css">
 </head>
 <body>
     <!-- Cabeçalho e Menu -->
@@ -53,7 +37,8 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="jogos.html"><i class="fas fa-gamepad"></i> Jogos</a></li>
-                            <li><a href="videos.html"><i class="fas fa-gamepad"></i> Vídeos</a></li>
+                            <li><a href="videos.html"><i class="fas fa-video"></i></i> Vídeos</a></li>
+                            <li><a href="focoEnem.html"><i class="fas fa-clipboard-check"></i></i></i> ENEM</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -96,19 +81,60 @@
                 <i class="fas fa-chevron-right"></i>
             </button>
         </section>
-        <section class="news">
-            <a class="btn-news" style=" text-decoration: none;">Noticias </a>
-            <div class="news-container" id="newsContainer">
-                <h2>
-                    Carregando notícias...
-                </h2>
-                <p>
-                    Verifique sua conexão com a internet ou tente novamente mais tarde.
-                </p>
-                <img src="assets/img/Escola_Entrada.jpg" alt="">
-
+<!-- ===========================
+ NEWS
+ =============================== -->
+<!-- Substitua sua seção de notícias por este código: -->
+<section class="news">
+    <div class="news-header">
+        <a class="btn-news">Notícias</a>
+        
+        <!-- Controles no canto superior esquerdo -->
+        <div class="news-controls">
+            <button class="news-prev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            
+            <div class="news-counter">
+                <span id="currentSlide">1</span> / <span id="totalSlides">2</span>
             </div>
-        </section>
+            
+            <button class="news-next">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+    
+    <div class="news-carousel-container">
+        <!-- Carrossel -->
+        <div class="news-carousel" id="newsCarousel">
+            <!-- Notícia 1 -->
+            <div class="news-slide active">
+                <div class="news-card">
+                    <div class="news-content">
+                        <h2>Volta às Aulas 2026</h2>
+                        <p>
+                            A escola Mariana Cavalcanti está animada para receber seus alunos de volta em 2026! 
+                            Preparamos um ambiente acolhedor e cheio de novidades para tornar o próximo ano letivo
+                            inesquecível. Estamos ansiosos para compartilhar momentos de aprendizado, crescimento e
+                            diversão com todos vocês. Preparem-se para um ano repleto de oportunidades e conquistas!
+                        </p>
+                    </div>
+                    <img src="assets/img/escudo_mara.jpg" alt="Volta às Aulas 2026">
+                </div>
+            </div>
+            
+            <!-- Notícia 2 -->
+
+        </div>
+        
+        <!-- Indicadores -->
+        <div class="news-indicators" id="newsIndicators">
+            <div class="indicator active" data-slide="0"></div>
+            <div class="indicator" data-slide="1"></div>
+        </div>
+    </div>
+</section>
         <section class="propPedag">
             <div class="text-content">
                 <h1>Proposta pedagógica</h1>
@@ -157,7 +183,6 @@
 
     <div class="footer-bottom">
         © 2024 Escola Estadual Mariana Cavalcanti.<br>
-        Desenvolvido com <i class="fa-solid fa-heart"></i> para a nossa escola
     </div>
 </footer>    
 <!-- ============================

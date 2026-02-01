@@ -218,7 +218,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             
             // Usar as fotos no lugar dos eventos
             eventos = fotosEscola.map(foto => ({
-                EVENTO: "Nossa Escola",
+                EVENTO: "Escola Estadual Mariana Cavalcanti",
                 INICIO: foto.DATA || new Date().toISOString(),
                 FOTOS: foto.LINK,
                 DESCRICAO: "Conheça as instalações da Escola Mariana Cavalcanti",
@@ -347,7 +347,185 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     console.log(`Carrossel iniciado com ${eventos.length} slides`);
 });
-
+/* =============================
+   CARROSSEL DE NOTÍCIAS
+   ============================= */
+document.addEventListener('DOMContentLoaded', () => {
+    // Elementos do carrossel
+    const newsCarousel = document.getElementById('newsCarousel');
+    const newsSlides = document.querySelectorAll('.news-slide');
+    const indicators = document.querySelectorAll('.news-indicators .indicator');
+    const prevBtn = document.querySelector('.news-prev');
+    const nextBtn = document.querySelector('.news-next');
+    const currentSlideSpan = document.getElementById('currentSlide');
+    const totalSlidesSpan = document.getElementById('totalSlides');
+    
+    // Se não existir carrossel, sai
+    if (!newsCarousel || newsSlides.length === 0) {
+        console.log('Carrossel de notícias não encontrado');
+        return;
+    }
+    
+    let currentSlide = 0;
+    let slideInterval;
+    let isTransitioning = false; // Para prevenir múltiplos cliques rápidos
+    const AUTO_PLAY_INTERVAL = 5000; // 5 segundos para trocar (mais tempo)
+    const TRANSITION_DURATION = 800; // 0.8 segundos para a animação
+    
+    // Configuração inicial
+    totalSlidesSpan.textContent = newsSlides.length;
+    
+    // Função para mostrar slide específico
+    function showSlide(index, instant = false) {
+        // Prevenir múltiplas transições simultâneas
+        if (isTransitioning) return;
+        isTransitioning = true;
+        
+        // Remove active de todos os slides
+        newsSlides.forEach(slide => {
+            slide.classList.remove('active');
+            slide.style.transition = instant ? 'none' : `all ${TRANSITION_DURATION}ms ease`;
+        });
+        
+        // Remove active de todos os indicadores
+        indicators.forEach(indicator => {
+            indicator.classList.remove('active');
+        });
+        
+        // Verifica limites
+        if (index >= newsSlides.length) {
+            currentSlide = 0;
+        } else if (index < 0) {
+            currentSlide = newsSlides.length - 1;
+        } else {
+            currentSlide = index;
+        }
+        
+        // Ativa slide atual (com atraso para permitir a transição)
+        setTimeout(() => {
+            newsSlides[currentSlide].classList.add('active');
+            newsSlides[currentSlide].style.transition = instant ? 'none' : `all ${TRANSITION_DURATION}ms ease`;
+            
+            // Ativa indicador atual
+            if (indicators[currentSlide]) {
+                indicators[currentSlide].classList.add('active');
+            }
+            
+            // Atualiza contador
+            currentSlideSpan.textContent = currentSlide + 1;
+            
+            // Libera para próxima transição
+            setTimeout(() => {
+                isTransitioning = false;
+            }, TRANSITION_DURATION);
+            
+            console.log(`Slide ${currentSlide + 1} ativo`);
+        }, 50);
+    }
+    
+    // Próximo slide
+    function nextSlide() {
+        if (isTransitioning) return;
+        showSlide(currentSlide + 1);
+    }
+    
+    // Slide anterior
+    function prevSlide() {
+        if (isTransitioning) return;
+        showSlide(currentSlide - 1);
+    }
+    
+    // Event Listeners
+    if (nextBtn) {
+        nextBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            nextSlide();
+            resetAutoPlay();
+        });
+    }
+    
+    if (prevBtn) {
+        prevBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            prevSlide();
+            resetAutoPlay();
+        });
+    }
+    
+    // Event Listeners para indicadores
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (index !== currentSlide && !isTransitioning) {
+                showSlide(index);
+                resetAutoPlay();
+            }
+        });
+    });
+    
+    // Auto-play
+    function startAutoPlay() {
+        clearInterval(slideInterval);
+        slideInterval = setInterval(() => {
+            if (!isTransitioning) {
+                nextSlide();
+            }
+        }, AUTO_PLAY_INTERVAL);
+        console.log(`Auto-play iniciado: ${AUTO_PLAY_INTERVAL/1000}s por slide`);
+    }
+    
+    function resetAutoPlay() {
+        clearInterval(slideInterval);
+        startAutoPlay();
+    }
+    
+    // Controles por teclado
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            prevSlide();
+            resetAutoPlay();
+        } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            nextSlide();
+            resetAutoPlay();
+        }
+    });
+    
+    // Pausar quando o mouse estiver sobre o carrossel
+    const carouselContainer = document.querySelector('.news-carousel-container');
+    if (carouselContainer) {
+        carouselContainer.addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+            console.log('Auto-play pausado');
+        });
+        
+        carouselContainer.addEventListener('mouseleave', () => {
+            startAutoPlay();
+            console.log('Auto-play retomado');
+        });
+        
+        // Pausar também nos controles
+        const controls = document.querySelector('.news-controls');
+        if (controls) {
+            controls.addEventListener('mouseenter', () => {
+                clearInterval(slideInterval);
+            });
+            
+            controls.addEventListener('mouseleave', () => {
+                startAutoPlay();
+            });
+        }
+    }
+    
+    // Inicialização
+    showSlide(0, true); // Primeira transição instantânea
+    setTimeout(() => {
+        startAutoPlay();
+    }, 1000); // Espera 1 segundo antes de iniciar auto-play
+    
+    console.log(`Carrossel de notícias inicializado com ${newsSlides.length} slides`);
+});
 // Função para abrir modal com detalhes do evento
 window.abrirModalEvento = async function(eventId) {
     console.log("Abrindo modal para evento ID:", eventId);

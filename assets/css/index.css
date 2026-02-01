@@ -1,0 +1,1607 @@
+/* ============================================
+   CONTEÚDO PRINCIPAL
+   ============================================ */
+
+main {
+    min-height: 70vh;
+    padding: 2rem 0;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #3498db, #2c3e50);
+    color: white;
+    text-align: center;
+    padding: 4rem 1rem;
+    margin-bottom: 2rem;
+    border-radius: 10px;
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    .hero h2 {
+        font-size: 2rem;
+    }
+}
+
+/* ============================================
+   PROPOSTA PEDAGÓGICA
+   ============================================ */
+
+.propPedag {
+    display: flex;
+    gap: 30px;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 30px;
+    margin: 40px auto;
+    width: 90%;
+    align-items: center;
+}
+
+/* Texto */
+.text-content {
+    flex: 1;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.text-content h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background: linear-gradient(120deg, #1f3c88, #4facfe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+}
+
+.text-content p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #444;
+    text-align: justify;
+}
+
+/* Imagem */
+.img-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.img-content img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(41, 40, 40, 0.4);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .propPedag {
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .text-content {
+        max-width: 100%;
+    }
+
+    .text-content h1 {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .text-content p {
+        font-size: 1rem;
+        text-align: left;
+    }
+
+    .img-content img {
+        max-width: 100%;
+    }
+}
+
+
+
+/* ============================================
+   SLIDERS E CARROSSÉIS
+   ============================================ */
+
+/* Slider de Eventos */
+.eventos-slider-container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+    text-align: center;
+}
+
+.slider-title {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* Área do slider */
+.eventos-slider {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    overflow: hidden;
+    border-radius: 16px;
+    background: #ddd;
+}
+
+/* Cada slide */
+.slider-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 100%;
+    top: 0;
+    opacity: 0;
+    transition: all 0.6s ease;
+    display: flex;
+    align-items: flex-end;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Slide ativo */
+.slider-slide.active {
+    left: 0;
+    opacity: 1;
+}
+
+/* Texto dentro do slide */
+.slide-info {
+    width: 100%;
+    color: white;
+    padding: 20px;
+    background: linear-gradient(0deg, rgba(0,0,0,0.75), transparent);
+    text-align: left;
+}
+
+/* Título e data */
+.slide-info h3 {
+    font-size: 1.4rem;
+    margin-bottom: 6px;
+}
+
+.slide-info p {
+    margin: 0;
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* Bolinhas */
+.slider-indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+    gap: 8px;
+}
+
+.slider-dot {
+    width: 12px;
+    height: 12px;
+    background: #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.slider-dot.active {
+    background: #2c3e50;
+    transform: scale(1.2);
+}
+
+.slider-loading {
+    padding: 40px;
+    font-size: 1.2rem;
+}
+
+/* ============================================
+   SUPER BANNER DE EVENTOS
+   ============================================ */
+
+.eventos-banner {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    margin: 40px auto 60px;
+    overflow: hidden;
+    border-radius: 14px;
+}
+
+/* Wrapper interno */
+.banner-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* SLIDE */
+.banner-slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+/* Slide ativo */
+.banner-slide.active {
+    opacity: 1;
+}
+
+/* IMAGEM menor dentro do banner */
+.banner-slide img {
+    width: 100%;
+    height: auto;
+    max-height: 85%;
+    object-fit: contain;
+    border-radius: 12px;
+    position: absolute;
+    right: 30px;
+    bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    animation: fadeUp 0.8s ease forwards;
+    opacity: 0;
+}
+
+/* LEGENDA (versão Glassmorphism) */
+.banner-info {
+    position: absolute;
+    left: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40%;
+    padding: 20px;
+    backdrop-filter: blur(14px);
+    background-color: rgba(64, 64, 64, 0.12);
+    border-radius: 14px;
+    color: rgb(14, 13, 13);
+    animation: fadeUp 0.8s ease forwards;
+    opacity: 0;
+}
+
+.banner-info h3 {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+}
+
+.banner-info p {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.banner-info button {
+    margin-top: 14px;
+    background: #3498db;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.banner-info button:hover {
+    background: #2980b9;
+}
+
+/* SETAS */
+.banner-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.15);
+    border: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    backdrop-filter: blur(12px);
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner-arrow:hover {
+    background: rgba(1, 1, 1, 0.537);
+}
+
+.banner-arrow.left { left: 15px; }
+.banner-arrow.right { right: 15px; }
+
+.banner-arrow i {
+    font-size: 1.3rem;
+    color: white;
+}
+
+/* INDICADORES (bolinhas estilo Netflix) */
+.banner-indicators {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.banner-indicators .dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.571);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.banner-indicators .dot.active {
+    background: rgb(90, 6, 6);
+    transform: scale(1.2);
+}
+
+/* Texto animado */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   CARROSSEL DE EVENTOS MODERNO
+   ============================================ */
+
+.eventos-banner {
+    width: 100%;
+    border-radius: 25px;
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-header h2 {
+    font-size: 2.2rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.section-header h2 i {
+    color: #e74c3c;
+    font-size: 1.8rem;
+}
+
+.section-header p {
+    color: #7f8c8d;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Container do carrossel */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Wrapper dos slides */
+.carousel-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+/* Estilo dos slides */
+.carousel-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.carousel-slide.active {
+    left: 0;
+    opacity: 1;
+}
+
+/* Parte da imagem */
+.slide-image {
+    position: relative;
+    
+}
+
+.slide-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.05);
+    transition: transform 8s ease;
+}
+
+.carousel-slide.active .slide-image img {
+    transform: scale(1);
+}
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(0deg, rgba(44, 62, 80, 0.9) 0%, transparent 100%);
+    display: flex;
+    align-items: flex-end;
+    padding: 30px;
+}
+
+.image-caption {
+    color: white;
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Parte do conteúdo */
+.slide-content {
+    padding: 50px 40px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.event-date {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #e74c3c;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    width: fit-content;
+}
+
+.event-date i {
+    font-size: 0.8rem;
+}
+
+.slide-content h3 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.slide-content p {
+    color: #5d6d7e;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    font-size: 1.05rem;
+}
+
+.event-details {
+    list-style: none;
+    margin-bottom: 30px;
+}
+
+.event-details li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    color: #4a5568;
+}
+
+.event-details li i {
+    color: #3498db;
+    width: 20px;
+}
+
+.view-details-btn {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    width: fit-content;
+}
+
+.view-details-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+    background: linear-gradient(135deg, #2980b9 0%, #2573a7 100%);
+}
+
+/* Controles */
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 56px;
+    height: 56px;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.carousel-control:hover {
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    background: #2c3e50;
+}
+
+.carousel-control:hover i {
+    color: white;
+}
+
+.carousel-control i {
+    font-size: 1.2rem;
+    color: #2c3e50;
+}
+
+.carousel-control.prev {
+    left: 20px;
+}
+
+.carousel-control.next {
+    right: 20px;
+}
+
+/* Indicadores */
+.carousel-indicators {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+}
+
+.carousel-indicators .indicator {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.carousel-indicators .indicator.active {
+    background: white;
+    transform: scale(1.3);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.carousel-indicators .indicator:hover {
+    background: white;
+    transform: scale(1.2);
+}
+
+/* Contador */
+.carousel-counter {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    z-index: 10;
+}
+
+/* Botão ver todos */
+.view-all-container {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.view-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #2c3e50;
+    color: white;
+    padding: 14px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.view-all-btn:hover {
+    background: #34495e;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(44, 62, 80, 0.2);
+}
+
+/* Efeito de loading */
+.carousel-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #7f8c8d;
+    font-size: 1.2rem;
+    gap: 15px;
+}
+
+/* Responsividade do Carrossel */
+@media (max-width: 992px) {
+    .carousel-slide {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+    
+    .carousel-container {
+        height: 700px;
+    }
+    
+    .slide-content {
+        padding: 30px 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-container {
+        height: 600px;
+    }
+    
+    .section-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .carousel-control {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .slide-content h3 {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .carousel-container {
+        height: 500px;
+        border-radius: 15px;
+    }
+    
+    .eventos-banner {
+        margin: 40px auto;
+    }
+}
+/* ============================================
+   CARROSSEL DE NOTÍCIAS MODERNO
+   ============================================ */
+
+.news {
+    width: 96%;
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 30px 15px;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-radius: 24px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Elemento decorativo de fundo */
+.news::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #3498db, #2c3e50, #3498db);
+    border-radius: 24px 24px 0 0;
+    z-index: 1;
+}
+
+/* Elemento decorativo de canto */
+.news::after {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(44, 62, 80, 0.05));
+    border-radius: 50%;
+    z-index: 0;
+}
+
+/* Cabeçalho */
+.news-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 2;
+    padding: 0 20px;
+}
+
+/* Botão/título das notícias */
+.btn-news {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #2c3e50, #3498db);
+    color: white;
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(44, 62, 80, 0.2);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: none;
+    cursor: default;
+}
+
+.btn-news:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(44, 62, 80, 0.3);
+    background: linear-gradient(135deg, #3498db, #2c3e50);
+}
+
+.btn-news::before {
+    content: '📰';
+    font-size: 1.5rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Container principal do carrossel */
+.news-carousel-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    background: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    min-height: 400px;
+    z-index: 2;
+}
+
+/* Carrossel interno */
+.news-carousel {
+    display: flex;
+    transition: transform 0.8s ease-in-out; /* Mais lento: 0.8s */
+    will-change: transform;
+    min-height: 400px;
+}
+
+/* Cada slide */
+.news-slide {
+    min-width: 100%;
+    padding: 40px;
+    box-sizing: border-box;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.8s ease; /* Mais lento: 0.8s */
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.news-slide.active {
+    opacity: 1;
+    transform: translateX(0);
+    display: block;
+    position: relative;
+    animation: slideIn 1s ease-out; /* Mais lento: 1s */
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Card de notícia */
+.news-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    min-height: 320px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Conteúdo de texto */
+.news-content {
+    flex: 1;
+    text-align: left;
+}
+
+.news-card h2 {
+    font-size: 2.2rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #2c3e50, #3498db);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.news-card p {
+    color: #64748b;
+    font-size: 1.2rem;
+    line-height: 1.7;
+    max-width: 600px;
+}
+
+/* Imagem da notícia */
+.news-card img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: transform 0.5s ease;
+}
+
+.news-card img:hover {
+    transform: scale(1.05);
+}
+
+/* Controles SUPERIOR ESQUERDO */
+.news-controls {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 10px 20px;
+    border-radius: 50px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
+    position: relative;
+    margin: 0;
+    height: fit-content;
+}
+
+.news-controls button {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background: #2c3e50;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.news-controls button:hover {
+    background: #3498db;
+    transform: scale(1.1);
+}
+
+.news-counter {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c3e50;
+    min-width: 50px;
+    text-align: center;
+}
+
+/* Indicadores (bolinhas) */
+.news-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 25px;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+}
+
+.news-indicators .indicator {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #cbd5e1;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.news-indicators .indicator.active {
+    background: #3498db;
+    transform: scale(1.3);
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+}
+
+.news-indicators .indicator:hover {
+    background: #3498db;
+    transform: scale(1.2);
+}
+
+/* ============================================
+   RESPONSIVIDADE
+   ============================================ */
+
+@media (max-width: 992px) {
+    .news-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+    
+    .news-content {
+        text-align: center;
+    }
+    
+    .news-card h2 {
+        font-size: 1.8rem;
+    }
+    
+    .news-card p {
+        font-size: 1.1rem;
+    }
+    
+    .news-slide {
+        padding: 30px 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .news-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    
+    .news-controls {
+        gap: 15px;
+        padding: 8px 16px;
+        align-self: flex-start;
+    }
+    
+    .news-controls button {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .news-counter {
+        font-size: 1rem;
+        min-width: 45px;
+    }
+    
+    .news-slide {
+        padding: 25px 20px;
+    }
+    
+    .news-card {
+        min-height: 280px;
+    }
+    
+    .news-card h2 {
+        font-size: 1.6rem;
+    }
+    
+    .news-card p {
+        font-size: 1rem;
+    }
+    
+    .news-card img {
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 576px) {
+    .news {
+        padding: 20px 10px;
+        margin: 40px auto;
+    }
+    
+    .btn-news {
+        padding: 14px 24px;
+        font-size: 1.1rem;
+    }
+    
+    .news-controls {
+        gap: 10px;
+        padding: 6px 12px;
+        border-radius: 40px;
+    }
+    
+    .news-controls button {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+    
+    .news-counter {
+        font-size: 0.9rem;
+        min-width: 35px;
+    }
+    
+    .news-slide {
+        padding: 20px 15px;
+    }
+    
+    .news-card {
+        gap: 20px;
+        min-height: 250px;
+    }
+    
+    .news-card h2 {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+    }
+    
+    .news-card p {
+        font-size: 0.95rem;
+    }
+    
+    .news-card img {
+        max-width: 200px;
+    }
+    
+    .news-indicators {
+        padding: 15px;
+    }
+    
+    .news-indicators .indicator {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    .news-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .news-content {
+        text-align: center;
+    }
+    
+    .news-card h2 {
+        font-size: 1.3rem;
+    }
+    
+    .news-card p {
+        font-size: 0.9rem;
+    }
+    
+    .btn-news {
+        font-size: 1rem;
+        padding: 12px 20px;
+    }
+}
+/* ============================================
+   RESPONSIVIDADE
+   ============================================ */
+
+@media (max-width: 992px) {
+    .news-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+    
+    .news-content {
+        text-align: center;
+    }
+    
+    .news-card h2 {
+        font-size: 1.8rem;
+    }
+    
+    .news-card p {
+        font-size: 1.1rem;
+    }
+    
+    .news-slide {
+        padding: 30px 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .news-controls {
+        gap: 15px;
+        padding: 8px 16px;
+    }
+    
+    .news-controls button {
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+    
+    .news-counter {
+        font-size: 1rem;
+        min-width: 50px;
+    }
+    
+    .news-slide {
+        padding: 25px 20px;
+    }
+    
+    .news-card {
+        min-height: 280px;
+    }
+    
+    .news-card h2 {
+        font-size: 1.6rem;
+    }
+    
+    .news-card p {
+        font-size: 1rem;
+    }
+    
+    .news-card img {
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 576px) {
+    .news {
+        padding: 20px 10px;
+        margin: 40px auto;
+    }
+    
+    .btn-news {
+        padding: 14px 24px;
+        font-size: 1.1rem;
+    }
+    
+    .news-controls {
+        gap: 10px;
+        padding: 6px 12px;
+        border-radius: 40px;
+    }
+    
+    .news-controls button {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .news-counter {
+        font-size: 0.9rem;
+        min-width: 40px;
+    }
+    
+    .news-slide {
+        padding: 20px 15px;
+    }
+    
+    .news-card {
+        gap: 20px;
+        min-height: 250px;
+    }
+    
+    .news-card h2 {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+    }
+    
+    .news-card p {
+        font-size: 0.95rem;
+    }
+    
+    .news-card img {
+        max-width: 200px;
+    }
+    
+    .news-indicators {
+        padding: 15px;
+    }
+    
+    .news-indicators .indicator {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    .news-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .news-content {
+        text-align: center;
+    }
+    
+    .news-card h2 {
+        font-size: 1.3rem;
+    }
+    
+    .news-card p {
+        font-size: 0.9rem;
+    }
+    
+    .news-controls {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+        border-radius: 20px;
+    }
+    
+    .btn-news {
+        font-size: 1rem;
+        padding: 12px 20px;
+    }
+}
+/* ============================================
+   CHATBOT DA ESCOLA
+   ============================================ */
+
+/* Botão flutuante */
+.chatbot-toggle {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3498db, #2c3e50);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+    z-index: 9998;
+    transition: all 0.3s ease;
+}
+
+.chatbot-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.6);
+}
+
+/* Notificação no botão */
+.chatbot-notification {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #e74c3c;
+    color: white;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* Container do chat */
+#chatbotContainer {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 350px;
+    height: 500px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    z-index: 9999;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Estado inicial (escondido) */
+.chatbot-hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+}
+
+.chatbot-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+/* Cabeçalho */
+.chatbot-header {
+    background: linear-gradient(135deg, #2c3e50, #3498db);
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chatbot-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.chatbot-title i {
+    font-size: 1.3rem;
+}
+
+.chatbot-title h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.chatbot-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chatbot-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Área de mensagens */
+.chatbot-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Mensagens */
+.message {
+    max-width: 80%;
+    padding: 12px 15px;
+    border-radius: 15px;
+    position: relative;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message.bot {
+    align-self: flex-start;
+    background: white;
+    border: 1px solid #e0e0e0;
+}
+
+.message.user {
+    align-self: flex-end;
+    background: #3498db;
+    color: white;
+}
+
+.message-content {
+    margin-bottom: 5px;
+    line-height: 1.4;
+}
+
+.message-time {
+    font-size: 0.7rem;
+    opacity: 0.7;
+    text-align: right;
+}
+
+/* Input */
+.chatbot-input {
+    padding: 15px 20px;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    gap: 10px;
+    background: white;
+}
+
+#chatbotInput {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    outline: none;
+    font-size: 0.9rem;
+}
+
+#chatbotInput:focus {
+    border-color: #3498db;
+}
+
+#chatbotSend {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+#chatbotSend:hover {
+    background: #2980b9;
+    transform: scale(1.05);
+}
+
+/* Opções rápidas */
+.chatbot-options {
+    padding: 15px 20px;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    gap: 10px;
+    background: white;
+    flex-wrap: wrap;
+}
+
+.quick-option {
+    flex: 1;
+    min-width: 100px;
+    padding: 8px 12px;
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: 0.3s;
+}
+
+.quick-option:hover {
+    background: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+/* Responsividade do Chatbot */
+@media (max-width: 768px) {
+    #chatbotContainer {
+        width: 90%;
+        max-width: 350px;
+        height: 450px;
+        right: 50%;
+        transform: translateX(50%);
+        bottom: 80px;
+    }
+    
+    .chatbot-toggle {
+        bottom: 20px;
+        right: 20px;
+        width: 55px;
+        height: 55px;
+    }
+    
+    .chatbot-hidden {
+        transform: translateY(20px) translateX(50%);
+    }
+    
+    .chatbot-visible {
+        transform: translateY(0) translateX(50%);
+    }
+}
+
+@media (max-width: 480px) {
+    #chatbotContainer {
+        width: 95%;
+        height: 400px;
+    }
+    
+    .chatbot-options {
+        flex-direction: column;
+    }
+    
+    .quick-option {
+        min-width: auto;
+    }
+}

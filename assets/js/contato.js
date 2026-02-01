@@ -1,134 +1,118 @@
-// Funções da Página de Contato
+// ================================
+// CONTATO.JS
+// Formulário de contato via WhatsApp
+// Compatível com GitHub Pages
+// ================================
 
-// Formulário de Contato
-document.addEventListener('DOMContentLoaded', function() {
-    // Formulário de contato
+document.addEventListener('DOMContentLoaded', function () {
+
     const formContato = document.getElementById('formContato');
-    
-    if (formContato) {
-        formContato.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Validação básica
-            const nome = document.getElementById('nome').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const mensagem = document.getElementById('mensagem').value.trim();
-            
-            if (!nome || !mensagem) {
-                alert('Por favor, preencha todos os campos obrigatórios.');
-                return;
-            }
-            
-            // Validação de email simples
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (email && !emailRegex.test(email)) {
-                alert('Por favor, insira um e-mail válido.');
-                return;
-            }
-            
-            // Aqui você pode adicionar o código para enviar o formulário
-            // Por enquanto, só mostra o modal de confirmação
-            mostrarModalConfirmacao();
-            
-            // Limpar formulário
-            formContato.reset();
-        });
-    }
-    
-    // Máscara para telefone
-    const telefoneInput = document.getElementById('telefone');
-    if (telefoneInput) {
-        telefoneInput.addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            
-            if (value.length > 0) {
-                if (value.length <= 2) {
-                    value = '(' + value;
-                } else if (value.length <= 7) {
-                    value = '(' + value.substring(0, 2) + ') ' + value.substring(2);
-                } else if (value.length <= 11) {
-                    value = '(' + value.substring(0, 2) + ') ' + value.substring(2, 7) + '-' + value.substring(7);
-                } else {
-                    value = '(' + value.substring(0, 2) + ') ' + value.substring(2, 7) + '-' + value.substring(7, 11);
-                }
-            }
-            
-            e.target.value = value;
-        });
-    }
-    
-    // FAQ Accordion
-    const faqPerguntas = document.querySelectorAll('.faq-pergunta');
-    
-    faqPerguntas.forEach(pergunta => {
-        pergunta.addEventListener('click', function() {
-            const faqItem = this.parentElement;
-            
-            // Fecha outros itens
-            document.querySelectorAll('.faq-item').forEach(item => {
-                if (item !== faqItem) {
-                    item.classList.remove('active');
-                }
-            });
-            
-            // Alterna o item atual
-            faqItem.classList.toggle('active');
-        });
+    if (!formContato) return; // evita conflito se não estiver na página
+
+    const telefoneWhatsApp = "5584999746224";
+
+    const modalConfirmacao = document.getElementById('modalConfirmacao');
+    const fecharModalBtn = document.getElementById('fecharModal');
+
+    // ================================
+    // ENVIO DO FORMULÁRIO
+    // ================================
+    formContato.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const nome = document.getElementById('nome').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const telefone = document.getElementById('telefone').value.trim();
+        const assunto = document.getElementById('assunto').value;
+        const mensagem = document.getElementById('mensagem').value.trim();
+
+        // Validação básica
+        if (!nome || !mensagem || !assunto) {
+            alert('Por favor, preencha os campos obrigatórios.');
+            return;
+        }
+
+        // Montar mensagem do WhatsApp
+        const textoWhatsApp =
+`📩 *Novo contato pelo site*
+🏫 *Escola Estadual Mariana Cavalcanti*
+
+👤 *Nome:* ${nome}
+📧 *E-mail:* ${email || 'Não informado'}
+📞 *Telefone:* ${telefone || 'Não informado'}
+🏷️ *Assunto:* ${assunto}
+
+💬 *Mensagem:*
+${mensagem}`;
+
+        const textoCodificado = encodeURIComponent(textoWhatsApp);
+
+        // Abrir WhatsApp
+        window.open(
+            `https://wa.me/${telefoneWhatsApp}?text=${textoCodificado}`,
+            '_blank'
+        );
+
+        // Mostrar modal de confirmação
+        abrirModalConfirmacao();
+
+        // Limpar formulário
+        formContato.reset();
     });
-    
-    // Botão Fale Conosco no footer
-    const footerBtn = document.querySelector('.footer-btn');
-    if (footerBtn) {
-        footerBtn.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-            
-            // Foca no formulário
-            const form = document.getElementById('formContato');
-            if (form) {
-                setTimeout(() => {
-                    document.getElementById('nome').focus();
-                }, 500);
+
+    // ================================
+    // MODAL
+    // ================================
+    function abrirModalConfirmacao() {
+        if (modalConfirmacao) {
+            modalConfirmacao.classList.add('ativo');
+        }
+    }
+
+    function fecharModalConfirmacao() {
+        if (modalConfirmacao) {
+            modalConfirmacao.classList.remove('ativo');
+        }
+    }
+
+    if (fecharModalBtn) {
+        fecharModalBtn.addEventListener('click', fecharModalConfirmacao);
+    }
+
+    // Fechar modal clicando fora
+    if (modalConfirmacao) {
+        modalConfirmacao.addEventListener('click', function (event) {
+            if (event.target === modalConfirmacao) {
+                fecharModalConfirmacao();
             }
         });
     }
-});
 
-// Função para mostrar modal de confirmação
-function mostrarModalConfirmacao() {
-    const modal = document.getElementById('modalConfirmacao');
-    if (modal) {
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-}
+    // ================================
+    // MÁSCARA DE TELEFONE (BR)
+    // ================================
+    const inputTelefone = document.getElementById('telefone');
 
-// Função para fechar modal
-function fecharModal() {
-    const modal = document.getElementById('modalConfirmacao');
-    if (modal) {
-        modal.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    }
-}
+    if (inputTelefone) {
+        inputTelefone.addEventListener('input', function (event) {
+            let valor = event.target.value.replace(/\D/g, '');
 
-// Fechar modal ao clicar fora ou pressionar ESC
-document.addEventListener('DOMContentLoaded', function() {
-    const modal = document.getElementById('modalConfirmacao');
-    
-    if (modal) {
-        modal.addEventListener('click', function(e) {
-            if (e.target === this) {
-                fecharModal();
+            if (valor.length > 11) {
+                valor = valor.slice(0, 11);
             }
-        });
-        
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                fecharModal();
+
+            if (valor.length > 10) {
+                valor = valor.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+            } else if (valor.length > 6) {
+                valor = valor.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+            } else if (valor.length > 2) {
+                valor = valor.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+            } else {
+                valor = valor.replace(/(\d*)/, '($1');
             }
+
+            event.target.value = valor;
         });
     }
+
 });
