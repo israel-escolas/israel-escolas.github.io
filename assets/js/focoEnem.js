@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ================================
     function criarContadorENEM() {
         // Data estimada do ENEM 2026: primeiro sábado de novembro
-        const dataENEM2026 = new Date('2026-11-07T13:00:00'); // 7 de novembro de 2026
+        const dataENEM2026 = new Date('2026-11-01T13:00:00'); // 7 de novembro de 2026
         const agora = new Date();
         const diferenca = dataENEM2026 - agora;
         

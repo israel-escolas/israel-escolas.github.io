@@ -12,6 +12,9 @@
     padding-bottom: 3rem;
     border-bottom: 1px solid #e9ecef;
 }
+.historia{
+    display: none;
+}
 
 .sobre-section:last-child {
     border-bottom: none;
