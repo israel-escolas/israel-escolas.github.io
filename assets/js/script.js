@@ -359,7 +359,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextBtn = document.querySelector('.news-next');
     const currentSlideSpan = document.getElementById('currentSlide');
     const totalSlidesSpan = document.getElementById('totalSlides');
-    
+    document.getElementById("ano-atual").textContent = new Date().getFullYear();
     // Se não existir carrossel, sai
     if (!newsCarousel || newsSlides.length === 0) {
         console.log('Carrossel de notícias não encontrado');

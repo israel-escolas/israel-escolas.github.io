@@ -1,0 +1,683 @@
+/* ============================================
+   LABORATÓRIO VIRTUAL - ESTILOS
+   ============================================ */
+
+/* 1. VARIÁVEIS E RESET */
+:root {
+    --primary: #2c3e50;
+    --secondary: #3498db;
+    --accent: #e74c3c;
+    --success: #27ae60;
+    --warning: #f39c12;
+    --light: #ecf0f1;
+    --dark: #2c3e50;
+    --gray: #95a5a6;
+    --light-gray: #f8f9fa;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --radius: 10px;
+    --transition: all 0.3s ease;
+}
+
+.lab-virtual-main {
+    min-height: calc(100vh - 200px);
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+}
+
+/* 2. BANNER PRINCIPAL */
+.lab-banner {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    padding: 60px 0;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.banner-content h1 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.banner-content p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 30px;
+    opacity: 0.9;
+}
+
+.search-box {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    gap: 10px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 15px 20px;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    box-shadow: var(--shadow);
+}
+
+.search-box button {
+    background: var(--warning);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    padding: 0 25px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: var(--transition);
+}
+
+.search-box button:hover {
+    background: #e67e22;
+    transform: translateY(-2px);
+}
+
+/* 3. MENU DE DISCIPLINAS */
+.disciplinas-section {
+    margin-bottom: 40px;
+}
+
+.disciplinas-menu {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 25px;
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.disciplina-btn {
+    padding: 14px 28px;
+    background: var(--light);
+    border: 2px solid transparent;
+    border-radius: 50px;
+    color: var(--dark);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    white-space: nowrap;
+}
+
+.disciplina-btn:hover {
+    background: var(--secondary);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(52, 152, 219, 0.3);
+}
+
+.disciplina-btn.active {
+    background: var(--secondary);
+    color: white;
+    border-color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+}
+
+.disciplina-btn i {
+    font-size: 1.2rem;
+}
+
+/* 4. CATEGORIAS DE DISCIPLINAS */
+.disciplina-categoria {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.disciplina-categoria.active {
+    display: block;
+}
+
+.categoria-titulo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid var(--secondary);
+    color: var(--primary);
+    font-size: 1.8rem;
+}
+
+.categoria-titulo i {
+    margin-right: 15px;
+    color: var(--secondary);
+}
+
+.contador {
+    background: var(--secondary);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* 5. GRID DE SIMULAÇÕES */
+.simulacoes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+/* 6. CARDS DE SIMULAÇÃO */
+.simulacao-card {
+    background: white;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e0e0e0;
+}
+
+.simulacao-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Cabeçalho do Card */
+.card-header {
+    padding: 15px 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    background: var(--light-gray);
+    border-bottom: 1px solid #eee;
+}
+
+.badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.badge-quimica { background: #3498db; color: white; }
+.badge-fisica { background: #2ecc71; color: white; }
+.badge-matematica { background: #9b59b6; color: white; }
+.badge-biologia { background: #27ae60; color: white; }
+.badge-geografia { background: #f39c12; color: white; }
+.badge-nivel { background: #e74c3c; color: white; }
+
+/* Corpo do Card */
+.card-body {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-body h3 {
+    color: var(--primary);
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.descricao {
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+/* Container do Iframe */
+.iframe-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 75%; /* Proporção 4:3 */
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--light-gray);
+    border: 1px solid #e9ecef;
+}
+
+.iframe-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Rodapé do Card */
+.card-footer {
+    padding: 20px;
+    display: flex;
+    gap: 10px;
+    background: var(--light-gray);
+    border-top: 1px solid #eee;
+}
+
+.btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex: 1;
+    font-size: 0.95rem;
+}
+
+.btn-primary {
+    background: var(--success);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #219653;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(39, 174, 96, 0.3);
+}
+
+.btn-secondary {
+    background: var(--warning);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #e67e22;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(243, 156, 18, 0.3);
+}
+
+.btn-large {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+}
+
+/* 7. MENSAGEM VAZIA */
+.mensagem-vazia {
+    text-align: center;
+    padding: 60px 20px;
+    display: none;
+}
+
+.mensagem-vazia i {
+    font-size: 4rem;
+    color: var(--gray);
+    margin-bottom: 20px;
+}
+
+.mensagem-vazia h3 {
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.mensagem-vazia p {
+    color: var(--gray);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* 8. MODAL DE DETALHES */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    border-radius: var(--radius);
+    max-width: 900px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: modalSlide 0.3s ease;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+    padding: 25px;
+    background: var(--primary);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 32px;
+    cursor: pointer;
+    padding: 5px;
+    transition: var(--transition);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-modal:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(90deg);
+}
+
+.modal-body {
+    padding: 30px;
+}
+
+.modal-info {
+    margin-bottom: 30px;
+}
+
+#modal-descricao {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+.modal-detalhes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    background: var(--light-gray);
+    padding: 20px;
+    border-radius: var(--radius);
+}
+
+.detalhe-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #555;
+}
+
+.detalhe-item i {
+    color: var(--secondary);
+    font-size: 1.2rem;
+}
+
+.modal-iframe-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* Proporção 16:9 */
+    margin-bottom: 30px;
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--light-gray);
+    border: 1px solid #e9ecef;
+}
+
+.modal-iframe-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.modal-acoes {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+/* 9. ANIMAÇÕES */
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+@keyframes modalSlide {
+    from { 
+        transform: translateY(-50px); 
+        opacity: 0; 
+    }
+    to { 
+        transform: translateY(0); 
+        opacity: 1; 
+    }
+}
+
+/* 10. FOOTER ESPECÍFICO */
+footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.logo-footer img {
+    height: 80px;
+    margin-bottom: 20px;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+}
+
+.footer-info {
+    max-width: 800px;
+}
+
+.footer-info p {
+    margin: 8px 0;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+/* 11. RESPONSIVIDADE */
+@media (max-width: 1200px) {
+    .simulacoes-grid {
+        grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    }
+}
+
+@media (max-width: 992px) {
+    .banner-content h1 {
+        font-size: 2.2rem;
+    }
+    
+    .categoria-titulo {
+        font-size: 1.6rem;
+    }
+    
+    .simulacoes-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .lab-banner {
+        padding: 40px 0;
+    }
+    
+    .banner-content h1 {
+        font-size: 1.8rem;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .banner-content p {
+        font-size: 1rem;
+        padding: 0 20px;
+    }
+    
+    .search-box {
+        flex-direction: column;
+        padding: 0 20px;
+    }
+    
+    .disciplinas-menu {
+        padding: 20px;
+        gap: 10px;
+    }
+    
+    .disciplina-btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+        flex: 1;
+        min-width: 150px;
+        justify-content: center;
+    }
+    
+    .simulacoes-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .modal-content {
+        width: 95%;
+    }
+    
+    .modal-header {
+        padding: 20px;
+    }
+    
+    .modal-header h3 {
+        font-size: 1.4rem;
+    }
+    
+    .modal-body {
+        padding: 20px;
+    }
+    
+    .modal-acoes {
+        flex-direction: column;
+    }
+    
+    .modal-acoes .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .lab-banner {
+        padding: 30px 0;
+    }
+    
+    .banner-content h1 {
+        font-size: 1.5rem;
+    }
+    
+    .disciplina-btn {
+        min-width: 130px;
+        padding: 10px 15px;
+        font-size: 0.85rem;
+    }
+    
+    .card-footer {
+        flex-direction: column;
+    }
+    
+    .card-footer .btn {
+        width: 100%;
+    }
+    
+    .modal-detalhes {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 12. ESTILOS PARA BUSCA */
+.filtro-ativo {
+    border: 2px solid var(--warning) !important;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(243, 156, 18, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0); }
+}
+
+/* 13. LOADING STATE */
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    font-size: 1.2rem;
+    color: var(--gray);
+}
+
+.loading::after {
+    content: '';
+    width: 30px;
+    height: 30px;
+    border: 3px solid var(--light);
+    border-top-color: var(--secondary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 10px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* 14. SCROLLBAR PERSONALIZADA */
+.modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: var(--light-gray);
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: var(--secondary);
+    border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}

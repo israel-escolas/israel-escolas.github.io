@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratório Virtual - Escola Mariana Cavalcanti</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/labVirt.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/desafio-matematico.css">
+</head>
+<body>
+    <!-- Cabeçalho e Menu -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="assets/img/LOGO.png">
+            </a>
+            <nav class="navbar">
+                <ul class="nav-menu">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="horarios.html"><i class="fas fa-clock"></i> Horários</a></li>
+                    <li><a href="calendario.html"><i class="fas fa-calendar-alt"></i> Calendário</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" >
+                            <i class="fa-solid fa-panorama"></i> Eventos  <i class="fas fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="eventos.html"><i class="fas fa-images"></i> Eventos</a></li>
+                            <li><a href="comunicados.html"><i class="fas fa-bullhorn"></i> Comunicados</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" >
+                            <i class="fa-solid fa-book"></i></i> Estudo  <i class="fas fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="labVirt.html" class="active"><i class="fas fa-flask"></i> Laboratório</a></li>
+                            <li><a href="videos.html"><i class="fas fa-video"></i></i> Vídeos</a></li>
+                            <li><a href="focoEnem.html"><i class="fas fa-clipboard-check"></i></i></i> ENEM</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" >
+                            <i class="fas fa-school"></i></i> Escola <i class="fas fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sobre.html"><i class="fa-solid fa-school-flag"></i> Sobre</a></li>
+                            <li><a href="informacoes.html"><i class="fa-solid fa-circle-info"></i> Informações</a></li>
+                            <li><a href="contato.html"><i class="fas fa-envelope"></i> Contato</a></li>
+                        </ul>
+                    </li> 
+                </ul>
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="lab-virtual-main">
+        <!-- Banner Principal -->
+        <section class="lab-banner">
+            <div class="container">
+                <div class="banner-content">
+                    <h1><i class="fas fa-flask"></i> Laboratório Virtual</h1>
+                    <p>Explore simulações interativas para aprender Ciências, Matemática e muito mais!</p>
+                    <div class="search-box">
+                        <input type="text" id="search-simulacoes" placeholder="Buscar simulações...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Menu de Disciplinas -->
+        <section class="disciplinas-section">
+            <div class="container">
+                <div class="disciplinas-menu">
+                    <button class="disciplina-btn active" data-disciplina="todas">
+                        <i class="fas fa-globe"></i> Todas
+                    </button>
+                    <button class="disciplina-btn" data-disciplina="quimica">
+                        <i class="fas fa-flask"></i> Química
+                    </button>
+                    <button class="disciplina-btn" data-disciplina="fisica">
+                        <i class="fas fa-atom"></i> Física
+                    </button>
+                    <button class="disciplina-btn" data-disciplina="matematica">
+                        <i class="fas fa-calculator"></i> Matemática
+                    </button>
+                    <button class="disciplina-btn" data-disciplina="biologia">
+                        <i class="fas fa-dna"></i> Biologia
+                    </button>
+                    <button class="disciplina-btn" data-disciplina="geografia">
+                        <i class="fas fa-globe-americas"></i> Geografia
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Grid de Simulações -->
+        <section class="simulacoes-section">
+            <div class="container">
+                <!-- Química -->
+                <div class="disciplina-categoria active" id="quimica">
+                    <h2 class="categoria-titulo">
+                        <i class="fas fa-flask"></i> Simulações de Química
+                        <span class="contador">4 simulações</span>
+                    </h2>
+                    <div class="simulacoes-grid">
+                        <!-- Monte o Átomo -->
+                        <div class="simulacao-card" data-disciplina="quimica">
+                            <div class="card-header">
+                                <span class="badge badge-quimica">Química</span>
+                                <span class="badge badge-nivel">Fundamental</span>
+                            </div>
+                            <div class="card-body">
+                                <h3>Monte o Átomo</h3>
+                                <p class="descricao">Construa átomos adicionando prótons, nêutrons e elétrons. Veja como o elemento, carga e massa mudam.</p>
+                                <div class="iframe-container">
+                                    <iframe src="https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_pt_BR.html" 
+                                            allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary btn-jogar" data-url="https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_pt_BR.html">
+                                    <i class="fas fa-play"></i> Abrir
+                                </button>
+                                <button class="btn btn-secondary btn-info" data-titulo="Monte o Átomo" data-descricao="Construa átomos adicionando prótons, nêutrons e elétrons. Veja como o elemento, carga e massa mudam.">
+                                    <i class="fas fa-info-circle"></i> Detalhes
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Monte a Molécula -->
+                        <div class="simulacao-card" data-disciplina="quimica">
+                            <div class="card-header">
+                                <span class="badge badge-quimica">Química</span>
+                                <span class="badge badge-nivel">Médio</span>
+                            </div>
+                            <div class="card-body">
+                                <h3>Monte a Molécula</h3>
+                                <p class="descricao">Construa moléculas a partir de átomos. Explore como as moléculas são formadas e suas estruturas.</p>
+                                <div class="iframe-container">
+                                    <iframe src="https://phet.colorado.edu/sims/html/build-a-molecule/latest/build-a-molecule_pt_BR.html" 
+                                            allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary btn-jogar" data-url="https://phet.colorado.edu/sims/html/build-a-molecule/latest/build-a-molecule_pt_BR.html">
+                                    <i class="fas fa-play"></i> Abrir
+                                </button>
+                                <button class="btn btn-secondary btn-info" data-titulo="Monte a Molécula" data-descricao="Construa moléculas a partir de átomos. Explore como as moléculas são formadas e suas estruturas.">
+                                    <i class="fas fa-info-circle"></i> Detalhes
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Densidade -->
+                        <div class="simulacao-card" data-disciplina="quimica">
+                            <div class="card-header">
+                                <span class="badge badge-quimica">Química</span>
+                                <span class="badge badge-nivel">Fundamental</span>
+                            </div>
+                            <div class="card-body">
+                                <h3>Densidade</h3>
+                                <p class="descricao">Explore como a densidade afeta a flutuação dos objetos. Descubra por que alguns objetos flutuam e outros afundam.</p>
+                                <div class="iframe-container">
+                                    <iframe src="https://phet.colorado.edu/sims/html/density/latest/density_pt_BR.html" 
+                                            allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary btn-jogar" data-url="https://phet.colorado.edu/sims/html/density/latest/density_pt_BR.html">
+                                    <i class="fas fa-play"></i> Abrir
+                                </button>
+                                <button class="btn btn-secondary btn-info" data-titulo="Densidade" data-descricao="Explore como a densidade afeta a flutuação dos objetos. Descubra por que alguns objetos flutuam e outros afundam.">
+                                    <i class="fas fa-info-circle"></i> Detalhes
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- pH Scale -->
+                        <div class="simulacao-card" data-disciplina="quimica">
+                            <div class="card-header">
+                                <span class="badge badge-quimica">Química</span>
+                                <span class="badge badge-nivel">Médio</span>
+                            </div>
+                            <div class="card-body">
+                                <h3>Escala de pH</h3>
+                                <p class="descricao">Teste o pH das coisas! Aprenda sobre ácidos e bases enquanto testa líquidos do cotidiano.</p>
+                                <div class="iframe-container">
+                                    <iframe src="https://phet.colorado.edu/sims/html/ph-scale/latest/ph-scale_pt_BR.html" 
+                                            allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary btn-jogar" data-url="https://phet.colorado.edu/sims/html/ph-scale/latest/ph-scale_pt_BR.html">
+                                    <i class="fas fa-play"></i> Abrir
+                                </button>
+                                <button class="btn btn-secondary btn-info" data-titulo="Escala de pH" data-descricao="Teste o pH das coisas! Aprenda sobre ácidos e bases enquanto testa líquidos do cotidiano.">
+                                    <i class="fas fa-info-circle"></i> Detalhes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Física -->
+                <div class="disciplina-categoria" id="fisica">
+                    <h2 class="categoria-titulo">
+                        <i class="fas fa-atom"></i> Simulações de Física
+                        <span class="contador">4 simulações</span>
+                    </h2>
+                    <div class="simulacoes-grid">
+                        <!-- Dados de Projéteis -->
+                        <div class="simulacao-card" data-disciplina="fisica">
+                            <div class="card-header">
+                                <span class="badge badge-fisica">Física</span>
+                                <span class="badge badge-nivel">Médio</span>
+                            </div>
+                            <div class="card-body">
+                                <h3>Dados de Projéteis</h3>
+                                <p class="descricao">Investigue o movimento de projéteis coletando dados e analisando gráficos.</p>
+                                <div class="iframe-container">
+                                    <iframe src="https://phet.colorado.edu/sims/html/projectile-data-lab/latest/projectile-data-lab_pt_BR.html" 
+                                            allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary btn-jogar" data-url="https://phet.colorado.edu/sims/html/projectile-data-lab/latest/projectile-data-lab_pt_BR.html">
+                                    <i class="fas fa-play"></i> Abrir
+                                </button>
+                                <button class="btn btn-secondary btn-info" data-titulo="Dados de Projéteis" data-descricao="Investigue o movimento de projéteis coletando dados e analisando gráficos.">
+                                    <i class="fas fa-info-circle"></i> Detalhes
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Balançando -->
+                        <div class="simulacao-card" data-disciplina="fisica">
+                            <div class="card-header">
+                                <span class="badge badge-fisica">Física</span>
+                                <span class="badge badge-nivel">Fundamental</span>
+                            </div>
+                            <div class="card-body">
+                                <h3>Balançando</h3>
+                                <p class="descricao">Explore o equilíbrio e as alavancas nesta simulação interativa.</p>
+                                <div class="iframe-container">
+                                    <iframe src="https://phet.colorado.edu/sims/html/balancing-act/latest/balancing-act_pt_BR.html" 
+                                            allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary btn-jogar" data-url="https://phet.colorado.edu/sims/html/balancing-act/latest/balancing-act_pt_BR.html">
+                                    <i class="fas fa-play"></i> Abrir
+                                </button>
+                                <button class="btn btn-secondary btn-info" data-titulo="Balançando" data-descricao="Explore o equilíbrio e as alavancas nesta simulação interativa.">
+                                    <i class="fas fa-info-circle"></i> Detalhes
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Forças e Movimento -->
+                        <div class="simulacao-card" data-disciplina="fisica">
+                            <div class="card-header">
+                                <span class="badge badge-fisica">Física</span>
+                                <span class="badge badge-nivel">Médio</span>
+                            </div>
+                            <div class="card-body">
+                                <h3>Forças e Movimento</h3>
+                                <p class="descricao">Explore as leis de Newton e como as forças afetam o movimento dos objetos.</p>
+                                <div class="iframe-container">
+                                    <iframe src="https://phet.colorado.edu/sims/html/forces-and-motion-basics/latest/forces-and-motion-basics_pt_BR.html" 
+                                            allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary btn-jogar" data-url="https://phet.colorado.edu/sims/html/forces-and-motion-basics/latest/forces-and-motion-basics_pt_BR.html">
+                                    <i class="fas fa-play"></i> Abrir
+                                </button>
+                                <button class="btn btn-secondary btn-info" data-titulo="Forças e Movimento" data-descricao="Explore as leis de Newton e como as forças afetam o movimento dos objetos.">
+                                    <i class="fas fa-info-circle"></i> Detalhes
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Circuito Elétrico -->
+                        <div class="simulacao-card" data-disciplina="fisica">
+                            <div class="card-header">
+                                <span class="badge badge-fisica">Física</span>
+                                <span class="badge badge-nivel">Avançado</span>
+                            </div>
+                            <div class="card-body">
+                                <h3>Circuito Elétrico</h3>
+                                <p class="descricao">Construa circuitos elétricos com resistores, lâmpadas, baterias e interruptores.</p>
+                                <div class="iframe-container">
+                                    <iframe src="https://phet.colorado.edu/sims/html/circuit-construction-kit-dc/latest/circuit-construction-kit-dc_pt_BR.html" 
+                                            allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary btn-jogar" data-url="https://phet.colorado.edu/sims/html/circuit-construction-kit-dc/latest/circuit-construction-kit-dc_pt_BR.html">
+                                    <i class="fas fa-play"></i> Abrir
+                                </button>
+                                <button class="btn btn-secondary btn-info" data-titulo="Circuito Elétrico" data-descricao="Construa circuitos elétricos com resistores, lâmpadas, baterias e interruptores.">
+                                    <i class="fas fa-info-circle"></i> Detalhes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Matemática -->
+                <div class="disciplina-categoria" id="matematica">
+                    <h2 class="categoria-titulo">
+                        <i class="fas fa-calculator"></i> Simulações de Matemática
+                        <span class="contador">3 simulações</span>
+                    </h2>
+                    <div class="simulacoes-grid">
+                        <!-- Frações -->
+                        <div class="simulacao-card" data-disciplina="matematica">
+                            <div class="card-header">
+                                <span class="badge badge-matematica">Matemática</span>
+                                <span class="badge badge-nivel">Fundamental</span>
+                            </div>
+                            <div class="card-body">
+                                <h3>Introdução às Frações</h3>
+                                <p class="descricao">Aprenda frações de forma visual e interativa. Compare frações e entenda conceitos básicos.</p>
+                                <div class="iframe-container">
+                                    <iframe src="https://phet.colorado.edu/sims/html/fractions-intro/latest/fractions-intro_pt_BR.html" 
+                                            allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary btn-jogar" data-url="https://phet.colorado.edu/sims/html/fractions-intro/latest/fractions-intro_pt_BR.html">
+                                    <i class="fas fa-play"></i> Abrir
+                                </button>
+                                <button class="btn btn-secondary btn-info" data-titulo="Introdução às Frações" data-descricao="Aprenda frações de forma visual e interativa. Compare frações e entenda conceitos básicos.">
+                                    <i class="fas fa-info-circle"></i> Detalhes
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Geometria -->
+                        <div class="simulacao-card" data-disciplina="matematica">
+                            <div class="card-header">
+                                <span class="badge badge-matematica">Matemática</span>
+                                <span class="badge badge-nivel">Fundamental</span>
+                            </div>
+                            <div class="card-body">
+                                <h3>Geometria Plana</h3>
+                                <p class="descricao">Explore formas geométricas, ângulos e propriedades das figuras planas.</p>
+                                <div class="iframe-container">
+                                    <iframe src="https://phet.colorado.edu/sims/html/geometry/latest/geometry_pt_BR.html" 
+                                            allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary btn-jogar" data-url="https://phet.colorado.edu/sims/html/geometry/latest/geometry_pt_BR.html">
+                                    <i class="fas fa-play"></i> Abrir
+                                </button>
+                                <button class="btn btn-secondary btn-info" data-titulo="Geometria Plana" data-descricao="Explore formas geométricas, ângulos e propriedades das figuras planas.">
+                                    <i class="fas fa-info-circle"></i> Detalhes
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Gráficos -->
+                        <div class="simulacao-card" data-disciplina="matematica">
+                            <div class="card-header">
+                                <span class="badge badge-matematica">Matemática</span>
+                                <span class="badge badge-nivel">Médio</span>
+                            </div>
+                            <div class="card-body">
+                                <h3>Criador de Gráficos</h3>
+                                <p class="descricao">Crie gráficos de funções e visualize como as equações se transformam em linhas no plano cartesiano.</p>
+                                <div class="iframe-container">
+                                    <iframe src="https://phet.colorado.edu/sims/html/graphing-lines/latest/graphing-lines_pt_BR.html" 
+                                            allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary btn-jogar" data-url="https://phet.colorado.edu/sims/html/graphing-lines/latest/graphing-lines_pt_BR.html">
+                                    <i class="fas fa-play"></i> Abrir
+                                </button>
+                                <button class="btn btn-secondary btn-info" data-titulo="Criador de Gráficos" data-descricao="Crie gráficos de funções e visualize como as equções se transformam em linhas no plano cartesiano.">
+                                    <i class="fas fa-info-circle"></i> Detalhes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Biologia -->
+                <div class="disciplina-categoria" id="biologia">
+                    <h2 class="categoria-titulo">
+                        <i class="fas fa-dna"></i> Simulações de Biologia
+                        <span class="contador">2 simulações</span>
+                    </h2>
+                    <div class="simulacoes-grid">
+                        <!-- Seleção Natural -->
+                        <div class="simulacao-card" data-disciplina="biologia">
+                            <div class="card-header">
+                                <span class="badge badge-biologia">Biologia</span>
+                                <span class="badge badge-nivel">Médio</span>
+                            </div>
+                            <div class="card-body">
+                                <h3>Seleção Natural</h3>
+                                <p class="descricao">Explore como a seleção natural afeta as populações ao longo do tempo.</p>
+                                <div class="iframe-container">
+                                    <iframe src="https://phet.colorado.edu/sims/html/natural-selection/latest/natural-selection_pt_BR.html" 
+                                            allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary btn-jogar" data-url="https://phet.colorado.edu/sims/html/natural-selection/latest/natural-selection_pt_BR.html">
+                                    <i class="fas fa-play"></i> Abrir
+                                </button>
+                                <button class="btn btn-secondary btn-info" data-titulo="Seleção Natural" data-descricao="Explore como a seleção natural afeta as populações ao longo do tempo.">
+                                    <i class="fas fa-info-circle"></i> Detalhes
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Neurônio -->
+                        <div class="simulacao-card" data-disciplina="biologia">
+                            <div class="card-header">
+                                <span class="badge badge-biologia">Biologia</span>
+                                <span class="badge badge-nivel">Avançado</span>
+                            </div>
+                            <div class="card-body">
+                                <h3>Neurônio: Um Impulso Nervoso</h3>
+                                <p class="descricao">Explore como os neurônios funcionam e como os impulsos nervosos são transmitidos.</p>
+                                <div class="iframe-container">
+                                    <iframe src="https://phet.colorado.edu/sims/html/neuron/latest/neuron_pt_BR.html" 
+                                            allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary btn-jogar" data-url="https://phet.colorado.edu/sims/html/neuron/latest/neuron_pt_BR.html">
+                                    <i class="fas fa-play"></i> Abrir
+                                </button>
+                                <button class="btn btn-secondary btn-info" data-titulo="Neurônio" data-descricao="Explore como os neurônios funcionam e como os impulsos nervosos são transmitidos.">
+                                    <i class="fas fa-info-circle"></i> Detalhes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Geografia -->
+                <div class="disciplina-categoria" id="geografia">
+                    <h2 class="categoria-titulo">
+                        <i class="fas fa-globe-americas"></i> Simulações de Geografia
+                        <span class="contador">1 simulação</span>
+                    </h2>
+                    <div class="simulacoes-grid">
+                        <!-- Clima -->
+                        <div class="simulacao-card" data-disciplina="geografia">
+                            <div class="card-header">
+                                <span class="badge badge-geografia">Geografia</span>
+                                <span class="badge badge-nivel">Médio</span>
+                            </div>
+                            <div class="card-body">
+                                <h3>Previsão do Tempo</h3>
+                                <p class="descricao">Explore como funciona a previsão do tempo e os fatores que influenciam o clima.</p>
+                                <div class="iframe-container">
+                                    <iframe src="https://phet.colorado.edu/sims/html/weather/latest/weather_pt_BR.html" 
+                                            allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary btn-jogar" data-url="https://phet.colorado.edu/sims/html/weather/latest/weather_pt_BR.html">
+                                    <i class="fas fa-play"></i> Abrir
+                                </button>
+                                <button class="btn btn-secondary btn-info" data-titulo="Previsão do Tempo" data-descricao="Explore como funciona a previsão do tempo e os fatores que influenciam o clima.">
+                                    <i class="fas fa-info-circle"></i> Detalhes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mensagem quando não há resultados -->
+                <div id="nenhuma-simulacao" class="mensagem-vazia">
+                    <i class="fas fa-search"></i>
+                    <h3>Nenhuma simulação encontrada</h3>
+                    <p>Tente buscar por outro termo ou selecione uma disciplina diferente.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal para Detalhes -->
+        <div id="modal-detalhes" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modal-titulo"></h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-info">
+                        <p id="modal-descricao"></p>
+                        <div class="modal-detalhes">
+                            <div class="detalhe-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Tempo estimado: <strong id="modal-tempo">15-20 minutos</strong></span>
+                            </div>
+                            <div class="detalhe-item">
+                                <i class="fas fa-graduation-cap"></i>
+                                <span>Nível: <strong id="modal-nivel">Fundamental</strong></span>
+                            </div>
+                            <div class="detalhe-item">
+                                <i class="fas fa-user-graduate"></i>
+                                <span>Indicado para: <strong id="modal-publico">6º ao 9º ano</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-iframe-container">
+                        <iframe id="modal-iframe" allowfullscreen></iframe>
+                    </div>
+                    <div class="modal-acoes">
+                        <button id="modal-btn-jogar" class="btn btn-primary btn-large">
+                            <i class="fas fa-play"></i> Iniciar Simulação
+                        </button>
+                        <button class="btn btn-secondary btn-large" onclick="fecharModal()">
+                            <i class="fas fa-times"></i> Fechar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <div class="logo-footer">
+                <img src="assets/img/LOGO.png" alt="Logo Escola Mariana Cavalcanti">
+            </div>
+            <div class="footer-info">
+                <p>Escola Estadual Mariana Cavalcanti</p>
+                <p>Endereço: AV. SENHORA SANTANA, 09 PREDIO. CENTRO - CEP: 59940-000</p>
+                <p>Telefone: (84) 3382-2270 | Email: eemarianacavalcanti@educar.rn.gov.br</p>
+                <p>&copy; <span id="ano-atual"></span> Escola Estadual Mariana Cavalcanti.<br>
+                Laboratório Virtual desenvolvido para apoio educacional.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/labVirt.js"></script>
+</body>
+</html>
