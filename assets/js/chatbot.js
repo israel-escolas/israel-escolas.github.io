@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
         flowHistory.length = 0; // Limpar histórico
         
         // MENSAGEM
-        addBotMessage(`Olá! 😊<br>Sou a <strong>Mariana</strong>, assistente virtual da <strong>${escola.nome}</strong>.<br><br>Como posso te ajudar hoje?`);
+        addBotMessage(`Olá! 😊<br>Sou a  assistente virtual da <strong>${escola.nome}</strong>.<br><br>Como posso te ajudar hoje?`);
         
         // BOTÕES IMEDIATAMENTE
         setTimeout(() => {
@@ -125,6 +125,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 addBotMessage('Atendimento encerrado! 😊<br>Tenha um ótimo dia!');
                 setTimeout(closeChat, 2000);
                 break;
+            case 'navegateToMenu':
+                navegateToMenu();
+                break;
                 
             // Ações de submenu
             case 'proximosEventos':
@@ -162,9 +165,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 break;
             case 'datasMatricula':
                 showDatasMatricula();
-                break;
-            case 'valoresMatricula':
-                showValoresMatricula();
                 break;
             case 'vagasDisponiveis':
                 showVagasDisponiveis();
@@ -462,7 +462,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const buttons = [
             { text: '📋 Documentos necessários', action: 'documentosMatricula' },
             { text: '📅 Datas e períodos', action: 'datasMatricula' },
-            { text: '💰 Valores e taxas', action: 'valoresMatricula' },
             { text: '👥 Vagas disponíveis', action: 'vagasDisponiveis' },
             { text: '🔄 Transferência', action: 'transferenciaMatricula' },
             { text: '🔙 Voltar ao menu', action: 'menu' }
@@ -487,7 +486,17 @@ document.addEventListener('DOMContentLoaded', function() {
             3. Comprovante de renda<br><br>
             💡 Traga também cópias simples.`);
         
-        showBackButtons();
+        // Botões personalizados incluindo o botão de navegação
+        const buttons = [
+            { 
+                text: '📄 Ver mais detalhes sobre matrículas', 
+                action: 'navegateToMenu' 
+            },
+            { text: '🔙 Voltar', action: 'back' },
+            { text: '🏠 Menu principal', action: 'menu' }
+        ];
+        
+        createButtonContainer(buttons);
     }
 
     function showDatasMatricula() {
@@ -503,24 +512,17 @@ document.addEventListener('DOMContentLoaded', function() {
             🔴 A partir de 1º de fevereiro<br><br>
             ⚠️ Vagas limitadas`);
         
-        showBackButtons();
-    }
-
-    function showValoresMatricula() {
-        currentFlow = 'valoresMatricula';
-        flowHistory.push(currentFlow);
+        // Botões personalizados incluindo o botão de navegação
+        const buttons = [
+            { 
+                text: '📄 Ver mais detalhes sobre matrículas', 
+                action: 'navegateToMenu' 
+            },
+            { text: '🔙 Voltar', action: 'back' },
+            { text: '🏠 Menu principal', action: 'menu' }
+        ];
         
-        addBotMessage(`<strong>💰 Valores e Taxas</strong><br><br>
-            ✅ MATRÍCULA GRATUITA<br>
-            ✅ MENSALIDADE GRATUITA<br>
-            ✅ MATERIAL BÁSICO GRATUITO<br><br>
-            Custos eventuais:<br>
-            • Material complementar<br>
-            • Uniforme escolar<br>
-            • Itens pessoais<br><br>
-            💰 Valores específicos na secretaria.`);
-        
-        showBackButtons();
+        createButtonContainer(buttons);
     }
 
     function showVagasDisponiveis() {
@@ -535,7 +537,17 @@ document.addEventListener('DOMContentLoaded', function() {
             Horário: ${escola.horario}<br><br>
             📊 Vagas por ordem de chegada.`);
         
-        showBackButtons();
+        // Botões personalizados incluindo o botão de navegação
+        const buttons = [
+            { 
+                text: '📄 Ver mais detalhes sobre matrículas', 
+                action: 'navegateToMenu' 
+            },
+            { text: '🔙 Voltar', action: 'back' },
+            { text: '🏠 Menu principal', action: 'menu' }
+        ];
+        
+        createButtonContainer(buttons);
     }
 
     function showTransferenciaMatricula() {
@@ -552,7 +564,28 @@ document.addEventListener('DOMContentLoaded', function() {
             3. Aguardar análise<br><br>
             ⚠️ Sujeito à disponibilidade de vagas.`);
         
-        showBackButtons();
+        // Botões personalizados incluindo o botão de navegação
+        const buttons = [
+            { 
+                text: '📄 Ver mais detalhes sobre matrículas', 
+                action: 'navegateToMenu' 
+            },
+            { text: '🔙 Voltar', action: 'back' },
+            { text: '🏠 Menu principal', action: 'menu' }
+        ];
+        
+        createButtonContainer(buttons);
+    }
+
+    function navegateToMenu() {
+        // Adiciona uma mensagem explicativa antes de navegar
+        addBotMessage(`<strong>📋 Informações Completas de Matrícula</strong><br><br>
+            Redirecionando para a página com todas as informações detalhadas sobre matrículas...`);
+        
+        // Pequeno delay para o usuário ler a mensagem
+        setTimeout(() => {
+            window.location.href = 'informacoes.html';
+        }, 1500);
     }
 
     // ========== MENU OUTRAS DÚVIDAS ==========
@@ -750,14 +783,14 @@ document.addEventListener('DOMContentLoaded', function() {
             'estacionamento': '🅿️ Estacionamento',
             'documentosMatricula': '📋 Documentos necessários',
             'datasMatricula': '📅 Datas e períodos',
-            'valoresMatricula': '💰 Valores e taxas',
             'vagasDisponiveis': '👥 Vagas disponíveis',
             'transferenciaMatricula': '🔄 Transferência',
             'uniforme': '👕 Uniforme escolar',
             'merenda': '🍎 Merenda escolar',
             'material': '📚 Material escolar',
             'atendimentoMedico': '🏥 Atendimento médico',
-            'regrasEscola': '📋 Regras da escola'
+            'regrasEscola': '📋 Regras da escola',
+            'navegateToMenu': '📄 Ver mais detalhes sobre matrículas'
         };
         return map[action] || action;
     }
