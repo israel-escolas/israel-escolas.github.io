@@ -11,8 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const telefoneWhatsApp = "5584999746224";
 
-    const modalConfirmacao = document.getElementById('modalConfirmacao');
-    const fecharModalBtn = document.getElementById('fecharModal');
 
     // ================================
     // ENVIO DO FORMULÁRIO
@@ -53,41 +51,9 @@ ${mensagem}`;
             '_blank'
         );
 
-        // Mostrar modal de confirmação
-        abrirModalConfirmacao();
-
         // Limpar formulário
         formContato.reset();
     });
-
-    // ================================
-    // MODAL
-    // ================================
-    function abrirModalConfirmacao() {
-        if (modalConfirmacao) {
-            modalConfirmacao.classList.add('ativo');
-        }
-    }
-
-    function fecharModalConfirmacao() {
-        if (modalConfirmacao) {
-            modalConfirmacao.classList.remove('ativo');
-        }
-    }
-
-    if (fecharModalBtn) {
-        fecharModalBtn.addEventListener('click', fecharModalConfirmacao);
-    }
-
-    // Fechar modal clicando fora
-    if (modalConfirmacao) {
-        modalConfirmacao.addEventListener('click', function (event) {
-            if (event.target === modalConfirmacao) {
-                fecharModalConfirmacao();
-            }
-        });
-    }
-
     // ================================
     // MÁSCARA DE TELEFONE (BR)
     // ================================

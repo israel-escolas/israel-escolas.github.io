@@ -360,41 +360,6 @@
     line-height: 1.6;
     margin: 0;
 }
-
-/* Modal de Confirmação */
-.modal-overlay{
-    display: none;
-}
-.modal-pequeno {
-    max-width: 500px;
-}
-
-.modal-success {
-    text-align: center;
-    padding: 20px 0;
-}
-
-.modal-success i {
-    color: #2ecc71;
-    margin-bottom: 20px;
-}
-
-.modal-success h3 {
-    color: #2c3e50;
-    margin-bottom: 15px;
-}
-
-.modal-success p {
-    color: #5d6d7e;
-    margin-bottom: 10px;
-}
-
-.modal-tempo {
-    font-style: italic;
-    color: #95a5a6;
-    font-size: 0.9rem;
-}
-
 /* =============================
    RESPONSIVIDADE
  ============================= */
