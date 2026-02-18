@@ -362,6 +362,9 @@
 }
 
 /* Modal de Confirmação */
+.modal-overlay{
+    display: none;
+}
 .modal-pequeno {
     max-width: 500px;
 }
