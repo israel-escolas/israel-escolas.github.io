@@ -11,12 +11,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1.5rem;
+    gap: 1rem;
     margin-bottom: 2rem;
     padding: 1rem;
     background: white;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    flex-wrap: wrap;
 }
 
 .calendario-controls button {
@@ -31,6 +32,7 @@
     align-items: center;
     justify-content: center;
     transition: background 0.3s;
+    flex-shrink: 0;
 }
 
 .calendario-controls button:hover {
@@ -44,18 +46,15 @@
     border-radius: 20px !important;
 }
 
-.btn-hoje:hover {
-    background: #34495e !important;
-}
-
 #currentMonth {
     font-size: 1.5rem;
     color: #2c3e50;
     min-width: 200px;
     text-align: center;
+    margin: 0;
 }
 
-/* Grid do calendário */
+/* Grid do calendário - Versão Responsiva */
 .calendario-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -63,28 +62,31 @@
     background: #e9ecef;
     border: 1px solid #e9ecef;
     border-radius: 10px;
-    overflow: hidden;
+    overflow-x: auto;
     margin-bottom: 2rem;
+    -webkit-overflow-scrolling: touch; /* Scroll suave no iOS */
 }
 
 /* Cabeçalho dos dias da semana */
 .dia-semana {
     background: #2c3e50;
     color: white;
-    padding: 1rem;
+    padding: 1rem 0.5rem;
     text-align: center;
     font-weight: 600;
     text-transform: uppercase;
     font-size: 0.9rem;
+    white-space: nowrap;
 }
 
 /* Dias do calendário */
 .dia-calendario {
     background: white;
-    min-height: 120px;
+    min-height: 100px;
     padding: 0.5rem;
     position: relative;
     transition: background 0.2s;
+    min-width: 80px; /* Largura mínima para cada dia */
 }
 
 .dia-calendario:hover {
@@ -101,7 +103,7 @@
 }
 
 .dia-calendario .numero-dia {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 700;
     color: #2c3e50;
     margin-bottom: 0.5rem;
@@ -113,6 +115,7 @@
 }
 
 .dia-calendario.outro-mes {
+    background: #f8f9fa;
     color: #adb5bd;
 }
 
@@ -125,35 +128,15 @@
 .evento-dia {
     background: #3498db;
     color: white;
-    padding: 0.3rem 0.5rem;
-    margin-bottom: 0.3rem;
-    border-radius: 4px;
-    font-size: 0.75rem;
+    padding: 0.2rem 0.3rem;
+    margin-bottom: 0.2rem;
+    border-radius: 3px;
+    font-size: 0.7rem;
     cursor: pointer;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     transition: opacity 0.2s;
-}
-
-.evento-dia:hover {
-    opacity: 0.9;
-}
-
-.evento-dia.feriado {
-    background: #e74c3c;
-}
-
-.evento-dia.prova {
-    background: #f39c12;
-}
-
-.evento-dia.reuniao {
-    background: #9b59b6;
-}
-
-.evento-dia.feira {
-    background: #2ecc71;
 }
 
 /* Lista de eventos do mês */
@@ -162,6 +145,7 @@
     border-radius: 10px;
     padding: 1.5rem;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-top: 2rem;
 }
 
 .eventos-mes h3 {
@@ -188,24 +172,33 @@
     transition: transform 0.2s;
 }
 
-.evento-item:hover {
+.evento-item:active {
     transform: translateX(5px);
     background: #e9ecef;
 }
 
+/* Cores dos tipos de evento */
+.evento-dia.feriado,
 .evento-item.feriado {
+    background: #e74c3c;
     border-left-color: #e74c3c;
 }
 
+.evento-dia.prova,
 .evento-item.prova {
+    background: #f39c12;
     border-left-color: #f39c12;
 }
 
+.evento-dia.reuniao,
 .evento-item.reuniao {
+    background: #9b59b6;
     border-left-color: #9b59b6;
 }
 
+.evento-dia.feira,
 .evento-item.feira {
+    background: #2ecc71;
     border-left-color: #2ecc71;
 }
 
@@ -230,65 +223,112 @@
     line-height: 1.4;
 }
 
-/* Modal de evento (simples) */
-.evento-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-}
-
-.evento-modal-conteudo {
-    background: white;
-    border-radius: 10px;
+.sem-eventos {
+    color: #999;
+    font-style: italic;
+    text-align: center;
     padding: 2rem;
-    max-width: 500px;
-    width: 90%;
-    max-height: 80vh;
-    overflow-y: auto;
 }
 
-.evento-modal-fechar {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #6c757d;
-}
+/* =============================
+   RESPONSIVIDADE ESPECÍFICA
+ ============================= */
 
-/* Responsividade */
 @media (max-width: 768px) {
     .calendario-controls {
-        flex-wrap: wrap;
-        gap: 1rem;
+        gap: 0.5rem;
     }
     
     #currentMonth {
+        font-size: 1.2rem;
+        min-width: 150px;
         order: -1;
         width: 100%;
-        margin-bottom: 0.5rem;
+    }
+    
+    .btn-hoje {
+        order: 1;
+    }
+    
+    /* Permite rolagem horizontal no calendário */
+    .calendario-grid {
+        grid-template-columns: repeat(7, minmax(70px, 1fr));
+        overflow-x: auto;
+        margin: 0 -15px 2rem -15px;
+        border-radius: 0;
+        width: calc(100% + 30px);
+    }
+    
+    .dia-semana {
+        padding: 0.8rem 0.3rem;
+        font-size: 0.8rem;
     }
     
     .dia-calendario {
-        min-height: 100px;
+        min-height: 80px;
+        min-width: 70px;
         padding: 0.3rem;
     }
     
-    .evento-dia {
-        font-size: 0.7rem;
-        padding: 0.2rem 0.3rem;
+    .dia-calendario .numero-dia {
+        font-size: 0.9rem;
+        margin-bottom: 0.3rem;
     }
     
-    .numero-dia {
+    .evento-dia {
+        font-size: 0.65rem;
+        padding: 0.15rem 0.25rem;
+        margin-bottom: 0.15rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .calendario-grid {
+        grid-template-columns: repeat(7, minmax(65px, 1fr));
+    }
+    
+    .dia-semana {
+        font-size: 0.7rem;
+        padding: 0.5rem 0.2rem;
+    }
+    
+    .dia-calendario {
+        min-width: 65px;
+        min-height: 70px;
+    }
+    
+    .dia-calendario .numero-dia {
         font-size: 0.8rem;
+    }
+    
+    .evento-dia {
+        font-size: 0.6rem;
+        padding: 0.1rem 0.2rem;
+        white-space: normal; /* Permite texto quebrar */
+        line-height: 1.2;
+    }
+    
+    .eventos-mes {
+        padding: 1rem;
+    }
+    
+    .evento-item {
+        padding: 0.8rem;
+    }
+    
+    .evento-titulo {
+        font-size: 0.9rem;
+    }
+}
+
+/* Para telas muito pequenas */
+@media (max-width: 360px) {
+    .calendario-grid {
+        grid-template-columns: repeat(7, minmax(60px, 1fr));
+    }
+    
+    .dia-calendario {
+        min-width: 60px;
+        min-height: 60px;
     }
 }
