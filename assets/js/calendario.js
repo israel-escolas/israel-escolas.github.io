@@ -99,29 +99,69 @@ document.addEventListener('DOMContentLoaded', function() {
         numeroEl.textContent = data.getDate();
         diaEl.appendChild(numeroEl);
         
-        // Eventos deste dia
-        const eventosDia = filtrarEventosPorData(data);
+        // Eventos deste dia (apenas início e fim)
+        const eventosDia = filtrarEventosPorInicioFim(data);
+        
+        // Adiciona eventos ao dia
         eventosDia.forEach(evento => {
             const eventoEl = document.createElement('div');
             eventoEl.className = `evento-dia ${evento.TIPO?.toLowerCase() || 'normal'}`;
-            eventoEl.textContent = evento.EVENTO || 'Evento';
-            eventoEl.title = `${evento.EVENTO}\n${evento.DESCRICAO || ''}`;
-            //eventoEl.addEventListener('click', () => abrirModalEvento(evento));
+            
+            // Verifica se é início ou fim para adicionar indicador visual
+            const dataInicio = new Date(evento.INICIO);
+            const dataFim = new Date(evento.FIM);
+            const dataComparar = new Date(data);
+            dataComparar.setHours(0, 0, 0, 0);
+            dataInicio.setHours(0, 0, 0, 0);
+            dataFim.setHours(0, 0, 0, 0);
+            
+            if (dataComparar.getTime() === dataInicio.getTime() && 
+                dataComparar.getTime() === dataFim.getTime()) {
+                // Evento de um único dia
+                eventoEl.textContent = `📅 ${evento.EVENTO || 'Evento'}`;
+            } else if (dataComparar.getTime() === dataInicio.getTime()) {
+                // Dia de início
+                eventoEl.textContent = `▶ ${evento.EVENTO || 'Evento'}`;
+            } else if (dataComparar.getTime() === dataFim.getTime()) {
+                // Dia de fim
+                eventoEl.textContent = `⏹ ${evento.EVENTO || 'Evento'}`;
+            } else {
+                eventoEl.textContent = evento.EVENTO || 'Evento';
+            }
+            
+            // Adiciona informações de data no tooltip
+            const dataInicioStr = formatarData(evento.INICIO);
+            const dataFimStr = formatarData(evento.FIM);
+            eventoEl.title = `${evento.EVENTO}\nInício: ${dataInicioStr}\nFim: ${dataFimStr}\n${evento.DESCRICAO || ''}`;
+            
             diaEl.appendChild(eventoEl);
         });
         
         calendarioContainer.appendChild(diaEl);
     }
     
-    // Filtra eventos por data
-    function filtrarEventosPorData(data) {
+    // NOVA FUNÇÃO: Filtra eventos apenas para início e fim
+    function filtrarEventosPorInicioFim(data) {
         return eventos.filter(evento => {
-            if (!evento.INICIO) return false;
+            if (!evento.INICIO || !evento.FIM) return false;
             
-            const dataEvento = new Date(evento.INICIO);
-            return dataEvento.getDate() === data.getDate() &&
-                   dataEvento.getMonth() === data.getMonth() &&
-                   dataEvento.getFullYear() === data.getFullYear();
+            // Converte as strings de data para objetos Date
+            const dataInicio = new Date(evento.INICIO);
+            const dataFim = new Date(evento.FIM);
+            
+            // Ajusta as datas para comparar apenas dia/mês/ano
+            const dataComparar = new Date(data);
+            dataComparar.setHours(0, 0, 0, 0);
+            
+            const inicioComparar = new Date(dataInicio);
+            inicioComparar.setHours(0, 0, 0, 0);
+            
+            const fimComparar = new Date(dataFim);
+            fimComparar.setHours(0, 0, 0, 0);
+            
+            // Verifica se a data é exatamente o início OU exatamente o fim
+            return dataComparar.getTime() === inicioComparar.getTime() || 
+                   dataComparar.getTime() === fimComparar.getTime();
         });
     }
     
@@ -129,39 +169,66 @@ document.addEventListener('DOMContentLoaded', function() {
     function renderizarListaEventos() {
         eventosLista.innerHTML = '';
         
+        // Filtra eventos que ocorrem neste mês (considerando início ou fim)
         const eventosMes = eventos.filter(evento => {
-            if (!evento.INICIO) return false;
+            if (!evento.INICIO || !evento.FIM) return false;
             
-            const dataEvento = new Date(evento.INICIO);
-            return dataEvento.getMonth() === dataAtual.getMonth() &&
-                   dataEvento.getFullYear() === dataAtual.getFullYear();
+            const dataInicio = new Date(evento.INICIO);
+            const dataFim = new Date(evento.FIM);
+            
+            // Cria datas para o primeiro e último dia do mês atual
+            const primeiroDiaMes = new Date(dataAtual.getFullYear(), dataAtual.getMonth(), 1);
+            const ultimoDiaMes = new Date(dataAtual.getFullYear(), dataAtual.getMonth() + 1, 0);
+            
+            // Ajusta para comparar apenas datas
+            primeiroDiaMes.setHours(0, 0, 0, 0);
+            ultimoDiaMes.setHours(23, 59, 59, 999);
+            dataInicio.setHours(0, 0, 0, 0);
+            dataFim.setHours(23, 59, 59, 999);
+            
+            // Verifica se INÍCIO ou FIM está dentro do mês atual
+            return (dataInicio >= primeiroDiaMes && dataInicio <= ultimoDiaMes) ||
+                   (dataFim >= primeiroDiaMes && dataFim <= ultimoDiaMes);
         });
         
-        // Ordena por data
-        eventosMes.sort((a, b) => new Date(a.INICIO) - new Date(b.INICIO));
+        // Remove duplicatas e ordena por data de início
+        const eventosUnicos = new Map();
+        eventosMes.forEach(evento => {
+            if (!eventosUnicos.has(evento.ID)) {
+                eventosUnicos.set(evento.ID, evento);
+            }
+        });
         
-        if (eventosMes.length === 0) {
+        // Converte o Map de volta para array e ordena por data de início
+        const eventosListaArray = Array.from(eventosUnicos.values());
+        eventosListaArray.sort((a, b) => new Date(a.INICIO) - new Date(b.INICIO));
+        
+        if (eventosListaArray.length === 0) {
             eventosLista.innerHTML = '<p class="sem-eventos">Nenhum evento este mês.</p>';
             return;
         }
         
-        eventosMes.forEach(evento => {
+        eventosListaArray.forEach(evento => {
             const eventoEl = document.createElement('div');
             eventoEl.className = `evento-item ${evento.TIPO?.toLowerCase() || 'normal'}`;
             
             const dataInicio = formatarData(evento.INICIO);
-            const dataFim = evento.FIM ? formatarData(evento.FIM) : null;
+            const dataFim = formatarData(evento.FIM);
+            
+            // Mostra o período completo
+            const periodo = dataInicio === dataFim 
+                ? dataInicio 
+                : `${dataInicio} até ${dataFim}`;
             
             eventoEl.innerHTML = `
                 <div class="evento-data">
                     <i class="far fa-calendar"></i>
-                    ${dataInicio}${dataFim && dataFim !== dataInicio ? ` até ${dataFim}` : ''}
+                    ${periodo}
                 </div>
                 <div class="evento-titulo">${evento.EVENTO || 'Evento'}</div>
                 <div class="evento-descricao">${evento.DESCRICAO || 'Sem descrição'}</div>
             `;
             
-           // eventoEl.addEventListener('click', () => abrirModalEvento(evento));
             eventosLista.appendChild(eventoEl);
         });
     }
@@ -180,28 +247,6 @@ document.addEventListener('DOMContentLoaded', function() {
             year: 'numeric' 
         }).replace(/^./, c => c.toUpperCase());
     }
-    
-    // Modal de evento
-    /*function abrirModalEvento(evento) {
-        const fotos = converterLinksDrive(evento.FOTOS || '');
-        const primeiraFoto = fotos[0] || '';
-        const dataInicio = formatarData(evento.INICIO);
-        const dataFim = evento.FIM ? formatarData(evento.FIM) : null;
-        
-        let mensagem = `
-            <strong>${evento.EVENTO}</strong><br><br>
-            <strong>Data:</strong> ${dataInicio}${dataFim ? ` até ${dataFim}` : ''}<br>
-            <strong>Tipo:</strong> ${evento.TIPO || 'Normal'}<br>
-            <strong>Descrição:</strong> ${evento.DESCRICAO || 'Sem descrição'}<br>
-            <strong>Local:</strong> ${evento.local || 'Não informado'}
-        `;
-        
-        if (primeiraFoto) {
-            mensagem += `<br><br><img src="${primeiraFoto}" style="max-width:100%;border-radius:5px;">`;
-        }
-        
-        alert(mensagem);
-    }*/
     
     // Navegação entre meses
     prevMonthBtn.addEventListener('click', () => {

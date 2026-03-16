@@ -65,6 +65,48 @@
             <h2>Escola Estadual Mariana Cavalcanti</h2>
             <p>Formando cidadãos conscientes para um futuro melhor.</p>
         </section>
+<!-- ===========================
+ NEWS
+ =============================== -->
+<section class="news">
+    <div class="news-header">
+        <a class="btn-news">Notícias</a>
+        
+        <!-- Controles no canto superior esquerdo -->
+        <div class="news-controls">
+            <button class="news-prev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            
+            <div class="news-counter">
+                <span id="currentSlide">1</span> / <span id="totalSlides">0</span>
+            </div>
+            
+            <button class="news-next">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+    
+    <div class="news-carousel-container">
+        <!-- Carrossel será preenchido pelo JavaScript -->
+        <div class="news-carousel" id="newsCarousel">
+            <!-- Loading... -->
+            <div class="news-slide active">
+                <div class="news-card">
+                    <div class="news-content">
+                        <h2>Carregando notícias...</h2>
+                        <p>Aguarde enquanto carregamos as últimas notícias da escola.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Indicadores -->
+        <div class="news-indicators" id="newsIndicators"></div>
+    </div>
+</section>
+
         <!-- ============================
         SLIDER DE EVENTOS DO MÊS
         =============================== -->
@@ -82,59 +124,8 @@
                 <i class="fas fa-chevron-right"></i>
             </button>
         </section>
-<!-- ===========================
- NEWS
- =============================== -->
-<!-- Substitua sua seção de notícias por este código: -->
-<section class="news">
-    <div class="news-header">
-        <a class="btn-news">Notícias</a>
-        
-        <!-- Controles no canto superior esquerdo -->
-        <div class="news-controls">
-            <button class="news-prev">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            
-            <div class="news-counter">
-                <span id="currentSlide">1</span> / <span id="totalSlides">2</span>
-            </div>
-            
-            <button class="news-next">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-        </div>
-    </div>
-    
-    <div class="news-carousel-container">
-        <!-- Carrossel -->
-        <div class="news-carousel" id="newsCarousel">
-            <!-- Notícia 1 -->
-            <div class="news-slide active">
-                <div class="news-card">
-                    <div class="news-content">
-                        <h2>Volta às Aulas 2026</h2>
-                        <p>
-                            A escola Mariana Cavalcanti está animada para receber seus alunos de volta em 2026! 
-                            Preparamos um ambiente acolhedor e cheio de novidades para tornar o próximo ano letivo
-                            inesquecível. Estamos ansiosos para compartilhar momentos de aprendizado, crescimento e
-                            diversão com todos vocês. Preparem-se para um ano repleto de oportunidades e conquistas!
-                        </p>
-                    </div>
-                    <img src="assets/img/escudo_mara.jpg" alt="Volta às Aulas 2026">
-                </div>
-            </div>
-            
-            <!-- Notícia 2 -->
 
-        </div>
-        
-        <!-- Indicadores -->
-        <div class="news-indicators" id="newsIndicators">
-            <div class="indicator active" data-slide="0"></div>
-            <div class="indicator" data-slide="1"></div>
-        </div>
-    </div>
+
 </section>
         <section class="propPedag">
             <div class="text-content">
@@ -228,5 +219,6 @@
     <script src="assets/js/script.js"></script>
     <script src="assets/js/api.js"></script>
     <script src="assets/js/chatbot.js"></script>
+    <script src="assets/js/news.js"></script>
 </body>
 </html>

@@ -96,7 +96,7 @@ function converterLinksDrive(urlString) {
         
         if (match) {
             // Formato que funciona para imagens públicas do Google Drive
-            const imageUrl = `https://lh3.googleusercontent.com/d/${match[1]}=w800-h500-p`;
+            const imageUrl = `https://lh3.googleusercontent.com/d/${match[1]}`;
             urlsConvertidas.push(imageUrl);
         }
         // Se já for um link direto de imagem, mantém
@@ -110,7 +110,7 @@ function converterLinksDrive(urlString) {
             const idMatch = url.match(/id=([a-zA-Z0-9_-]+)/) || 
                            url.match(/file\/d\/([a-zA-Z0-9_-]+)/);
             if (idMatch) {
-                urlsConvertidas.push(`https://lh3.googleusercontent.com/d/${idMatch[1]}=w800`);
+                urlsConvertidas.push(`https://lh3.googleusercontent.com/d/${idMatch[1]}`);
             }
         }
     });
