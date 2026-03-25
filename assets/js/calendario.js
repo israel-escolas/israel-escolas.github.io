@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { data: '2026-07-27', nome: 'Recesso', tipo: 'recesso', descricao: 'Recesso escolar' },
         { data: '2026-07-28', nome: 'Término do Recesso', tipo: 'recesso', descricao: 'Retorno das aulas' },
         // AGOSTO
-        { data: '2026-08-12', nome: 'Dia do Estudante', tipo: 'comemorativo', descricao: 'Data comemorativa' },
+        { data: '2026-08-12', nome: 'Dia do Estudante', tipo: 'feriado', descricao: 'Data comemorativa' },
         { data: '2026-08-23', nome: 'Dia Letivo Acrescido', tipo: 'letivo_especial', descricao: 'Sábado letivo' },
         // SETEMBRO
         { data: '2026-09-08', nome: 'Independência do Brasil', tipo: 'feriado', descricao: 'Feriado Nacional' },
@@ -56,8 +56,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // OUTUBRO
         { data: '2026-10-04', nome: 'Mártires de Cunhaú e Uruaçu', tipo: 'feriado', descricao: 'Feriado Estadual RN' },
         { data: '2026-10-13', nome: 'Nossa Senhora Aparecida', tipo: 'feriado', descricao: 'Padroeira do Brasil' },
-        { data: '2026-10-16', nome: 'Dia do Professor', tipo: 'ponto_facultativo', descricao: 'Ponto facultativo' },
-        { data: '2026-10-29', nome: 'Dia do Servidor Público', tipo: 'ponto_facultativo', descricao: 'Ponto facultativo' },
+        { data: '2026-10-16', nome: 'Dia do Professor', tipo: 'feriado', descricao: 'Ponto facultativo' },
+        { data: '2026-10-29', nome: 'Dia do Servidor Público', tipo: 'feriado', descricao: 'Ponto facultativo' },
         // NOVEMBRO
         { data: '2026-11-03', nome: 'Finados', tipo: 'feriado', descricao: 'Feriado Nacional' },
         { data: '2026-11-08', nome: 'Dia Letivo Acrescido', tipo: 'letivo_especial', descricao: 'Sábado letivo' },
