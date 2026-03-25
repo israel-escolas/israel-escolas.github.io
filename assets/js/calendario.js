@@ -9,9 +9,86 @@ document.addEventListener('DOMContentLoaded', function() {
     let dataAtual = new Date();
     let eventos = [];
     
-    // Inicialização
+    // Inicialização com feriados
     async function init() {
         await carregarEventos();
+        
+        // ========== ADICIONAR FERIADOS ESCOLARES 2026 ==========
+        const feriadosLista = [
+            // FEVEREIRO
+            { data: '2026-02-11', nome: 'Jornada Pedagógica', tipo: 'jornada', descricao: 'DIREC, Equipe Gestora e Equipe Pedagógica' },
+            { data: '2026-02-12', nome: 'Jornada Pedagógica', tipo: 'jornada', descricao: 'DIREC, Equipe Gestora e Equipe Pedagógica' },
+            { data: '2026-02-16', nome: 'Carnaval', tipo: 'feriado', descricao: 'Ponto facultativo' },
+            { data: '2026-02-17', nome: 'Carnaval', tipo: 'feriado', descricao: 'Ponto facultativo' },
+            { data: '2026-02-18', nome: 'Quarta-feira de Cinzas', tipo: 'ponto_facultativo', descricao: 'Ponto facultativo até 14h' },
+            { data: '2026-02-19', nome: 'Jornada Pedagógica', tipo: 'jornada', descricao: 'Escola' },
+            { data: '2026-02-20', nome: 'Jornada Pedagógica', tipo: 'jornada', descricao: 'Escola' },
+            
+            // ABRIL
+            { data: '2026-04-02', nome: 'Quinta-feira Santa', tipo: 'feriado', descricao: 'Semana Santa' },
+            { data: '2026-04-03', nome: 'Sexta-feira Santa', tipo: 'feriado', descricao: 'Paixão de Cristo' },
+            { data: '2026-04-21', nome: 'Tiradentes', tipo: 'feriado', descricao: 'Feriado Nacional' },
+            { data: '2026-04-25', nome: 'Jornada Pedagógica', tipo: 'jornada', descricao: 'Não considerar dia letivo' },
+            
+            // MAIO
+            { data: '2026-05-01', nome: 'Dia do Trabalho', tipo: 'feriado', descricao: 'Feriado Nacional' },
+            { data: '2026-05-16', nome: 'Dia Letivo Acrescido', tipo: 'letivo_especial', descricao: 'Sábado letivo - compensação' },
+            
+            // JUNHO
+            { data: '2026-06-04', nome: 'Corpus Christi', tipo: 'ponto_facultativo', descricao: 'Ponto facultativo' },
+            
+            // JULHO
+            { data: '2026-07-11', nome: 'Dia Letivo Acrescido', tipo: 'letivo_especial', descricao: 'Sábado letivo - compensação' },
+            { data: '2026-07-13', nome: 'Início do Recesso Escolar', tipo: 'recesso', descricao: 'Período de recesso - sem aulas' },
+            { data: '2026-07-25', nome: 'Jornada Pedagógica', tipo: 'jornada', descricao: 'Não considerar dia letivo' },
+            { data: '2026-07-27', nome: 'Término do Recesso Escolar', tipo: 'recesso', descricao: 'Retorno das aulas' },
+            
+            // AGOSTO
+            { data: '2026-08-11', nome: 'Dia do Estudante', tipo: 'comemorativo', descricao: 'Data comemorativa' },
+            { data: '2026-08-22', nome: 'Dia Letivo Acrescido', tipo: 'letivo_especial', descricao: 'Sábado letivo - compensação' },
+            
+            // SETEMBRO
+            { data: '2026-09-07', nome: 'Independência do Brasil', tipo: 'feriado', descricao: 'Feriado Nacional - 7 de Setembro' },
+            { data: '2026-09-12', nome: 'Dia Letivo Acrescido', tipo: 'letivo_especial', descricao: 'Sábado letivo - compensação' },
+            { data: '2026-09-26', nome: 'Jornada Pedagógica', tipo: 'jornada', descricao: 'Não considerar dia letivo' },
+            
+            // OUTUBRO
+            { data: '2026-10-03', nome: 'Mártires de Cunhaú e Uruaçu', tipo: 'feriado', descricao: 'Feriado Estadual (RN)' },
+            { data: '2026-10-12', nome: 'Nossa Senhora Aparecida', tipo: 'feriado', descricao: 'Padroeira do Brasil' },
+            { data: '2026-10-15', nome: 'Dia do Professor', tipo: 'ponto_facultativo', descricao: 'Ponto facultativo nas escolas' },
+            { data: '2026-10-28', nome: 'Dia do Servidor Público', tipo: 'ponto_facultativo', descricao: 'Ponto facultativo' },
+            
+            // NOVEMBRO
+            { data: '2026-11-02', nome: 'Finados', tipo: 'feriado', descricao: 'Feriado Nacional' },
+            { data: '2026-11-07', nome: 'Dia Letivo Acrescido', tipo: 'letivo_especial', descricao: 'Sábado letivo - compensação' },
+            { data: '2026-11-20', nome: 'Consciência Negra', tipo: 'feriado', descricao: 'Feriado Nacional' },
+            
+            // DEZEMBRO
+            { data: '2026-12-25', nome: 'Natal', tipo: 'feriado', descricao: 'Feriado Nacional' }
+        ];
+        
+        // Adiciona os feriados ao array eventos
+        feriadosLista.forEach(feriado => {
+            const jaExiste = eventos.some(e => {
+                if (!e || !e.INICIO) return false;
+                const dataEvento = new Date(e.INICIO).toISOString().split('T')[0];
+                return dataEvento === feriado.data;
+            });
+            
+            if (!jaExiste) {
+                eventos.push({
+                    ID: `escolar_${feriado.data.replace(/-/g, '_')}`,
+                    EVENTO: feriado.nome,
+                    INICIO: feriado.data,
+                    FIM: feriado.data,
+                    TIPO: feriado.tipo,
+                    DESCRICAO: feriado.descricao
+                });
+            }
+        });
+        
+        console.log(`✅ Feriados escolares 2026 adicionados! Total de eventos: ${eventos.length}`);
+        
         renderizarCalendario();
         renderizarListaEventos();
     }
@@ -140,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function() {
         calendarioContainer.appendChild(diaEl);
     }
     
-    // NOVA FUNÇÃO: Filtra eventos apenas para início e fim
+    // Filtra eventos apenas para início e fim
     function filtrarEventosPorInicioFim(data) {
         return eventos.filter(evento => {
             if (!evento.INICIO || !evento.FIM) return false;
@@ -270,3 +347,55 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inicializa
     init();
 });
+
+// Adiciona estilos CSS para os novos tipos de evento
+(function adicionarEstilosFeriados() {
+    const styleFeriados = document.createElement('style');
+    styleFeriados.textContent = `
+        /* Estilos para jornadas pedagógicas */
+        .evento-dia.jornada, .evento-item.jornada {
+            background: #9b59b6 !important;
+            border-left-color: #9b59b6 !important;
+        }
+        
+        /* Estilos para recesso */
+        .evento-dia.recesso, .evento-item.recesso {
+            background: #3498db !important;
+            border-left-color: #3498db !important;
+        }
+        
+        /* Estilos para dias letivos acrescidos */
+        .evento-dia.letivo_especial, .evento-item.letivo_especial {
+            background: #2ecc71 !important;
+            border-left-color: #2ecc71 !important;
+        }
+        
+        /* Estilos para datas comemorativas */
+        .evento-dia.comemorativo, .evento-item.comemorativo {
+            background: #f1c40f !important;
+            border-left-color: #f1c40f !important;
+            color: #2c3e50 !important;
+        }
+        
+        /* Estilos para pontos facultativos */
+        .evento-dia.ponto_facultativo, .evento-item.ponto_facultativo {
+            background: #f39c12 !important;
+            border-left-color: #f39c12 !important;
+        }
+        
+        /* Destaque para dias com feriado */
+        .dia-calendario:has(.evento-dia.feriado) .numero-dia {
+            color: #e74c3c !important;
+            font-weight: bold;
+        }
+        
+        /* Tooltip mais visível */
+        .evento-dia[title] {
+            cursor: help;
+        }
+    `;
+    document.head.appendChild(styleFeriados);
+    console.log('🎨 Estilos dos feriados adicionados!');
+})();
+
+console.log('📅 Calendário escolar com feriados 2026 carregado!');
