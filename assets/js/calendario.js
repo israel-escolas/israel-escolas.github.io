@@ -9,29 +9,30 @@ document.addEventListener('DOMContentLoaded', function() {
     let dataAtual = new Date();
     let eventos = [];
     
-    // Lista de feriados escolares 2026 - CORRIGIDA
+    // Lista de feriados escolares 2026
     const feriadosEscolares = [
         // FEVEREIRO
+        { data: '2026-02-10', nome: 'Jornada Pedagógica', tipo: 'jornada', descricao: 'DIREC, Equipe Gestora e Equipe Pedagógica' },
         { data: '2026-02-11', nome: 'Jornada Pedagógica', tipo: 'jornada', descricao: 'DIREC, Equipe Gestora e Equipe Pedagógica' },
-        { data: '2026-02-12', nome: 'Jornada Pedagógica', tipo: 'jornada', descricao: 'DIREC, Equipe Gestora e Equipe Pedagógica' },
+        { data: '2026-02-15', nome: 'Carnaval', tipo: 'feriado', descricao: 'Ponto facultativo' },
         { data: '2026-02-16', nome: 'Carnaval', tipo: 'feriado', descricao: 'Ponto facultativo' },
-        { data: '2026-02-17', nome: 'Carnaval', tipo: 'feriado', descricao: 'Ponto facultativo' },
-        { data: '2026-02-18', nome: 'Quarta-feira de Cinzas', tipo: 'ponto_facultativo', descricao: 'Ponto facultativo até 14h' },
+        { data: '2026-02-17', nome: 'Quarta-feira de Cinzas', tipo: 'ponto_facultativo', descricao: 'Ponto facultativo até 14h' },
+        { data: '2026-02-18', nome: 'Jornada Pedagógica', tipo: 'jornada', descricao: 'Escola' },
         { data: '2026-02-19', nome: 'Jornada Pedagógica', tipo: 'jornada', descricao: 'Escola' },
-        { data: '2026-02-20', nome: 'Jornada Pedagógica', tipo: 'jornada', descricao: 'Escola' },
         // ABRIL
-        { data: '2026-04-03', nome: 'Quinta-feira Santa', tipo: 'feriado', descricao: 'Semana Santa' },
-        { data: '2026-04-04', nome: 'Sexta-feira Santa', tipo: 'feriado', descricao: 'Paixão de Cristo' },
-        { data: '2026-04-22', nome: 'Tiradentes', tipo: 'feriado', descricao: 'Feriado Nacional' },
-        { data: '2026-04-26', nome: 'Jornada Pedagógica', tipo: 'jornada', descricao: 'Não considerar dia letivo' },
+        { data: '2026-04-02', nome: 'Quinta-feira Santa', tipo: 'feriado', descricao: 'Semana Santa' },
+        { data: '2026-04-03', nome: 'Sexta-feira Santa', tipo: 'feriado', descricao: 'Paixão de Cristo' },
+        { data: '2026-04-21', nome: 'Tiradentes', tipo: 'feriado', descricao: 'Feriado Nacional' },
+        { data: '2026-04-25', nome: 'Jornada Pedagógica', tipo: 'jornada', descricao: 'Não considerar dia letivo' },
         // MAIO
-        { data: '2026-05-02', nome: 'Dia do Trabalho', tipo: 'feriado', descricao: 'Feriado Nacional' },
-        { data: '2026-05-17', nome: 'Dia Letivo Acrescido', tipo: 'letivo_especial', descricao: 'Sábado letivo' },
+        { data: '2026-05-01', nome: 'Dia do Trabalho', tipo: 'feriado', descricao: 'Feriado Nacional' },
+        { data: '2026-05-16', nome: 'Dia Letivo Acrescido', tipo: 'letivo_especial', descricao: 'Sábado letivo' },
         // JUNHO
-        { data: '2026-06-05', nome: 'Corpus Christi', tipo: 'ponto_facultativo', descricao: 'Ponto facultativo' },
+        { data: '2026-06-04', nome: 'Corpus Christi', tipo: 'ponto_facultativo', descricao: 'Ponto facultativo' },
         // JULHO
-        { data: '2026-07-12', nome: 'Dia Letivo Acrescido', tipo: 'letivo_especial', descricao: 'Sábado letivo' },
-        { data: '2026-07-14', nome: 'Início do Recesso', tipo: 'recesso', descricao: 'Recesso escolar' },
+        { data: '2026-07-11', nome: 'Dia Letivo Acrescido', tipo: 'letivo_especial', descricao: 'Sábado letivo' },
+        { data: '2026-07-13', nome: 'Início do Recesso', tipo: 'recesso', descricao: 'Recesso escolar' },
+        { data: '2026-07-14', nome: 'Recesso', tipo: 'recesso', descricao: 'Recesso escolar' },
         { data: '2026-07-15', nome: 'Recesso', tipo: 'recesso', descricao: 'Recesso escolar' },
         { data: '2026-07-16', nome: 'Recesso', tipo: 'recesso', descricao: 'Recesso escolar' },
         { data: '2026-07-17', nome: 'Recesso', tipo: 'recesso', descricao: 'Recesso escolar' },
@@ -41,30 +42,40 @@ document.addEventListener('DOMContentLoaded', function() {
         { data: '2026-07-21', nome: 'Recesso', tipo: 'recesso', descricao: 'Recesso escolar' },
         { data: '2026-07-22', nome: 'Recesso', tipo: 'recesso', descricao: 'Recesso escolar' },
         { data: '2026-07-23', nome: 'Recesso', tipo: 'recesso', descricao: 'Recesso escolar' },
-        { data: '2026-07-24', nome: 'Recesso', tipo: 'recesso', descricao: 'Recesso escolar' },
-        { data: '2026-07-25', nome: 'Recesso', tipo: 'recesso', descricao: 'Recesso escolar' },      
-        { data: '2026-07-26', nome: 'Jornada Pedagógica', tipo: 'jornada', descricao: 'Não considerar dia letivo' },
-        { data: '2026-07-27', nome: 'Recesso', tipo: 'recesso', descricao: 'Recesso escolar' },
-        { data: '2026-07-28', nome: 'Término do Recesso', tipo: 'recesso', descricao: 'Retorno das aulas' },
+        { data: '2026-07-24', nome: 'Recesso', tipo: 'recesso', descricao: 'Recesso escolar' },      
+        { data: '2026-07-25', nome: 'Jornada Pedagógica', tipo: 'jornada', descricao: 'Não considerar dia letivo' },
+        { data: '2026-07-26', nome: 'Recesso', tipo: 'recesso', descricao: 'Recesso escolar' },
+        { data: '2026-07-27', nome: 'Término do Recesso', tipo: 'recesso', descricao: 'Retorno das aulas' },
         // AGOSTO
-        { data: '2026-08-12', nome: 'Dia do Estudante', tipo: 'feriado', descricao: 'Data comemorativa' },
-        { data: '2026-08-23', nome: 'Dia Letivo Acrescido', tipo: 'letivo_especial', descricao: 'Sábado letivo' },
+        { data: '2026-08-11', nome: 'Dia do Estudante', tipo: 'comemorativo', descricao: 'Data comemorativa' },
+        { data: '2026-08-22', nome: 'Dia Letivo Acrescido', tipo: 'letivo_especial', descricao: 'Sábado letivo' },
         // SETEMBRO
-        { data: '2026-09-08', nome: 'Independência do Brasil', tipo: 'feriado', descricao: 'Feriado Nacional' },
-        { data: '2026-09-13', nome: 'Dia Letivo Acrescido', tipo: 'letivo_especial', descricao: 'Sábado letivo' },
-        { data: '2026-09-27', nome: 'Jornada Pedagógica', tipo: 'jornada', descricao: 'Não considerar dia letivo' },
+        { data: '2026-09-07', nome: 'Independência do Brasil', tipo: 'feriado', descricao: 'Feriado Nacional' },
+        { data: '2026-09-12', nome: 'Dia Letivo Acrescido', tipo: 'letivo_especial', descricao: 'Sábado letivo' },
+        { data: '2026-09-26', nome: 'Jornada Pedagógica', tipo: 'jornada', descricao: 'Não considerar dia letivo' },
         // OUTUBRO
-        { data: '2026-10-04', nome: 'Mártires de Cunhaú e Uruaçu', tipo: 'feriado', descricao: 'Feriado Estadual RN' },
-        { data: '2026-10-13', nome: 'Nossa Senhora Aparecida', tipo: 'feriado', descricao: 'Padroeira do Brasil' },
-        { data: '2026-10-16', nome: 'Dia do Professor', tipo: 'feriado', descricao: 'Ponto facultativo' },
-        { data: '2026-10-29', nome: 'Dia do Servidor Público', tipo: 'feriado', descricao: 'Ponto facultativo' },
+        { data: '2026-10-03', nome: 'Mártires de Cunhaú e Uruaçu', tipo: 'feriado', descricao: 'Feriado Estadual RN' },
+        { data: '2026-10-12', nome: 'Nossa Senhora Aparecida', tipo: 'feriado', descricao: 'Padroeira do Brasil' },
+        { data: '2026-10-16', nome: 'Dia do Professor', tipo: 'comemorativo', descricao: 'Ponto facultativo' },
+        { data: '2026-10-28', nome: 'Dia do Servidor Público', tipo: 'comemorativo', descricao: 'Ponto facultativo' },
         // NOVEMBRO
-        { data: '2026-11-03', nome: 'Finados', tipo: 'feriado', descricao: 'Feriado Nacional' },
-        { data: '2026-11-08', nome: 'Dia Letivo Acrescido', tipo: 'letivo_especial', descricao: 'Sábado letivo' },
-        { data: '2026-11-21', nome: 'Consciência Negra', tipo: 'feriado', descricao: 'Feriado Nacional' },
+        { data: '2026-11-02', nome: 'Finados', tipo: 'feriado', descricao: 'Feriado Nacional' },
+        { data: '2026-11-07', nome: 'Dia Letivo Acrescido', tipo: 'letivo_especial', descricao: 'Sábado letivo' },
+        { data: '2026-11-20', nome: 'Consciência Negra', tipo: 'feriado', descricao: 'Feriado Nacional' },
         // DEZEMBRO
-        { data: '2026-12-26', nome: 'Natal', tipo: 'feriado', descricao: 'Feriado Nacional' }
+        { data: '2026-12-25', nome: 'Natal', tipo: 'feriado', descricao: 'Feriado Nacional' }
     ];
+    
+    // Função auxiliar para criar data sem horário (apenas YYYY-MM-DD)
+    function criarDataSemHorario(dataString) {
+        if (!dataString) return null;
+        const partes = dataString.split('-');
+        if (partes.length === 3) {
+            // Cria data com ano, mês, dia (sem horário, usando fuso local)
+            return new Date(parseInt(partes[0]), parseInt(partes[1]) - 1, parseInt(partes[2]));
+        }
+        return null;
+    }
     
     // Inicialização
     async function init() {
@@ -98,12 +109,39 @@ document.addEventListener('DOMContentLoaded', function() {
     // Carrega eventos da planilha
     async function carregarEventos() {
         try {
-            eventos = await fetchData('EVENTOS', 'EVENTOS');
-            console.log('Eventos carregados:', eventos);
+            // Verifica se a função fetchData existe globalmente
+            if (typeof window.fetchData === 'function') {
+                eventos = await window.fetchData('EVENTOS', 'EVENTOS');
+                console.log('Eventos carregados:', eventos);
+            } else {
+                console.log('⚠️ Função fetchData não encontrada, usando apenas feriados escolares');
+                eventos = [];
+            }
         } catch (error) {
             console.error('Erro ao carregar eventos:', error);
             eventos = [];
         }
+    }
+    
+    // Filtra eventos apenas para início e fim (CORRIGIDO)
+    function filtrarEventosPorInicioFim(data) {
+        const dataComparar = new Date(data.getFullYear(), data.getMonth(), data.getDate());
+        dataComparar.setHours(0, 0, 0, 0);
+        
+        return eventos.filter(evento => {
+            if (!evento.INICIO || !evento.FIM) return false;
+            
+            const dataInicio = criarDataSemHorario(evento.INICIO);
+            const dataFim = criarDataSemHorario(evento.FIM);
+            
+            if (!dataInicio || !dataFim) return false;
+            
+            dataInicio.setHours(0, 0, 0, 0);
+            dataFim.setHours(0, 0, 0, 0);
+            
+            return dataComparar.getTime() === dataInicio.getTime() || 
+                   dataComparar.getTime() === dataFim.getTime();
+        });
     }
     
     // Renderiza o calendário
@@ -155,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Cria um dia no calendário
+    // Cria um dia no calendário (CORRIGIDO)
     function criarDiaCalendario(data, isOutroMes) {
         const diaEl = document.createElement('div');
         diaEl.className = 'dia-calendario';
@@ -164,11 +202,12 @@ document.addEventListener('DOMContentLoaded', function() {
             diaEl.classList.add('outro-mes');
         }
         
-        // Verifica se é hoje
+        // Verifica se é hoje (comparando data sem horário)
         const hoje = new Date();
-        if (data.getDate() === hoje.getDate() && 
-            data.getMonth() === hoje.getMonth() && 
-            data.getFullYear() === hoje.getFullYear()) {
+        const hojeSemHorario = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate());
+        const dataSemHorario = new Date(data.getFullYear(), data.getMonth(), data.getDate());
+        
+        if (dataSemHorario.getTime() === hojeSemHorario.getTime()) {
             diaEl.classList.add('hoje');
         }
         
@@ -187,20 +226,25 @@ document.addEventListener('DOMContentLoaded', function() {
             eventoEl.className = `evento-dia ${evento.TIPO?.toLowerCase() || 'normal'}`;
             
             // Verifica se é início ou fim para adicionar indicador visual
-            const dataInicio = new Date(evento.INICIO);
-            const dataFim = new Date(evento.FIM);
-            const dataComparar = new Date(data);
+            const dataInicio = criarDataSemHorario(evento.INICIO);
+            const dataFim = criarDataSemHorario(evento.FIM);
+            const dataComparar = new Date(data.getFullYear(), data.getMonth(), data.getDate());
             dataComparar.setHours(0, 0, 0, 0);
-            dataInicio.setHours(0, 0, 0, 0);
-            dataFim.setHours(0, 0, 0, 0);
             
-            if (dataComparar.getTime() === dataInicio.getTime() && 
-                dataComparar.getTime() === dataFim.getTime()) {
-                eventoEl.textContent = `📅 ${evento.EVENTO || 'Evento'}`;
-            } else if (dataComparar.getTime() === dataInicio.getTime()) {
-                eventoEl.textContent = `▶ ${evento.EVENTO || 'Evento'}`;
-            } else if (dataComparar.getTime() === dataFim.getTime()) {
-                eventoEl.textContent = `⏹ ${evento.EVENTO || 'Evento'}`;
+            if (dataInicio && dataFim) {
+                dataInicio.setHours(0, 0, 0, 0);
+                dataFim.setHours(0, 0, 0, 0);
+                
+                if (dataComparar.getTime() === dataInicio.getTime() && 
+                    dataComparar.getTime() === dataFim.getTime()) {
+                    eventoEl.textContent = `📅 ${evento.EVENTO || 'Evento'}`;
+                } else if (dataComparar.getTime() === dataInicio.getTime()) {
+                    eventoEl.textContent = `▶ ${evento.EVENTO || 'Evento'}`;
+                } else if (dataComparar.getTime() === dataFim.getTime()) {
+                    eventoEl.textContent = `⏹ ${evento.EVENTO || 'Evento'}`;
+                } else {
+                    eventoEl.textContent = evento.EVENTO || 'Evento';
+                }
             } else {
                 eventoEl.textContent = evento.EVENTO || 'Evento';
             }
@@ -216,41 +260,23 @@ document.addEventListener('DOMContentLoaded', function() {
         calendarioContainer.appendChild(diaEl);
     }
     
-    // Filtra eventos apenas para início e fim
-    function filtrarEventosPorInicioFim(data) {
-        return eventos.filter(evento => {
-            if (!evento.INICIO || !evento.FIM) return false;
-            
-            const dataInicio = new Date(evento.INICIO);
-            const dataFim = new Date(evento.FIM);
-            const dataComparar = new Date(data);
-            dataComparar.setHours(0, 0, 0, 0);
-            
-            const inicioComparar = new Date(dataInicio);
-            inicioComparar.setHours(0, 0, 0, 0);
-            
-            const fimComparar = new Date(dataFim);
-            fimComparar.setHours(0, 0, 0, 0);
-            
-            return dataComparar.getTime() === inicioComparar.getTime() || 
-                   dataComparar.getTime() === fimComparar.getTime();
-        });
-    }
-    
-    // Renderiza lista de eventos do mês
+    // Renderiza lista de eventos do mês (CORRIGIDO)
     function renderizarListaEventos() {
         eventosLista.innerHTML = '';
+        
+        const primeiroDiaMes = new Date(dataAtual.getFullYear(), dataAtual.getMonth(), 1);
+        const ultimoDiaMes = new Date(dataAtual.getFullYear(), dataAtual.getMonth() + 1, 0);
+        primeiroDiaMes.setHours(0, 0, 0, 0);
+        ultimoDiaMes.setHours(23, 59, 59, 999);
         
         const eventosMes = eventos.filter(evento => {
             if (!evento.INICIO || !evento.FIM) return false;
             
-            const dataInicio = new Date(evento.INICIO);
-            const dataFim = new Date(evento.FIM);
-            const primeiroDiaMes = new Date(dataAtual.getFullYear(), dataAtual.getMonth(), 1);
-            const ultimoDiaMes = new Date(dataAtual.getFullYear(), dataAtual.getMonth() + 1, 0);
+            const dataInicio = criarDataSemHorario(evento.INICIO);
+            const dataFim = criarDataSemHorario(evento.FIM);
             
-            primeiroDiaMes.setHours(0, 0, 0, 0);
-            ultimoDiaMes.setHours(23, 59, 59, 999);
+            if (!dataInicio || !dataFim) return false;
+            
             dataInicio.setHours(0, 0, 0, 0);
             dataFim.setHours(23, 59, 59, 999);
             
@@ -266,7 +292,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         const eventosListaArray = Array.from(eventosUnicos.values());
-        eventosListaArray.sort((a, b) => new Date(a.INICIO) - new Date(b.INICIO));
+        eventosListaArray.sort((a, b) => {
+            const dataA = criarDataSemHorario(a.INICIO);
+            const dataB = criarDataSemHorario(b.INICIO);
+            return dataA - dataB;
+        });
         
         if (eventosListaArray.length === 0) {
             eventosLista.innerHTML = '<p class="sem-eventos">Nenhum evento este mês.</p>';
@@ -294,7 +324,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Formata data para exibição - CORRIGIDA (sem problema de fuso)
+    // Formata data para exibição
     function formatarData(dataString) {
         if (!dataString) return '';
         const partes = dataString.split('-');
@@ -359,6 +389,10 @@ document.addEventListener('DOMContentLoaded', function() {
         .evento-dia.ponto_facultativo, .evento-item.ponto_facultativo {
             background: #f39c12 !important;
             border-left-color: #f39c12 !important;
+        }
+        .evento-dia.feriado, .evento-item.feriado {
+            background: #e74c3c !important;
+            border-left-color: #e74c3c !important;
         }
         .dia-calendario:has(.evento-dia.feriado) .numero-dia {
             color: #e74c3c !important;
