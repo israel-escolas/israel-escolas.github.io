@@ -1,4 +1,4 @@
-// news.js - Gerenciador de Notícias
+// news.js - Gerenciador de Notícias com fallback combinado
 class NewsManager {
     constructor() {
         this.noticias = [];
@@ -9,6 +9,10 @@ class NewsManager {
         this.totalSlidesSpan = document.getElementById('totalSlides');
         this.autoPlayInterval = null;
         this.isTransitioning = false;
+        
+        // Configuração do fallback
+        this.MIN_NOTICIAS = 4; // Mínimo de notícias desejado
+        this.usouFallback = false; // Flag para saber se usou fallback
         
         // Verificar se elementos existem antes de inicializar
         if (!this.carousel) {
@@ -29,45 +33,64 @@ class NewsManager {
         try {
             // Tenta carregar do arquivo JSON primeiro
             const response = await fetch('assets/txt/news.json');
+            let noticiasOriginais = [];
             
             if (response.ok) {
                 const data = await response.json();
                 
                 if (data.noticias && Array.isArray(data.noticias)) {
-                    this.noticias = data.noticias;
-                    console.log(`✅ ${this.noticias.length} notícias carregadas do JSON`);
+                    noticiasOriginais = data.noticias;
+                    console.log(`✅ ${noticiasOriginais.length} notícias carregadas do JSON`);
                 }
             }
             
-            // SE NÃO HOUVER NOTÍCIAS, BUSCAR FOTOS DA ESCOLA COMO FALLBACK
-            if (this.noticias.length === 0) {
-                console.log("📸 Nenhuma notícia encontrada, buscando fotos da escola como fallback...");
+            // VERIFICA SE PRECISA DE FALLBACK (menos que o mínimo)
+            if (noticiasOriginais.length < this.MIN_NOTICIAS) {
+                console.log(`📸 Apenas ${noticiasOriginais.length} notícias encontradas. Buscando fotos da escola para completar...`);
                 
-                // Verifica se a função global existe
+                // Busca fotos da escola como fallback
                 if (typeof window.buscarFotosEscola === 'function') {
                     const fotosEscola = await window.buscarFotosEscola();
                     
                     if (fotosEscola && fotosEscola.length > 0) {
-                        console.log(`✅ Encontradas ${fotosEscola.length} fotos da escola para usar como notícias`);
+                        console.log(`✅ Encontradas ${fotosEscola.length} fotos da escola`);
                         
-                        // Converter fotos em formato de notícia
-                        this.noticias = fotosEscola.map((foto, index) => ({
-                            id: index + 1,
-                            titulo: "Escola Estadual Mariana Cavalcanti",
-                            conteudo: foto.DESCRICAO || "Conheça as instalações da nossa escola",
+                        // Calcula quantas fotos precisa para atingir o mínimo
+                        const faltam = this.MIN_NOTICIAS - noticiasOriginais.length;
+                        const fotosNecessarias = Math.min(faltam, fotosEscola.length);
+                        
+                        // Converte as fotos necessárias em formato de notícia
+                        const fotosComoNoticias = fotosEscola.slice(0, fotosNecessarias).map((foto, index) => ({
+                            id: `fallback_${index + 1}`,
+                            titulo: "📸 Conheça Nossa Escola",
+                            conteudo: foto.DESCRICAO || "Venha conhecer as instalações da Escola Estadual Mariana Cavalcanti",
                             imagem: foto.LINK || "assets/img/Escola_Entrada.jpg",
                             data: foto.DATA || new Date().toISOString().split('T')[0],
-                            legenda: foto.LEGENDA || "Foto da estrutura escolar"
+                            legenda: foto.LEGENDA || "Foto da estrutura escolar",
+                            isFallback: true // Marca como conteúdo de fallback
                         }));
+                        
+                        // COMBINA notícias originais + fotos de fallback
+                        this.noticias = [...noticiasOriginais, ...fotosComoNoticias];
+                        this.usouFallback = fotosNecessarias > 0;
+                        
+                        console.log(`🎯 Total: ${this.noticias.length} itens (${noticiasOriginais.length} notícias + ${fotosNecessarias} fotos complementares)`);
                     } else {
-                        console.log('⚠️ Nenhuma foto encontrada na planilha');
+                        // Não encontrou fotos, usa só as notícias que tem
+                        this.noticias = noticiasOriginais;
+                        console.log(`⚠️ Nenhuma foto encontrada, usando apenas ${this.noticias.length} notícias`);
                     }
                 } else {
                     console.warn('⚠️ Função buscarFotosEscola não está disponível');
+                    this.noticias = noticiasOriginais;
                 }
+            } else {
+                // Tem notícias suficientes, usa só elas
+                this.noticias = noticiasOriginais;
+                console.log(`✅ ${this.noticias.length} notícias suficientes, sem necessidade de fallback`);
             }
             
-            // Renderizar (mesmo que seja com fotos ou vazio)
+            // Renderizar (mesmo que seja vazio)
             this.renderNews();
             
         } catch (error) {
@@ -82,34 +105,13 @@ class NewsManager {
         // Limpar carrossel existente
         this.carousel.innerHTML = '';
         
-        // Se ainda não houver notícias (nem fotos)
+        // Se não houver absolutamente nada
         if (this.noticias.length === 0) {
-            this.carousel.innerHTML = `
-                <div class="news-slide active">
-                    <div class="news-card">
-                        <div class="news-content">
-                            <h2>📰 Nenhuma notícia disponível</h2>
-                            <p>Em breve teremos novidades para compartilhar com você!</p>
-                            <p style="font-size: 0.9rem; color: #666; margin-top: 15px;">
-                                <i class="fas fa-school"></i> Escola Estadual Mariana Cavalcanti
-                            </p>
-                        </div>
-                        <img src="assets/img/Escola_Entrada.jpg" 
-                             alt="Escola Mariana Cavalcanti" 
-                             onerror="this.onerror=null; this.src='https://via.placeholder.com/800x400?text=Escola+Mariana+Cavalcanti'"
-                             loading="lazy">
-                    </div>
-                </div>
-            `;
-            
-            // Atualizar indicadores vazios
-            this.updateIndicators(1);
-            if (this.totalSlidesSpan) this.totalSlidesSpan.textContent = '1';
-            if (this.currentSlideSpan) this.currentSlideSpan.textContent = '1';
+            this.renderEmptyState();
             return;
         }
         
-        // Renderizar cada notícia (ou foto convertida)
+        // Renderizar cada notícia (combinadas)
         this.noticias.forEach((noticia, index) => {
             const slide = document.createElement('div');
             slide.className = `news-slide ${index === 0 ? 'active' : ''}`;
@@ -133,9 +135,13 @@ class NewsManager {
             // Formatar data
             const dataFormatada = this.formatDate(noticia.data);
             
+            // Adiciona classe especial se for fallback
+            const fallbackClass = noticia.isFallback ? 'news-fallback' : '';
+            
             slide.innerHTML = `
-                <div class="news-card">
+                <div class="news-card ${fallbackClass}">
                     <div class="news-content">
+                        ${noticia.isFallback ? '<span class="fallback-badge">📸 Conheça a Escola</span>' : ''}
                         <h2>${this.escapeHtml(noticia.titulo)}</h2>
                         <p>${this.escapeHtml(noticia.conteudo)}</p>
                         
@@ -153,10 +159,17 @@ class NewsManager {
                             ` : ''}
                         </div>
                         
-                    ${noticia.id ? `
-                            <a href="informacoes.html?id=${noticia.id}#estrutura" class="view-details-btn" style="margin-top: 15px;">
-                                Leia mais <i class="fas fa-arrow-right"></i>
-                            </a>
+                    ${!noticia.isFallback && (noticia.link || noticia.id) ? `
+                        <a href="${noticia.link ? noticia.link : `informacoes.html?id=${noticia.id}#estrutura`}" 
+                        class="view-details-btn" 
+                        style="margin-top: 15px;"
+                        ${noticia.link ? 'target="_blank" rel="noopener noreferrer"' : ''}>
+                            ${noticia.link ? 'Saiba mais' : 'Leia mais'} <i class="fas ${noticia.link ? 'fa-external-link-alt' : 'fa-arrow-right'}"></i>
+                        </a>
+                    ` : noticia.isFallback ? `
+                        <a href="informacoes.html?id=${noticia.id}#estrutura"  class="view-details-btn" style="margin-top: 15px;">
+                            Ver galeria completa <i class="fas fa-images"></i>
+                        </a>
                     ` : ''}
                     </div>
                     <div class="news-image">
@@ -171,10 +184,66 @@ class NewsManager {
             this.carousel.appendChild(slide);
         });
 
+        // Adicionar aviso se usou fallback
+        if (this.usouFallback) {
+            this.addFallbackNotice();
+        }
+
         // Atualizar indicadores
         this.updateIndicators(this.noticias.length);
         if (this.totalSlidesSpan) this.totalSlidesSpan.textContent = this.noticias.length;
         if (this.currentSlideSpan) this.currentSlideSpan.textContent = '1';
+    }
+
+    renderEmptyState() {
+        if (!this.carousel) return;
+        
+        this.carousel.innerHTML = `
+            <div class="news-slide active">
+                <div class="news-card">
+                    <div class="news-content">
+                        <h2>📰 Nenhuma notícia disponível</h2>
+                        <p>Em breve teremos novidades para compartilhar com você!</p>
+                        <p style="font-size: 0.9rem; color: #666; margin-top: 15px;">
+                            <i class="fas fa-school"></i> Escola Estadual Mariana Cavalcanti
+                        </p>
+                    </div>
+                    <img src="assets/img/Escola_Entrada.jpg" 
+                         alt="Escola Mariana Cavalcanti" 
+                         onerror="this.onerror=null; this.src='https://via.placeholder.com/800x400?text=Escola+Mariana+Cavalcanti'"
+                         loading="lazy">
+                </div>
+            </div>
+        `;
+        
+        // Atualizar indicadores vazios
+        this.updateIndicators(1);
+        if (this.totalSlidesSpan) this.totalSlidesSpan.textContent = '1';
+        if (this.currentSlideSpan) this.currentSlideSpan.textContent = '1';
+    }
+
+    addFallbackNotice() {
+        // Adiciona um aviso sutil no carrossel indicando que há conteúdo complementar
+        const notice = document.createElement('div');
+        notice.className = 'fallback-notice';
+        notice.innerHTML = `
+            <div class="fallback-notice-content">
+                <i class="fas fa-info-circle"></i>
+                <span>Complementamos com fotos da escola para melhor experiência</span>
+            </div>
+        `;
+        
+        // Insere após o carrossel
+        const container = document.querySelector('.news-carousel-container');
+        if (container && !document.querySelector('.fallback-notice')) {
+            container.appendChild(notice);
+            
+            // Remove após 5 segundos
+            setTimeout(() => {
+                notice.style.opacity = '0';
+                setTimeout(() => notice.remove(), 500);
+            }, 5000);
+        }
     }
 
     updateIndicators(totalSlides) {
@@ -186,9 +255,16 @@ class NewsManager {
         for (let i = 0; i < numSlides; i++) {
             const indicator = document.createElement('div');
             indicator.className = `indicator ${i === this.currentSlide ? 'active' : ''}`;
-            indicator.dataset.slide = i;
-            indicator.setAttribute('aria-label', `Ir para slide ${i + 1}`);
             
+            // Adiciona indicador visual se for slide de fallback
+            if (this.noticias[i] && this.noticias[i].isFallback) {
+                indicator.classList.add('indicator-fallback');
+                indicator.setAttribute('aria-label', `Slide ${i + 1} - Conteúdo da galeria da escola`);
+            } else {
+                indicator.setAttribute('aria-label', `Ir para slide ${i + 1}`);
+            }
+            
+            indicator.dataset.slide = i;
             indicator.addEventListener('click', () => this.goToSlide(i));
             
             this.indicators.appendChild(indicator);
@@ -358,6 +434,13 @@ class NewsManager {
                 this.handleSwipe();
             }, { passive: true });
         }
+        
+        // Salvar variáveis para o swipe
+        this.touchStartX = 0;
+        this.touchEndX = 0;
+        
+        // Bind dos métodos de swipe
+        this.handleSwipe = this.handleSwipe.bind(this);
     }
 
     handleSwipe() {
@@ -365,7 +448,7 @@ class NewsManager {
         if (!slides.length) return;
         
         const swipeThreshold = 50; // pixels mínimos para considerar swipe
-        const diffX = touchEndX - touchStartX;
+        const diffX = this.touchEndX - this.touchStartX;
         
         if (Math.abs(diffX) > swipeThreshold) {
             if (diffX > 0) {
@@ -436,7 +519,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Verificar se já existe uma instância
     if (!window.newsManager) {
         window.newsManager = new NewsManager();
-        console.log('🚀 NewsManager inicializado com fallback para fotos da escola');
+        console.log('🚀 NewsManager inicializado com fallback combinado');
     }
 });
 
@@ -447,5 +530,7 @@ if (window.location.hostname === 'localhost' || window.location.hostname.include
         console.log('- Notícias:', window.newsManager?.noticias);
         console.log('- Slide atual:', window.newsManager?.currentSlide);
         console.log('- AutoPlay:', window.newsManager?.autoPlayInterval ? 'Ativo' : 'Inativo');
+        console.log('- Usou fallback:', window.newsManager?.usouFallback);
+        console.log('- Mínimo configurado:', window.newsManager?.MIN_NOTICIAS);
     };
 }

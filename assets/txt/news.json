@@ -1,5 +1,13 @@
 {
     "noticias": [
-
+        {
+            "id": 1,
+            "titulo": "Programa Jovem Senador 2026: inscrições abertas para estudantes da rede pública",
+            "conteudo": "Estudantes do ensino médio das escolas públicas estaduais e do Distrito Federal podem participar do Programa Jovem Senador. A iniciativa proporciona conhecimento sobre a estrutura e funcionamento do Poder Legislativo no Brasil, com a oportunidade de vivenciar uma jornada parlamentar em Brasília.",
+            "imagem": "https://drive.google.com/file/d/11A6wMnI6r0LLLgqIDJbDGeWyedSRqE-I/view?usp=sharing",
+            "data": "2026-03-19",
+            "legenda": "Jovem Senador 2026",
+            "link": "https://www12.senado.leg.br/jovemsenador"
+        }
     ]
 }
