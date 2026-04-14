@@ -208,31 +208,22 @@ document.addEventListener('DOMContentLoaded', function() {
         createButtonContainer(buttons);
     }
 
-    function showProximosEventos() {
-        currentFlow = 'proximosEventos';
-        flowHistory.push(currentFlow);
-        
-        addBotMessage(`<strong>📅 Próximos Eventos</strong><br><br>
-            🎉 <strong>Festa da Primavera</strong><br>
-            📅 20 de Março | 14h às 17h<br>
-            📍 Pátio da escola<br><br>
-            
-            👨‍👩‍👧 <strong>Reunião de Pais</strong><br>
-            📅 25 de Março | 18h às 19h30<br>
-            📍 Auditório<br><br>
-            
-            🔬 <strong>Feira de Ciências</strong><br>
-            📅 30 de Março | 8h às 12h<br>
-            📍 Quadra coberta`);
-        
-        const buttons = [
-            { text: '🗓️ Ver calendário', action: 'openCalendar' },
-            { text: '✅ Confirmar presença', action: 'contato' },
-            { text: '🔙 Voltar', action: 'back' },
-            { text: '🏠 Menu principal', action: 'menu' }
-        ];
-        createButtonContainer(buttons);
-    }
+function showProximosEventos() {
+    currentFlow = 'proximosEventos';
+    flowHistory.push(currentFlow);
+    
+    addBotMessage(`<strong>📅 Próximos Eventos</strong><br><br>
+        Confira nossa agenda completa de eventos e atividades escolares.`);
+    
+    const buttons = [
+        { text: '🎉 Ver todos os eventos', action: 'openEventsPage', specialClass: 'chatbot-button-action' },
+        { text: '🗓️ Ver calendário', action: 'openCalendar' },
+        { text: '✅ Confirmar presença', action: 'contato' },
+        { text: '🔙 Voltar', action: 'back' },
+        { text: '🏠 Menu principal', action: 'menu' }
+    ];
+    createButtonContainer(buttons);
+}
 
     function showParticiparEventos() {
         currentFlow = 'participarEventos';
@@ -360,12 +351,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         addBotMessage(`<strong>🚌 Transporte Escolar</strong><br><br>
             Opções:<br>
-            1. Ônibus municipal<br>
-            2. Van particular<br>
-            3. Carona solidária<br>
-            4. A pé<br><br>
-            ⚠️ A escola não fornece transporte.<br><br>
-            💡 Combine caronas com outros pais.`);
+            1. Ônibus municipal<br><br>
+            ⚠️ A escola não fornece transporte.<br><br>`);
         
         showBackButtons();
     }
@@ -441,13 +428,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         addBotMessage(`<strong>🅿️ Estacionamento</strong><br><br>
             Opções:<br>
-            1. Frente da escola (15 min)<br>
-            2. Rua lateral (público)<br>
-            3. Praça Central (100m)<br><br>
-            Recomendações:<br>
-            • Chegue com antecedência<br>
-            • Respeite vagas PCD<br><br>
-            ⚠️ Não temos estacionamento privativo.`);
+            1. Frente da escola <br>
+            2. Interno para motos<br>
+            3. Lateral sem pavimento<br><br>`);
         
         showBackButtons();
     }
@@ -613,13 +596,11 @@ document.addEventListener('DOMContentLoaded', function() {
         
         addBotMessage(`<strong>👕 Uniforme Escolar</strong><br><br>
             Obrigatório:<br>
-            • Camiseta branca com logo<br>
-            • Calça/bermuda jeans<br>
-            • Tênis<br><br>
+            • Fardamento escolar<br>
+            • Calça jeans ou análoga<br>
             Onde comprar:<br>
-            🏫 Secretaria da escola<br>
-            💰 R$ 45,00 (kit completo)<br><br>
-            ⚠️ Identifique com nome.`);
+            🏫 Falar com a Secretaria da escola<br>
+            `);
         
         showBackButtons();
     }
@@ -630,9 +611,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         addBotMessage(`<strong>🍎 Merenda Escolar</strong><br><br>
             Oferecemos:<br>
-            • Café da manhã (manhã)<br>
-            • Almoço (tarde)<br>
-            • Lanches nutritivos<br><br>
+            • Lanche (manhã e Tarde)<br>
+            • Almoço (tarde - contra    turno)<br>
             Cardápio:<br>
             • Frutas e verduras<br>
             • Proteínas balanceadas<br><br>
@@ -648,14 +628,12 @@ document.addEventListener('DOMContentLoaded', function() {
         addBotMessage(`<strong>📚 Material Escolar</strong><br><br>
             Fornecido pela escola:<br>
             • Livros didáticos<br>
-            • Cadernos básicos<br>
+            • Lanche<br>
             • Material coletivo<br><br>
-            Do aluno:<br>
-            • Mochila<br>
-            • Itens pessoais<br>
-            • Uniforme<br>
-            • Lanche (opcional)<br><br>
-            📋 Lista completa na secretaria.`);
+            Responsabilidade do aluno:<br>
+            • Manter os materiais em bom estado<br>
+            • Devolver os materiais quando solicitado<br>
+            • Fardamento<br>`);
         
         showBackButtons();
     }
@@ -667,8 +645,7 @@ document.addEventListener('DOMContentLoaded', function() {
         addBotMessage(`<strong>🏥 Atendimento Médico</strong><br><br>
             Na escola:<br>
             • Primeiros socorros<br>
-            • Acompanhamento<br>
-            • Encaminhamentos<br><br>
+            • Acompanhamento<br><br>
             Emergências:<br>
             1. SAMU: 192<br>
             2. Hospital mais próximo<br>
@@ -692,7 +669,7 @@ document.addEventListener('DOMContentLoaded', function() {
             • Celular em sala<br>
             • Agressão<br>
             • Saídas não autorizadas<br><br>
-            📖 Regimento completo disponível.`);
+            📖 Regimento completo disponível na secretaria.`);
         
         showBackButtons();
     }
@@ -850,6 +827,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const externalActions = {
         'openCalendar': () => window.location.href = 'calendario.html',
         'openGaleria': () => window.location.href = 'eventos.html#galeria',
+        'openEventsPage': () => window.location.href = 'eventos.html', 
         'callSchool': () => window.location.href = `tel:${escola.telefone.replace(/\D/g, '')}`,
         'sendEmail': () => window.location.href = `mailto:${escola.email}?subject=Contato via Site - ${escola.nome}`,
         'openMaps': () => {
