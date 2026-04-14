@@ -531,3 +531,282 @@ document.addEventListener('click', function(e) {
         }
     }
 });
+// ===========================
+// TIRINHA DE COMUNICADOS - INTEGRAÇÃO COM API
+// ===========================
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Elementos da tirinha
+    const tirinhaSection = document.querySelector('.comunicados-tirinha');
+    const tirinhaScroll = document.querySelector('.tirinha-scroll');
+    
+    if (!tirinhaSection || !tirinhaScroll) return;
+    
+    let todosComunicados = [];
+    
+    // Inicialização
+    async function initTirinha() {
+        // Garante que começa escondida
+        tirinhaSection.style.display = 'none';
+        await carregarComunicadosTirinha();
+    }
+    
+    // Carrega comunicados da planilha
+    async function carregarComunicadosTirinha() {
+        try {
+            // Usa a mesma função fetchData do api.js
+            todosComunicados = await fetchData('COMUNICADOS', 'COMUNICADOS');
+            console.log('Comunicados carregados para tirinha:', todosComunicados);
+            
+            if (todosComunicados.length === 0) {
+                return; // Já está escondida
+            }
+            
+            exibirComunicadosTirinha(todosComunicados);
+        } catch (error) {
+            console.error('Erro ao carregar comunicados:', error);
+            // Mantém escondida em caso de erro
+        }
+    }
+    
+    // Exibe comunicados na tirinha
+    function exibirComunicadosTirinha(comunicados) {
+        // Filtra apenas comunicados ativos (não expirados)
+        const hoje = new Date();
+        const comunicadosAtivos = comunicados.filter(comunicado => {
+            // Se não tem validade, considera ativo
+            if (!comunicado.VALIDADE || comunicado.VALIDADE.trim() === '') {
+                return true;
+            }
+            
+            const validade = converterData(comunicado.VALIDADE);
+            return !validade || validade >= hoje;
+        });
+        
+        // Se não há comunicados ativos, mantém escondida
+        if (comunicadosAtivos.length === 0) {
+            return;
+        }
+        
+        // Ordena comunicados: urgentes primeiro, depois por data (mais recentes)
+        const comunicadosOrdenados = ordenarParaTirinha(comunicadosAtivos);
+        
+        // Pega os primeiros 5 comunicados para não sobrecarregar a tirinha
+        const comunicadosExibicao = comunicadosOrdenados.slice(0, 5);
+        
+        // Limpa e preenche a tirinha
+        tirinhaScroll.innerHTML = '';
+        
+        comunicadosExibicao.forEach(comunicado => {
+            const item = criarItemTirinha(comunicado);
+            tirinhaScroll.appendChild(item);
+        });
+        
+        // SÓ AGORA mostra a seção
+        tirinhaSection.style.display = 'block';
+        
+        // Inicia rolagem automática
+        iniciarRolagemAutomatica();
+    }
+    
+    // Ordena comunicados para a tirinha
+    function ordenarParaTirinha(comunicados) {
+        return [...comunicados].sort((a, b) => {
+            // 1º critério: Urgentes primeiro
+            if (a.URGENTE === 'SIM' && b.URGENTE !== 'SIM') return -1;
+            if (a.URGENTE !== 'SIM' && b.URGENTE === 'SIM') return 1;
+            
+            // 2º critério: Data mais recente primeiro
+            const dataA = converterData(a.DATA) || new Date(0);
+            const dataB = converterData(b.DATA) || new Date(0);
+            return dataB - dataA;
+        });
+    }
+    
+    // Cria um item da tirinha
+    function criarItemTirinha(comunicado) {
+        const item = document.createElement('div');
+        item.className = 'tirinha-item';
+        
+        // Adiciona classe de destaque se for urgente
+        if (comunicado.URGENTE === 'SIM') {
+            item.classList.add('destaque');
+        }
+        
+        // Escolhe ícone baseado no tipo/destinatário
+        const icone = escolherIcone(comunicado);
+        
+        // Formata o texto do comunicado
+        const titulo = comunicado.TITULO || 'Comunicado';
+        let textoExibicao = titulo;
+        
+        // Se o título for muito longo, trunca
+        if (textoExibicao.length > 30) {
+            textoExibicao = textoExibicao.substring(0, 27) + '...';
+        }
+        
+        // Adiciona data se disponível
+        const dataFormatada = formatarDataCurta(comunicado.DATA);
+        if (dataFormatada) {
+            textoExibicao += ` - ${dataFormatada}`;
+        }
+        
+        item.innerHTML = `
+            <i class="fas ${icone}"></i>
+            <span>${textoExibicao}</span>
+        `;
+        
+        // Adiciona tooltip com mais informações
+        item.title = `${titulo}\n${comunicado.MENSAGEM || ''}`.substring(0, 100) + '...';
+        
+        // Torna o item clicável para ver detalhes
+        item.style.cursor = 'pointer';
+        item.addEventListener('click', () => {
+            window.location.href = 'comunicados.html';
+        });
+        
+        return item;
+    }
+    
+    // Escolhe ícone baseado no comunicado
+    function escolherIcone(comunicado) {
+        const titulo = (comunicado.TITULO || '').toLowerCase();
+        const destinatario = (comunicado.DESTINATARIO || '').toLowerCase();
+        
+        if (comunicado.URGENTE === 'SIM') {
+            return 'fa-exclamation-circle';
+        } else if (destinatario.includes('pais') || destinatario.includes('responsáveis')) {
+            return 'fa-users';
+        } else if (destinatario.includes('aluno')) {
+            return 'fa-graduation-cap';
+        } else if (titulo.includes('reunião')) {
+            return 'fa-calendar-check';
+        } else if (titulo.includes('prova') || titulo.includes('avaliação')) {
+            return 'fa-pencil-alt';
+        } else if (titulo.includes('evento')) {
+            return 'fa-calendar-alt';
+        } else if (titulo.includes('feriado')) {
+            return 'fa-umbrella-beach';
+        } else {
+            return 'fa-bullhorn';
+        }
+    }
+    
+    // Formata data curta (dd/mm)
+    function formatarDataCurta(dataString) {
+        if (!dataString || dataString.trim() === '') return null;
+        
+        const data = converterData(dataString);
+        if (!data) return null;
+        
+        const dia = String(data.getDate()).padStart(2, '0');
+        const mes = String(data.getMonth() + 1).padStart(2, '0');
+        
+        return `${dia}/${mes}`;
+    }
+    
+    // Converte data para objeto Date
+    function converterData(dataString) {
+        if (!dataString || dataString.trim() === '') return null;
+        
+        dataString = dataString.trim();
+        
+        // Tenta formato dd/mm/aaaa
+        if (dataString.includes('/')) {
+            const partes = dataString.split('/');
+            if (partes.length === 3) {
+                const dia = parseInt(partes[0].trim(), 10);
+                const mes = parseInt(partes[1].trim(), 10) - 1;
+                let ano = parseInt(partes[2].trim(), 10);
+                
+                if (ano < 100) {
+                    ano += 2000;
+                }
+                
+                return new Date(ano, mes, dia);
+            }
+        }
+        
+        // Tenta formato ISO
+        if (dataString.includes('T')) {
+            return new Date(dataString);
+        }
+        
+        // Tenta formato yyyy-mm-dd
+        if (dataString.includes('-')) {
+            const partes = dataString.split('-');
+            if (partes.length === 3) {
+                const ano = parseInt(partes[0], 10);
+                const mes = parseInt(partes[1], 10) - 1;
+                const dia = parseInt(partes[2], 10);
+                return new Date(ano, mes, dia);
+            }
+        }
+        
+        const data = new Date(dataString);
+        return isNaN(data.getTime()) ? null : data;
+    }
+    
+    // Rolagem automática suave
+    function iniciarRolagemAutomatica() {
+        let scrollAmount = 0;
+        const scrollStep = 1;
+        const scrollInterval = 40;
+        let isPaused = false;
+        
+        // Pausa rolagem quando mouse está sobre a tirinha
+        tirinhaScroll.addEventListener('mouseenter', () => {
+            isPaused = true;
+        });
+        
+        tirinhaScroll.addEventListener('mouseleave', () => {
+            isPaused = false;
+        });
+        
+        // Inicia rolagem automática
+        const intervalId = setInterval(() => {
+            if (!isPaused && tirinhaScroll && tirinhaScroll.scrollWidth > tirinhaScroll.clientWidth) {
+                scrollAmount += scrollStep;
+                
+                // Reinicia quando chega ao final
+                if (scrollAmount >= tirinhaScroll.scrollWidth - tirinhaScroll.clientWidth) {
+                    scrollAmount = 0;
+                }
+                
+                tirinhaScroll.scrollTo({
+                    left: scrollAmount,
+                    behavior: 'smooth'
+                });
+            }
+        }, scrollInterval);
+        
+        // Limpa intervalo quando a página é fechada
+        window.addEventListener('beforeunload', () => {
+            clearInterval(intervalId);
+        });
+    }
+    
+    // Verifica periodicamente por novos comunicados (a cada 5 minutos)
+    function iniciarAtualizacaoPeriodica() {
+        setInterval(async () => {
+            try {
+                const novosComunicados = await fetchData('COMUNICADOS', 'COMUNICADOS');
+                if (JSON.stringify(novosComunicados) !== JSON.stringify(todosComunicados)) {
+                    todosComunicados = novosComunicados;
+                    
+                    if (todosComunicados.length === 0) {
+                        tirinhaSection.style.display = 'none';
+                    } else {
+                        exibirComunicadosTirinha(todosComunicados);
+                    }
+                }
+            } catch (error) {
+                console.error('Erro ao atualizar comunicados:', error);
+            }
+        }, 300000); // 5 minutos
+    }
+    
+    // Inicializa
+    initTirinha();
+    iniciarAtualizacaoPeriodica();
+});

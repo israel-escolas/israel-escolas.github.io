@@ -586,3 +586,176 @@ footer > .logo-footer .container p:last-child {
         font-size: 1.1rem;
     }
 }
+/* ===========================
+   COMUNICADOS - TIRINHA
+============================== */
+.comunicados-tirinha {
+    background: linear-gradient(135deg, #1a3a5c 0%, #2c5a8c 100%);
+    padding: 12px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.tirinha-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.tirinha-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffd700;
+    font-weight: 600;
+    white-space: nowrap;
+    padding-right: 20px;
+    border-right: 2px solid rgba(255,255,255,0.2);
+}
+
+.tirinha-header i {
+    font-size: 1.2rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.tirinha-scroll {
+    flex: 1;
+    display: flex;
+    gap: 30px;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+    padding: 5px 0;
+}
+
+.tirinha-scroll::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+.tirinha-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    padding: 5px 15px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 30px;
+    transition: all 0.3s ease;
+}
+
+.tirinha-item:hover {
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-2px);
+}
+
+.tirinha-item.destaque {
+    background: #e74c3c;
+}
+
+.tirinha-item.destaque i {
+    color: #ffd700;
+}
+
+.tirinha-item i {
+    color: #ffd700;
+    font-size: 0.9rem;
+}
+
+.tirinha-link {
+    color: #ffd700;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    padding: 5px 15px;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.1);
+    transition: all 0.3s ease;
+}
+
+.tirinha-link:hover {
+    background: #ffd700;
+    color: #1a3a5c;
+    transform: translateX(3px);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .tirinha-container {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .tirinha-header {
+        border-right: none;
+        padding-right: 0;
+    }
+    
+    .tirinha-scroll {
+        order: 3;
+        width: 100%;
+    }
+    
+    .tirinha-link {
+        margin-left: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .comunicados-tirinha {
+        padding: 10px 0;
+    }
+    
+    .tirinha-item {
+        font-size: 0.8rem;
+        padding: 4px 12px;
+    }
+}
+/* Adicione ao CSS existente da tirinha */
+
+.tirinha-item {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tirinha-item:hover {
+    background: rgba(255,255,255,0.25) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.tirinha-item.destaque {
+    animation: destaquePulse 2s infinite;
+}
+
+@keyframes destaquePulse {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(231, 76, 60, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 15px rgba(231, 76, 60, 0.8);
+    }
+}
+
+/* Loading state */
+.tirinha-item .fa-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
