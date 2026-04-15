@@ -1,4 +1,4 @@
-// news.js - Gerenciador de Notícias com fallback combinado
+// news.js - Gerenciador de Notícias integrado com Google Sheets
 class NewsManager {
     constructor() {
         this.noticias = [];
@@ -11,7 +11,7 @@ class NewsManager {
         this.isTransitioning = false;
         
         // Configuração do fallback
-        this.MIN_NOTICIAS = 4; // Mínimo de notícias desejado
+        this.MIN_NOTICIAS = 6; // Mínimo de notícias desejado
         this.usouFallback = false; // Flag para saber se usou fallback
         
         // Verificar se elementos existem antes de inicializar
@@ -31,20 +31,48 @@ class NewsManager {
 
     async loadNews() {
         try {
-            // Tenta carregar do arquivo JSON primeiro
-            const response = await fetch('assets/txt/news.json');
+            // NOVO: Buscar notícias da planilha NEWS
+            console.log('📰 Buscando notícias da planilha...');
+            
             let noticiasOriginais = [];
             
-            if (response.ok) {
-                const data = await response.json();
-                
-                if (data.noticias && Array.isArray(data.noticias)) {
-                    noticiasOriginais = data.noticias;
-                    console.log(`✅ ${noticiasOriginais.length} notícias carregadas do JSON`);
+            // Verificar se a função fetchData está disponível globalmente
+            if (typeof window.fetchData === 'function') {
+                try {
+                    const dadosPlanilha = await window.fetchData('NEWS', 'news');
+                    
+                    if (dadosPlanilha && Array.isArray(dadosPlanilha)) {
+                        // Mapear os dados da planilha para o formato esperado
+                        noticiasOriginais = dadosPlanilha
+                            .filter(item => item.titulo && item.titulo.trim() !== '') // Filtra itens sem título
+                            .map((item, index) => ({
+                                id: index + 1,
+                                titulo: item.titulo || 'Notícia sem título',
+                                conteudo: item.conteudo || 'Conteúdo não disponível',
+                                imagem: item.imagem || '',
+                                data: item.data || new Date().toISOString().split('T')[0],
+                                legenda: item.legenda || '',
+                                link: item.link || ''
+                            }));
+                        
+                        console.log(`✅ ${noticiasOriginais.length} notícias carregadas da planilha NEWS`);
+                    } else {
+                        console.warn('⚠️ Nenhuma notícia encontrada na planilha');
+                        noticiasOriginais = [];
+                    }
+                } catch (planilhaError) {
+                    console.error('❌ Erro ao buscar da planilha:', planilhaError);
+                    
+                    // TENTAR FALLBACK PARA JSON se a planilha falhar
+                    console.log('🔄 Tentando fallback para news.json...');
+                    noticiasOriginais = await this.loadFromJson();
                 }
+            } else {
+                console.warn('⚠️ Função fetchData não encontrada, tentando JSON...');
+                noticiasOriginais = await this.loadFromJson();
             }
             
-            // VERIFICA SE PRECISA DE FALLBACK (menos que o mínimo)
+            // VERIFICA SE PRECISA DE FALLBACK DE FOTOS (menos que o mínimo)
             if (noticiasOriginais.length < this.MIN_NOTICIAS) {
                 console.log(`📸 Apenas ${noticiasOriginais.length} notícias encontradas. Buscando fotos da escola para completar...`);
                 
@@ -98,6 +126,27 @@ class NewsManager {
             this.showError('Erro ao carregar notícias. Tente novamente mais tarde.');
         }
     }
+    
+    // NOVO: Método de fallback para carregar do JSON (backup)
+    async loadFromJson() {
+        try {
+            const response = await fetch('assets/txt/news.json');
+            
+            if (response.ok) {
+                const data = await response.json();
+                
+                if (data.noticias && Array.isArray(data.noticias)) {
+                    console.log(`📄 ${data.noticias.length} notícias carregadas do JSON (fallback)`);
+                    return data.noticias;
+                }
+            }
+            
+            return [];
+        } catch (error) {
+            console.error('❌ Erro ao carregar JSON de fallback:', error);
+            return [];
+        }
+    }
 
     renderNews() {
         if (!this.carousel) return;
@@ -116,14 +165,22 @@ class NewsManager {
             const slide = document.createElement('div');
             slide.className = `news-slide ${index === 0 ? 'active' : ''}`;
             
-            // Converter link da imagem se necessário
+            // Converter link da imagem se necessário (para links do Google Drive)
             let imagemUrl = noticia.imagem;
             
-            // Tenta converter usando a função global
-            if (typeof window.converterLinksDrive === 'function') {
-                const urlsConvertidas = window.converterLinksDrive(noticia.imagem);
-                if (urlsConvertidas && urlsConvertidas.length > 0) {
-                    imagemUrl = urlsConvertidas[0];
+            // Verificar se é link do Google Drive e converter
+            if (imagemUrl && imagemUrl.includes('drive.google.com')) {
+                if (typeof window.converterLinksDrive === 'function') {
+                    const urlsConvertidas = window.converterLinksDrive(imagemUrl);
+                    if (urlsConvertidas && urlsConvertidas.length > 0) {
+                        imagemUrl = urlsConvertidas[0];
+                    }
+                } else {
+                    // Extrair ID do Drive manualmente
+                    const match = imagemUrl.match(/[-\w]{25,}/);
+                    if (match) {
+                        imagemUrl = `https://drive.google.com/uc?export=view&id=${match[0]}`;
+                    }
                 }
             }
             
@@ -159,15 +216,15 @@ class NewsManager {
                             ` : ''}
                         </div>
                         
-                    ${!noticia.isFallback && (noticia.link || noticia.id) ? `
-                        <a href="${noticia.link ? noticia.link : `informacoes.html?id=${noticia.id}#estrutura`}" 
+                    ${!noticia.isFallback && noticia.link ? `
+                        <a href="${noticia.link}" 
                         class="view-details-btn" 
                         style="margin-top: 15px;"
-                        ${noticia.link ? 'target="_blank" rel="noopener noreferrer"' : ''}>
-                            ${noticia.link ? 'Saiba mais' : 'Leia mais'} <i class="fas ${noticia.link ? 'fa-external-link-alt' : 'fa-arrow-right'}"></i>
+                        target="_blank" rel="noopener noreferrer">
+                            Saiba mais <i class="fas fa-external-link-alt"></i>
                         </a>
                     ` : noticia.isFallback ? `
-                        <a href="informacoes.html?id=${noticia.id}#estrutura"  class="view-details-btn" style="margin-top: 15px;">
+                        <a href="informacoes.html#estrutura" class="view-details-btn" style="margin-top: 15px;">
                             Ver galeria completa <i class="fas fa-images"></i>
                         </a>
                     ` : ''}
@@ -208,10 +265,12 @@ class NewsManager {
                             <i class="fas fa-school"></i> Escola Estadual Mariana Cavalcanti
                         </p>
                     </div>
-                    <img src="assets/img/Escola_Entrada.jpg" 
-                         alt="Escola Mariana Cavalcanti" 
-                         onerror="this.onerror=null; this.src='https://via.placeholder.com/800x400?text=Escola+Mariana+Cavalcanti'"
-                         loading="lazy">
+                    <div class="news-image">
+                        <img src="assets/img/Escola_Entrada.jpg" 
+                             alt="Escola Mariana Cavalcanti" 
+                             onerror="this.onerror=null; this.src='https://via.placeholder.com/800x400?text=Escola+Mariana+Cavalcanti'"
+                             loading="lazy">
+                    </div>
                 </div>
             </div>
         `;
@@ -281,11 +340,12 @@ class NewsManager {
         if (!dateString) return 'Data não informada';
         
         try {
-            // Se já estiver formatado, retorna
+            // Se for string com barras (formato brasileiro)
             if (typeof dateString === 'string' && dateString.includes('/')) {
                 return dateString;
             }
             
+            // Tentar converter para objeto Date
             const date = new Date(dateString);
             if (isNaN(date.getTime())) {
                 return dateString;
@@ -426,21 +486,14 @@ class NewsManager {
         
         if (this.carousel) {
             this.carousel.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
+                this.touchStartX = e.changedTouches[0].screenX;
             }, { passive: true });
             
             this.carousel.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
+                this.touchEndX = e.changedTouches[0].screenX;
                 this.handleSwipe();
             }, { passive: true });
         }
-        
-        // Salvar variáveis para o swipe
-        this.touchStartX = 0;
-        this.touchEndX = 0;
-        
-        // Bind dos métodos de swipe
-        this.handleSwipe = this.handleSwipe.bind(this);
     }
 
     handleSwipe() {
@@ -499,10 +552,12 @@ class NewsManager {
                             <i class="fas fa-redo"></i> Tentar novamente
                         </button>
                     </div>
-                    <img src="assets/img/Escola_Entrada.jpg" 
-                         alt="Escola Mariana Cavalcanti" 
-                         onerror="this.onerror=null; this.src='https://via.placeholder.com/800x400?text=Erro'"
-                         loading="lazy">
+                    <div class="news-image">
+                        <img src="assets/img/Escola_Entrada.jpg" 
+                             alt="Escola Mariana Cavalcanti" 
+                             onerror="this.onerror=null; this.src='https://via.placeholder.com/800x400?text=Erro'"
+                             loading="lazy">
+                    </div>
                 </div>
             </div>
         `;
@@ -519,7 +574,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Verificar se já existe uma instância
     if (!window.newsManager) {
         window.newsManager = new NewsManager();
-        console.log('🚀 NewsManager inicializado com fallback combinado');
+        console.log('🚀 NewsManager inicializado com integração Google Sheets');
     }
 });
 
@@ -533,4 +588,4 @@ if (window.location.hostname === 'localhost' || window.location.hostname.include
         console.log('- Usou fallback:', window.newsManager?.usouFallback);
         console.log('- Mínimo configurado:', window.newsManager?.MIN_NOTICIAS);
     };
-}
+}   
