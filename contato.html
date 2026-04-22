@@ -199,31 +199,30 @@
             </div>
         </section>
 
-        <!-- Mapa -->
+        <!-- Mapa com imagem de satélite e logo da escola -->
         <section class="mapa-section">
             <div class="container">
                 <h2><i class="fas fa-map"></i> Como Chegar</h2>
                 <div class="mapa-container">
-                    <!-- Google Maps Embed -->
                     <div class="mapa-wrapper">
-                        <iframe 
-                            src="https://maps.google.com/maps?q=-6.415931806025811,-38.386494279584966&z=19&output=embed"
-                            width="100%" 
-                            height="450" 
-                            style="border:0;" 
-                            allowfullscreen="" 
-                            loading="lazy"
-                            title="Localização da Escola Mariana Cavalcanti">
-                        </iframe>
+                        <!-- Container do mapa Leaflet -->
+                        <div id="map" style="height: 450px; width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); z-index: 1;"></div>
                         <div class="mapa-legenda">
                             <p><i class="fas fa-info-circle"></i> A escola está localizada no centro de Luís Gomes, próximo ao Ginásio Pedro Germano da Silva.</p>
+                            <p style="margin-top: 10px;">
+                                <a href="https://maps.google.com/maps?q=-6.415931806025811,-38.386494279584966&z=19&t=k" 
+                                   target="_blank" 
+                                   rel="noopener noreferrer"
+                                   style="color: #2c5282; text-decoration: none; font-weight: 500;">
+                                    <i class="fas fa-satellite"></i> Ver no Google Maps (Modo Satélite)
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        
     </main>
 
     <!-- Rodapé -->
@@ -257,7 +256,11 @@
         </div>
     </footer> 
 
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="assets/js/script.js"></script>
     <script src="assets/js/contato.js"></script>
+    
+
 </body>
 </html>

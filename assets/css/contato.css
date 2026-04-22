@@ -433,3 +433,34 @@
         padding: 15px;
     }
 }
+.custom-marker {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .marker-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            object-fit: cover;
+            background-color: white;
+        }
+        /* Estilo para o popup */
+        .leaflet-popup-content {
+            font-family: Arial, sans-serif;
+            min-width: 200px;
+        }
+        .leaflet-popup-content strong {
+            color: #2c5282;
+            font-size: 14px;
+        }
+        .leaflet-popup-content a {
+            color: #2c5282;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .leaflet-popup-content a:hover {
+            text-decoration: underline;
+        }
