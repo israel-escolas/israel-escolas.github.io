@@ -194,29 +194,56 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
     `;
     
-    let eventos = await fetchData("EVENTOS", "EVENTOS");
+    let todosEventos = await fetchData("EVENTOS", "EVENTOS");
     
-    const mesAtual = new Date().getMonth() + 1;
-    const anoAtual = new Date().getFullYear();
+    const hoje = new Date();
+    const mesAtual = hoje.getMonth() + 1;
+    const anoAtual = hoje.getFullYear();
     
     // Filtrar eventos do mês atual
-    eventos = eventos.filter(e => {
+    let eventos = todosEventos.filter(e => {
         if (!e.INICIO) return false;
         const d = new Date(e.INICIO);
         return d.getMonth() + 1 === mesAtual && d.getFullYear() === anoAtual;
     });
     
-    // *** ALTERAÇÃO: Se não tiver eventos, buscar fotos ***
-    if (eventos.length === 0) {
-        const container = document.querySelector(".carousel-container");
-        if (container) {
-            container.classList.add("hidden");
-        }
-        return;
-    }
+    // *** FALLBACK: Se não tiver eventos no mês, mostrar os 5 últimos eventos ***
+    let mostrandoHistorico = false;
     
-    // Limitar a 5 eventos/fotos para não sobrecarregar
-    eventos = eventos.slice(0, 5);
+    if (eventos.length === 0) {
+        // Ordenar todos os eventos por data (mais recentes primeiro)
+        const eventosOrdenados = todosEventos
+            .filter(e => e.INICIO)
+            .sort((a, b) => {
+                const dataA = new Date(a.INICIO);
+                const dataB = new Date(b.INICIO);
+                return dataB - dataA;
+            });
+        
+        // Pegar os 5 últimos eventos
+        eventos = eventosOrdenados.slice(0, 5);
+        mostrandoHistorico = true;
+        
+        // Se ainda assim não tiver eventos
+        if (eventos.length === 0) {
+            const container = document.querySelector(".carousel-container");
+            if (container) {
+                container.classList.add("hidden");
+            }
+            wrapper.innerHTML = `
+                <div class="carousel-loading">
+                    <i class="fas fa-calendar-times"></i>
+                    <span>Nenhum evento disponível no momento.</span>
+                </div>
+            `;
+            return;
+        }
+        
+        console.log(`Nenhum evento este mês. Mostrando os ${eventos.length} últimos eventos.`);
+    } else {
+        // Limitar a 5 eventos do mês
+        eventos = eventos.slice(0, 5);
+    }
     
     let current = 0;
     let timer;
@@ -248,6 +275,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     </div>
                 </div>
                 <div class="slide-content">
+                    ${mostrandoHistorico ? '<span class="evento-historico-badge">📌 Eventos Anteriores</span>' : ''}
                     <div class="event-date">
                         <i class="far fa-calendar"></i>
                         ${formatarData(ev.INICIO)}
@@ -276,6 +304,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     function mudarSlide(novoIndex) {
         const slides = document.querySelectorAll(".carousel-slide");
         const dots = document.querySelectorAll(".indicator");
+        
+        if (slides.length === 0 || dots.length === 0) return;
         
         slides[current].classList.remove("active");
         dots[current].classList.remove("active");
@@ -324,7 +354,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     criarSlides();
     iniciarAutoPlay();
     
-    console.log(`Carrossel iniciado com ${eventos.length} slides`);
+    console.log(`Carrossel iniciado com ${eventos.length} slides${mostrandoHistorico ? ' (eventos anteriores)' : ''}`);
 });
 
 // Função para abrir modal com detalhes do evento
