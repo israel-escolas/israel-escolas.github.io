@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feira de Ciências e Tecnologia 2026</title>
+    <link rel="icon" type="image/png" href="assets/img/eventos/LOGO FEIRA.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/feira.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Cabeçalho e Menu -->
+    <header>
+        <div class="container header-container">
+            <a class="logoFeira" href="index.html">
+                <img src="assets/img/eventos/LOGO FEIRA.png" alt="Logo Escola">
+            </a>
+            <nav class="navbar">
+                <ul class="nav-menu">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="horarios.html"><i class="fas fa-clock"></i> Horários</a></li>
+                    <li><a href="calendario.html"><i class="fas fa-calendar-alt"></i> Calendário</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="fa-solid fa-panorama"></i> Eventos <i class="fas fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="eventos.html"><i class="fas fa-images"></i> Eventos</a></li>
+                            <li><a href="comunicados.html"><i class="fas fa-bullhorn"></i> Comunicados</a></li>
+                            <li><a href="feira.html" ><i class="fa-solid fa-vial-virus"></i> Feira 2026</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="fa-solid fa-book"></i> Estudo <i class="fas fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="labVirt.html"><i class="fas fa-flask"></i> Laboratório</a></li>
+                            <li><a href="videos.html"><i class="fas fa-video"></i> Vídeos</a></li>
+                            <li><a href="focoEnem.html"><i class="fas fa-clipboard-check"></i> ENEM</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="fas fa-school"></i> Escola <i class="fas fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sobre.html"><i class="fa-solid fa-school-flag"></i> Sobre</a></li>
+                            <li><a href="informacoes.html"><i class="fa-solid fa-circle-info"></i> Informações</a></li>
+                            <li><a href="contato.html"><i class="fas fa-envelope"></i> Contato</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Banner Principal -->
+        <section class="feira-banner">
+            <div class="banner-overlay">
+                <div class="container">
+                    <span class="banner-badge">25 e 26 de Junho de 2026</span>
+                    <h1>Feira de Ciências e Tecnologia 2026</h1>
+                    <p>Demonstre seu potencial investigativo e inventivo nas mais diversas áreas do conhecimento</p>
+                    <div class="banner-buttons">
+                        <button class="btn-primary" onclick="scrollToSection('inscricao')">
+                            <i class="fas fa-rocket"></i> Inscreva-se
+                        </button>
+                        <button class="btn-secondary" onclick="scrollToSection('regulamento')">
+                            <i class="fas fa-book"></i> Regulamento
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contador Regressivo -->
+        <section class="countdown-section">
+            <div class="container">
+                <div class="countdown-grid">
+                    <div class="countdown-item">
+                        <span id="dias" class="countdown-number">00</span>
+                        <span class="countdown-label">Dias</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="horas" class="countdown-number">00</span>
+                        <span class="countdown-label">Horas</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="minutos" class="countdown-number">00</span>
+                        <span class="countdown-label">Minutos</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="segundos" class="countdown-number">00</span>
+                        <span class="countdown-label">Segundos</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cards de Destaque -->
+        <section class="destaque-section">
+            <div class="container">
+                <div class="destaque-grid">
+                    <div class="destaque-card">
+                        <div class="card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Quem pode participar?</h3>
+                        <p>Todos os alunos do Ensino Médio (1º ao 3º ano) regularmente matriculados</p>
+                    </div>
+                    <div class="destaque-card">
+                        <div class="card-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3>Categorias</h3>
+                        <p>Ciências da Natureza, Matemática, Humanas, Linguagens e Tecnologia</p>
+                    </div>
+                    <div class="destaque-card">
+                        <div class="card-icon">
+                            <i class="fas fa-microscope"></i>
+                        </div>
+                        <h3>Participação das oficinas</h3>
+                        <p>Estudante da escola e de outras instituições de ensino podem se inscrever para participar das oficinas</p>
+                        <div class="btn-oficina-wrapper">
+                            <button class="science-btn" disabled>
+                                <i class="fas fa-rocket"></i>
+                                Inscreva sua turma nas oficinas
+                            </button>
+                        </div>
+                    </div>
+                    <div class="destaque-card destaque-card-oculto">
+                        <div class="card-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3>Premiação</h3>
+                        <p>Os melhores trabalhos receberão premiações especiais</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Regulamento -->
+        <section id="regulamento" class="regulamento-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2><i class="fas fa-scroll"></i> Regulamento</h2>
+                    <p>Confira as regras e diretrizes para participar</p>
+                </div>
+                
+                <div class="regulamento-grid">
+                    <!-- Objetivo -->
+                    <div class="regulamento-card">
+                        <div class="regulamento-card-header">
+                            <i class="fas fa-bullseye"></i>
+                            <h3>Objetivo</h3>
+                        </div>
+                        <div class="regulamento-card-body">
+                            <p>Criar oportunidades para que os estudantes possam demonstrar seu potencial investigativo e inventivo, utilizando a metodologia científica como ferramenta de aprendizagem, inovação e produção de saberes.</p>
+                        </div>
+                    </div>
+
+                    <!-- Participação -->
+                    <div class="regulamento-card">
+                        <div class="regulamento-card-header">
+                            <i class="fas fa-user-plus"></i>
+                            <h3>Participação</h3>
+                        </div>
+                        <div class="regulamento-card-body">
+                            <ul>
+                                <li>Equipes de até 3 alunos</li>
+                                <li>1 professor orientador por equipe</li>
+                                <li>Cada aluno em apenas 1 trabalho</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Categorias -->
+                    <div class="regulamento-card">
+                        <div class="regulamento-card-header">
+                            <i class="fas fa-tags"></i>
+                            <h3>Categorias</h3>
+                        </div>
+                        <div class="regulamento-card-body">
+                            <ul>
+                                <li>Ciências da Natureza</li>
+                                <li>Matemática e suas Tecnologias</li>
+                                <li>Ciências Humanas e Sociais</li>
+                                <li>Linguagens e suas Tecnologias</li>
+                                <li>Tecnologia e Inovação</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Modalidades -->
+                    <div class="regulamento-card">
+                        <div class="regulamento-card-header">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <h3>Modalidades</h3>
+                        </div>
+                        <div class="regulamento-card-body">
+                            <p><strong>Estande Expositivo:</strong> Banner e/ou protótipo com demonstração prática.</p>
+                            <p><strong>Oficina:</strong> Atividade interativa de em média 40 minutos.</p>
+                        </div>
+                    </div>
+
+                    <!-- Avaliação -->
+                    <div class="regulamento-card">
+                        <div class="regulamento-card-header">
+                            <i class="fas fa-star"></i>
+                            <h3>Avaliação</h3>
+                        </div>
+                        <div class="regulamento-card-body">
+                            <ul>
+                                <li>Metodologia Científica: 25 pts</li>
+                                <li>Criatividade e Inovação: 20 pts</li>
+                                <li>Clareza na Exposição: 20 pts</li>
+                                <li>Profundidade: 15 pts</li>
+                                <li>Atitude Científica: 10 pts</li>
+                                <li>Relevância Social: 10 pts</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Documentos -->
+                    <div class="regulamento-card">
+                        <div class="regulamento-card-header">
+                            <i class="fas fa-file-alt"></i>
+                            <h3>Documentos Obrigatórios</h3>
+                        </div>
+                        <div class="regulamento-card-body">
+                            <p><strong>Diário de Bordo:</strong> Registro de todo o processo de desenvolvimento.</p>
+                            <p><strong>Relatório de Pesquisa:</strong> Documento impresso detalhando o projeto.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cronograma -->
+        <section class="cronograma-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2><i class="fas fa-calendar-check"></i> Cronograma</h2>
+                    <p>Datas importantes do evento</p>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">14 de Maio</div>
+                        <div class="timeline-content">
+                            <h4>Publicação do Evento</h4>
+                            <p>Divulgação oficial da feira</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">25/05 - 10/06</div>
+                        <div class="timeline-content">
+                            <h4>Inscrição dos Projetos</h4>
+                            <p>Preenchimento do formulário na Coordenação Pedagógica</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">15 e 16/06</div>
+                        <div class="timeline-content">
+                            <h4>Divulgação dos Resultados</h4>
+                            <p>Lista dos trabalhos aprovados</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">16 e 21/06</div>
+                        <div class="timeline-content">
+                            <h4>Envio dos trabalhos completos</h4>
+                            <p>Lista de materiais necessários e instruções</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">16 e 23/06</div>
+                        <div class="timeline-content">
+                            <h4>Inscrições nas oficinas</h4>
+                            <p>Professores de outras escolas podem inscrever suas turmas</p>
+                            <div class="btn-oficina-wrapper">
+                                <button class="science-btn" disabled>
+                                    <i class="fas fa-rocket"></i>
+                                    Inscreva sua turma nas oficinas
+                                </button>
+                            </div>
+                        </div>
+                    </div>                   
+                    <div class="timeline-item">
+                        <div class="timeline-date">25/06</div>
+                        <div class="timeline-content">
+                            <h4>Realização das Oficinas</h4>
+                            <p>Primeiro dia do evento</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item destaque-timeline">
+                        <div class="timeline-date">26/06</div>
+                        <div class="timeline-content">
+                            <h4>Apresentação dos Trabalhos</h4>
+                            <p>Exposição e premiação dos vencedores</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Inscrição -->
+        <section id="inscricao" class="inscricao-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2><i class="fas fa-pen-to-square"></i> Inscreva seu Projeto</h2>
+                    <p>Prepare sua equipe e participe!</p>
+                </div>
+                
+                <div class="inscricao-info">
+                    <div class="info-card">
+                        <i class="fas fa-clock"></i>
+                        <h3>Prazo de Inscrição</h3>
+                        <p>25 de Maio a 10 de Junho de 2026</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Onde Inscrever seu Projeto ou Oficina</h3>
+                        <p>Biblioteca da Escola</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Onde se Inscrever para Participar da Oficina</h3>
+                        <p>Biblioteca da Escola</p>
+                        <div class="btn-oficina-wrapper">
+                            <button class="science-btn" disabled>
+                                <i class="fas fa-rocket"></i>
+                                Inscreva sua turma nas oficinas
+                            </button>
+                        </div>
+                    </div>                    
+                    <div class="info-card">
+                        <i class="fas fa-users-cog"></i>
+                        <h3>Orientação</h3>
+                        <p>Procure um professor para orientar seu projeto</p>
+                    </div>
+                </div>
+
+                <div class="inscricao-alert">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p><strong>Atenção:</strong> Não haverá exceção para inscrições realizadas fora do prazo.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="faq-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2><i class="fas fa-question-circle"></i> Perguntas Frequentes</h2>
+                </div>
+                
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>Posso participar sozinho?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Sim! As equipes podem ter de 1 a 3 participantes, desde que todos estejam regularmente matriculados na Escola Estadual Mariana Cavalcanti.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>Preciso ter um professor orientador?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Não. O estudante pode participar sem professor orientador desde que esteja regularmente matriculado na Escola Estadual Mariana Cavalcanti e o seu projeto esteja de acordo com os critérios do evento.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>O que devo levar no dia da apresentação?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Você deve levar o Diário de Bordo, o Relatório de Pesquisa impresso e todo o material necessário para a montagem do estande. A escola fornecerá duas mesas de aproximadamente 1,20m.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>Como funciona a modalidade Oficina?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Na modalidade Oficina, os expositores ensinam ou demonstram um conceito, técnica ou experimento com participação ativa dos visitantes. Cada sessão dura até 40 minutos e pode ser repetida ao longo do evento.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="footer-content">
+            <div class="logoFeira footer-logo">
+                <img src="assets/img/eventos/LOGO FEIRA.png" alt="Logo Escola">
+            </div>
+            <div class="footer-col">
+                <h3>Escola Estadual Mariana Cavalcanti</h3>
+                <p><i class="fa-solid fa-location-dot"></i> AV. SENHORA SANTANA, 09 PREDIO. CENTRO</p>
+                <p><i class="fa-solid fa-city"></i> Luís Gomes - RN, CEP: 59940-000</p>
+                <p><i class="fa-solid fa-phone"></i> Telefone: (84) 3382-2270</p>
+            </div>
+        </div>
+        <div class="footer-divider"></div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="ano-atual"></span> Escola Estadual Mariana Cavalcanti.</p>
+        </div>
+    </footer>
+
+    <!-- Modal de Inscrição em Oficinas -->
+    <div class="modal-overlay" id="modal-oficina">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2><i class="fas fa-microscope"></i> Inscrição em Oficinas</h2>
+                <button class="modal-close" onclick="fecharModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <form id="form-oficina" onsubmit="return false;">
+                    <!-- Etapa 1: Dados do Responsável -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-user"></i> Dados do Responsável</h3>
+                        
+                        <div class="form-group">
+                            <label for="tipo-inscricao">Tipo de Inscrição *</label>
+                            <select id="tipo-inscricao" required>
+                                <option value="">Selecione...</option>
+                                <option value="representante">Representante de Escola</option>
+                                <option value="individual">Individual</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nome-responsavel">Nome Completo *</label>
+                            <input type="text" id="nome-responsavel" placeholder="Digite seu nome completo" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="escola">Escola em que estuda *</label>
+                            <div class="input-with-checkbox">
+                                <input type="text" id="escola" placeholder="Nome da escola" required>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="nao-estuda">
+                                    <span>Não estudo</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="grupo-participantes">
+                            <label for="qtd-participantes">Quantidade de Participantes *</label>
+                            <input type="number" id="qtd-participantes" min="1" max="50" value="1" required>
+                        </div>
+                    </div>
+
+                    <!-- Etapa 2: Oficina e Horário -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-calendar-alt"></i> Oficina e Horário</h3>
+                        
+                        <div class="form-group">
+                            <label for="oficina">Selecione a Oficina *</label>
+                            <select id="oficina" required>
+                                <option value="">Escolha uma oficina...</option>
+                                <option value="1">🔬 Extração de DNA de Morango</option>
+                                <option value="2">🤖 Introdução à Robótica com Arduino</option>
+                                <option value="3">🧪 Química Divertida: Reações Coloridas</option>
+                                <option value="4">🔭 Observação Astronômica</option>
+                                <option value="5">💻 Programação de Jogos com Scratch</option>
+                                <option value="6">🌱 Cultivo Hidropônico Caseiro</option>
+                                <option value="7">📐 Matemática com Origami</option>
+                                <option value="8">🔋 Construção de Pilhas Caseiras</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Selecione o Horário *</label>
+                            <div class="horarios-grid" id="horarios-grid">
+                                <!-- Preenchido via JavaScript -->
+                            </div>
+                            <input type="hidden" id="horario-selecionado" required>
+                        </div>
+                    </div>
+
+                    <!-- Botões de Ação -->
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancelar" onclick="fecharModal()">
+                            <i class="fas fa-times"></i> Cancelar
+                        </button>
+                        <button type="button" class="btn-inscrever" onclick="inscreverOficina()">
+                            <i class="fas fa-check"></i> Inscrever
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cartão de Confirmação -->
+    <div class="modal-overlay" id="modal-confirmacao">
+        <div class="cartao-confirmacao">
+            <!-- Banner Superior -->
+            <div class="cartao-banner">
+            </div>
+            
+            <!-- Corpo do Cartão -->
+            <div class="cartao-body">
+                <div class="cartao-info">
+                    <div class="info-linha">
+                        <i class="fas fa-user"></i>
+                        <div>
+                            <strong>Responsável</strong>
+                            <span id="conf-nome">-</span>
+                        </div>
+                    </div>
+                    <div class="info-linha">
+                        <i class="fas fa-school"></i>
+                        <div>
+                            <strong>Escola</strong>
+                            <span id="conf-escola">-</span>
+                        </div>
+                    </div>
+                    <div class="info-linha">
+                        <i class="fas fa-users"></i>
+                        <div>
+                            <strong>Participantes</strong>
+                            <span id="conf-participantes">-</span>
+                        </div>
+                    </div>
+                    <div class="info-linha">
+                        <i class="fas fa-flask"></i>
+                        <div>
+                            <strong>Oficina</strong>
+                            <span id="conf-oficina">-</span>
+                        </div>
+                    </div>
+                    <div class="info-linha">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <strong>Horário</strong>
+                            <span id="conf-horario">-</span>
+                        </div>
+                    </div>
+                    <div class="info-linha">
+                        <i class="fas fa-calendar-day"></i>
+                        <div>
+                            <strong>Data</strong>
+                            <span id="conf-data">25 de Junho de 2026</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Logo da Feira -->
+                <div class="cartao-logo">
+                    <img src="assets/img/eventos/LOGO FEIRA.png" alt="Logo Feira de Ciências">
+                </div>
+            </div>
+            
+            <!-- Ações do Cartão -->
+            <div class="cartao-actions">
+                <button class="btn-salvar" onclick="salvarInscricao()">
+                    <i class="fas fa-download"></i> Salvar Comprovante
+                </button>
+                <button class="btn-fechar" onclick="fecharConfirmacao()">
+                    <i class="fas fa-check-circle"></i> Concluir
+                </button>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="assets/js/feira.js"></script>
+</body>
+</html>
