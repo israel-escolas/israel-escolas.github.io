@@ -182,11 +182,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 document.addEventListener("DOMContentLoaded", async () => {
     const wrapper = document.getElementById("bannerWrapper");
     const indicators = document.getElementById("bannerIndicators");
-
-    // 🔴 SE NÃO EXISTIR, PARA AQUI
     if (!wrapper || !indicators) return;
 
-    // Mostrar loading
     wrapper.innerHTML = `
         <div class="carousel-loading">
             <i class="fas fa-spinner fa-spin"></i>
@@ -199,19 +196,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     const hoje = new Date();
     const mesAtual = hoje.getMonth() + 1;
     const anoAtual = hoje.getFullYear();
-    
-    // Filtrar eventos do mês atual
+
     let eventos = todosEventos.filter(e => {
         if (!e.INICIO) return false;
         const d = new Date(e.INICIO);
         return d.getMonth() + 1 === mesAtual && d.getFullYear() === anoAtual;
     });
-    
-    // *** FALLBACK: Se não tiver eventos no mês, mostrar os 5 últimos eventos ***
+
     let mostrandoHistorico = false;
     
     if (eventos.length === 0) {
-        // Ordenar todos os eventos por data (mais recentes primeiro)
         const eventosOrdenados = todosEventos
             .filter(e => e.INICIO)
             .sort((a, b) => {
@@ -219,12 +213,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                 const dataB = new Date(b.INICIO);
                 return dataB - dataA;
             });
-        
-        // Pegar os 5 últimos eventos
+
         eventos = eventosOrdenados.slice(0, 5);
         mostrandoHistorico = true;
-        
-        // Se ainda assim não tiver eventos
         if (eventos.length === 0) {
             const container = document.querySelector(".carousel-container");
             if (container) {
@@ -241,7 +232,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         
         console.log(`Nenhum evento este mês. Mostrando os ${eventos.length} últimos eventos.`);
     } else {
-        // Limitar a 5 eventos do mês
         eventos = eventos.slice(0, 5);
     }
     
@@ -292,8 +282,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             `;
             
             wrapper.appendChild(slide);
-            
-            // Criar indicador
             const indicator = document.createElement("div");
             indicator.className = "indicator" + (i === 0 ? " active" : "");
             indicator.onclick = () => mudarSlide(i);
@@ -323,8 +311,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     function slideAnterior() {
         mudarSlide((current - 1 + eventos.length) % eventos.length);
     }
-    
-    // Auto-play
     function iniciarAutoPlay() {
         timer = setInterval(proximoSlide, 6000);
     }
@@ -332,46 +318,35 @@ document.addEventListener("DOMContentLoaded", async () => {
     function pararAutoPlay() {
         clearInterval(timer);
     }
-    
-    // Event listeners
     const bannerNext = document.getElementById("bannerNext");
     const bannerPrev = document.getElementById("bannerPrev");
     
     if (bannerNext) bannerNext.onclick = proximoSlide;
     if (bannerPrev) bannerPrev.onclick = slideAnterior;
-    
-    // Pausar no hover
+
     wrapper.addEventListener("mouseenter", pararAutoPlay);
     wrapper.addEventListener("mouseleave", iniciarAutoPlay);
-    
-    // Teclado
+
     document.addEventListener("keydown", (e) => {
         if (e.key === "ArrowLeft") slideAnterior();
         if (e.key === "ArrowRight") proximoSlide();
     });
-    
-    // Inicializar
     criarSlides();
     iniciarAutoPlay();
     
     console.log(`Carrossel iniciado com ${eventos.length} slides${mostrandoHistorico ? ' (eventos anteriores)' : ''}`);
 });
 
-// Função para abrir modal com detalhes do evento
 window.abrirModalEvento = async function(eventId) {
     console.log("Abrindo modal para evento ID:", eventId);
-    
-    // Abrir o modal imediatamente
     const modal = document.getElementById('eventModal');
     const modalContent = document.getElementById('modalContent');
-    
-    // Verificar se o modal existe
+
     if (!modal || !modalContent) {
         console.error("Modal não encontrado no DOM");
         return;
     }
-    
-    // Mostrar loading
+
     modalContent.innerHTML = `
         <div class="modal-loading">
             <i class="fas fa-spinner fa-spin"></i>
@@ -380,9 +355,8 @@ window.abrirModalEvento = async function(eventId) {
     `;
     
     modal.classList.add('active');
-    document.body.style.overflow = 'hidden'; // Prevenir scroll
-    
-    // Buscar dados do evento
+    document.body.style.overflow = 'hidden'; 
+
     try {
         const eventos = await fetchData("EVENTOS", "EVENTOS");
         const evento = eventos.find(e => e.ID == eventId || e.EVENTO_ID == eventId);
@@ -397,15 +371,14 @@ window.abrirModalEvento = async function(eventId) {
             return;
         }
         
-        // Converter fotos
+
         const fotos = converterLinksDrive(evento.FOTOS || '');
         const primeiraFoto = fotos[0] || '';
         
-        // Formatar datas
+
         const dataInicio = formatarData(evento.INICIO);
         const dataFim = evento.FIM ? formatarData(evento.FIM) : '';
-        
-        // Criar HTML do modal
+
         modalContent.innerHTML = `
             ${fotos.length > 0 ? `
                 <div class="modal-main-image">
@@ -521,20 +494,15 @@ window.abrirModalEvento = async function(eventId) {
     }
 };
 
-// Função para trocar imagem principal na galeria
 window.trocarImagemPrincipal = function(src, index) {
     const mainImage = document.getElementById('mainEventImage');
     if (mainImage) {
         mainImage.src = src;
     }
-    
-    // Atualizar galeria ativa
     document.querySelectorAll('.modal-gallery-item').forEach((item, i) => {
         item.classList.toggle('active', i === index);
     });
 };
-
-// Função para fechar modal
 window.fecharModal = function() {
     const modal = document.getElementById('eventModal');
     if (modal) {
@@ -542,15 +510,11 @@ window.fecharModal = function() {
         document.body.style.overflow = ''; // Restaurar scroll
     }
 };
-
-// Fechar modal ao pressionar ESC
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         fecharModal();
     }
 });
-
-// Fechar modal ao clicar fora do conteúdo
 document.addEventListener('click', function(e) {
     const modal = document.getElementById('eventModal');
     const modalContent = document.getElementById('modalContent');
@@ -562,49 +526,37 @@ document.addEventListener('click', function(e) {
     }
 });
 // ===========================
-// TIRINHA DE COMUNICADOS - INTEGRAÇÃO COM API
+// TIRINHA DE COMUNICADOS 
 // ===========================
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Elementos da tirinha
     const tirinhaSection = document.querySelector('.comunicados-tirinha');
     const tirinhaScroll = document.querySelector('.tirinha-scroll');
     
     if (!tirinhaSection || !tirinhaScroll) return;
     
     let todosComunicados = [];
-    
-    // Inicialização
     async function initTirinha() {
-        // Garante que começa escondida
         tirinhaSection.style.display = 'none';
         await carregarComunicadosTirinha();
     }
-    
-    // Carrega comunicados da planilha
     async function carregarComunicadosTirinha() {
         try {
-            // Usa a mesma função fetchData do api.js
             todosComunicados = await fetchData('COMUNICADOS', 'COMUNICADOS');
             console.log('Comunicados carregados para tirinha:', todosComunicados);
             
             if (todosComunicados.length === 0) {
-                return; // Já está escondida
+                return;
             }
             
             exibirComunicadosTirinha(todosComunicados);
         } catch (error) {
             console.error('Erro ao carregar comunicados:', error);
-            // Mantém escondida em caso de erro
         }
     }
-    
-    // Exibe comunicados na tirinha
     function exibirComunicadosTirinha(comunicados) {
-        // Filtra apenas comunicados ativos (não expirados)
         const hoje = new Date();
         const comunicadosAtivos = comunicados.filter(comunicado => {
-            // Se não tem validade, considera ativo
             if (!comunicado.VALIDADE || comunicado.VALIDADE.trim() === '') {
                 return true;
             }
@@ -613,69 +565,46 @@ document.addEventListener('DOMContentLoaded', function() {
             return !validade || validade >= hoje;
         });
         
-        // Se não há comunicados ativos, mantém escondida
         if (comunicadosAtivos.length === 0) {
             return;
         }
-        
-        // Ordena comunicados: urgentes primeiro, depois por data (mais recentes)
+
         const comunicadosOrdenados = ordenarParaTirinha(comunicadosAtivos);
-        
-        // Pega os primeiros 5 comunicados para não sobrecarregar a tirinha
         const comunicadosExibicao = comunicadosOrdenados.slice(0, 5);
-        
-        // Limpa e preenche a tirinha
+
         tirinhaScroll.innerHTML = '';
         
         comunicadosExibicao.forEach(comunicado => {
             const item = criarItemTirinha(comunicado);
             tirinhaScroll.appendChild(item);
         });
-        
-        // SÓ AGORA mostra a seção
         tirinhaSection.style.display = 'block';
-        
-        // Inicia rolagem automática
+
         iniciarRolagemAutomatica();
     }
-    
-    // Ordena comunicados para a tirinha
+
     function ordenarParaTirinha(comunicados) {
         return [...comunicados].sort((a, b) => {
-            // 1º critério: Urgentes primeiro
             if (a.URGENTE === 'SIM' && b.URGENTE !== 'SIM') return -1;
             if (a.URGENTE !== 'SIM' && b.URGENTE === 'SIM') return 1;
-            
-            // 2º critério: Data mais recente primeiro
+
             const dataA = converterData(a.DATA) || new Date(0);
             const dataB = converterData(b.DATA) || new Date(0);
             return dataB - dataA;
         });
     }
-    
-    // Cria um item da tirinha
     function criarItemTirinha(comunicado) {
         const item = document.createElement('div');
         item.className = 'tirinha-item';
-        
-        // Adiciona classe de destaque se for urgente
         if (comunicado.URGENTE === 'SIM') {
             item.classList.add('destaque');
         }
-        
-        // Escolhe ícone baseado no tipo/destinatário
         const icone = escolherIcone(comunicado);
-        
-        // Formata o texto do comunicado
         const titulo = comunicado.TITULO || 'Comunicado';
         let textoExibicao = titulo;
-        
-        // Se o título for muito longo, trunca
         if (textoExibicao.length > 30) {
             textoExibicao = textoExibicao.substring(0, 27) + '...';
         }
-        
-        // Adiciona data se disponível
         const dataFormatada = formatarDataCurta(comunicado.DATA);
         if (dataFormatada) {
             textoExibicao += ` - ${dataFormatada}`;
@@ -685,11 +614,9 @@ document.addEventListener('DOMContentLoaded', function() {
             <i class="fas ${icone}"></i>
             <span>${textoExibicao}</span>
         `;
-        
-        // Adiciona tooltip com mais informações
+
         item.title = `${titulo}\n${comunicado.MENSAGEM || ''}`.substring(0, 100) + '...';
         
-        // Torna o item clicável para ver detalhes
         item.style.cursor = 'pointer';
         item.addEventListener('click', () => {
             window.location.href = 'comunicados.html';
@@ -697,8 +624,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         return item;
     }
-    
-    // Escolhe ícone baseado no comunicado
     function escolherIcone(comunicado) {
         const titulo = (comunicado.TITULO || '').toLowerCase();
         const destinatario = (comunicado.DESTINATARIO || '').toLowerCase();
@@ -721,8 +646,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return 'fa-bullhorn';
         }
     }
-    
-    // Formata data curta (dd/mm)
     function formatarDataCurta(dataString) {
         if (!dataString || dataString.trim() === '') return null;
         
@@ -734,14 +657,11 @@ document.addEventListener('DOMContentLoaded', function() {
         
         return `${dia}/${mes}`;
     }
-    
-    // Converte data para objeto Date
     function converterData(dataString) {
         if (!dataString || dataString.trim() === '') return null;
         
         dataString = dataString.trim();
-        
-        // Tenta formato dd/mm/aaaa
+
         if (dataString.includes('/')) {
             const partes = dataString.split('/');
             if (partes.length === 3) {
@@ -756,13 +676,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 return new Date(ano, mes, dia);
             }
         }
-        
-        // Tenta formato ISO
+
         if (dataString.includes('T')) {
             return new Date(dataString);
         }
-        
-        // Tenta formato yyyy-mm-dd
+
         if (dataString.includes('-')) {
             const partes = dataString.split('-');
             if (partes.length === 3) {
@@ -776,15 +694,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const data = new Date(dataString);
         return isNaN(data.getTime()) ? null : data;
     }
-    
-    // Rolagem automática suave
     function iniciarRolagemAutomatica() {
         let scrollAmount = 0;
         const scrollStep = 1;
         const scrollInterval = 40;
         let isPaused = false;
-        
-        // Pausa rolagem quando mouse está sobre a tirinha
+
         tirinhaScroll.addEventListener('mouseenter', () => {
             isPaused = true;
         });
@@ -792,13 +707,11 @@ document.addEventListener('DOMContentLoaded', function() {
         tirinhaScroll.addEventListener('mouseleave', () => {
             isPaused = false;
         });
-        
-        // Inicia rolagem automática
+
         const intervalId = setInterval(() => {
             if (!isPaused && tirinhaScroll && tirinhaScroll.scrollWidth > tirinhaScroll.clientWidth) {
                 scrollAmount += scrollStep;
-                
-                // Reinicia quando chega ao final
+
                 if (scrollAmount >= tirinhaScroll.scrollWidth - tirinhaScroll.clientWidth) {
                     scrollAmount = 0;
                 }
@@ -809,14 +722,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
         }, scrollInterval);
-        
-        // Limpa intervalo quando a página é fechada
+
         window.addEventListener('beforeunload', () => {
             clearInterval(intervalId);
         });
     }
-    
-    // Verifica periodicamente por novos comunicados (a cada 5 minutos)
+
     function iniciarAtualizacaoPeriodica() {
         setInterval(async () => {
             try {
@@ -833,10 +744,8 @@ document.addEventListener('DOMContentLoaded', function() {
             } catch (error) {
                 console.error('Erro ao atualizar comunicados:', error);
             }
-        }, 300000); // 5 minutos
+        }, 300000); 
     }
-    
-    // Inicializa
     initTirinha();
     iniciarAtualizacaoPeriodica();
 });
