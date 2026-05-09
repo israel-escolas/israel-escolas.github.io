@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Cabeçalho e Menu -->
     <header>
         <div class="container header-container">
             <a class="logoFeira" href="index.html">
@@ -60,7 +59,6 @@
     </header>
 
     <main>
-        <!-- Banner Principal -->
         <section class="feira-banner">
             <div class="banner-overlay">
                 <div class="container">
@@ -78,8 +76,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Contador Regressivo -->
         <section class="countdown-section">
             <div class="container">
                 <div class="countdown-grid">
@@ -102,8 +98,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Cards de Destaque -->
         <section class="destaque-section">
             <div class="container">
                 <div class="destaque-grid">
@@ -144,17 +138,13 @@
                 </div>
             </div>
         </section>
-
-        <!-- Regulamento -->
         <section id="regulamento" class="regulamento-section">
             <div class="container">
                 <div class="section-header">
                     <h2><i class="fas fa-scroll"></i> Regulamento</h2>
                     <p>Confira as regras e diretrizes para participar</p>
-                </div>
-                
+                </div>                
                 <div class="regulamento-grid">
-                    <!-- Objetivo -->
                     <div class="regulamento-card">
                         <div class="regulamento-card-header">
                             <i class="fas fa-bullseye"></i>
@@ -164,8 +154,6 @@
                             <p>Criar oportunidades para que os estudantes possam demonstrar seu potencial investigativo e inventivo, utilizando a metodologia científica como ferramenta de aprendizagem, inovação e produção de saberes.</p>
                         </div>
                     </div>
-
-                    <!-- Participação -->
                     <div class="regulamento-card">
                         <div class="regulamento-card-header">
                             <i class="fas fa-user-plus"></i>
@@ -179,8 +167,6 @@
                             </ul>
                         </div>
                     </div>
-
-                    <!-- Categorias -->
                     <div class="regulamento-card">
                         <div class="regulamento-card-header">
                             <i class="fas fa-tags"></i>
@@ -196,8 +182,6 @@
                             </ul>
                         </div>
                     </div>
-
-                    <!-- Modalidades -->
                     <div class="regulamento-card">
                         <div class="regulamento-card-header">
                             <i class="fas fa-chalkboard-teacher"></i>
@@ -208,8 +192,6 @@
                             <p><strong>Oficina:</strong> Atividade interativa de em média 40 minutos.</p>
                         </div>
                     </div>
-
-                    <!-- Avaliação -->
                     <div class="regulamento-card">
                         <div class="regulamento-card-header">
                             <i class="fas fa-star"></i>
@@ -226,8 +208,6 @@
                             </ul>
                         </div>
                     </div>
-
-                    <!-- Documentos -->
                     <div class="regulamento-card">
                         <div class="regulamento-card-header">
                             <i class="fas fa-file-alt"></i>
@@ -241,15 +221,12 @@
                 </div>
             </div>
         </section>
-
-        <!-- Cronograma -->
         <section class="cronograma-section">
             <div class="container">
                 <div class="section-header">
                     <h2><i class="fas fa-calendar-check"></i> Cronograma</h2>
                     <p>Datas importantes do evento</p>
-                </div>
-                
+                </div>                
                 <div class="timeline">
                     <div class="timeline-item">
                         <div class="timeline-date">14 de Maio</div>
@@ -309,8 +286,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Inscrição -->
         <section id="inscricao" class="inscricao-section">
             <div class="container">
                 <div class="section-header">
@@ -353,8 +328,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- FAQ -->
         <section class="faq-section">
             <div class="container">
                 <div class="section-header">
@@ -370,8 +343,7 @@
                         <div class="faq-answer">
                             <p>Sim! As equipes podem ter de 1 a 3 participantes, desde que todos estejam regularmente matriculados na Escola Estadual Mariana Cavalcanti.</p>
                         </div>
-                    </div>
-                    
+                    </div>                    
                     <div class="faq-item">
                         <div class="faq-question">
                             <h4>Preciso ter um professor orientador?</h4>
@@ -380,8 +352,7 @@
                         <div class="faq-answer">
                             <p>Não. O estudante pode participar sem professor orientador desde que esteja regularmente matriculado na Escola Estadual Mariana Cavalcanti e o seu projeto esteja de acordo com os critérios do evento.</p>
                         </div>
-                    </div>
-                    
+                    </div>                    
                     <div class="faq-item">
                         <div class="faq-question">
                             <h4>O que devo levar no dia da apresentação?</h4>
@@ -390,8 +361,7 @@
                         <div class="faq-answer">
                             <p>Você deve levar o Diário de Bordo, o Relatório de Pesquisa impresso e todo o material necessário para a montagem do estande. A escola fornecerá duas mesas de aproximadamente 1,20m.</p>
                         </div>
-                    </div>
-                    
+                    </div>                    
                     <div class="faq-item">
                         <div class="faq-question">
                             <h4>Como funciona a modalidade Oficina?</h4>
@@ -405,8 +375,6 @@
             </div>
         </section>
     </main>
-
-    <!-- Rodapé -->
     <footer>
         <div class="footer-content">
             <div class="logoFeira footer-logo">
@@ -424,8 +392,6 @@
             <p>&copy; <span id="ano-atual"></span> Escola Estadual Mariana Cavalcanti.</p>
         </div>
     </footer>
-
-    <!-- Modal de Inscrição em Oficinas -->
     <div class="modal-overlay" id="modal-oficina">
         <div class="modal-container">
             <div class="modal-header">
@@ -437,10 +403,8 @@
             
             <div class="modal-body">
                 <form id="form-oficina" onsubmit="return false;">
-                    <!-- Etapa 1: Dados do Responsável -->
                     <div class="form-section">
-                        <h3><i class="fas fa-user"></i> Dados do Responsável</h3>
-                        
+                        <h3><i class="fas fa-user"></i> Dados do Responsável</h3>                        
                         <div class="form-group">
                             <label for="tipo-inscricao">Tipo de Inscrição *</label>
                             <select id="tipo-inscricao" required>
@@ -449,12 +413,10 @@
                                 <option value="individual">Individual</option>
                             </select>
                         </div>
-
                         <div class="form-group">
                             <label for="nome-responsavel">Nome Completo *</label>
                             <input type="text" id="nome-responsavel" placeholder="Digite seu nome completo" required>
                         </div>
-
                         <div class="form-group">
                             <label for="escola">Escola em que estuda *</label>
                             <div class="input-with-checkbox">
@@ -465,17 +427,13 @@
                                 </label>
                             </div>
                         </div>
-
                         <div class="form-group" id="grupo-participantes">
                             <label for="qtd-participantes">Quantidade de Participantes *</label>
                             <input type="number" id="qtd-participantes" min="1" max="50" value="1" required>
                         </div>
                     </div>
-
-                    <!-- Etapa 2: Oficina e Horário -->
                     <div class="form-section">
-                        <h3><i class="fas fa-calendar-alt"></i> Oficina e Horário</h3>
-                        
+                        <h3><i class="fas fa-calendar-alt"></i> Oficina e Horário</h3>                        
                         <div class="form-group">
                             <label for="oficina">Selecione a Oficina *</label>
                             <select id="oficina" required>
@@ -490,17 +448,13 @@
                                 <option value="8">🔋 Construção de Pilhas Caseiras</option>
                             </select>
                         </div>
-
                         <div class="form-group">
                             <label>Selecione o Horário *</label>
                             <div class="horarios-grid" id="horarios-grid">
-                                <!-- Preenchido via JavaScript -->
                             </div>
                             <input type="hidden" id="horario-selecionado" required>
                         </div>
                     </div>
-
-                    <!-- Botões de Ação -->
                     <div class="form-actions">
                         <button type="button" class="btn-cancelar" onclick="fecharModal()">
                             <i class="fas fa-times"></i> Cancelar

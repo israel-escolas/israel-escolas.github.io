@@ -1,5 +1,5 @@
 // ============================================
-// FEIRA DE CIÊNCIAS - JAVASCRIPT COMPLETO
+// FEIRA DE CIÊNCIAS 
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -11,16 +11,9 @@ document.addEventListener('DOMContentLoaded', function() {
     initScrollAnimations();
     initActiveNavLink();
     initFooterYear();
-    
-    // Inicializações do modal de oficinas
     initModalOficinas();
     atualizarBotoesOficina();
 });
-
-// ============================================
-// MENU HAMBURGER (RESPONSIVO)
-// ============================================
-
 function initHamburgerMenu() {
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.querySelector('.nav-menu');
@@ -35,8 +28,6 @@ function initHamburgerMenu() {
             icon.classList.toggle('fa-times');
         }
     });
-    
-    // Fecha menu ao clicar em um link
     document.querySelectorAll('.nav-menu a').forEach(link => {
         link.addEventListener('click', () => {
             if (window.innerWidth <= 768) {
@@ -50,11 +41,6 @@ function initHamburgerMenu() {
         });
     });
 }
-
-// ============================================
-// DROPDOWNS
-// ============================================
-
 function initDropdowns() {
     const dropdowns = document.querySelectorAll('.dropdown');
     
@@ -67,8 +53,6 @@ function initDropdowns() {
             if (window.innerWidth <= 768) {
                 e.preventDefault();
                 dropdown.classList.toggle('open');
-                
-                // Fecha outros dropdowns
                 dropdowns.forEach(other => {
                     if (other !== dropdown) {
                         other.classList.remove('open');
@@ -77,8 +61,6 @@ function initDropdowns() {
             }
         });
     });
-    
-    // Fecha dropdowns ao clicar fora
     document.addEventListener('click', function(e) {
         if (!e.target.closest('.dropdown')) {
             dropdowns.forEach(d => d.classList.remove('open'));
@@ -86,13 +68,8 @@ function initDropdowns() {
     });
 }
 
-// ============================================
-// CONTADOR REGRESSIVO
-// ============================================
-
 function initCountdown() {
-    // Data da feira: 25 de junho de 2026
-    const targetDate = new Date(2026, 5, 25, 8, 0, 0); // Mês 5 = Junho
+    const targetDate = new Date(2026, 5, 25, 8, 0, 0); 
     
     const diasEl = document.getElementById('dias');
     const horasEl = document.getElementById('horas');
@@ -128,10 +105,6 @@ function initCountdown() {
     setInterval(updateCountdown, 1000);
 }
 
-// ============================================
-// FAQ - ACORDEÃO
-// ============================================
-
 function initFAQ() {
     const faqItems = document.querySelectorAll('.faq-item');
     
@@ -141,23 +114,15 @@ function initFAQ() {
         if (!question) return;
         
         question.addEventListener('click', () => {
-            // Fecha outros itens
             faqItems.forEach(other => {
                 if (other !== item && other.classList.contains('active')) {
                     other.classList.remove('active');
                 }
             });
-            
-            // Alterna o atual
             item.classList.toggle('active');
         });
     });
 }
-
-// ============================================
-// SCROLL SUAVE PARA SEÇÕES
-// ============================================
-
 function scrollToSection(sectionId) {
     const section = document.getElementById(sectionId);
     
@@ -171,13 +136,7 @@ function scrollToSection(sectionId) {
         });
     }
 }
-
-// Disponibiliza a função globalmente para os botões do banner
 window.scrollToSection = scrollToSection;
-
-// ============================================
-// ANIMAÇÕES AO SCROLL
-// ============================================
 
 function initScrollAnimations() {
     const observerOptions = {
@@ -194,8 +153,6 @@ function initScrollAnimations() {
             }
         });
     }, observerOptions);
-    
-    // Elementos para animar
     const animatableElements = document.querySelectorAll([
         '.destaque-card',
         '.regulamento-card',
@@ -212,30 +169,19 @@ function initScrollAnimations() {
     });
 }
 
-// ============================================
-// LINK ATIVO NA NAVEGAÇÃO
-// ============================================
-
 function initActiveNavLink() {
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     
     document.querySelectorAll('.nav-menu a').forEach(link => {
         const href = link.getAttribute('href');
-        
-        // Remove active de todos
+
         link.classList.remove('active');
-        
-        // Verifica se é a página atual
+
         if (href === currentPage) {
             link.classList.add('active');
         }
     });
 }
-
-// ============================================
-// ANO NO RODAPÉ
-// ============================================
-
 function initFooterYear() {
     const yearSpan = document.getElementById('ano-atual');
     if (yearSpan) {
@@ -243,11 +189,6 @@ function initFooterYear() {
     }
 }
 
-// ============================================
-// MODAL DE INSCRIÇÃO EM OFICINAS
-// ============================================
-
-// Horários disponíveis (simulados)
 const horariosDisponiveis = [
     { id: '08:00', label: '08:00 - 09:00', disponivel: true },
     { id: '09:00', label: '09:00 - 10:00', disponivel: false },
@@ -257,15 +198,13 @@ const horariosDisponiveis = [
     { id: '16:30', label: '16:30 - 17:30', disponivel: false }
 ];
 
-// Inicializar eventos dos modais
 function initModalOficinas() {
     const tipoInscricao = document.getElementById('tipo-inscricao');
     const qtdParticipantes = document.getElementById('qtd-participantes');
     const grupoParticipantes = document.getElementById('grupo-participantes');
     const naoEstuda = document.getElementById('nao-estuda');
     const escolaInput = document.getElementById('escola');
-    
-    // Gerenciar campo de participantes baseado no tipo de inscrição
+
     if (tipoInscricao && qtdParticipantes && grupoParticipantes) {
         tipoInscricao.addEventListener('change', function() {
             if (this.value === 'individual') {
@@ -281,8 +220,7 @@ function initModalOficinas() {
             }
         });
     }
-    
-    // Checkbox "Não estudo"
+
     if (naoEstuda && escolaInput) {
         naoEstuda.addEventListener('change', function() {
             if (this.checked) {
@@ -296,8 +234,7 @@ function initModalOficinas() {
             }
         });
     }
-    
-    // Fechar modal ao clicar fora
+
     document.addEventListener('click', function(e) {
         const modalOficina = document.getElementById('modal-oficina');
         const modalConfirmacao = document.getElementById('modal-confirmacao');
@@ -310,8 +247,7 @@ function initModalOficinas() {
             fecharConfirmacao();
         }
     });
-    
-    // Fechar modal com tecla ESC
+
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             fecharModal();
@@ -319,8 +255,6 @@ function initModalOficinas() {
         }
     });
 }
-
-// Função para abrir o modal
 function abrirModalOficina() {
     const modal = document.getElementById('modal-oficina');
     if (modal) {
@@ -329,8 +263,6 @@ function abrirModalOficina() {
         gerarHorarios();
     }
 }
-
-// Função para fechar o modal
 function fecharModal() {
     const modal = document.getElementById('modal-oficina');
     if (modal) {
@@ -339,8 +271,6 @@ function fecharModal() {
         limparFormulario();
     }
 }
-
-// Função para fechar confirmação
 function fecharConfirmacao() {
     const modal = document.getElementById('modal-confirmacao');
     if (modal) {
@@ -348,8 +278,6 @@ function fecharConfirmacao() {
         document.body.style.overflow = 'auto';
     }
 }
-
-// Gerar grid de horários
 function gerarHorarios() {
     const grid = document.getElementById('horarios-grid');
     if (!grid) return;
@@ -369,21 +297,13 @@ function gerarHorarios() {
     });
 }
 
-// Selecionar horário
 function selecionarHorario(horario, element) {
-    // Remove selected de todos
     document.querySelectorAll('.horario-option').forEach(opt => {
         opt.classList.remove('selected');
     });
-    
-    // Adiciona selected no clicado
     element.classList.add('selected');
-    
-    // Atualiza input hidden
     document.getElementById('horario-selecionado').value = horario.id;
 }
-
-// Limpar formulário
 function limparFormulario() {
     const form = document.getElementById('form-oficina');
     if (form) {
@@ -396,27 +316,17 @@ function limparFormulario() {
     }
 }
 
-// ============================================
-// FUNÇÕES DE ALERTA E CARREGAMENTO
-// ============================================
-
-// Função para mostrar erros de forma amigável
 function mostrarErro(mensagem) {
-    // Remover alertas anteriores
     const alertaAnterior = document.querySelector('.alerta-erro');
     if (alertaAnterior) {
         alertaAnterior.remove();
     }
-    
-    // Criar elemento de alerta temporário
     const alerta = document.createElement('div');
     alerta.className = 'alerta-erro';
     alerta.innerHTML = `
         <i class="fas fa-exclamation-circle"></i>
         <span>${mensagem}</span>
     `;
-    
-    // Estilo do alerta
     alerta.style.cssText = `
         position: fixed;
         top: 20px;
@@ -437,8 +347,6 @@ function mostrarErro(mensagem) {
     `;
     
     document.body.appendChild(alerta);
-    
-    // Remover após 3 segundos
     setTimeout(() => {
         if (alerta.parentNode) {
             alerta.style.animation = 'slideDown 0.3s ease reverse';
@@ -450,10 +358,7 @@ function mostrarErro(mensagem) {
         }
     }, 3000);
 }
-
-// Função para mostrar mensagem de sucesso
 function mostrarSucesso(mensagem) {
-    // Remover alertas anteriores
     const alertaAnterior = document.querySelector('.alerta-sucesso');
     if (alertaAnterior) {
         alertaAnterior.remove();
@@ -487,7 +392,6 @@ function mostrarSucesso(mensagem) {
     
     document.body.appendChild(alerta);
     
-    // Remover após 3 segundos
     setTimeout(() => {
         if (alerta.parentNode) {
             alerta.style.animation = 'slideDown 0.3s ease reverse';
@@ -499,8 +403,6 @@ function mostrarSucesso(mensagem) {
         }
     }, 3000);
 }
-
-// Função para mostrar indicador de carregamento
 function mostrarCarregando(mensagem) {
     removerCarregando();
     
@@ -517,7 +419,6 @@ function mostrarCarregando(mensagem) {
     document.body.appendChild(loader);
 }
 
-// Função para remover indicador de carregamento
 function removerCarregando() {
     const loader = document.getElementById('loader-pdf');
     if (loader) {
@@ -525,21 +426,14 @@ function removerCarregando() {
     }
 }
 
-// ============================================
-// INSCRIÇÃO E COMPROVANTE
-// ============================================
-
-// Função principal de inscrição
 function inscreverOficina() {
-    // Coletar dados do formulário
     const tipoInscricao = document.getElementById('tipo-inscricao')?.value;
     const nome = document.getElementById('nome-responsavel')?.value.trim();
     const escola = document.getElementById('escola')?.value.trim();
     const qtdParticipantes = document.getElementById('qtd-participantes')?.value;
     const oficinaId = document.getElementById('oficina')?.value;
     const horarioId = document.getElementById('horario-selecionado')?.value;
-    
-    // Validações
+   
     if (!tipoInscricao) {
         mostrarErro('Por favor, selecione o tipo de inscrição.');
         return;
@@ -570,32 +464,27 @@ function inscreverOficina() {
         return;
     }
     
-    // Buscar nomes da oficina e horário
     const oficinaSelect = document.getElementById('oficina');
     const oficinaNome = oficinaSelect.options[oficinaSelect.selectedIndex].text;
     
     const horarioOption = horariosDisponiveis.find(h => h.id === horarioId);
     const horarioLabel = horarioOption ? horarioOption.label : horarioId;
-    
-    // Preencher cartão de confirmação
+
     document.getElementById('conf-nome').textContent = nome;
     document.getElementById('conf-escola').textContent = escola;
     document.getElementById('conf-participantes').textContent = qtdParticipantes;
     document.getElementById('conf-oficina').textContent = oficinaNome;
     document.getElementById('conf-horario').textContent = horarioLabel;
     document.getElementById('conf-data').textContent = '25 de Junho de 2026';
-    
-    // Fechar modal de inscrição
+
     fecharModal();
     
-    // Pequeno delay para garantir transição suave
     setTimeout(() => {
         const modalConfirmacao = document.getElementById('modal-confirmacao');
         if (modalConfirmacao) {
             modalConfirmacao.style.display = 'flex';
             document.body.style.overflow = 'hidden';
             
-            // Scroll para o topo do cartão
             const cartao = modalConfirmacao.querySelector('.cartao-confirmacao');
             if (cartao) {
                 cartao.scrollTop = 0;
@@ -604,7 +493,6 @@ function inscreverOficina() {
     }, 300);
 }
 
-// Função para salvar inscrição como PNG
 function salvarInscricao() {
     const cartao = document.querySelector('.cartao-confirmacao');
     
@@ -612,18 +500,14 @@ function salvarInscricao() {
         mostrarErro('Erro ao gerar comprovante. Tente novamente.');
         return;
     }
-    
-    // Verificar se a biblioteca está disponível
+
     if (typeof html2canvas === 'undefined') {
         mostrarErro('Funcionalidade não disponível. Use Ctrl+P para imprimir.');
         setTimeout(() => window.print(), 2000);
         return;
     }
-    
-    // Mostrar loader
+
     mostrarCarregando('Gerando comprovante...');
-    
-    // Ocultar botões temporariamente para não aparecerem na imagem
     const botoes = cartao.querySelector('.cartao-actions');
     const botoesDisplayOriginal = botoes ? botoes.style.display : '';
     if (botoes) {
@@ -637,14 +521,11 @@ function salvarInscricao() {
         logging: false,
         allowTaint: true
     }).then(canvas => {
-        // Restaurar botões
         if (botoes) {
             botoes.style.display = botoesDisplayOriginal;
         }
         
         removerCarregando();
-        
-        // Criar link de download
         const link = document.createElement('a');
         link.download = 'comprovante-oficina-feira-ciencias-2026.png';
         link.href = canvas.toDataURL('image/png');
@@ -652,7 +533,6 @@ function salvarInscricao() {
         
         mostrarSucesso('Comprovante salvo com sucesso!');
     }).catch(error => {
-        // Restaurar botões em caso de erro
         if (botoes) {
             botoes.style.display = botoesDisplayOriginal;
         }
@@ -662,11 +542,6 @@ function salvarInscricao() {
         mostrarErro('Erro ao gerar comprovante. Tente usar Ctrl+P para imprimir.');
     });
 }
-
-// ============================================
-// ATUALIZAR BOTÕES
-// ============================================
-
 function atualizarBotoesOficina() {
     const botoesOficina = document.querySelectorAll('.science-btn');
     
@@ -717,18 +592,10 @@ function atualizarBotoesOficina() {
         }
     });
 }
-
-// Atualizar a cada 1 minuto para precisão
 setInterval(atualizarBotoesOficina, 60000);
 
-// Atualizar a cada hora
 setInterval(atualizarBotoesOficina, 3600000);
 
-// ============================================
-// ESTILOS DINÂMICOS
-// ============================================
-
-// Adicionar animação para os alertas
 const styleAlerta = document.createElement('style');
 styleAlerta.textContent = `
     @keyframes slideDown {
@@ -818,10 +685,6 @@ styleAlerta.textContent = `
     }
 `;
 document.head.appendChild(styleAlerta);
-
-// ============================================
-// EXPORTAR FUNÇÕES GLOBAIS
-// ============================================
 
 window.abrirModalOficina = abrirModalOficina;
 window.fecharModal = fecharModal;
