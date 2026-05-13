@@ -1414,3 +1414,219 @@
         box-shadow: 0 0 0 10px rgba(79, 119, 45, 0);
     }
 }
+/* ============================
+   MODELOS DE DOCUMENTOS
+   ============================ */
+.modelos-section {
+    padding: 60px 0;
+    background: linear-gradient(135deg, #f8f9fc 0%, #e8ecf1 100%);
+}
+
+.modelos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.modelo-card {
+    background: white;
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+    position: relative;
+    border: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modelo-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+}
+
+.modelo-card.destaque {
+    border: 2px solid #667eea;
+    background: linear-gradient(135deg, white 0%, #f0f2ff 100%);
+}
+
+.badge-obrigatorio {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+}
+
+.modelo-card-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: white;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.modelo-card-content h3 {
+    font-size: 1.3rem;
+    color: #2d3748;
+    margin: 0 0 10px;
+    font-weight: 700;
+}
+
+.modelo-card-content p {
+    font-size: 0.95rem;
+    color: #718096;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.modelo-info {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.modelo-info li {
+    font-size: 0.85rem;
+    color: #a0aec0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.modelo-info li i {
+    color: #667eea;
+}
+
+.modelo-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-modelo {
+    padding: 12px 22px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-download {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.btn-download:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.btn-preview {
+    background: #e2e8f0;
+    color: #4a5568;
+}
+
+.btn-preview:hover {
+    background: #cbd5e0;
+    transform: translateY(-2px);
+}
+
+.modelos-aviso {
+    margin-top: 40px;
+    background: white;
+    padding: 20px 25px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-left: 5px solid #667eea;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.04);
+}
+
+.modelos-aviso i {
+    font-size: 1.5rem;
+    color: #667eea;
+    flex-shrink: 0;
+}
+
+.modelos-aviso p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #4a5568;
+    line-height: 1.5;
+}
+.modal-preview-container {
+    max-width: 500px;
+}
+
+.preview-body {
+    text-align: center;
+    padding: 40px 30px;
+}
+
+.preview-info {
+    margin-bottom: 30px;
+}
+
+.preview-info i {
+    font-size: 4rem;
+    color: #667eea;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.preview-info p {
+    font-size: 1rem;
+    color: #718096;
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+.preview-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+@media (max-width: 768px) {
+    .modelos-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .modelo-card {
+        padding: 25px;
+    }
+    
+    .modelo-actions {
+        flex-direction: column;
+    }
+    
+    .btn-modelo {
+        justify-content: center;
+    }
+}

@@ -542,6 +542,23 @@ function salvarInscricao() {
         mostrarErro('Erro ao gerar comprovante. Tente usar Ctrl+P para imprimir.');
     });
 }
+function previewDocumento(url, titulo) {
+    const modal = document.getElementById('modal-preview');
+    const previewTitulo = document.getElementById('preview-titulo');
+    const downloadLink = document.getElementById('preview-download-link');
+    
+    previewTitulo.innerHTML = `<i class="fas fa-file-alt"></i> ${titulo}`;
+    downloadLink.href = url;
+    
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function fecharPreview() {
+    const modal = document.getElementById('modal-preview');
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+}
 function atualizarBotoesOficina() {
     const botoesOficina = document.querySelectorAll('.science-btn');
     
