@@ -1,4 +1,4 @@
-// news.js - Gerenciador de Notícias integrado com Google Sheets
+// news.js 
 class NewsManager {
     constructor() {
         this.noticias = [];
@@ -10,11 +10,9 @@ class NewsManager {
         this.autoPlayInterval = null;
         this.isTransitioning = false;
         
-        // Configuração do fallback
-        this.MIN_NOTICIAS = 6; // Mínimo de notícias desejado
-        this.usouFallback = false; // Flag para saber se usou fallback
+        this.MIN_NOTICIAS = 6;
+        this.usouFallback = false;
         
-        // Verificar se elementos existem antes de inicializar
         if (!this.carousel) {
             console.warn('⚠️ Carrossel de notícias não encontrado no DOM');
             return;
@@ -31,20 +29,17 @@ class NewsManager {
 
     async loadNews() {
         try {
-            // NOVO: Buscar notícias da planilha NEWS
             console.log('📰 Buscando notícias da planilha...');
             
             let noticiasOriginais = [];
             
-            // Verificar se a função fetchData está disponível globalmente
             if (typeof window.fetchData === 'function') {
                 try {
                     const dadosPlanilha = await window.fetchData('NEWS', 'news');
                     
                     if (dadosPlanilha && Array.isArray(dadosPlanilha)) {
-                        // Mapear os dados da planilha para o formato esperado
                         noticiasOriginais = dadosPlanilha
-                            .filter(item => item.titulo && item.titulo.trim() !== '') // Filtra itens sem título
+                            .filter(item => item.titulo && item.titulo.trim() !== '')
                             .map((item, index) => ({
                                 id: index + 1,
                                 titulo: item.titulo || 'Notícia sem título',
@@ -62,8 +57,6 @@ class NewsManager {
                     }
                 } catch (planilhaError) {
                     console.error('❌ Erro ao buscar da planilha:', planilhaError);
-                    
-                    // TENTAR FALLBACK PARA JSON se a planilha falhar
                     console.log('🔄 Tentando fallback para news.json...');
                     noticiasOriginais = await this.loadFromJson();
                 }
@@ -71,23 +64,19 @@ class NewsManager {
                 console.warn('⚠️ Função fetchData não encontrada, tentando JSON...');
                 noticiasOriginais = await this.loadFromJson();
             }
-            
-            // VERIFICA SE PRECISA DE FALLBACK DE FOTOS (menos que o mínimo)
+
+            noticiasOriginais = this.filtrarNoticiasRecentes(noticiasOriginais);
+
             if (noticiasOriginais.length < this.MIN_NOTICIAS) {
-                console.log(`📸 Apenas ${noticiasOriginais.length} notícias encontradas. Buscando fotos da escola para completar...`);
+                console.log(`📸 Apenas ${noticiasOriginais.length} notícias. Buscando fotos da escola...`);
                 
-                // Busca fotos da escola como fallback
                 if (typeof window.buscarFotosEscola === 'function') {
                     const fotosEscola = await window.buscarFotosEscola();
                     
                     if (fotosEscola && fotosEscola.length > 0) {
-                        console.log(`✅ Encontradas ${fotosEscola.length} fotos da escola`);
-                        
-                        // Calcula quantas fotos precisa para atingir o mínimo
                         const faltam = this.MIN_NOTICIAS - noticiasOriginais.length;
                         const fotosNecessarias = Math.min(faltam, fotosEscola.length);
                         
-                        // Converte as fotos necessárias em formato de notícia
                         const fotosComoNoticias = fotosEscola.slice(0, fotosNecessarias).map((foto, index) => ({
                             id: `fallback_${index + 1}`,
                             titulo: "📸 Conheça Nossa Escola",
@@ -95,30 +84,22 @@ class NewsManager {
                             imagem: foto.LINK || "assets/img/Escola_Entrada.jpg",
                             data: foto.DATA || new Date().toISOString().split('T')[0],
                             legenda: foto.LEGENDA || "Foto da estrutura escolar",
-                            isFallback: true // Marca como conteúdo de fallback
+                            isFallback: true
                         }));
                         
-                        // COMBINA notícias originais + fotos de fallback
                         this.noticias = [...noticiasOriginais, ...fotosComoNoticias];
                         this.usouFallback = fotosNecessarias > 0;
-                        
-                        console.log(`🎯 Total: ${this.noticias.length} itens (${noticiasOriginais.length} notícias + ${fotosNecessarias} fotos complementares)`);
                     } else {
-                        // Não encontrou fotos, usa só as notícias que tem
                         this.noticias = noticiasOriginais;
-                        console.log(`⚠️ Nenhuma foto encontrada, usando apenas ${this.noticias.length} notícias`);
                     }
                 } else {
-                    console.warn('⚠️ Função buscarFotosEscola não está disponível');
                     this.noticias = noticiasOriginais;
                 }
             } else {
-                // Tem notícias suficientes, usa só elas
                 this.noticias = noticiasOriginais;
-                console.log(`✅ ${this.noticias.length} notícias suficientes, sem necessidade de fallback`);
             }
             
-            // Renderizar (mesmo que seja vazio)
+            console.log(`🎯 Total: ${this.noticias.length} itens no carrossel`);
             this.renderNews();
             
         } catch (error) {
@@ -127,48 +108,80 @@ class NewsManager {
         }
     }
     
-    // NOVO: Método de fallback para carregar do JSON (backup)
     async loadFromJson() {
         try {
             const response = await fetch('assets/txt/news.json');
-            
             if (response.ok) {
                 const data = await response.json();
-                
                 if (data.noticias && Array.isArray(data.noticias)) {
                     console.log(`📄 ${data.noticias.length} notícias carregadas do JSON (fallback)`);
                     return data.noticias;
                 }
             }
-            
             return [];
         } catch (error) {
             console.error('❌ Erro ao carregar JSON de fallback:', error);
             return [];
         }
     }
+    filtrarNoticiasRecentes(noticias) {
+        const hoje = new Date();
+        hoje.setHours(23, 59, 59, 999); 
+        
+        const dezDiasAtras = new Date();
+        dezDiasAtras.setDate(hoje.getDate() - 10);
+        dezDiasAtras.setHours(0, 0, 0, 0); 
+        
+        const noticiasFiltradas = noticias.filter(noticia => {
+            if (!noticia.data) return false;
+            
+            try {
+                let dataNoticia;
+                if (noticia.data.includes('/')) {
+                    const partes = noticia.data.split('/');
+                    if (partes.length === 3) {
+                        dataNoticia = new Date(partes[2], partes[1] - 1, partes[0]);
+                    } else {
+                        return false;
+                    }
+                } 
+                else {
+                    dataNoticia = new Date(noticia.data);
+                }
+                
+                if (isNaN(dataNoticia.getTime())) return false;
+                return dataNoticia >= dezDiasAtras && dataNoticia <= hoje;
+                
+            } catch (error) {
+                return false;
+            }
+        });
+        
+        const removidas = noticias.length - noticiasFiltradas.length;
+        if (removidas > 0) {
+            console.log(`🗑️ ${removidas} notícias removidas (mais de 10 dias ou data futura)`);
+        }
+        console.log(`📅 ${noticiasFiltradas.length} notícias dentro do período de 10 dias`);
+        
+        return noticiasFiltradas;
+    }
 
     renderNews() {
         if (!this.carousel) return;
 
-        // Limpar carrossel existente
         this.carousel.innerHTML = '';
         
-        // Se não houver absolutamente nada
         if (this.noticias.length === 0) {
             this.renderEmptyState();
             return;
         }
         
-        // Renderizar cada notícia (combinadas)
         this.noticias.forEach((noticia, index) => {
             const slide = document.createElement('div');
             slide.className = `news-slide ${index === 0 ? 'active' : ''}`;
             
-            // Converter link da imagem se necessário (para links do Google Drive)
             let imagemUrl = noticia.imagem;
             
-            // Verificar se é link do Google Drive e converter
             if (imagemUrl && imagemUrl.includes('drive.google.com')) {
                 if (typeof window.converterLinksDrive === 'function') {
                     const urlsConvertidas = window.converterLinksDrive(imagemUrl);
@@ -176,7 +189,6 @@ class NewsManager {
                         imagemUrl = urlsConvertidas[0];
                     }
                 } else {
-                    // Extrair ID do Drive manualmente
                     const match = imagemUrl.match(/[-\w]{25,}/);
                     if (match) {
                         imagemUrl = `https://drive.google.com/uc?export=view&id=${match[0]}`;
@@ -184,15 +196,11 @@ class NewsManager {
                 }
             }
             
-            // Fallback se a imagem estiver vazia
             if (!imagemUrl || imagemUrl.trim() === '') {
                 imagemUrl = 'assets/img/Escola_Entrada.jpg';
             }
             
-            // Formatar data
             const dataFormatada = this.formatDate(noticia.data);
-            
-            // Adiciona classe especial se for fallback
             const fallbackClass = noticia.isFallback ? 'news-fallback' : '';
             
             slide.innerHTML = `
@@ -241,12 +249,10 @@ class NewsManager {
             this.carousel.appendChild(slide);
         });
 
-        // Adicionar aviso se usou fallback
         if (this.usouFallback) {
             this.addFallbackNotice();
         }
 
-        // Atualizar indicadores
         this.updateIndicators(this.noticias.length);
         if (this.totalSlidesSpan) this.totalSlidesSpan.textContent = this.noticias.length;
         if (this.currentSlideSpan) this.currentSlideSpan.textContent = '1';
@@ -275,14 +281,12 @@ class NewsManager {
             </div>
         `;
         
-        // Atualizar indicadores vazios
         this.updateIndicators(1);
         if (this.totalSlidesSpan) this.totalSlidesSpan.textContent = '1';
         if (this.currentSlideSpan) this.currentSlideSpan.textContent = '1';
     }
 
     addFallbackNotice() {
-        // Adiciona um aviso sutil no carrossel indicando que há conteúdo complementar
         const notice = document.createElement('div');
         notice.className = 'fallback-notice';
         notice.innerHTML = `
@@ -292,12 +296,10 @@ class NewsManager {
             </div>
         `;
         
-        // Insere após o carrossel
         const container = document.querySelector('.news-carousel-container');
         if (container && !document.querySelector('.fallback-notice')) {
             container.appendChild(notice);
             
-            // Remove após 5 segundos
             setTimeout(() => {
                 notice.style.opacity = '0';
                 setTimeout(() => notice.remove(), 500);
@@ -315,7 +317,6 @@ class NewsManager {
             const indicator = document.createElement('div');
             indicator.className = `indicator ${i === this.currentSlide ? 'active' : ''}`;
             
-            // Adiciona indicador visual se for slide de fallback
             if (this.noticias[i] && this.noticias[i].isFallback) {
                 indicator.classList.add('indicator-fallback');
                 indicator.setAttribute('aria-label', `Slide ${i + 1} - Conteúdo da galeria da escola`);
@@ -340,12 +341,10 @@ class NewsManager {
         if (!dateString) return 'Data não informada';
         
         try {
-            // Se for string com barras (formato brasileiro)
             if (typeof dateString === 'string' && dateString.includes('/')) {
                 return dateString;
             }
             
-            // Tentar converter para objeto Date
             const date = new Date(dateString);
             if (isNaN(date.getTime())) {
                 return dateString;
@@ -363,7 +362,6 @@ class NewsManager {
 
     escapeHtml(text) {
         if (!text) return '';
-        
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
@@ -377,21 +375,17 @@ class NewsManager {
         
         if (!slides.length) return;
         
-        // Validar índice
         if (index < 0) index = 0;
         if (index >= slides.length) index = slides.length - 1;
         
         this.isTransitioning = true;
         
-        // Remover active de todos os slides
         slides.forEach(slide => {
             slide.classList.remove('active');
         });
         
-        // Adicionar active ao slide atual
         slides[index].classList.add('active');
         
-        // Atualizar indicadores
         indicators.forEach((ind, i) => {
             ind.classList.toggle('active', i === index);
         });
@@ -399,7 +393,6 @@ class NewsManager {
         this.currentSlide = index;
         this.updateCounter();
         
-        // Liberar transição após animação
         setTimeout(() => {
             this.isTransitioning = false;
         }, 500);
@@ -422,7 +415,6 @@ class NewsManager {
     }
 
     setupEventListeners() {
-        // Botões de navegação
         const nextBtn = document.querySelector('.news-next');
         const prevBtn = document.querySelector('.news-prev');
         
@@ -442,9 +434,7 @@ class NewsManager {
             });
         }
 
-        // Controles por teclado (só se o carrossel estiver visível)
         document.addEventListener('keydown', (e) => {
-            // Verifica se o carrossel está visível na tela
             const carouselContainer = document.querySelector('.news-carousel-container');
             if (!carouselContainer) return;
             
@@ -464,14 +454,12 @@ class NewsManager {
             }
         });
 
-        // Pausar no hover
         const container = document.querySelector('.news-carousel-container');
         if (container) {
             container.addEventListener('mouseenter', () => this.stopAutoPlay());
             container.addEventListener('mouseleave', () => this.startAutoPlay());
         }
 
-        // Pausar quando a aba não está visível (economia de recursos)
         document.addEventListener('visibilitychange', () => {
             if (document.hidden) {
                 this.stopAutoPlay();
@@ -480,7 +468,6 @@ class NewsManager {
             }
         });
         
-        // Touch events para mobile
         let touchStartX = 0;
         let touchEndX = 0;
         
@@ -500,15 +487,13 @@ class NewsManager {
         const slides = document.querySelectorAll('.news-slide');
         if (!slides.length) return;
         
-        const swipeThreshold = 50; // pixels mínimos para considerar swipe
+        const swipeThreshold = 50;
         const diffX = this.touchEndX - this.touchStartX;
         
         if (Math.abs(diffX) > swipeThreshold) {
             if (diffX > 0) {
-                // Swipe para direita (anterior)
                 this.prevSlide();
             } else {
-                // Swipe para esquerda (próximo)
                 this.nextSlide();
             }
             this.resetAutoPlay();
@@ -516,7 +501,6 @@ class NewsManager {
     }
 
     startAutoPlay() {
-        // Não iniciar se tiver 1 ou nenhum slide
         const slides = document.querySelectorAll('.news-slide');
         if (slides.length <= 1) return;
         
@@ -524,7 +508,7 @@ class NewsManager {
         
         this.autoPlayInterval = setInterval(() => {
             this.nextSlide();
-        }, 6000); // 6 segundos
+        }, 6000);
     }
 
     stopAutoPlay() {
@@ -562,30 +546,16 @@ class NewsManager {
             </div>
         `;
         
-        // Atualizar indicadores
         this.updateIndicators(1);
         if (this.totalSlidesSpan) this.totalSlidesSpan.textContent = '1';
         if (this.currentSlideSpan) this.currentSlideSpan.textContent = '1';
     }
 }
 
-// Inicializar quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', () => {
-    // Verificar se já existe uma instância
     if (!window.newsManager) {
         window.newsManager = new NewsManager();
         console.log('🚀 NewsManager inicializado com integração Google Sheets');
     }
 });
 
-// Para debug (opcional)
-if (window.location.hostname === 'localhost' || window.location.hostname.includes('127.0.0.1')) {
-    window.debugNews = () => {
-        console.log('📊 Debug do NewsManager:');
-        console.log('- Notícias:', window.newsManager?.noticias);
-        console.log('- Slide atual:', window.newsManager?.currentSlide);
-        console.log('- AutoPlay:', window.newsManager?.autoPlayInterval ? 'Ativo' : 'Inativo');
-        console.log('- Usou fallback:', window.newsManager?.usouFallback);
-        console.log('- Mínimo configurado:', window.newsManager?.MIN_NOTICIAS);
-    };
-}   

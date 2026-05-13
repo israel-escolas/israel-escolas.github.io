@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="assets/css/comunicados.css">
 </head>
 <body>
-    <!-- Cabeçalho e Menu -->
     <header>
         <div class="container header-container">
             <a href="" class="logo">
@@ -63,8 +62,7 @@
     <div class="container">
         <h1><i class="fas fa-bullhorn"></i> Comunicados</h1>
         <p class="page-description">Avisos e informativos importantes da escola.</p>
-        
-        <!-- Filtros -->
+
         <div class="comunicados-filtros">
             <div class="filtro-group">
                 <label for="filtroDestinatario">Destinatário:</label>
@@ -97,18 +95,95 @@
             
             <button id="limparFiltros" class="btn-limpar">Limpar filtros</button>
         </div>
-        
-        <!-- Container dos comunicados -->
+
         <div id="comunicadosContainer" class="comunicados-lista">
             <div class="loading-comunicados">
                 <i class="fas fa-spinner fa-spin"></i>
                 <p>Carregando comunicados...</p>
             </div>
         </div>
+
+        <section class="todas-noticias-section" id="news">
+            <div class="todas-noticias-header">
+                <div class="header-left">
+                    <h2>
+                        <i class="fas fa-newspaper"></i> 
+                        Notícias da Escola
+                        <span class="noticias-count-badge" id="countTodasNoticias">0</span>
+                    </h2>
+                    <p class="header-subtitle">
+                        Histórico completo de notícias • 
+                        <span id="countRecentes">0</span> recentes (últimas 2 semanas)
+                    </p>
+                </div>
+                
+                <div class="header-controls">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" 
+                            id="searchTodasNoticias" 
+                            placeholder="Buscar notícias..."
+                            aria-label="Buscar notícias">
+                    </div>
+                    
+                    <button id="limparFiltrosTodas" class="btn-control" title="Limpar busca">
+                        <i class="fas fa-sync-alt"></i> Limpar
+                    </button>
+                    
+                    <button id="toggleTodasNoticias" class="btn-control btn-toggle" 
+                            aria-expanded="true" title="Mostrar/Ocultar">
+                        <i class="fas fa-chevron-up"></i>
+                        <span>Ocultar</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="todas-noticias-gallery" id="todasNoticiasContent">
+                <div class="noticias-loading">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Carregando notícias...</p>
+                </div>
+            </div>
+        </section>
     </div>
 </main>
 
-    <!-- Rodapé -->
+<div class="noticia-modal-overlay" id="noticiaModal">
+    <div class="noticia-modal">
+        <button class="modal-close" id="modalClose">✕</button>
+        
+        <div class="modal-carousel">
+            <div class="modal-carousel-track" id="modalCarouselTrack">
+            </div>
+            
+            <button class="modal-carousel-btn prev" id="modalPrev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="modal-carousel-btn next" id="modalNext">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            
+            <div class="modal-carousel-counter" id="modalCounter">1 / 1</div>
+            <div class="modal-carousel-indicators" id="modalIndicators">
+            </div>
+        </div>
+        
+        <div class="modal-body">
+            <h2 id="modalTitulo">Título da notícia</h2>
+            <div class="modal-meta">
+                <span id="modalData"><i class="far fa-calendar-alt"></i> </span>
+                <span id="modalLegenda"><i class="fas fa-camera"></i> </span>
+            </div>
+            <div class="conteudo-completo" id="modalConteudo">
+                Conteúdo completo aqui...
+            </div>
+            <a href="#" id="modalLink" class="noticia-link" target="_blank" rel="noopener noreferrer" style="display:none;">
+                Saiba mais <i class="fas fa-external-link-alt"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
     <footer>
         <div class="logo-footer">
             <img src="assets/img/LOGO.png" alt="">
@@ -125,5 +200,6 @@
     <script src="assets/js/script.js"></script>
     <script src="assets/js/api.js"></script>
     <script src="assets/js/comunicados.js"></script>
+    <script src="assets/js/todas-noticias.js"></script>
 </body>
 </html>
