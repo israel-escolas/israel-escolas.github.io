@@ -956,7 +956,9 @@ main {
 .news-card img {
     width: 100%;
     max-width: 500px;
-    height: auto;
+    height: 300px; 
+    object-fit: cover; 
+    object-position: center;
     border-radius: 16px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     transition: transform 0.5s ease;
