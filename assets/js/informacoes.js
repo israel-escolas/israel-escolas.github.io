@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
         
         // Limitar a 10 fotos para performance
-        const fotosLimitadas = fotos.slice(0, 10);
+        const fotosLimitadas = fotos;
         
         // Atualizar contador total
         totalSlidesSpan.textContent = fotosLimitadas.length;
