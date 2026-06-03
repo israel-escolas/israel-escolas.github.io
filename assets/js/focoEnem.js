@@ -371,5 +371,223 @@ if (document.readyState === 'loading') {
 } else {
     adicionarCSSFocoEnem();
 }
+// ================================
+// ESTATÍSTICAS ENEM - DADOS
+// ================================
+const estatisticasENEM = {
+    series: [
+        {
+            nome: '1º Ano',
+            icone: 'fa-star',
+            cor: '#3498db',
+            corClara: '#ebf5fb',
+            inscritos: 6,
+            total: 57
+        },
+        {
+            nome: '2º Ano',
+            icone: 'fa-medal',
+            cor: '#2ecc71',
+            corClara: '#eafaf1',
+            inscritos: 26,
+            total: 59,
+            destaque: true
+        },
+        {
+            nome: '3º Ano',
+            icone: 'fa-trophy',
+            cor: '#8e44ad',
+            corClara: '#f4ecf7',
+            inscritos: 34,
+            total: 37
+        }
+    ]
+};
 
-console.log('🚀 FOCO ENEM.js configurado para focoEnem.html');
+// ================================
+// FUNÇÕES AUXILIARES
+// ================================
+
+// Calcula porcentagem
+function calcularPorcentagem(inscritos, total) {
+    return Math.round((inscritos / total) * 100);
+}
+
+// Cria gráfico circular SVG
+function criarGraficoSVG(porcentagem, cor) {
+    return `
+        <svg viewBox="0 0 36 36">
+            <path class="grafico-bg"
+                d="M18 2.0845
+                a 15.9155 15.9155 0 0 1 0 31.831
+                a 15.9155 15.9155 0 0 1 0 -31.831"
+                fill="none"
+                stroke="#e0e6ed"
+                stroke-width="3"
+            />
+            <path class="grafico-progresso"
+                d="M18 2.0845
+                a 15.9155 15.9155 0 0 1 0 31.831
+                a 15.9155 15.9155 0 0 1 0 -31.831"
+                fill="none"
+                stroke="${cor}"
+                stroke-width="3"
+                stroke-dasharray="${porcentagem}, 100"
+            />
+            <text x="18" y="20.5" class="grafico-texto">${porcentagem}%</text>
+        </svg>
+    `;
+}
+
+// Cria card de estatística
+function criarCardEstatistica(serie) {
+    const porcentagem = calcularPorcentagem(serie.inscritos, serie.total);
+    const classeDestaque = serie.destaque ? ' destaque' : '';
+    
+    return `
+        <div class="estatistica-card${classeDestaque}">
+            <div class="estatistica-header">
+                <i class="fas ${serie.icone}"></i>
+                <h3>${serie.nome}</h3>
+            </div>
+            <div class="grafico-container">
+                <div class="grafico-circular" data-porcentagem="${porcentagem}">
+                    ${criarGraficoSVG(porcentagem, serie.cor)}
+                </div>
+            </div>
+            <div class="estatistica-info">
+                <div class="info-numero">
+                    <span class="numero-destaque" style="color: ${serie.cor}">${serie.inscritos}</span>
+                    <span class="numero-total">/ ${serie.total}</span>
+                </div>
+                <p class="info-label">alunos inscritos</p>
+            </div>
+            <div class="progresso-barra">
+                <div class="progresso-preenchido" 
+                     style="width: ${porcentagem}%; background: linear-gradient(90deg, ${serie.cor}, ${serie.cor}cc)">
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Cria resumo geral
+function criarResumoGeral() {
+    const totalInscritos = estatisticasENEM.series.reduce((soma, serie) => soma + serie.inscritos, 0);
+    const totalAlunos = estatisticasENEM.series.reduce((soma, serie) => soma + serie.total, 0);
+    const participacaoGeral = calcularPorcentagem(totalInscritos, totalAlunos);
+    
+    return `
+        <div class="resumo-item">
+            <i class="fas fa-users"></i>
+            <div>
+                <span class="resumo-numero">${totalInscritos}</span>
+                <span class="resumo-label">Total de Inscritos</span>
+            </div>
+        </div>
+        <div class="resumo-item">
+            <i class="fas fa-user-graduate"></i>
+            <div>
+                <span class="resumo-numero">${totalAlunos}</span>
+                <span class="resumo-label">Total de Alunos</span>
+            </div>
+        </div>
+        <div class="resumo-item">
+            <i class="fas fa-percentage"></i>
+            <div>
+                <span class="resumo-numero">${participacaoGeral}%</span>
+                <span class="resumo-label">Participação Geral</span>
+            </div>
+        </div>
+    `;
+}
+
+// ================================
+// RENDERIZA AS ESTATÍSTICAS
+// ================================
+function renderizarEstatisticas() {
+    const gridContainer = document.getElementById('estatisticasGrid');
+    const resumoContainer = document.getElementById('resumoGeral');
+    
+    if (!gridContainer || !resumoContainer) {
+        console.warn('⚠️ Containers de estatísticas não encontrados');
+        return;
+    }
+    
+    // Renderiza cards
+    gridContainer.innerHTML = estatisticasENEM.series
+        .map(serie => criarCardEstatistica(serie))
+        .join('');
+    
+    // Renderiza resumo
+    resumoContainer.innerHTML = criarResumoGeral();
+    
+    console.log('✅ Estatísticas ENEM renderizadas com sucesso!');
+}
+
+// ================================
+// ANIMAÇÃO DAS BARRAS DE PROGRESSO
+// ================================
+function animarBarrasProgresso() {
+    const barras = document.querySelectorAll('.progresso-preenchido');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const barra = entry.target;
+                const width = barra.style.width;
+                
+                // Reseta e anima
+                barra.style.width = '0%';
+                setTimeout(() => {
+                    barra.style.width = width;
+                }, 100);
+                
+                observer.unobserve(barra);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    barras.forEach(barra => observer.observe(barra));
+}
+
+// ================================
+// FUNÇÃO PARA ATUALIZAR DADOS
+// ================================
+function atualizarDadosENEM(novosDados) {
+    if (novosDados.series) {
+        estatisticasENEM.series = novosDados.series;
+    }
+    
+    renderizarEstatisticas();
+    setTimeout(animarBarrasProgresso, 200);
+    
+    console.log('📊 Dados ENEM atualizados:', estatisticasENEM);
+}
+
+// ================================
+// INICIALIZAÇÃO
+// ================================
+document.addEventListener('DOMContentLoaded', function() {
+    // Verifica se está na página do ENEM
+    if (document.getElementById('estatisticasGrid')) {
+        renderizarEstatisticas();
+        
+        // Anima as barras após renderizar
+        setTimeout(animarBarrasProgresso, 300);
+        
+        // Exemplo de como atualizar os dados (descomente para usar)
+        /*
+        setTimeout(() => {
+            atualizarDadosENEM({
+                series: [
+                    { nome: '1º Ano', icone: 'fa-star', cor: '#3498db', inscritos: 25, total: 45 },
+                    { nome: '2º Ano', icone: 'fa-medal', cor: '#2ecc71', inscritos: 30, total: 34, destaque: true },
+                    { nome: '3º Ano', icone: 'fa-trophy', cor: '#8e44ad', inscritos: 38, total: 38 }
+                ]
+            });
+        }, 5000);
+        */
+    }
+});
+

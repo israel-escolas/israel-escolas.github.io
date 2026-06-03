@@ -12,10 +12,10 @@
 <body>
     <header>
         <div class="container header-container">
-            <a class="logoFeira">
+            <a class="logoFeira" href="index.html">
                 <img src="assets/img/eventos/LOGO FEIRA.png" alt="Logo Escola">
             </a>
-            <nav class="navbar">
+            <nav class="navbar" aria-label="Navegação principal">
                 <ul class="nav-menu">
                     <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
                     <li><a href="horarios.html"><i class="fas fa-clock"></i> Horários</a></li>
@@ -27,7 +27,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="eventos.html"><i class="fas fa-images"></i> Eventos</a></li>
                             <li><a href="comunicados.html"><i class="fas fa-bullhorn"></i> Comunicados</a></li>
-                            <li><a href="feira.html" ><i class="fa-solid fa-vial-virus"></i> Feira 2026</a></li>
+                            <li><a href="feira.html"><i class="fa-solid fa-vial-virus"></i> Feira 2026</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -51,7 +51,7 @@
                         </ul>
                     </li>
                 </ul>
-                <button class="hamburger" id="hamburger">
+                <button class="hamburger" id="hamburger" aria-label="Menu de navegação">
                     <i class="fas fa-bars"></i>
                 </button>
             </nav>
@@ -59,6 +59,7 @@
     </header>
 
     <main>
+        <!-- BANNER PRINCIPAL -->
         <section class="feira-banner">
             <div class="banner-overlay">
                 <div class="container">
@@ -76,7 +77,8 @@
                 </div>
             </div>
         </section>
-        <!-- Seção de Modelos de Documentos -->
+
+        <!-- MODELOS DE DOCUMENTOS -->
         <section class="modelos-section">
             <div class="container">
                 <div class="section-header">
@@ -98,14 +100,15 @@
                             </ul>
                             <div class="modelo-actions">
                                 <a href="https://docs.google.com/document/d/1DTdyxP9rrdpOY4zPbWPR615mfWaY9EUJ/export?format=docx" 
-                                class="btn-modelo btn-download" 
-                                target="_blank" 
-                                rel="noopener noreferrer">
+                                   class="btn-modelo btn-download" 
+                                   target="_blank" 
+                                   rel="noopener noreferrer">
                                     <i class="fas fa-download"></i> Baixar Modelo
+                                </a>
                                 <a href="https://docs.google.com/document/d/1DTdyxP9rrdpOY4zPbWPR615mfWaY9EUJ/preview" 
-                                class="btn-modelo btn-preview" 
-                                target="_blank" 
-                                rel="noopener noreferrer">
+                                   class="btn-modelo btn-preview" 
+                                   target="_blank" 
+                                   rel="noopener noreferrer">
                                     <i class="fas fa-eye"></i> Visualizar
                                 </a>
                             </div>
@@ -125,15 +128,15 @@
                             </ul>
                             <div class="modelo-actions">
                                 <a href="https://cienciaparatodos.com.br/wp-content/uploads/2023/04/O-Diario-de-Bordo.pdf" 
-                                class="btn-modelo btn-download" 
-                                target="_blank" 
-                                rel="noopener noreferrer">
+                                   class="btn-modelo btn-download" 
+                                   target="_blank" 
+                                   rel="noopener noreferrer">
                                     <i class="fas fa-download"></i> Baixar Modelo
                                 </a>
                                 <a href="https://cienciaparatodos.com.br/wp-content/uploads/2023/04/O-Diario-de-Bordo.pdf" 
-                                class="btn-modelo btn-preview" 
-                                target="_blank" 
-                                rel="noopener noreferrer">
+                                   class="btn-modelo btn-preview" 
+                                   target="_blank" 
+                                   rel="noopener noreferrer">
                                     <i class="fas fa-eye"></i> Visualizar
                                 </a>
                             </div>
@@ -151,20 +154,20 @@
                                 <li><i class="fas fa-file-word"></i> Formato: DOCX</li>
                                 <li><i class="fa-solid fa-eye"></i> Google Docs</li>
                             </ul>
-                        <div class="modelo-actions">
-                            <a href="https://docs.google.com/document/d/1X1wmkVlU8GKR8g0xiu1LU7KkBHYj01VU/export?format=docx" 
-                            class="btn-modelo btn-download" 
-                            target="_blank" 
-                            rel="noopener noreferrer">
-                                <i class="fas fa-download"></i> Baixar Modelo
-                            </a>
-                            <a href="https://docs.google.com/document/d/1X1wmkVlU8GKR8g0xiu1LU7KkBHYj01VU/preview" 
-                            class="btn-modelo btn-preview" 
-                            target="_blank" 
-                            rel="noopener noreferrer">
-                                <i class="fas fa-eye"></i> Visualizar
-                            </a>
-                        </div>
+                            <div class="modelo-actions">
+                                <a href="https://docs.google.com/document/d/1X1wmkVlU8GKR8g0xiu1LU7KkBHYj01VU/export?format=docx" 
+                                   class="btn-modelo btn-download" 
+                                   target="_blank" 
+                                   rel="noopener noreferrer">
+                                    <i class="fas fa-download"></i> Baixar Modelo
+                                </a>
+                                <a href="https://docs.google.com/document/d/1X1wmkVlU8GKR8g0xiu1LU7KkBHYj01VU/preview" 
+                                   class="btn-modelo btn-preview" 
+                                   target="_blank" 
+                                   rel="noopener noreferrer">
+                                    <i class="fas fa-eye"></i> Visualizar
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -175,6 +178,8 @@
                 </div>
             </div>
         </section>
+
+        <!-- COUNTDOWN -->
         <section class="countdown-section">
             <div class="container">
                 <div class="countdown-grid">
@@ -197,6 +202,8 @@
                 </div>
             </div>
         </section>
+
+        <!-- DESTAQUES -->
         <section class="destaque-section">
             <div class="container">
                 <div class="destaque-grid">
@@ -219,7 +226,7 @@
                             <i class="fas fa-microscope"></i>
                         </div>
                         <h3>Participação das oficinas</h3>
-                        <p>Estudante da escola e de outras instituições de ensino podem se inscrever para participar das oficinas</p>
+                        <p>Estudantes da escola e de outras instituições de ensino podem se inscrever para participar das oficinas</p>
                         <div class="btn-oficina-wrapper">
                             <button class="science-btn" disabled>
                                 <i class="fas fa-rocket"></i>
@@ -227,7 +234,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="destaque-card destaque-card-oculto">
+                    <div class="destaque-card">
                         <div class="card-icon">
                             <i class="fas fa-trophy"></i>
                         </div>
@@ -237,6 +244,8 @@
                 </div>
             </div>
         </section>
+
+        <!-- REGULAMENTO -->
         <section id="regulamento" class="regulamento-section">
             <div class="container">
                 <div class="section-header">
@@ -320,6 +329,8 @@
                 </div>
             </div>
         </section>
+
+        <!-- CRONOGRAMA -->
         <section class="cronograma-section">
             <div class="container">
                 <div class="section-header">
@@ -349,14 +360,14 @@
                         </div>
                     </div>
                     <div class="timeline-item">
-                        <div class="timeline-date">16 e 21/06</div>
+                        <div class="timeline-date">16 a 21/06</div>
                         <div class="timeline-content">
                             <h4>Envio dos trabalhos completos</h4>
                             <p>Lista de materiais necessários e instruções</p>
                         </div>
                     </div>
                     <div class="timeline-item">
-                        <div class="timeline-date">16 e 23/06</div>
+                        <div class="timeline-date">16 a 23/06</div>
                         <div class="timeline-content">
                             <h4>Inscrições nas oficinas</h4>
                             <p>Professores de outras escolas podem inscrever suas turmas</p>
@@ -385,6 +396,8 @@
                 </div>
             </div>
         </section>
+
+        <!-- INSCRIÇÃO -->
         <section id="inscricao" class="inscricao-section">
             <div class="container">
                 <div class="section-header">
@@ -427,6 +440,8 @@
                 </div>
             </div>
         </section>
+
+        <!-- FAQ -->
         <section class="faq-section">
             <div class="container">
                 <div class="section-header">
@@ -474,6 +489,7 @@
             </div>
         </section>
     </main>
+
     <footer>
         <div class="footer-content">
             <div class="logoFeira footer-logo">
@@ -491,31 +507,45 @@
             <p>&copy; <span id="ano-atual"></span> Escola Estadual Mariana Cavalcanti.</p>
         </div>
     </footer>
-    <div class="modal-overlay" id="modal-oficina">
+
+    <!-- ============================================
+         MODAL DE INSCRIÇÃO EM OFICINAS
+         ============================================ -->
+    <div class="modal-overlay" id="modal-oficina" role="dialog" aria-labelledby="modal-titulo" aria-modal="true">
         <div class="modal-container">
             <div class="modal-header">
-                <h2><i class="fas fa-microscope"></i> Inscrição em Oficinas</h2>
-                <button class="modal-close" onclick="fecharModal()">
+                <h2 id="modal-titulo"><i class="fas fa-microscope"></i> Inscrição em Oficinas</h2>
+                <button class="modal-close" onclick="fecharModal()" aria-label="Fechar modal">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             
             <div class="modal-body">
-                <form id="form-oficina" onsubmit="return false;">
+                <form id="form-oficina" onsubmit="return false;" novalidate>
+                    <!-- DADOS DO RESPONSÁVEL -->
                     <div class="form-section">
-                        <h3><i class="fas fa-user"></i> Dados do Responsável</h3>                        
+                        <h3><i class="fas fa-user"></i> Dados do Responsável</h3>
+                        
                         <div class="form-group">
                             <label for="tipo-inscricao">Tipo de Inscrição *</label>
                             <select id="tipo-inscricao" required>
                                 <option value="">Selecione...</option>
-                                <option value="representante">Representante de Escola</option>
+                                <option value="representante">Turma completa</option>
                                 <option value="individual">Individual</option>
                             </select>
                         </div>
+                        
                         <div class="form-group">
                             <label for="nome-responsavel">Nome Completo *</label>
                             <input type="text" id="nome-responsavel" placeholder="Digite seu nome completo" required>
                         </div>
+                        
+                        <div class="form-group">
+                            <label for="telefone-contato">Telefone para Contato *</label>
+                            <input type="tel" id="telefone-contato" placeholder="(84) 99999-9999" required>
+                            <small class="form-help">Informe um telefone com DDD para contato.</small>
+                        </div>
+                        
                         <div class="form-group">
                             <label for="escola">Escola em que estuda *</label>
                             <div class="input-with-checkbox">
@@ -526,39 +556,39 @@
                                 </label>
                             </div>
                         </div>
+                        
                         <div class="form-group" id="grupo-participantes">
                             <label for="qtd-participantes">Quantidade de Participantes *</label>
                             <input type="number" id="qtd-participantes" min="1" max="50" value="1" required>
                         </div>
                     </div>
+                    
+                    <!-- OFICINA E HORÁRIO (CARREGADOS DA PLANILHA) -->
                     <div class="form-section">
-                        <h3><i class="fas fa-calendar-alt"></i> Oficina e Horário</h3>                        
+                        <h3><i class="fas fa-calendar-alt"></i> Oficina e Horário</h3>
+                        
                         <div class="form-group">
                             <label for="oficina">Selecione a Oficina *</label>
                             <select id="oficina" required>
-                                <option value="">Escolha uma oficina...</option>
-                                <option value="1">🔬 Extração de DNA de Morango</option>
-                                <option value="2">🤖 Introdução à Robótica com Arduino</option>
-                                <option value="3">🧪 Química Divertida: Reações Coloridas</option>
-                                <option value="4">🔭 Observação Astronômica</option>
-                                <option value="5">💻 Programação de Jogos com Scratch</option>
-                                <option value="6">🌱 Cultivo Hidropônico Caseiro</option>
-                                <option value="7">📐 Matemática com Origami</option>
-                                <option value="8">🔋 Construção de Pilhas Caseiras</option>
+                                <option value="">🔄 Carregando oficinas...</option>
                             </select>
+                            <small class="form-help">As oficinas são carregadas automaticamente da planilha.</small>
                         </div>
+                        
                         <div class="form-group">
                             <label>Selecione o Horário *</label>
-                            <div class="horarios-grid" id="horarios-grid">
+                            <div class="horarios-grid" id="horarios-grid" role="radiogroup" aria-label="Horários disponíveis">
+                                <p style="color:#999;text-align:center;width:100%;">Selecione uma oficina primeiro</p>
                             </div>
                             <input type="hidden" id="horario-selecionado" required>
                         </div>
                     </div>
+                    
                     <div class="form-actions">
                         <button type="button" class="btn-cancelar" onclick="fecharModal()">
                             <i class="fas fa-times"></i> Cancelar
                         </button>
-                        <button type="button" class="btn-inscrever" onclick="inscreverOficina()">
+                        <button type="submit" class="btn-inscrever" id="btn-inscrever-submit">
                             <i class="fas fa-check"></i> Inscrever
                         </button>
                     </div>
@@ -567,16 +597,24 @@
         </div>
     </div>
 
-    <!-- Cartão de Confirmação -->
-    <div class="modal-overlay" id="modal-confirmacao">
+    <!-- ============================================
+         CARTÃO DE CONFIRMAÇÃO
+         ============================================ -->
+    <div class="modal-overlay" id="modal-confirmacao" role="dialog" aria-labelledby="confirmacao-titulo" aria-modal="true">
         <div class="cartao-confirmacao">
-            <!-- Banner Superior -->
-            <div class="cartao-banner">
-            </div>
+            <div class="cartao-banner"></div>
             
-            <!-- Corpo do Cartão -->
             <div class="cartao-body">
                 <div class="cartao-info">
+                    <!-- ID da Inscrição -->
+                    <div class="info-linha destaque">
+                        <i class="fas fa-hashtag"></i>
+                        <div class="info-detalhe">
+                            <strong>Nº da Inscrição</strong>
+                            <span id="conf-id">-</span>
+                        </div>
+                    </div>
+                    
                     <div class="info-linha">
                         <i class="fas fa-user"></i>
                         <div>
@@ -584,6 +622,15 @@
                             <span id="conf-nome">-</span>
                         </div>
                     </div>
+                    
+                    <div class="info-linha">
+                        <i class="fas fa-phone"></i>
+                        <div class="info-detalhe">
+                            <strong>Telefone</strong>
+                            <span id="conf-telefone">-</span>
+                        </div>
+                    </div>
+                    
                     <div class="info-linha">
                         <i class="fas fa-school"></i>
                         <div>
@@ -591,6 +638,7 @@
                             <span id="conf-escola">-</span>
                         </div>
                     </div>
+                    
                     <div class="info-linha">
                         <i class="fas fa-users"></i>
                         <div>
@@ -598,6 +646,7 @@
                             <span id="conf-participantes">-</span>
                         </div>
                     </div>
+                    
                     <div class="info-linha">
                         <i class="fas fa-flask"></i>
                         <div>
@@ -605,6 +654,7 @@
                             <span id="conf-oficina">-</span>
                         </div>
                     </div>
+                    
                     <div class="info-linha">
                         <i class="fas fa-clock"></i>
                         <div>
@@ -612,6 +662,7 @@
                             <span id="conf-horario">-</span>
                         </div>
                     </div>
+                    
                     <div class="info-linha">
                         <i class="fas fa-calendar-day"></i>
                         <div>
@@ -621,13 +672,11 @@
                     </div>
                 </div>
                 
-                <!-- Logo da Feira -->
                 <div class="cartao-logo">
                     <img src="assets/img/eventos/LOGO FEIRA.png" alt="Logo Feira de Ciências">
                 </div>
             </div>
             
-            <!-- Ações do Cartão -->
             <div class="cartao-actions">
                 <button class="btn-salvar" onclick="salvarInscricao()">
                     <i class="fas fa-download"></i> Salvar Comprovante
@@ -639,8 +688,9 @@
         </div>
     </div>
 
-    
+    <!-- SCRIPTS --> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="assets/js/feira.js"></script>
-</body>
+    <script src="assets/js/inscricaoFeira.js"></script>
+
 </html>

@@ -1959,3 +1959,319 @@
         padding: 12px;
     }
 }
+/* =============================
+   ESTATÍSTICAS ENEM
+   ============================= */
+
+.estatisticas-enem {
+    padding: 60px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.estatisticas-enem h2 {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.estatisticas-enem h2 i {
+    color: #8e44ad;
+}
+
+.estatisticas-subtitle {
+    text-align: center;
+    color: #7f8c8d;
+    margin-bottom: 50px;
+    font-size: 1.1rem;
+}
+
+/* Grid dos cards */
+.estatisticas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+/* Cards individuais */
+.estatistica-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: all 0.4s ease;
+    border: 2px solid #e0e6ed;
+    position: relative;
+    overflow: hidden;
+}
+
+.estatistica-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3498db, #8e44ad);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.estatistica-card:hover::before {
+    opacity: 1;
+}
+
+.estatistica-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    border-color: #8e44ad;
+}
+
+.estatistica-card.destaque {
+    border-color: #2ecc71;
+    background: linear-gradient(135deg, #ffffff 0%, #f0fff4 100%);
+}
+
+/* Header do card */
+.estatistica-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.estatistica-header i {
+    font-size: 1.5rem;
+    color: #8e44ad;
+}
+
+.estatistica-card:nth-child(1) .estatistica-header i { color: #3498db; }
+.estatistica-card:nth-child(2) .estatistica-header i { color: #2ecc71; }
+.estatistica-card:nth-child(3) .estatistica-header i { color: #8e44ad; }
+
+.estatistica-header h3 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.3rem;
+}
+
+/* Gráfico circular */
+.grafico-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.grafico-circular {
+    width: 150px;
+    height: 150px;
+}
+
+.grafico-circular svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.grafico-texto {
+    font-size: 0.5rem;
+    fill: #2c3e50;
+    font-weight: bold;
+    transform: rotate(90deg);
+    transform-origin: center;
+}
+
+/* Informações numéricas */
+.estatistica-info {
+    margin-bottom: 20px;
+}
+
+.info-numero {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+.numero-destaque {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.estatistica-card:nth-child(1) .numero-destaque { color: #3498db; }
+.estatistica-card:nth-child(2) .numero-destaque { color: #2ecc71; }
+.estatistica-card:nth-child(3) .numero-destaque { color: #8e44ad; }
+
+.numero-total {
+    font-size: 1.5rem;
+    color: #7f8c8d;
+}
+
+.info-label {
+    color: #7f8c8d;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+/* Barra de progresso */
+.progresso-barra {
+    width: 100%;
+    height: 8px;
+    background: #e0e6ed;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progresso-preenchido {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 1.5s ease-in-out;
+}
+
+.estatistica-card:nth-child(1) .progresso-preenchido { 
+    background: linear-gradient(90deg, #3498db, #5dade2); 
+}
+.estatistica-card:nth-child(2) .progresso-preenchido { 
+    background: linear-gradient(90deg, #2ecc71, #58d68d); 
+}
+.estatistica-card:nth-child(3) .progresso-preenchido { 
+    background: linear-gradient(90deg, #8e44ad, #a569bd); 
+}
+
+/* Resumo Geral */
+.resumo-geral {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.resumo-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 20px;
+}
+
+.resumo-item i {
+    font-size: 2rem;
+    color: #8e44ad;
+    background: #f0e6f5;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.resumo-numero {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.resumo-label {
+    display: block;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+/* Animação dos gráficos */
+@keyframes preencherGrafico {
+    from {
+        stroke-dasharray: 0, 100;
+    }
+}
+
+.grafico-progresso {
+    animation: preencherGrafico 2s ease-in-out forwards;
+}
+
+/* Responsividade */
+@media (max-width: 992px) {
+    .estatisticas-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    }
+    
+    .resumo-geral {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .estatisticas-enem h2 {
+        font-size: 1.7rem;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .estatisticas-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto 40px;
+    }
+    
+    .resumo-geral {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .resumo-item {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .grafico-circular {
+        width: 130px;
+        height: 130px;
+    }
+    
+    .numero-destaque {
+        font-size: 2rem;
+    }
+    
+    .numero-total {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .estatisticas-enem {
+        padding: 40px 0;
+    }
+    
+    .estatistica-card {
+        padding: 25px 20px;
+    }
+    
+    .grafico-circular {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .numero-destaque {
+        font-size: 1.8rem;
+    }
+    
+    .resumo-numero {
+        font-size: 1.5rem;
+    }
+}

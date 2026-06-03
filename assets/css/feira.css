@@ -1345,7 +1345,80 @@
         max-width: 50%;
     }
 }
+.form-group input[type="tel"] {
+    width: 100%;
+    padding: 10px 14px;
+    border: 2px solid #e0e0e0;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    transition: var(--transition);
+    background: var(--light);
+    box-sizing: border-box;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+}
 
+.form-group input[type="tel"]:focus {
+    outline: none;
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    background: white;
+}
+
+.form-group input[type="tel"]::placeholder {
+    font-family: inherit;
+    letter-spacing: normal;
+    color: #aaa;
+}
+
+.form-help {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.75rem;
+    color: #888;
+    font-style: italic;
+}
+
+.info-linha i.fa-phone {
+    color: var(--success);
+}
+
+.info-linha.destaque {
+    background: linear-gradient(135deg, #f0f8ff 0%, #e8f4fd 100%);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    border: 1px dashed var(--secondary);
+}
+
+.info-linha.destaque i {
+    background: var(--gradient-primary);
+    color: white;
+}
+
+.info-linha.destaque strong {
+    color: var(--secondary);
+    font-size: 0.75rem;
+}
+
+.info-linha.destaque span {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 0.9rem;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 480px) {
+    .form-group input[type="tel"] {
+        font-size: 0.85rem;
+        padding: 12px 10px;
+    }
+    
+    .form-help {
+        font-size: 0.7rem;
+    }
+}
 /* ============================================
    ESTILOS PARA IMPRESSÃO
    ============================================ */
