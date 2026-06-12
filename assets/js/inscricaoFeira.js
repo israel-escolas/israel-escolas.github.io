@@ -347,7 +347,7 @@ function salvarInscricao() {
 
 function atualizarBotoesOficina() {
     var botoes = document.querySelectorAll('.science-btn');
-    var lib = new Date(2026, 4, 19);
+    var lib = new Date(2026, 5, 19);
     var agora = new Date();
     
     botoes.forEach(function(b) {
