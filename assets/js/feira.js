@@ -166,7 +166,7 @@ function initScrollAnimations() {
 // LINK ATIVO NO MENU
 // ============================================
 function initActiveNavLink() {
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const currentPage = window.location.pathname.split('/').pop() || '../../';
     document.querySelectorAll('.nav-menu a').forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href') === currentPage) link.classList.add('active');

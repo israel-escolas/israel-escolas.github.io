@@ -1,11 +1,8 @@
 // ============================================
 // FOCO ENEM - Funcionalidades da Página ENEM
-// Página: focoEnem.html
 // ============================================
 
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ FOCO ENEM carregado para focoEnem.html');
-    
+document.addEventListener('DOMContentLoaded', function() {   
     // ================================
     // 1. ACCORDION PARA CONTEÚDOS
     // ================================

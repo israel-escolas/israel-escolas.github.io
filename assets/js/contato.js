@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
         
         // Ícone personalizado com o logo da escola
         const schoolIcon = L.divIcon({
-            html: '<img src="assets/img/LOGO.png" class="marker-logo" alt="Escola Mariana Cavalcanti" style="width: 45px; height: 45px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 10px rgba(0,0,0,0.3); object-fit: cover; background-color: white;">',
+            html: '<img src="../assets/img/LOGO.png" class="marker-logo" alt="Escola Mariana Cavalcanti" style="width: 45px; height: 45px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 10px rgba(0,0,0,0.3); object-fit: cover; background-color: white;">',
             className: 'custom-marker',
             iconSize: [45, 45],
             iconAnchor: [22, 45],
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const marker = L.marker([lat, lng], { icon: schoolIcon }).addTo(map);
         marker.bindPopup(`
             <div style="text-align: center;">
-                <img src="assets/img/LOGO.png" alt="Logo" style="width: 40px; height: 40px; margin-bottom: 5px;"><br>
+                <img src="../assets/img/LOGO.png" alt="Logo" style="width: 40px; height: 40px; margin-bottom: 5px;"><br>
                 <strong>Escola Estadual Mariana Cavalcanti</strong><br>
                 AV. SENHORA SANTANA, 09 - CENTRO<br>
                 Luís Gomes - RN<br>

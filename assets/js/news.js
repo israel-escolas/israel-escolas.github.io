@@ -232,7 +232,7 @@ class NewsManager {
                             Saiba mais <i class="fas fa-external-link-alt"></i>
                         </a>
                     ` : noticia.isFallback ? `
-                        <a href="informacoes.html#estrutura" class="view-details-btn" style="margin-top: 15px;">
+                        <a href="../../informacoes/#estrutura" class="view-details-btn" style="margin-top: 15px;">
                             Ver galeria completa <i class="fas fa-images"></i>
                         </a>
                     ` : ''}

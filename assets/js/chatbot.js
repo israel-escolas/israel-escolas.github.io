@@ -567,7 +567,7 @@ function showProximosEventos() {
         
         // Pequeno delay para o usuário ler a mensagem
         setTimeout(() => {
-            window.location.href = 'informacoes.html';
+            window.location.href = '../../informacoes/';
         }, 1500);
     }
 
@@ -825,9 +825,9 @@ function showProximosEventos() {
 
     // ========== AÇÕES EXTERNAS ==========
     const externalActions = {
-        'openCalendar': () => window.location.href = 'calendario.html',
-        'openGaleria': () => window.location.href = 'eventos.html#galeria',
-        'openEventsPage': () => window.location.href = 'eventos.html', 
+        'openCalendar': () => window.location.href = '../../calendario/',
+        'openGaleria': () => window.location.href = '../../eventos/#galeria',
+        'openEventsPage': () => window.location.href = '../../eventos/', 
         'callSchool': () => window.location.href = `tel:${escola.telefone.replace(/\D/g, '')}`,
         'sendEmail': () => window.location.href = `mailto:${escola.email}?subject=Contato via Site - ${escola.nome}`,
         'openMaps': () => {

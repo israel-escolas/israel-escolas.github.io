@@ -258,7 +258,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                             <i class="fas fa-camera"></i> ${ev.LOCAL || 'Local a definir'}
                         </div>
                         <div >
-                            <a href="eventos.html" class="view-details-btn" >
+                            <a href="../../eventos/" class="view-details-btn" >
                             <i class="fas fa-images"></i> Ver todos os eventos
                             </a>
                         </div>
@@ -619,7 +619,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         item.style.cursor = 'pointer';
         item.addEventListener('click', () => {
-            window.location.href = 'comunicados.html';
+            window.location.href = '../../comunicados/';
         });
         
         return item;
