@@ -1,6 +1,55 @@
+// ============================================
+// FEIRA DE CIÊNCIAS 2026 - INSCRIÇÕES
+// Controle de inscrições, planilha e cards de oficinas
+// ============================================
+
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzrNeP4anjnsFOS9SsA4RjiAnzsbLgGHwhbH3ds8_X_mp8XTBTOAP5IOcWvk3YCZCA/exec';
 var inscrevendo = false;
 
+// ============================================
+// BANCO DE DADOS DAS OFICINAS
+// Para adicionar nova oficina: adicione um objeto no array abaixo
+// ============================================
+const oficinas = [
+    {
+        id: '01',
+        titulo: 'Construção do Carrinho Potencial',
+        professor: 'Solange Batista',
+        estudantes: [
+            'João Gabriel Nunes de Oliveira',
+            'José Davi Alves da Silva',
+            'Maria Vivia da Silva Santos',
+            'Thalles Gabriel Fernandes Nunes',
+            'Thamyris Crystina de Oliveira Santos'
+        ],
+        publicoAlvo: {
+            'Ensino Médio': false,
+            'Ensino Fundamental': true,
+            'Comunidade': false
+        },
+        descricao: 'Nesta oficina, os participantes irão construir um carrinho movido exclusivamente por energia potencial, utilizando materiais simples e de baixo custo. O experimento demonstra na prática como a energia potencial gravitacional se transforma em energia cinética, permitindo que o carrinho se mova sem motor ou pilhas. Durante a atividade, serão explorados conceitos fundamentais da Física, como a Lei da Conservação de Energia, que explica que a energia não pode ser criada nem destruída, apenas transformada. Os participantes entenderão como a altura da rampa (energia potencial) influencia diretamente na velocidade do carrinho (energia cinética), e como o atrito dissipa parte dessa energia em forma de calor. Ao final, cada participante terá construído seu próprio carrinho e compreendido, de forma divertida e interativa, os princípios que regem o movimento e a energia no nosso dia a dia.'
+    },
+    {
+        id: '02',
+        titulo: 'Conservação de abelhas sem ferrão por meio de iscas sustentáveis com materiais recicláveis',
+        professor: 'Weliton Andrade',
+        estudantes: [
+            'Júlio Cesar da Silva Feliciano',
+            'Micaias Natanael Silva de Moura',
+            'Wellington Samuel Alves da Silva'
+        ],
+        publicoAlvo: {
+            'Ensino Médio': true,
+            'Ensino Fundamental': true,
+            'Comunidade': true
+        },
+        descricao: 'Você sabia que as abelhas sem ferrão são responsáveis pela polinização de até 90% das plantas nativas do Brasil? Nesta oficina, os participantes irão aprender sobre a importância vital desses pequenos polinizadores para a preservação da biodiversidade e produção de alimentos, além de descobrir como construir iscas sustentáveis utilizando garrafas PET recicladas para atrair e proteger novas colônias. A atividade aborda de forma prática: o papel ecológico das abelhas nativas, as principais ameaças que enfrentam (desmatamento, agrotóxicos e mudanças climáticas), e o passo a passo completo para confecção e instalação correta das iscas. Serão apresentados também os resultados reais do monitoramento feito pelos estudantes, demonstrando como a ciência cidadã pode contribuir para a conservação ambiental. Cada participante sairá da oficina com o conhecimento e as habilidades necessárias para se tornar um protetor das abelhas nativas em sua própria comunidade.'
+    }
+];
+
+// ============================================
+// API DA PLANILHA GOOGLE
+// ============================================
 function chamarAPI(params, callback) {
     var cb = 'jsonp_' + Date.now() + '_' + Math.floor(Math.random() * 10000);
     
@@ -100,6 +149,9 @@ function carregarOficinasDaPlanilha() {
     });
 }
 
+// ============================================
+// VALIDAÇÕES E FORMATAÇÕES
+// ============================================
 function validarTelefone(t) {
     var n = t.replace(/\D/g, '');
     return n.length >= 10 && n.length <= 11;
@@ -129,8 +181,11 @@ function initMascaraTelefone() {
     });
 }
 
+// ============================================
+// INSCRIÇÃO NA OFICINA
+// ============================================
 function enviarInscricaoParaPlanilha(dados, callback) {
-    mostrarCarregando('Salvando...');
+    mostrarCarregando('Salvando inscrição...');
     
     chamarAPI({
         action: 'inscrever',
@@ -158,11 +213,11 @@ function inscreverOficina() {
    
     if (!nome || nome.length < 3) { mostrarErro('Nome completo (mín. 3 caracteres).'); return; }
     if (!telefone) { mostrarErro('Telefone obrigatório.'); return; }
-    if (!validarTelefone(telefone)) { mostrarErro('Telefone inválido.'); return; }
+    if (!validarTelefone(telefone)) { mostrarErro('Telefone inválido. Use DDD + número.'); return; }
     if (!escola) { mostrarErro('Informe a escola.'); return; }
     if (!oficina) { mostrarErro('Selecione uma oficina.'); return; }
     if (!horario) { mostrarErro('Selecione um horário.'); return; }
-    if (isNaN(qtd) || qtd < 1 || qtd > 50) { mostrarErro('Quantidade: 1 a 50.'); return; }
+    if (isNaN(qtd) || qtd < 1 || qtd > 50) { mostrarErro('Quantidade de participantes: 1 a 50.'); return; }
     
     inscrevendo = true;
     var btn = document.getElementById('btn-inscrever-submit');
@@ -186,7 +241,7 @@ function inscreverOficina() {
         }
         
         if (!r.sucesso) {
-            mostrarErro(r.erro || 'Erro na inscrição.');
+            mostrarErro(r.erro || 'Erro na inscrição. Tente novamente.');
             return;
         }
         
@@ -206,10 +261,13 @@ function inscreverOficina() {
             if (m) { m.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
         }, 300);
         
-        mostrarSucesso('✅ Inscrição confirmada!');
+        mostrarSucesso('✅ Inscrição confirmada com sucesso!');
     });
 }
 
+// ============================================
+// MODAIS DE INSCRIÇÃO
+// ============================================
 function initModalOficinas() {
     var tipo = document.getElementById('tipo-inscricao');
     var qtd = document.getElementById('qtd-participantes');
@@ -249,10 +307,15 @@ function initModalOficinas() {
     document.addEventListener('click', function(e) {
         if (e.target === document.getElementById('modal-oficina')) fecharModal();
         if (e.target === document.getElementById('modal-confirmacao')) fecharConfirmacao();
+        if (e.target === document.getElementById('modal-detalhes-oficina')) fecharModalDetalhes();
     });
 
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') { fecharModal(); fecharConfirmacao(); }
+        if (e.key === 'Escape') { 
+            fecharModal(); 
+            fecharConfirmacao(); 
+            fecharModalDetalhes();
+        }
     });
     
     initMascaraTelefone();
@@ -300,7 +363,7 @@ function salvarInscricao() {
         return;
     }
     
-    mostrarCarregando('Gerando...');
+    mostrarCarregando('Gerando comprovante...');
     var botoes = cartao.querySelector('.cartao-actions');
     var disp = botoes ? botoes.style.display : '';
     if (botoes) botoes.style.display = 'none';
@@ -345,9 +408,12 @@ function salvarInscricao() {
     });
 }
 
+// ============================================
+// BOTÕES DE INSCRIÇÃO (CONTROLE DE DATA)
+// ============================================
 function atualizarBotoesOficina() {
     var botoes = document.querySelectorAll('.science-btn');
-    var lib = new Date(2026, 5, 19);
+    var lib = new Date(2026, 5, 18); 
     var agora = new Date();
     
     botoes.forEach(function(b) {
@@ -379,15 +445,173 @@ function atualizarBotoesOficina() {
     });
 }
 
+// ============================================
+// GERAÇÃO DINÂMICA DOS CARDS DE OFICINAS (ACCORDION)
+// ============================================
+function gerarCardsOficinas() {
+    var container = document.querySelector('.oficinas-cards-wrapper');
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    if (oficinas.length === 0) {
+        container.innerHTML = '<p style="text-align:center;color:#999;width:100%;padding:20px;">Nenhuma oficina cadastrada ainda.</p>';
+        return;
+    }
+    
+    oficinas.forEach(function(oficina, index) {
+        var publicos = [];
+        for (var p in oficina.publicoAlvo) {
+            if (oficina.publicoAlvo[p]) publicos.push(p);
+        }
+        var publicoTexto = publicos.length > 0 ? publicos.join(', ') : 'Todos os públicos';
+        
+        var accordion = document.createElement('div');
+        accordion.className = 'oficina-accordion';
+        
+        accordion.innerHTML = 
+            '<div class="oficina-accordion-header" data-index="' + index + '">' +
+                '<div class="oficina-accordion-info">' +
+                    '<span class="oficina-accordion-badge">Oficina ' + oficina.id + '</span>' +
+                    '<h5>' + oficina.titulo + '</h5>' +
+                '</div>' +
+                '<div class="oficina-accordion-meta">' +
+                    '<span><i class="fas fa-chalkboard-teacher"></i> ' + oficina.professor + '</span>' +
+                    '<span><i class="fas fa-user-graduate"></i> ' + oficina.estudantes.length + ' estud.</span>' +
+                '</div>' +
+                '<i class="fas fa-chevron-down oficina-accordion-icon"></i>' +
+            '</div>' +
+            '<div class="oficina-accordion-body">' +
+                '<div class="oficina-accordion-detalhes">' +
+                    '<div class="detalhe-item">' +
+                        '<strong><i class="fas fa-chalkboard-teacher"></i> Professor(a):</strong>' +
+                        '<span>' + oficina.professor + '</span>' +
+                    '</div>' +
+                    '<div class="detalhe-item">' +
+                        '<strong><i class="fas fa-users"></i> Equipe:</strong>' +
+                        '<span>' + oficina.estudantes.join(', ') + '</span>' +
+                    '</div>' +
+                    '<div class="detalhe-item">' +
+                        '<strong><i class="fas fa-bullseye"></i> Público-Alvo:</strong>' +
+                        '<span>' + publicoTexto + '</span>' +
+                    '</div>' +
+                    '<div class="detalhe-item detalhe-descricao">' +
+                        '<strong><i class="fas fa-align-left"></i> Descrição:</strong>' +
+                        '<p>' + oficina.descricao + '</p>' +
+                    '</div>' +
+                '</div>' +
+            '</div>';
+        
+        container.appendChild(accordion);
+    });
+    
+    // Adiciona evento de clique para expandir/recolher
+    document.querySelectorAll('.oficina-accordion-header').forEach(function(header) {
+        header.addEventListener('click', function() {
+            var accordion = this.parentElement;
+            var isActive = accordion.classList.contains('active');
+            
+            // Fecha todos os outros
+            document.querySelectorAll('.oficina-accordion').forEach(function(item) {
+                item.classList.remove('active');
+            });
+            
+            // Abre o clicado (se não estava ativo)
+            if (!isActive) {
+                accordion.classList.add('active');
+            }
+        });
+    });
+}
+
+// ============================================
+// MODAL DE DETALHES DA OFICINA
+// ============================================
+document.addEventListener('click', function(event) {
+    if (event.target.closest('.btn-detalhes-oficina')) {
+        var card = event.target.closest('.oficina-card');
+        if (!card) return;
+        var index = parseInt(card.getAttribute('data-oficina-index'));
+        abrirModalDetalhes(index);
+    }
+});
+
+function abrirModalDetalhes(index) {
+    var modal = document.getElementById('modal-detalhes-oficina');
+    if (!modal) return;
+    
+    var dadosOficina = oficinas[index];
+    if (!dadosOficina) return;
+    
+    preencherModalDetalhes(dadosOficina);
+    modal.classList.add('visivel');
+    document.body.style.overflow = 'hidden';
+}
+
+function fecharModalDetalhes() {
+    var modal = document.getElementById('modal-detalhes-oficina');
+    if (modal) {
+        modal.classList.remove('visivel');
+        document.body.style.overflow = '';
+    }
+}
+
+function preencherModalDetalhes(dados) {
+    var container = document.getElementById('detalhes-oficina-conteudo');
+    if (!container || !dados) return;
+    
+    var estudantesHtml = dados.estudantes
+        .map(function(nome) { return '<li><i class="fas fa-user-graduate"></i> ' + nome + '</li>'; })
+        .join('');
+    
+    var publicoAlvoHtml = '';
+    for (var p in dados.publicoAlvo) {
+        if (dados.publicoAlvo[p]) {
+            publicoAlvoHtml += '<span class="publico-tag">' + p + '</span>';
+        }
+    }
+    
+    container.innerHTML = 
+        '<div class="detalhes-oficina-header">' +
+            '<h3>' + dados.titulo + '</h3>' +
+            '<span class="detalhes-badge-oficina">Oficina ' + dados.id + '</span>' +
+        '</div>' +
+        '<div class="detalhes-secao">' +
+            '<h4><i class="fas fa-chalkboard-teacher"></i> Professor(a) Orientador(a)</h4>' +
+            '<p class="detalhes-prof-nome">' + dados.professor + '</p>' +
+        '</div>' +
+        '<div class="detalhes-secao">' +
+            '<h4><i class="fas fa-users"></i> Equipe de Estudantes</h4>' +
+            '<ul class="detalhes-lista-estudantes">' + estudantesHtml + '</ul>' +
+        '</div>' +
+        '<div class="detalhes-secao">' +
+            '<h4><i class="fas fa-bullseye"></i> Público-Alvo</h4>' +
+            '<div class="detalhes-publico-alvo">' + (publicoAlvoHtml || '<p>Público não especificado.</p>') + '</div>' +
+        '</div>' +
+        '<div class="detalhes-secao detalhes-descricao">' +
+            '<h4><i class="fas fa-align-left"></i> Descrição das Atividades</h4>' +
+            '<p>' + dados.descricao + '</p>' +
+        '</div>';
+}
+
+// ============================================
+// INICIALIZAÇÃO
+// ============================================
 setInterval(atualizarBotoesOficina, 60000);
 
 document.addEventListener('DOMContentLoaded', function() {
+    gerarCardsOficinas();
     initModalOficinas();
     atualizarBotoesOficina();
 });
 
+// ============================================
+// EXPORTAÇÃO GLOBAL
+// ============================================
 window.abrirModalOficina = abrirModalOficina;
 window.fecharModal = fecharModal;
 window.fecharConfirmacao = fecharConfirmacao;
+window.fecharModalDetalhes = fecharModalDetalhes;
 window.inscreverOficina = inscreverOficina;
 window.salvarInscricao = salvarInscricao;
+window.gerarCardsOficinas = gerarCardsOficinas;

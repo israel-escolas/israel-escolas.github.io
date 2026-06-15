@@ -372,14 +372,21 @@
                         <div class="timeline-content">
                             <h4>Inscrições nas oficinas</h4>
                             <p>Professores de outras escolas podem inscrever suas turmas</p>
-                            <div class="btn-oficina-wrapper" >
+                            
+                            <!-- Container para os Cards das Oficinas (gerados dinamicamente pelo JavaScript) -->
+                            <div class="oficinas-cards-wrapper">
+                                <!-- Os cards serão gerados automaticamente pelo inscricaoFeira.js -->
+                            </div>
+
+                            <!-- Botão de Inscrição (mantido, mas ainda desabilitado até a data) -->
+                            <div class="btn-oficina-wrapper">
                                 <button class="science-btn" disabled>
                                     <i class="fas fa-rocket"></i>
                                     Inscreva sua turma nas oficinas
                                 </button>
                             </div>
                         </div>
-                    </div>                   
+                    </div>                  
                     <div class="timeline-item">
                         <div class="timeline-date">25/06</div>
                         <div class="timeline-content">
@@ -594,6 +601,27 @@
                         </button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MODAL DE DETALHES DA OFICINA
+         ============================================ -->
+    <div class="modal-overlay" id="modal-detalhes-oficina" role="dialog" aria-labelledby="detalhes-titulo" aria-modal="true">
+        <div class="modal-container modal-detalhes-container">
+            <div class="modal-header">
+                <h2 id="detalhes-titulo"><i class="fas fa-microscope"></i> Detalhes da Oficina</h2>
+                <button class="modal-close" onclick="fecharModalDetalhes()" aria-label="Fechar modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- O conteúdo será preenchido dinamicamente pelo JavaScript -->
+                <div id="detalhes-oficina-conteudo" class="detalhes-oficina-layout">
+                    <!-- Conteúdo será inserido aqui -->
+                </div>
             </div>
         </div>
     </div>
