@@ -77,7 +77,7 @@ function initDropdowns() {
 // COUNTDOWN
 // ============================================
 function initCountdown() {
-    const targetDate = new Date(2026, 5, 25, 8, 0, 0);
+    const targetDate = new Date(2026, 5, 30, 8, 0, 0);
     
     const diasEl = document.getElementById('dias');
     const horasEl = document.getElementById('horas');

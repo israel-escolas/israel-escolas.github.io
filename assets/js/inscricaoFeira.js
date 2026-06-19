@@ -14,7 +14,7 @@ const oficinas = [
     {
         id: '01',
         titulo: 'Construção do Carrinho Potencial',
-        professor: 'Solange Batista',
+        professor: 'Solange Batista ',
         estudantes: [
             'João Gabriel Nunes de Oliveira',
             'José Davi Alves da Silva',
@@ -44,6 +44,90 @@ const oficinas = [
             'Comunidade': true
         },
         descricao: 'Você sabia que as abelhas sem ferrão são responsáveis pela polinização de até 90% das plantas nativas do Brasil? Nesta oficina, os participantes irão aprender sobre a importância vital desses pequenos polinizadores para a preservação da biodiversidade e produção de alimentos, além de descobrir como construir iscas sustentáveis utilizando garrafas PET recicladas para atrair e proteger novas colônias. A atividade aborda de forma prática: o papel ecológico das abelhas nativas, as principais ameaças que enfrentam (desmatamento, agrotóxicos e mudanças climáticas), e o passo a passo completo para confecção e instalação correta das iscas. Serão apresentados também os resultados reais do monitoramento feito pelos estudantes, demonstrando como a ciência cidadã pode contribuir para a conservação ambiental. Cada participante sairá da oficina com o conhecimento e as habilidades necessárias para se tornar um protetor das abelhas nativas em sua própria comunidade.'
+    },
+    {
+        id: '03',
+        titulo: 'Papel Reciclado: Produção de Papel a Partir do Reaproveitamento de Resíduos de Papel',
+        professor: 'Israel Lázaro',
+        estudantes: [
+            'Ana Talita Soares de Santana',
+            'Clarice Emanuely da Silva Oliveira',
+            'Emilly de Almeida Soares'
+        ],
+        publicoAlvo: {
+            'Ensino Médio': true,
+            'Ensino Fundamental': true,
+            'Comunidade': true
+        },
+        descricao: 'Nesta oficina, os participantes aprenderão, de forma prática, como transformar papel usado em novas folhas de papel reciclado. A atividade envolve etapas como trituração, preparo da polpa e moldagem das folhas, permitindo compreender o processo de reciclagem e sua importância para a redução de resíduos e a preservação dos recursos naturais. A oficina busca incentivar hábitos sustentáveis e a conscientização ambiental.'
+    },
+    {
+        id: '04',
+        titulo: 'Bomba de Sementes',
+        professor: 'Sebastião de Alencar Neto',
+        estudantes: [
+            'Maria Allyce Nunes Brito',
+            'Ana Alícia Jácome da Silva',
+            'Murilo Arthur de Arraújo Barbosa',
+            'Guilherme Libanio da Rocha Neto'
+        ],
+        publicoAlvo: {
+            'Ensino Médio': true,
+            'Ensino Fundamental': true,
+            'Comunidade': true
+        },
+        descricao: 'A oficina de produção de bombas de sementes oferece uma alternativa de reflorestamento de áreas desertas e desperta a curiosidade para reconhecer espécies nativas e a importância do bioma caatinga.'
+    },
+    {
+        id: '05',
+        titulo: 'Foguetes de Garrafa PET - Princípios de Física na Prática',
+        professor: 'Israel Lázaro',
+        estudantes: [
+            'Bruna Ismael de Oliveira',
+            'Maria Gabriela da Silva Clementino',
+            'Caio Frutuoso da Silva',
+            'Thays Soares Santana'
+        ],
+        publicoAlvo: {
+            'Ensino Médio': true,
+            'Ensino Fundamental': true,
+            'Comunidade': false
+        },
+        descricao: 'Nesta oficina, os participantes aprenderão, de forma prática, como construir e lançar foguetes utilizando garrafas PET, explorando princípios fundamentais da Física como pressão, propulsão e leis de Newton. A atividade demonstra conceitos de lançamento de projéteis, aerodinâmica e transformação de energia de maneira divertida e interativa.'
+    },
+    {
+        id: '06',
+        titulo: 'Dança: Movimento que Acalma e Causa Bem-Estar',
+        professor: 'Solange Batista e Cristiany Sheyla ',
+        estudantes: [
+            'Carlos Emanuel Ferreira',
+            'Ana Vitoria da Silva Alvilino'
+        ],
+        publicoAlvo: {
+            'Ensino Médio': true,
+            'Ensino Fundamental': true,
+            'Comunidade': true
+        },
+        descricao: 'A oficina "Dança: movimento que acalma e causa bem-estar" tem como objetivo demonstrar os benefícios da dança para a saúde física e emocional. Através da prática de movimento acompanhados por música, os participantes poderão observar como a dança ajuda a reduzir o estresse, melhorar o humor e promover a sensação de relaxamento. Além de ser uma atividade divertida, a dança contribui para o bem-estar, a socialização e a qualidade de vida, mostrando que o movimento é uma importante ferramenta para manter o equilíbrio entre o corpo e mente.'
+    },
+    {
+        id: '07',
+        titulo: 'Redação Nota 1000',
+        professor: 'Maria Cecília',
+        estudantes: [
+            'Ana Júlia da Silva Cipriano',
+            'Maria Luiza Gomes da Silva',
+            'Zayna Zaara Oliveira Nunes',
+            'Ingrid Eloa Ferreira da Silva',
+            'Josicleide Araújo de Sousa',
+            'Thays Soares Santana'
+        ],
+        publicoAlvo: {
+            'Ensino Médio': true,
+            'Ensino Fundamental': false,
+            'Comunidade': true
+        },
+        descricao: 'Trata-se de uma aula dinâmica sobre a produção de redação para o Enem, considerando as 5 competências exigidas pelo concurso, com o objetivo de apresentar em 4 passos a fórmula perfeita para uma redação nota 1000. Será utilizado o projetor.'
     }
 ];
 
@@ -251,7 +335,7 @@ function inscreverOficina() {
         document.getElementById('conf-participantes').textContent = qtd;
         document.getElementById('conf-oficina').textContent = oficina;
         document.getElementById('conf-horario').textContent = horario;
-        document.getElementById('conf-data').textContent = '25 de Junho de 2026';
+        document.getElementById('conf-data').textContent = '30 de Junho de 2026';
         document.getElementById('conf-id').textContent = 'FEIRA2026-' + Date.now().toString(36).toUpperCase().slice(-6);
         
         fecharModal();
