@@ -137,35 +137,31 @@ const oficinas = [
 // com Chrome e Opera no mobile
 // ============================================
 function chamarAPI(params, callback) {
-    var url = SCRIPT_URL + '?';
-    var partes = [];
-
+    var cb = 'jsonp_' + Date.now() + '_' + Math.floor(Math.random() * 10000);
+    
+    window[cb] = function(data) {
+        callback(data);
+        delete window[cb];
+        var s = document.getElementById(cb);
+        if (s) s.remove();
+    };
+    
+    var url = SCRIPT_URL + '?callback=' + cb;
     for (var k in params) {
         if (params[k] !== undefined && params[k] !== null && params[k] !== '') {
-            partes.push(k + '=' + encodeURIComponent(params[k]));
+            url += '&' + k + '=' + encodeURIComponent(params[k]);
         }
     }
-    url += partes.join('&');
-
-    fetch(url, {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json'
-        }
-    })
-    .then(function(response) {
-        if (!response.ok) {
-            throw new Error('HTTP ' + response.status);
-        }
-        return response.json();
-    })
-    .then(function(data) {
-        callback(data);
-    })
-    .catch(function(err) {
-        console.error('Erro na API:', err);
-        callback({ error: 'Erro de conexão: ' + err.message, sucesso: false });
-    });
+    
+    var script = document.createElement('script');
+    script.id = cb;
+    script.src = url;
+    script.onerror = function() {
+        callback({ error: 'Erro de conexão', sucesso: false });
+        delete window[cb];
+        script.remove();
+    };
+    document.body.appendChild(script);
 }
 
 // ============================================
