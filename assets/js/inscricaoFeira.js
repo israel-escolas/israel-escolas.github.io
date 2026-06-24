@@ -132,34 +132,35 @@ const oficinas = [
 ];
 
 // ============================================
-// API DA PLANILHA GOOGLE
+// API DA PLANILHA GOOGLE (CORRIGIDA PARA CELULAR)
 // ============================================
 function chamarAPI(params, callback) {
-    var cb = 'jsonp_' + Date.now() + '_' + Math.floor(Math.random() * 10000);
-    
-    window[cb] = function(data) {
-        callback(data);
-        delete window[cb];
-        var s = document.getElementById(cb);
-        if (s) s.remove();
-    };
-    
-    var url = SCRIPT_URL + '?callback=' + cb;
-    for (var k in params) {
+    // Constroi a URL com os parâmetros
+    let urlParams = [];
+    for (let k in params) {
         if (params[k] !== undefined && params[k] !== null && params[k] !== '') {
-            url += '&' + k + '=' + encodeURIComponent(params[k]);
+            urlParams.push(k + '=' + encodeURIComponent(params[k]));
         }
     }
-    
-    var script = document.createElement('script');
-    script.id = cb;
-    script.src = url;
-    script.onerror = function() {
-        callback({ error: 'Erro de conexão', sucesso: false });
-        delete window[cb];
-        script.remove();
-    };
-    document.body.appendChild(script);
+    let url = SCRIPT_URL + '?' + urlParams.join('&');
+
+    // Usa um proxy CORS público para garantir que o celular não bloqueie
+    const proxyUrl = 'https://api.allorigins.win/raw?url=';
+
+    fetch(proxyUrl + encodeURIComponent(url))
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro na requisição');
+            }
+            return response.json();
+        })
+        .then(data => {
+            callback(data);
+        })
+        .catch(error => {
+            console.error('Erro ao chamar API:', error);
+            callback({ error: 'Erro de conexão. Verifique a internet.', sucesso: false });
+        });
 }
 
 function carregarOficinasDaPlanilha() {
