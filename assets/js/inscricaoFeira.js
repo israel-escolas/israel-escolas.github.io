@@ -14,7 +14,7 @@ const oficinas = [
     {
         id: '01',
         titulo: 'Construção do Carrinho Potencial',
-        professor: 'Solange Batista ',
+        professor: 'Solange Batista',
         estudantes: [
             'João Gabriel Nunes de Oliveira',
             'José Davi Alves da Silva',
@@ -98,7 +98,7 @@ const oficinas = [
     {
         id: '06',
         titulo: 'Dança: Movimento que Acalma e Causa Bem-Estar',
-        professor: 'Solange Batista e Cristiany Sheyla ',
+        professor: 'Solange Batista e Cristiany Sheyla',
         estudantes: [
             'Carlos Emanuel Ferreira',
             'Ana Vitoria da Silva Alvilino'
@@ -132,35 +132,59 @@ const oficinas = [
 ];
 
 // ============================================
-// API DA PLANILHA GOOGLE
-// Usa fetch() em vez de JSONP para compatibilidade
-// com Chrome e Opera no mobile
+// API DA PLANILHA GOOGLE (JSONP - Funciona em todos navegadores)
 // ============================================
 function chamarAPI(params, callback) {
-    var cb = 'jsonp_' + Date.now() + '_' + Math.floor(Math.random() * 10000);
+    // Gera um nome único para o callback
+    var nomeCallback = 'jsonp_' + Date.now() + '_' + Math.floor(Math.random() * 10000);
     
-    window[cb] = function(data) {
-        callback(data);
-        delete window[cb];
-        var s = document.getElementById(cb);
-        if (s) s.remove();
-    };
+    // Timeout de segurança (15 segundos)
+    var timeout = setTimeout(function() {
+        console.error('Timeout na chamada API');
+        limparCallback();
+        callback({ error: 'Tempo esgotado. Verifique sua conexão.', sucesso: false });
+    }, 15000);
     
-    var url = SCRIPT_URL + '?callback=' + cb;
-    for (var k in params) {
-        if (params[k] !== undefined && params[k] !== null && params[k] !== '') {
-            url += '&' + k + '=' + encodeURIComponent(params[k]);
+    // Função para limpar o callback e script
+    function limparCallback() {
+        clearTimeout(timeout);
+        try { delete window[nomeCallback]; } catch(e) {}
+        var scriptElement = document.getElementById('script_' + nomeCallback);
+        if (scriptElement) {
+            scriptElement.remove();
         }
     }
     
-    var script = document.createElement('script');
-    script.id = cb;
-    script.src = url;
-    script.onerror = function() {
-        callback({ error: 'Erro de conexão', sucesso: false });
-        delete window[cb];
-        script.remove();
+    // Define o callback global
+    window[nomeCallback] = function(data) {
+        console.log('✅ Dados recebidos da API');
+        limparCallback();
+        callback(data);
     };
+    
+    // Monta a URL com os parâmetros
+    var url = SCRIPT_URL + '?callback=' + nomeCallback;
+    for (var chave in params) {
+        if (params[chave] !== undefined && params[chave] !== null && params[chave] !== '') {
+            url += '&' + chave + '=' + encodeURIComponent(params[chave]);
+        }
+    }
+    
+    console.log('🔄 Chamando API:', url);
+    
+    // Cria elemento script para JSONP (sem restrições CORS)
+    var script = document.createElement('script');
+    script.id = 'script_' + nomeCallback;
+    script.src = url;
+    
+    // Tratamento de erro
+    script.onerror = function(erro) {
+        console.error('❌ Erro ao carregar script:', erro);
+        limparCallback();
+        callback({ error: 'Erro de conexão com o servidor. Tente novamente.', sucesso: false });
+    };
+    
+    // Adiciona ao documento
     document.body.appendChild(script);
 }
 
@@ -168,75 +192,112 @@ function chamarAPI(params, callback) {
 // CARREGAR OFICINAS DA PLANILHA
 // ============================================
 function carregarOficinasDaPlanilha() {
+    console.log('📋 Iniciando carregamento das oficinas...');
+    
     var select = document.getElementById('oficina');
-    if (!select) return;
+    if (!select) {
+        console.error('❌ Elemento #oficina não encontrado!');
+        return;
+    }
 
     select.innerHTML = '<option value="">🔄 Carregando...</option>';
     select.disabled = true;
 
     chamarAPI({ action: 'listarOficinas' }, function(data) {
+        console.log('📦 Resposta da API:', data);
         select.disabled = false;
 
+        // Verifica erros
         if (data.error) {
+            console.error('❌ Erro da API:', data.error);
             select.innerHTML = '<option value="">❌ ' + data.error + '</option>';
             return;
         }
 
-        if (data.oficinas && data.oficinas.length > 0) {
-            select.innerHTML = '<option value="">Escolha uma oficina...</option>';
-
-            data.oficinas.forEach(function(of) {
-                var opt = document.createElement('option');
-                opt.value = of.titulo;
-
-                if (of.horarios && of.horarios.length > 0) {
-                    opt.dataset.horarios = JSON.stringify(of.horarios);
-                }
-
-                if (of.disponivel) {
-                    opt.textContent = '🔬 ' + of.titulo + ' (' + of.vagasDisponiveis + '/' + of.vagas + ' vagas)';
-                } else {
-                    opt.textContent = '🚫 ' + of.titulo + ' (ESGOTADO)';
-                    opt.disabled = true;
-                }
-
-                select.appendChild(opt);
-            });
-
-            select.onchange = function() {
-                var sel  = this.options[this.selectedIndex];
-                var grid = document.getElementById('horarios-grid');
-                document.getElementById('horario-selecionado').value = '';
-
-                if (sel.dataset.horarios) {
-                    var horarios = JSON.parse(sel.dataset.horarios);
-                    grid.innerHTML = '';
-
-                    if (horarios.length === 0) {
-                        grid.innerHTML = '<p style="color:#999;text-align:center;width:100%;">Sem horários disponíveis</p>';
-                        return;
-                    }
-
-                    horarios.forEach(function(h) {
-                        var div = document.createElement('div');
-                        div.className = 'horario-option';
-                        div.textContent = h;
-                        div.onclick = function() {
-                            document.querySelectorAll('.horario-option').forEach(function(o) {
-                                o.classList.remove('selected');
-                            });
-                            this.classList.add('selected');
-                            document.getElementById('horario-selecionado').value = h;
-                        };
-                        grid.appendChild(div);
-                    });
-                } else {
-                    grid.innerHTML = '<p style="color:#999;text-align:center;width:100%;">Selecione uma oficina</p>';
-                }
-            };
-        } else {
+        // Verifica se há oficinas
+        if (!data.oficinas || data.oficinas.length === 0) {
             select.innerHTML = '<option value="">⚠️ Nenhuma oficina disponível</option>';
+            return;
         }
+
+        // Popula o select com as oficinas
+        select.innerHTML = '<option value="">Escolha uma oficina...</option>';
+
+        data.oficinas.forEach(function(of) {
+            var opt = document.createElement('option');
+            opt.value = of.titulo;
+
+            // Armazena horários no dataset
+            if (of.horarios && of.horarios.length > 0) {
+                opt.dataset.horarios = JSON.stringify(of.horarios);
+            }
+
+            // Define texto e disponibilidade
+            if (of.disponivel) {
+                opt.textContent = '🔬 ' + of.titulo + ' (' + of.vagasDisponiveis + '/' + of.vagas + ' vagas)';
+            } else {
+                opt.textContent = '🚫 ' + of.titulo + ' (ESGOTADO)';
+                opt.disabled = true;
+            }
+
+            select.appendChild(opt);
+        });
+
+        // Evento de mudança de oficina
+        select.onchange = function() {
+            var opcaoSelecionada = this.options[this.selectedIndex];
+            var grid = document.getElementById('horarios-grid');
+            var inputHorario = document.getElementById('horario-selecionado');
+            
+            if (inputHorario) inputHorario.value = '';
+
+            if (opcaoSelecionada.dataset.horarios) {
+                var horarios = JSON.parse(opcaoSelecionada.dataset.horarios);
+                grid.innerHTML = '';
+
+                if (horarios.length === 0) {
+                    grid.innerHTML = '<p style="color:#999;text-align:center;width:100%;">Sem horários disponíveis</p>';
+                    return;
+                }
+
+                horarios.forEach(function(h) {
+                    var div = document.createElement('div');
+                    div.className = 'horario-option';
+                    div.textContent = h;
+                    div.setAttribute('role', 'radio');
+                    div.setAttribute('aria-checked', 'false');
+                    div.tabIndex = 0;
+                    
+                    div.onclick = function() {
+                        // Remove seleção anterior
+                        document.querySelectorAll('.horario-option').forEach(function(o) {
+                            o.classList.remove('selected');
+                            o.setAttribute('aria-checked', 'false');
+                        });
+                        
+                        // Seleciona este
+                        this.classList.add('selected');
+                        this.setAttribute('aria-checked', 'true');
+                        
+                        if (inputHorario) inputHorario.value = h;
+                    };
+                    
+                    // Tecla Enter para selecionar
+                    div.onkeydown = function(e) {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            this.click();
+                        }
+                    };
+                    
+                    grid.appendChild(div);
+                });
+            } else {
+                grid.innerHTML = '<p style="color:#999;text-align:center;width:100%;">Selecione uma oficina</p>';
+            }
+        };
+        
+        console.log('✅ Oficinas carregadas com sucesso!');
     });
 }
 
@@ -264,9 +325,9 @@ function initMascaraTelefone() {
         if (v.length > 11) v = v.slice(0, 11);
 
         if (v.length > 0) {
-            if (v.length <= 2)      v = '(' + v;
+            if (v.length <= 2) v = '(' + v;
             else if (v.length <= 7) v = '(' + v.slice(0, 2) + ') ' + v.slice(2);
-            else                    v = '(' + v.slice(0, 2) + ') ' + v.slice(2, 7) + '-' + v.slice(7);
+            else v = '(' + v.slice(0, 2) + ') ' + v.slice(2, 7) + '-' + v.slice(7);
         }
 
         e.target.value = v;
@@ -277,18 +338,22 @@ function initMascaraTelefone() {
 // INSCRIÇÃO NA OFICINA
 // ============================================
 function enviarInscricaoParaPlanilha(dados, callback) {
-    mostrarCarregando('Salvando inscrição...');
+    if (typeof mostrarCarregando === 'function') {
+        mostrarCarregando('Salvando inscrição...');
+    }
 
     chamarAPI({
-        action:    'inscrever',
-        nome:      dados.nome,
+        action: 'inscrever',
+        nome: dados.nome,
         quantidade: dados.qtdParticipantes,
-        escola:    dados.escola,
-        oficina:   dados.oficina,
-        horario:   dados.horario,
-        contato:   dados.telefone
+        escola: dados.escola,
+        oficina: dados.oficina,
+        horario: dados.horario,
+        contato: dados.telefone
     }, function(r) {
-        removerCarregando();
+        if (typeof removerCarregando === 'function') {
+            removerCarregando();
+        }
         callback(r);
     });
 }
@@ -296,20 +361,42 @@ function enviarInscricaoParaPlanilha(dados, callback) {
 function inscreverOficina() {
     if (inscrevendo) return;
 
-    var nome    = document.getElementById('nome-responsavel')?.value.trim();
+    var nome = document.getElementById('nome-responsavel')?.value.trim();
     var telefone = document.getElementById('telefone-contato')?.value.trim();
-    var escola  = document.getElementById('escola')?.value.trim();
-    var qtd     = parseInt(document.getElementById('qtd-participantes')?.value) || 1;
+    var escola = document.getElementById('escola')?.value.trim();
+    var qtd = parseInt(document.getElementById('qtd-participantes')?.value) || 1;
     var oficina = document.getElementById('oficina')?.value;
     var horario = document.getElementById('horario-selecionado')?.value;
 
-    if (!nome || nome.length < 3)           { mostrarErro('Nome completo (mín. 3 caracteres).'); return; }
-    if (!telefone)                           { mostrarErro('Telefone obrigatório.'); return; }
-    if (!validarTelefone(telefone))          { mostrarErro('Telefone inválido. Use DDD + número.'); return; }
-    if (!escola)                             { mostrarErro('Informe a escola.'); return; }
-    if (!oficina)                            { mostrarErro('Selecione uma oficina.'); return; }
-    if (!horario)                            { mostrarErro('Selecione um horário.'); return; }
-    if (isNaN(qtd) || qtd < 1 || qtd > 50)  { mostrarErro('Quantidade de participantes: 1 a 50.'); return; }
+    // Validações
+    if (!nome || nome.length < 3) { 
+        if (typeof mostrarErro === 'function') mostrarErro('Nome completo (mín. 3 caracteres).'); 
+        return; 
+    }
+    if (!telefone) { 
+        if (typeof mostrarErro === 'function') mostrarErro('Telefone obrigatório.'); 
+        return; 
+    }
+    if (!validarTelefone(telefone)) { 
+        if (typeof mostrarErro === 'function') mostrarErro('Telefone inválido. Use DDD + número.'); 
+        return; 
+    }
+    if (!escola) { 
+        if (typeof mostrarErro === 'function') mostrarErro('Informe a escola.'); 
+        return; 
+    }
+    if (!oficina) { 
+        if (typeof mostrarErro === 'function') mostrarErro('Selecione uma oficina.'); 
+        return; 
+    }
+    if (!horario) { 
+        if (typeof mostrarErro === 'function') mostrarErro('Selecione um horário.'); 
+        return; 
+    }
+    if (isNaN(qtd) || qtd < 1 || qtd > 50) { 
+        if (typeof mostrarErro === 'function') mostrarErro('Quantidade de participantes: 1 a 50.'); 
+        return; 
+    }
 
     inscrevendo = true;
     var btn = document.getElementById('btn-inscrever-submit');
@@ -319,12 +406,12 @@ function inscreverOficina() {
     }
 
     enviarInscricaoParaPlanilha({
-        nome:            nome,
+        nome: nome,
         qtdParticipantes: qtd,
-        escola:          escola,
-        oficina:         oficina,
-        horario:         horario,
-        telefone:        telefone
+        escola: escola,
+        oficina: oficina,
+        horario: horario,
+        telefone: telefone
     }, function(r) {
         inscrevendo = false;
         if (btn) {
@@ -333,27 +420,35 @@ function inscreverOficina() {
         }
 
         if (!r.sucesso) {
-            mostrarErro(r.erro || 'Erro na inscrição. Tente novamente.');
+            if (typeof mostrarErro === 'function') {
+                mostrarErro(r.erro || 'Erro na inscrição. Tente novamente.');
+            }
             return;
         }
 
-        document.getElementById('conf-nome').textContent         = nome;
-        document.getElementById('conf-telefone').textContent     = formatarTelefone(telefone);
-        document.getElementById('conf-escola').textContent       = escola;
+        // Preenche dados de confirmação
+        document.getElementById('conf-nome').textContent = nome;
+        document.getElementById('conf-telefone').textContent = formatarTelefone(telefone);
+        document.getElementById('conf-escola').textContent = escola;
         document.getElementById('conf-participantes').textContent = qtd;
-        document.getElementById('conf-oficina').textContent      = oficina;
-        document.getElementById('conf-horario').textContent      = horario;
-        document.getElementById('conf-data').textContent         = '30 de Junho de 2026';
-        document.getElementById('conf-id').textContent           = 'FEIRA2026-' + Date.now().toString(36).toUpperCase().slice(-6);
+        document.getElementById('conf-oficina').textContent = oficina;
+        document.getElementById('conf-horario').textContent = horario;
+        document.getElementById('conf-data').textContent = '30 de Junho de 2026';
+        document.getElementById('conf-id').textContent = 'FEIRA2026-' + Date.now().toString(36).toUpperCase().slice(-6);
 
         fecharModal();
 
         setTimeout(function() {
             var m = document.getElementById('modal-confirmacao');
-            if (m) { m.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+            if (m) { 
+                m.style.display = 'flex'; 
+                document.body.style.overflow = 'hidden'; 
+            }
         }, 300);
 
-        mostrarSucesso('✅ Inscrição confirmada com sucesso!');
+        if (typeof mostrarSucesso === 'function') {
+            mostrarSucesso('✅ Inscrição confirmada com sucesso!');
+        }
     });
 }
 
@@ -361,12 +456,13 @@ function inscreverOficina() {
 // MODAIS DE INSCRIÇÃO
 // ============================================
 function initModalOficinas() {
-    var tipo     = document.getElementById('tipo-inscricao');
-    var qtd      = document.getElementById('qtd-participantes');
-    var grupo    = document.getElementById('grupo-participantes');
+    var tipo = document.getElementById('tipo-inscricao');
+    var qtd = document.getElementById('qtd-participantes');
+    var grupo = document.getElementById('grupo-participantes');
     var naoEstuda = document.getElementById('nao-estuda');
-    var escola   = document.getElementById('escola');
+    var escola = document.getElementById('escola');
 
+    // Botão de inscrição
     var btnInscrever = document.getElementById('btn-inscrever-submit');
     if (btnInscrever) {
         btnInscrever.addEventListener('click', function(e) {
@@ -375,33 +471,44 @@ function initModalOficinas() {
         });
     }
 
+    // Controle de tipo de inscrição
     if (tipo && qtd && grupo) {
         tipo.addEventListener('change', function() {
             if (this.value === 'individual') {
-                qtd.value = '1'; qtd.disabled = true; grupo.style.opacity = '0.6';
+                qtd.value = '1'; 
+                qtd.disabled = true; 
+                grupo.style.opacity = '0.6';
             } else {
-                qtd.disabled = false; grupo.style.opacity = '1';
+                qtd.disabled = false; 
+                grupo.style.opacity = '1';
                 if (qtd.value === '1') qtd.value = '5';
             }
         });
     }
 
+    // Checkbox "Não estudo"
     if (naoEstuda && escola) {
         naoEstuda.addEventListener('change', function() {
             if (this.checked) {
-                escola.value = 'Não estuda'; escola.disabled = true; escola.style.opacity = '0.6';
+                escola.value = 'Não estuda'; 
+                escola.disabled = true; 
+                escola.style.opacity = '0.6';
             } else {
-                escola.value = ''; escola.disabled = false; escola.style.opacity = '1';
+                escola.value = ''; 
+                escola.disabled = false; 
+                escola.style.opacity = '1';
             }
         });
     }
 
+    // Fechar modais ao clicar fora
     document.addEventListener('click', function(e) {
-        if (e.target === document.getElementById('modal-oficina'))          fecharModal();
-        if (e.target === document.getElementById('modal-confirmacao'))      fecharConfirmacao();
+        if (e.target === document.getElementById('modal-oficina')) fecharModal();
+        if (e.target === document.getElementById('modal-confirmacao')) fecharConfirmacao();
         if (e.target === document.getElementById('modal-detalhes-oficina')) fecharModalDetalhes();
     });
 
+    // Fechar modais com ESC
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             fecharModal();
@@ -419,6 +526,8 @@ function abrirModalOficina() {
         m.style.display = 'flex';
         document.body.style.overflow = 'hidden';
         carregarOficinasDaPlanilha();
+        
+        // Foco no primeiro campo
         setTimeout(function() {
             var f = m.querySelector('input, select');
             if (f) f.focus();
@@ -428,12 +537,19 @@ function abrirModalOficina() {
 
 function fecharModal() {
     var m = document.getElementById('modal-oficina');
-    if (m) { m.style.display = 'none'; document.body.style.overflow = 'auto'; limparFormulario(); }
+    if (m) { 
+        m.style.display = 'none'; 
+        document.body.style.overflow = 'auto'; 
+        limparFormulario(); 
+    }
 }
 
 function fecharConfirmacao() {
     var m = document.getElementById('modal-confirmacao');
-    if (m) { m.style.display = 'none'; document.body.style.overflow = 'auto'; }
+    if (m) { 
+        m.style.display = 'none'; 
+        document.body.style.overflow = 'auto'; 
+    }
 }
 
 function limparFormulario() {
@@ -442,7 +558,9 @@ function limparFormulario() {
         f.reset();
         document.getElementById('qtd-participantes').value = '1';
         document.getElementById('horario-selecionado').value = '';
-        document.querySelectorAll('.horario-option').forEach(function(o) { o.classList.remove('selected'); });
+        document.querySelectorAll('.horario-option').forEach(function(o) { 
+            o.classList.remove('selected'); 
+        });
     }
 }
 
@@ -458,18 +576,21 @@ function salvarInscricao() {
         return;
     }
 
-    mostrarCarregando('Gerando comprovante...');
+    if (typeof mostrarCarregando === 'function') {
+        mostrarCarregando('Gerando comprovante...');
+    }
+    
     var botoes = cartao.querySelector('.cartao-actions');
-    var disp   = botoes ? botoes.style.display : '';
+    var disp = botoes ? botoes.style.display : '';
     if (botoes) botoes.style.display = 'none';
 
-    var overflowOriginal  = cartao.style.overflow;
+    var overflowOriginal = cartao.style.overflow;
     var maxHeightOriginal = cartao.style.maxHeight;
-    var heightOriginal    = cartao.style.height;
+    var heightOriginal = cartao.style.height;
 
-    cartao.style.overflow  = 'visible';
+    cartao.style.overflow = 'visible';
     cartao.style.maxHeight = 'none';
-    cartao.style.height    = 'auto';
+    cartao.style.height = 'auto';
 
     html2canvas(cartao, {
         scale: 2,
@@ -477,28 +598,37 @@ function salvarInscricao() {
         logging: false,
         scrollY: -window.scrollY,
         scrollX: -window.scrollX,
-        windowWidth:  document.documentElement.scrollWidth,
+        windowWidth: document.documentElement.scrollWidth,
         windowHeight: document.documentElement.scrollHeight
     }).then(function(c) {
-        cartao.style.overflow  = overflowOriginal;
+        cartao.style.overflow = overflowOriginal;
         cartao.style.maxHeight = maxHeightOriginal;
-        cartao.style.height    = heightOriginal;
+        cartao.style.height = heightOriginal;
         if (botoes) botoes.style.display = disp;
 
-        removerCarregando();
+        if (typeof removerCarregando === 'function') {
+            removerCarregando();
+        }
 
         var id = document.getElementById('conf-id')?.textContent || 'inscricao';
-        var a  = document.createElement('a');
+        var a = document.createElement('a');
         a.download = 'comprovante-' + id.toLowerCase() + '.png';
-        a.href     = c.toDataURL('image/png');
+        a.href = c.toDataURL('image/png');
         a.click();
-        mostrarSucesso('✅ Comprovante salvo!');
+        
+        if (typeof mostrarSucesso === 'function') {
+            mostrarSucesso('✅ Comprovante salvo!');
+        }
     }).catch(function() {
-        cartao.style.overflow  = overflowOriginal;
+        cartao.style.overflow = overflowOriginal;
         cartao.style.maxHeight = maxHeightOriginal;
-        cartao.style.height    = heightOriginal;
+        cartao.style.height = heightOriginal;
         if (botoes) botoes.style.display = disp;
-        removerCarregando();
+        
+        if (typeof removerCarregando === 'function') {
+            removerCarregando();
+        }
+        
         window.print();
     });
 }
@@ -508,32 +638,32 @@ function salvarInscricao() {
 // ============================================
 function atualizarBotoesOficina() {
     var botoes = document.querySelectorAll('.science-btn');
-    var lib    = new Date(2026, 5, 18);
-    var agora  = new Date();
+    var dataLiberacao = new Date(2026, 5, 18); // 18 de Junho de 2026
+    var agora = new Date();
 
     botoes.forEach(function(b) {
-        if (agora >= lib) {
-            b.disabled       = false;
-            b.style.cursor   = 'pointer';
-            b.style.opacity  = '1';
-            b.className      = 'science-btn btn-liberado';
-            b.title          = '✅ Inscrições abertas!';
-            b.onclick        = abrirModalOficina;
+        if (agora >= dataLiberacao) {
+            b.disabled = false;
+            b.style.cursor = 'pointer';
+            b.style.opacity = '1';
+            b.className = 'science-btn btn-liberado';
+            b.title = '✅ Inscrições abertas!';
+            b.onclick = abrirModalOficina;
         } else {
-            b.disabled      = true;
-            b.style.cursor  = 'not-allowed';
+            b.disabled = true;
+            b.style.cursor = 'not-allowed';
             b.style.opacity = '0.6';
-            b.className     = 'science-btn btn-bloqueado';
+            b.className = 'science-btn btn-bloqueado';
 
-            var diff = lib - agora;
+            var diff = dataLiberacao - agora;
             var d = Math.floor(diff / 86400000);
             var h = Math.floor((diff % 86400000) / 3600000);
             var m = Math.floor((diff % 3600000) / 60000);
 
             var msg = '🔒 Indisponível\n';
-            if (d > 0)      msg += 'Em ' + d + 'd ' + h + 'h';
+            if (d > 0) msg += 'Em ' + d + 'd ' + h + 'h';
             else if (h > 0) msg += 'Em ' + h + 'h';
-            else            msg += 'Em ' + m + 'min';
+            else msg += 'Em ' + m + 'min';
 
             b.title = msg;
         }
@@ -600,15 +730,18 @@ function gerarCardsOficinas() {
         container.appendChild(accordion);
     });
 
+    // Eventos de clique para expandir/recolher
     document.querySelectorAll('.oficina-accordion-header').forEach(function(header) {
         header.addEventListener('click', function() {
             var accordion = this.parentElement;
-            var isActive  = accordion.classList.contains('active');
+            var isActive = accordion.classList.contains('active');
 
+            // Fecha todos os outros
             document.querySelectorAll('.oficina-accordion').forEach(function(item) {
                 item.classList.remove('active');
             });
 
+            // Abre o clicado se não estava ativo
             if (!isActive) {
                 accordion.classList.add('active');
             }
@@ -619,15 +752,6 @@ function gerarCardsOficinas() {
 // ============================================
 // MODAL DE DETALHES DA OFICINA
 // ============================================
-document.addEventListener('click', function(event) {
-    if (event.target.closest('.btn-detalhes-oficina')) {
-        var card = event.target.closest('.oficina-card');
-        if (!card) return;
-        var index = parseInt(card.getAttribute('data-oficina-index'));
-        abrirModalDetalhes(index);
-    }
-});
-
 function abrirModalDetalhes(index) {
     var modal = document.getElementById('modal-detalhes-oficina');
     if (!modal) return;
@@ -636,14 +760,14 @@ function abrirModalDetalhes(index) {
     if (!dadosOficina) return;
 
     preencherModalDetalhes(dadosOficina);
-    modal.classList.add('visivel');
+    modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
 }
 
 function fecharModalDetalhes() {
     var modal = document.getElementById('modal-detalhes-oficina');
     if (modal) {
-        modal.classList.remove('visivel');
+        modal.style.display = 'none';
         document.body.style.overflow = '';
     }
 }
@@ -689,21 +813,25 @@ function preencherModalDetalhes(dados) {
 // ============================================
 // INICIALIZAÇÃO
 // ============================================
+// Atualiza botões a cada minuto
 setInterval(atualizarBotoesOficina, 60000);
 
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 Inicializando sistema de inscrições...');
     gerarCardsOficinas();
     initModalOficinas();
     atualizarBotoesOficina();
+    console.log('✅ Sistema pronto!');
 });
 
 // ============================================
 // EXPORTAÇÃO GLOBAL
 // ============================================
-window.abrirModalOficina    = abrirModalOficina;
-window.fecharModal          = fecharModal;
-window.fecharConfirmacao    = fecharConfirmacao;
-window.fecharModalDetalhes  = fecharModalDetalhes;
-window.inscreverOficina     = inscreverOficina;
-window.salvarInscricao      = salvarInscricao;
-window.gerarCardsOficinas   = gerarCardsOficinas;
+window.abrirModalOficina = abrirModalOficina;
+window.fecharModal = fecharModal;
+window.fecharConfirmacao = fecharConfirmacao;
+window.fecharModalDetalhes = fecharModalDetalhes;
+window.inscreverOficina = inscreverOficina;
+window.salvarInscricao = salvarInscricao;
+window.gerarCardsOficinas = gerarCardsOficinas;
+window.abrirModalDetalhes = abrirModalDetalhes;
