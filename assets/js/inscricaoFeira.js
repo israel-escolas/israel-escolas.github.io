@@ -132,35 +132,64 @@ const oficinas = [
 ];
 
 // ============================================
-// API DA PLANILHA GOOGLE (CORRIGIDA PARA CELULAR)
+// API DA PLANILHA GOOGLE - VERSÃO UNIVERSAL (PC e CELULAR)
 // ============================================
 function chamarAPI(params, callback) {
-    // Constroi a URL com os parâmetros
-    let urlParams = [];
-    for (let k in params) {
+    var cb = 'jsonp_' + Date.now() + '_' + Math.floor(Math.random() * 10000);
+    
+    // Guarda o callback global
+    window[cb] = function(data) {
+        callback(data);
+        // Limpeza após execução
+        setTimeout(function() {
+            delete window[cb];
+            var s = document.getElementById(cb);
+            if (s) s.remove();
+        }, 100);
+    };
+    
+    // Se for mobile (detecta se tem touch ou é pequeno), usa uma técnica
+    // que não depende do script.onerror ser bloqueado
+    var url = SCRIPT_URL + '?callback=' + cb;
+    for (var k in params) {
         if (params[k] !== undefined && params[k] !== null && params[k] !== '') {
-            urlParams.push(k + '=' + encodeURIComponent(params[k]));
+            url += '&' + k + '=' + encodeURIComponent(params[k]);
         }
     }
-    let url = SCRIPT_URL + '?' + urlParams.join('&');
-
-    // Usa um proxy CORS público para garantir que o celular não bloqueie
-    const proxyUrl = 'https://api.allorigins.win/raw?url=';
-
-    fetch(proxyUrl + encodeURIComponent(url))
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro na requisição');
-            }
-            return response.json();
-        })
-        .then(data => {
-            callback(data);
-        })
-        .catch(error => {
-            console.error('Erro ao chamar API:', error);
+    
+    // Cria o script
+    var script = document.createElement('script');
+    script.id = cb;
+    script.src = url;
+    
+    // Tratamento de erro universal (não depende do navegador bloquear o onerror)
+    var timeout = setTimeout(function() {
+        if (window[cb]) {
+            // Se o callback ainda estiver lá depois de 8 segundos, deu erro
             callback({ error: 'Erro de conexão. Verifique a internet.', sucesso: false });
-        });
+            delete window[cb];
+            if (script.parentNode) script.remove();
+        }
+    }, 8000);
+    
+    // Remove o timeout quando carregar com sucesso (reatribuímos o callback original)
+    var originalCallback = window[cb];
+    window[cb] = function(data) {
+        clearTimeout(timeout);
+        originalCallback(data);
+    };
+    
+    script.onerror = function() {
+        clearTimeout(timeout);
+        // Apenas chama o erro se o callback ainda não tiver sido chamado
+        if (window[cb]) {
+            callback({ error: 'Erro de conexão', sucesso: false });
+            delete window[cb];
+            script.remove();
+        }
+    };
+    
+    document.body.appendChild(script);
 }
 
 function carregarOficinasDaPlanilha() {
